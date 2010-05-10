@@ -316,7 +316,7 @@ alias sounduse='fuser -v /dev/snd/* /dev/dsp*'
 alias xx='extractlast'
 alias oo='ooffice'
 alias x='extract'
-alias p='mplayer'
+alias p='mplayer -msgcolor -msglevel all=0:statusline=9 -monitoraspect 4:3'
 alias m='ncmpc'
 
 alias cl='/usr/bin/grc -es --colour=auto'
