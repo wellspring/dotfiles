@@ -1,0 +1,72 @@
+mpd_host = "localhost"
+mpd_port = "666"
+mpd_music_dir = "/disk/music"
+mpd_connection_timeout = "5"
+mpd_crossfade_time = "10"
+
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "Visualizer stream"
+visualizer_type = "spectrum"
+
+##### song format #####
+##
+## for song format you can use:
+##
+## %l - length
+## %f - short filename
+## %F - full filename
+## %a - artist
+## %t - title
+## %b - album
+## %y - year
+## %n - track number
+## %g - genre
+## %c - composer
+## %p - performer
+## %d - disc
+## %C - comment
+## %r - begin right align
+##
+## you can also put them in { } and then it will be displayed
+## only if all requested values are available and/or define alternate
+## value with { }|{ } eg. {%a - %t}|{%f}
+##
+## text can also have different color than the main window has,
+## eg. if you want length to be green, write $3%l$9
+##
+## available values:
+##
+## - 0 - default window color
+## - 1 - black
+## - 2 - red
+## - 3 - green
+## - 4 - yellow
+## - 5 - blue
+## - 6 - magenta
+## - 7 - cyan
+## - 8 - white
+## - 9 - end of current color
+##
+
+colors_enabled = "yes"
+song_columns_list_format = "(7f)[green]{l} (25)[cyan]{a} (40)[]{t} (30)[red]{b}"
+song_list_format = "{%a - }{%t}|{$8%f$9}$R{$3(%l)$9}"
+song_status_format = "{{%a{ \"%b\"{ (%y)}} - }{%t}}|{%f}"
+song_library_format = "{%n - }{%t}|{%f}"
+tag_editor_album_format = "{(%y) }%b"
+now_playing_prefix = "$b"
+progressbar_look = "=|"
+
+playlist_display_mode = "columns"
+browser_display_mode = "classic"
+user_interface = "alternative"
+default_find_mode = "wrapped"
+header_visibility = "no"
+statusbar_visibility = "no"
+cyclic_scrolling = "no"
+show_hidden_files_in_local_browser = "no"
+clock_display_seconds = "no"
+
+allow_physical_files_deletion = "no"
+allow_physical_directories_deletion = "no"
+
