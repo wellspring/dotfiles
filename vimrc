@@ -33,7 +33,7 @@ syntax on
 set wrap
 " DéActiver la souris dans tous les modes
 set mouse=a
-" Desactive l'affichage des numeros de ligne lorsque l'on programme
+" Désactive l'affichage des numeros de ligne lorsque l'on programme
 set nonumber
 " Affichage de la position du curseur dans la ligne de status
 set ruler
@@ -45,7 +45,7 @@ set showcmd
 " Actualiser le fichier lorsqu'il est modifié par un autre programme
 set autoread
 " Se place par rapport au dossier du fichier en cours
-"set autochdir
+set autochdir
 " Montrer les caracteres de fin de ligne
 "set list
 set listchars=eol:¤,trail:-
@@ -139,18 +139,16 @@ endfunction
 
 " [Mapping]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Cree le fichier ctags
-noremap <F1> <Esc>:silent !ctags --fields=afiKmsSzn **/*<CR>:redraw!<CR>
+" Aide de vim
+noremap <F1> <Esc>:help<Space>
 " Désactiver le surlignage des recherches et passer en mode insertion
 noremap <F2> <Esc>:nohl<CR>
 " Sauvegarde rapide et retour en mode insertion
-"noremap <F3> <Esc>:w!<CR>
+noremap <F3> <Esc>:w!<CR>
 " Passer ou non en mode collage avec la touche F4
 noremap <F4> <Esc>:call ToggleMousePaste()<CR>
-" Activer ou desactiver Fuzzy Files Search (tag) avec la touche F10
-noremap <F10> <Esc>:FufFileWithFullCwd<CR>
-" Activer ou desactiver NERD Tree avec la touche F11
-noremap <F12> <Esc>:NERDTreeToggle<CR>
+" Activer ou desactiver VimCommander avec la touche F11
+noremap <F12> <Esc>:cal VimCommanderToggle<CR>
 " Sauvegarde en mode insertion avec CTRL+s
 inoremap <C-s> <Esc>:w!<CR>
 " Ferme le tampon actif
@@ -159,7 +157,7 @@ noremap <C-w> <Esc>:Bclose<CR>
 noremap . <Esc>:A<CR>
 " Va au tampon precedent/suivant
 noremap + <Esc>:MBEbp<CR>
-noremap = <Esc>:MBEbn<CR>
+noremap - <Esc>:MBEbn<CR>
 " Se déplacer dans les fenetres plus rapidement avec CTRL+h/j/k/l
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
@@ -170,6 +168,8 @@ noremap <leader>tn :tabnew %<CR>
 noremap <leader>te :tabedit
 noremap <leader>tc :tabclose<CR>
 noremap <leader>tm :tabmove
+" Cree le fichier ctags
+noremap <F2> <Esc>:silent !ctags --fields=afiKmsSzn *<CR>:redraw!<CR>
 " Smart mapping for tab completion (Tip #102)
 inoremap <Tab> <c-r>=InsertTabWrapper()<CR>
 inoremap <S-Tab> <C-x><C-o>
