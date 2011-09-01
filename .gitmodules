@@ -112,3 +112,6 @@
 [submodule "bundle/l9"]
 	path = bundle/l9
 	url = https://github.com/vim-scripts/L9
+[submodule "bundle/align"]
+	path = bundle/align
+	url = https://github.com/pix/vim-align
