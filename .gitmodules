@@ -115,3 +115,6 @@
 [submodule "bundle/align"]
 	path = bundle/align
 	url = https://github.com/pix/vim-align
+[submodule "bundle/netrw"]
+	path = bundle/netrw
+	url = https://github.com/vim-scripts/netrw.vim
