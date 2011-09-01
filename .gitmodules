@@ -61,3 +61,6 @@
 [submodule "bundle/vimball"]
 	path = bundle/vimball
 	url = https://github.com/vim-scripts/Vimball
+[submodule "bundle/zencoding"]
+	path = bundle/zencoding
+	url = https://github.com/mattn/zencoding-vim
