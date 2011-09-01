@@ -94,3 +94,6 @@
 [submodule "bundle/afterimage"]
 	path = bundle/afterimage
 	url = https://github.com/tpope/vim-afterimage
+[submodule "bundle/csapprox"]
+	path = bundle/csapprox
+	url = https://github.com/godlygeek/csapprox.git
