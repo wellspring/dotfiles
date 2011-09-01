@@ -49,3 +49,9 @@
 [submodule "bundle/color-lucius"]
 	path = bundle/color-lucius
 	url = https://github.com/vim-scripts/Lucius
+[submodule "bundle/color-wombat"]
+	path = bundle/color-wombat
+	url = https://github.com/mikesimons/vim-color-wombat
+[submodule "bundle/color-wombat256"]
+	path = bundle/color-wombat256
+	url = https://github.com/vim-scripts/wombat256.vim
