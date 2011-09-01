@@ -31,3 +31,6 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree
+[submodule "bundle/delimit-mate"]
+	path = bundle/delimit-mate
+	url = https://github.com/Raimondi/delimitMate
