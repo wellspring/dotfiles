@@ -43,3 +43,6 @@
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = https://github.com/ervandew/supertab
+[submodule "bundle/html-autoclosetag"]
+	path = bundle/html-autoclosetag
+	url = https://github.com/vim-scripts/HTML-AutoCloseTag
