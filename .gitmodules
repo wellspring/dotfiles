@@ -7,3 +7,6 @@
 [submodule "bundle/rails"]
 	path = bundle/rails
 	url = https://github.com/tpope/vim-rails.git
+[submodule "bundle/code-overview"]
+	path = bundle/code-overview
+	url = https://github.com/Twinside/vim-codeoverview.git
