@@ -55,3 +55,9 @@
 [submodule "bundle/color-wombat256"]
 	path = bundle/color-wombat256
 	url = https://github.com/vim-scripts/wombat256.vim
+[submodule "bundle/color-railscasts"]
+	path = bundle/color-railscasts
+	url = https://github.com/jpo/vim-railscasts-theme
+[submodule "bundle/vimball"]
+	path = bundle/vimball
+	url = https://github.com/vim-scripts/Vimball
