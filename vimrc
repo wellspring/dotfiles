@@ -249,4 +249,6 @@ vmap <C-<> <Plug>MarkersMark
 " Effacer les surlignages de recherche via Ctrl+L et redessiner la fenetre
 nnoremap <C-L> :nohls<CR><C-L>
 inoremap <C-L> <C-O>:nohls<CR>
+" Permet d'utiliser le plugin grep facilement
+map <C-F> <esc>:Grep<CR>
 
