@@ -121,3 +121,6 @@
 [submodule "bundle/ragtag"]
 	path = bundle/ragtag
 	url = https://github.com/tpope/vim-ragtag
+[submodule "bundle/quicksilver"]
+	path = bundle/quicksilver
+	url = https://github.com/Bogdanp/quicksilver.vim
