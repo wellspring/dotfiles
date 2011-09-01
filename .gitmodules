@@ -10,3 +10,6 @@
 [submodule "bundle/code-overview"]
 	path = bundle/code-overview
 	url = https://github.com/Twinside/vim-codeoverview.git
+[submodule "bundle/haml"]
+	path = bundle/haml
+	url = https://github.com/tpope/vim-haml
