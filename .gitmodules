@@ -100,3 +100,6 @@
 [submodule "bundle/minibufexpl"]
 	path = bundle/minibufexpl
 	url = https://github.com/fholgado/minibufexpl.vim
+[submodule "bundle/fuzzy-finder"]
+	path = bundle/fuzzy-finder
+	url = https://github.com/vim-scripts/FuzzyFinder
