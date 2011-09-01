@@ -73,3 +73,6 @@
 [submodule "bundle/bclose"]
 	path = bundle/bclose
 	url = https://github.com/rbgrouleff/bclose.vim
+[submodule "bundle/endwise"]
+	path = bundle/endwise
+	url = https://github.com/tpope/vim-endwise
