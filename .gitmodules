@@ -103,3 +103,6 @@
 [submodule "bundle/fuzzy-finder"]
 	path = bundle/fuzzy-finder
 	url = https://github.com/vim-scripts/FuzzyFinder
+[submodule "bundle/indexed-search"]
+	path = bundle/indexed-search
+	url = https://github.com/vim-scripts/IndexedSearch
