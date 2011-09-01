@@ -46,3 +46,6 @@
 [submodule "bundle/html-autoclosetag"]
 	path = bundle/html-autoclosetag
 	url = https://github.com/vim-scripts/HTML-AutoCloseTag
+[submodule "bundle/color-lucius"]
+	path = bundle/color-lucius
+	url = https://github.com/vim-scripts/Lucius

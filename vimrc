@@ -2,6 +2,10 @@
 "*** .vimrc wellspring's file -- Thanks to the authors of the functions ***"
 "**************************************************************************"
 
+" [Pathogen]
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call pathogen#infect() 
+
 " [General]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Activer toutes fonctionalités de VIM (imcompatible avec VI)
@@ -100,8 +104,6 @@ endif
 
 " [Plugins]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call pathogen#infect() 
-
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
