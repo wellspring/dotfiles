@@ -106,6 +106,11 @@ endif
 
 " [Plugins]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:snips_author = "William Hubault"
+
+let g:NERDTreeMouseMode = 2
+let g:NERDTreeWinSize = 40
+
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
@@ -194,7 +199,7 @@ noremap <F3> <Esc>:w!<CR>
 "noremap <F4> <Esc>:call ToggleMousePaste()<CR>
 :set pastetoggle=<F4>
 " Activer ou desactiver NerdTree avec la touche F12
-noremap <F12> <Esc>:NERDTree<CR>
+noremap <F12> <Esc>:NERDTreeToggle<CR>
 " Redessine la fenetre (en cas de bug d'affichage)
 noremap <C-l> <Esc>:redraw<CR>
 " Sauvegarde en mode insertion avec CTRL+s
@@ -241,4 +246,7 @@ imap <C-K> <Plug>MarkersJumpB
 map  <C-K> <Plug>MarkersJumpB
 imap <C-<> <Plug>MarkersMark
 vmap <C-<> <Plug>MarkersMark
+" Effacer les surlignages de recherche via Ctrl+L et redessiner la fenetre
+nnoremap <C-L> :nohls<CR><C-L>
+inoremap <C-L> <C-O>:nohls<CR>
 
