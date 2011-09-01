@@ -145,3 +145,6 @@
 [submodule "bundle/snipmate-snippets-franciscosouza"]
 	path = bundle/snipmate-snippets-franciscosouza
 	url = https://github.com/franciscosouza/snipmate-snippets
+[submodule "bundle/jquery"]
+	path = bundle/jquery
+	url = https://github.com/itspriddle/vim-jquery
