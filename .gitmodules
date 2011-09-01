@@ -130,3 +130,6 @@
 [submodule "bundle/vcs-command"]
 	path = bundle/vcs-command
 	url = git://repo.or.cz/vcscommand
+[submodule "bundle/taglist"]
+	path = bundle/taglist
+	url = https://github.com/vim-scripts/taglist.vim
