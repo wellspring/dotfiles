@@ -85,10 +85,12 @@ highlight PmenuSel ctermbg=7 guibg=DarkBlue guifg=White
 highlight PmenuSbar ctermbg=7 guibg=DarkGray
 highlight PmenuThumb guibg=Black
 " MiniBufExplorer colors
-highlight MBENormal guibg=LightGray guifg=DarkGray
-highlight MBEChanged guibg=Red guifg=DarkRed
-highlight MBEVisibleNormal term=bold cterm=bold gui=bold guibg=Gray guifg=Black
-highlight MBEVisibleChanged term=bold cterm=bold gui=bold guibg=DarkRed guifg=Black
+hi MBEVisibleActive guifg=#A6DB29 guibg=fg
+hi MBEVisibleChangedActive guifg=#F1266F guibg=fg
+hi MBEVisibleChanged guifg=#F1266F guibg=fg
+hi MBEVisibleNormal guifg=#5DC2D6 guibg=fg
+hi MBEChanged guifg=#CD5907 guibg=fg
+hi MBENormal guifg=#808080 guibg=fg
 " Set status line
 if has('statusline')
     set laststatus=2
