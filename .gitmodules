@@ -124,3 +124,6 @@
 [submodule "bundle/quicksilver"]
 	path = bundle/quicksilver
 	url = https://github.com/Bogdanp/quicksilver.vim
+[submodule "bundle/lorem-ipsum"]
+	path = bundle/lorem-ipsum
+	url = https://github.com/vim-scripts/loremipsum
