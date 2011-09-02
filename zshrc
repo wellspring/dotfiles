@@ -407,8 +407,11 @@ alias :e=$EDITOR
 alias @=$EDITOR
 alias :q='exit'
 
+alias tmux="tmux -2"
+
 alias G='grep'
 alias J='jobs'
+alias T='tmux'
 alias S='screen'
 alias W='watch'
 alias W0='watch -n 0'
