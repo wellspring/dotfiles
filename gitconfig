@@ -13,6 +13,7 @@
 	amend = commit --amend
 	branches = branch --verbose -a
 	remotes = remote --verbose show
+	rlog = log --pretty=format:'%C(green)%ar%Creset, by %C(red bold)%an %Creset-> %C(cyan)%s'
 	slog = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --abbrev-commit --date=short
 	pull-submodules = submodule foreach git pull origin master
 [apply]

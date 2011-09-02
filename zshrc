@@ -423,6 +423,13 @@ alias xlog="grep --binary-files=without-match --color -nsie '(EE)' -e '(WW)' /va
 alias lastkernel='lynx -dump http://kernel.org/kdist/finger_banner' lk='lastkernel'
 alias tmsg='tail -f /var/log/messages'
 
+alias gd="git diff"
+alias gl="git rlog"
+alias gll="git slog"
+alias gs="git status"
+alias gc="git commit"
+alias gca="git commit -a"
+
 alias a="sudo aptitude"
 alias as="sudo aptitude search"
 alias ai="sudo apt-fast install"
@@ -514,7 +521,6 @@ else
         alias forwardtetrinet='ssh -L 31457:87.98.131.200:31457 wellspring.is-a-geek.net'
 
         alias fruityloops="wine ~/.wine/drive_c/Program\ Files/Image-Line/FL\ Studio\ 8/FL.exe"
-	alias glogs='git log --pretty=format:"%h %an %ar - %s"'
     fi
 fi
 
