@@ -1,6 +1,8 @@
 [user]
-	name = wellspring
-	email = wellspring.fr@gmail.com
+	name = William Hubault
+	email = william.hubault@gmail.com
+	#name = wellspring
+	#email = wellspring.fr@gmail.com
 [color]
 	ui = auto
 [alias]
@@ -8,3 +10,10 @@
 	ci = commit
 	co = checkout
 	br = branch
+	amend = commit --amend
+	branches = branch --verbose -a
+	remotes = remote --verbose show
+	slog = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --abbrev-commit --date=short
+	pull-submodules = submodule foreach git pull origin master
+[apply]
+	whitespace = fix
