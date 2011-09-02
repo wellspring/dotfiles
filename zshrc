@@ -3,8 +3,8 @@
 #                              ~~~~~~~~~~~                              #
 #   Author         : wellspring <wellspring.fr A T gmail.com>           #
 #   Description    : BASHrc/ZSHrc mix of configurations (dotfiles...)   #
-#   Last modified  : 08/05/2010                                         #
-#   Version        : 1.6.0                                              #
+#   Last modified  : 07/07/2011                                         #
+#   Version        : 1.6.1                                              #
 # ********************************************************************* #
 
 ####
@@ -15,7 +15,8 @@ export LOGCHECK=5
 export WATCH=all
 
 #export CDPATH="~:/disk:/usr/src:/usr:/var"
-#export FPATH="~/.zsh_functions"
+#export FPATH="~/.zsh/functions"
+export PATH=/usr/local/rvm/bin/:/usr/local/rvm/gems/ruby-1.9.2-head/bin/:$PATH:/opt/android/tools:/opt/android/platform-tools #:/var/lib/gems/1.9.1/bin/
 
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=1000
@@ -33,7 +34,7 @@ export VMWARE_USE_SHIPPED_GTK="yes"
 export RAILS_ENV=development
 export LC_COLLATE="C"
 
-export MYNAME="wellspring"
+export MYNAME="william"
 export COLUMNS
 export ROWS
 
@@ -45,6 +46,7 @@ autoload -U compinit
 compinit
 autoload -U promptinit 
 promptinit
+autoload -Uz vcs_info
 autoload -U colors
 autoload -U zargs
 autoload -U zmv
@@ -93,20 +95,22 @@ setopt PRINT_EXIT_VALUE
 setopt LONG_LIST_JOBS
 setopt CHECKJOBS
 setopt NOTIFY
-# Share commands in history between opened terminals.
+# Some nice options for history
 setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
 setopt EXTENDED_HISTORY
 setopt APPEND_HISTORY
 #setopt SHARE_HISTORY
 setopt BANG_HIST
+# Authorize prompt variable substitution (used by vcs)
+setopt prompt_subst
 
 ####
 # Prompt
 ########
 
 if [ $TERM != "screen" ]; then
-    export RPS1="%b <%T"
+    export RPS1='%b ${vcs_info_msg_1_}'
 else
     export RPS1="%b"
 fi
@@ -130,11 +134,17 @@ case $HOST in
 
   "ethics")
     if [ $UID == 0 ]; then
-        #export PS1="%b%k%F{white}(%F{red}r00t%F{white}@%F{red}%m%F{white}:%F{red}%1~%F{white}) %F{red}%# %B%f%k"
         export PS1="%b%k%F{white}(%F{cyan}r00t%F{white}@%F{cyan}%m%F{white}:%F{cyan}%1~%F{white}) %F{red}%# %B%f%k"
     else
-        #export PS1="%b%k%F{red}(~o~) %F{white}%n%F{red}@%F{white}%m%F{red}:%F{white}%1~ %F{red}(~o~) %B%f%k"
         export PS1="%b%k%F{cyan}(~o~) %F{white}%n%F{cyan}@%F{white}%m%F{cyan}:%F{white}%1~ %F{cyan}(~o~) %B%f%k"
+    fi
+    ;;
+
+  "fork")
+    if [ $UID == 0 ]; then
+        export PS1='%B%k%K{red}%F{yellow}(~o~) %F{white}%n%F{yellow}@%F{white}%m%F{yellow}:%F{white}%1~ %F{yellow}(~o~)%b%k%F{red} '
+    else
+        export PS1='%b%k%F{green}(~o~) %f%n%F{green}@%f%m%F{green}:%f${vcs_info_msg_0_} %F{green}(~o~) %B%f%k'
     fi
     ;;
 
@@ -149,11 +159,24 @@ esac
 
 
 ####
+# Version Control Systems infos
+########
+#zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+#zstyle ':vcs_info:*' formats       '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
+zstyle ':vcs_info:*' nvcsformats '%1~' '<%T'
+zstyle ':vcs_info:*' unstagedstr '%F{yellow}*'
+zstyle ':vcs_info:*' stagedstr '%F{green}*'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' enable git cvs svn bzr hg
+
+
+####
 # Completion
 ########
 # Use cache for commands with big list of results.
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
+#zstyle ':completion:*' use-cache on
+#zstyle ':completion:*' cache-path ~/.zsh/cache
 # Prevent CVS files/directories from being completed.
 zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
 zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
@@ -235,7 +258,7 @@ bindkey '^U'      undo                                # Ctrl+U
 bindkey '^O'      paste-xclip                         # Ctrl+O
 bindkey '^B'      start-background                    # Ctrl+B
 bindkey '^P'      push-line                           # Ctrl+P
-bindkey '^L'      clear-screen                        # Ctrl+L
+bindkey '^L'      clear-screen-motd                   # Ctrl+L
 bindkey '^N'      comment-line                        # Ctrl+N
 bindkey '^Y'      start-silent                        # Ctrl+Y
 bindkey '^J'      start-root                          # Ctrl+J
@@ -287,9 +310,9 @@ alias -s {c,cpp,h,com,bat,css,xml,txt,lst,list,rc,conf,.htaccess,.htpasswd}=$EDI
 # Auto open links
 alias -s {com,org,net,fr,htm,html}=$BROWSER
 # Auto open documents
-alias -s {doc,docx,odt,sdw,xls,xlsx,xlc,sdc,ods,ppt,pptx,pps,sda,sdd,odp}='ooffice'
+alias -s {doc,docx,odt,sdw,xls,xlsx,xlc,sdc,ods,ppt,pptx,pps,sda,sdd,odp}='libreoffice'
 # Auto open pdf
-alias -s {pdf,PDF}='xpdf'
+alias -s {pdf,PDF}='evince'
 # Auto open images
 alias -s {jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF,tga,TGA,bmp,BMP,xpm,tiff,pcx}='display'
 # Auto open movies
@@ -399,6 +422,13 @@ alias dfh='df -ah'
 alias xlog="grep --binary-files=without-match --color -nsie '(EE)' -e '(WW)' /var/log/Xorg.0.log"
 alias lastkernel='lynx -dump http://kernel.org/kdist/finger_banner' lk='lastkernel'
 alias tmsg='tail -f /var/log/messages'
+
+alias a="sudo aptitude"
+alias as="sudo aptitude search"
+alias ai="sudo apt-fast install"
+alias gem="rvmsudo gem"
+[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
+
 
 # [Asus laptop alias only]
 if [[ $HOST == "Laptop" || $HOST == "ethics" ]]; then
@@ -520,6 +550,7 @@ backup() { tar jcvf $HOME/Backups/`basename $1`-`date +%Y%m%d%H%M`.tar.bz2 $1 }
 getlinks() { perl -ne 'while ( m/"((www|ftp|http):\/\/.*?)"/gc ) { print $1, "\n"; }' $* }
 timezone() { ruby -e "require 'tzinfo'; puts Time.parse('$*').strftime('=> %Hh%M - %d/%m/%Y (%Z)');" }
 
+clear-screen-motd() { test -e /etc/motd.conf && cat /etc/motd.conf && zle push-input && zle send-break }
 exec-ncmpc() { BUFFER="ncmpc" ; zle accept-line }
 exec-alsamixer() { BUFFER="alsamixer" ; zle accept-line }
 comment-line() { BUFFER="#"$BUFFER ; zle accept-line }
@@ -529,6 +560,7 @@ paste-xclip() { BUFFER=$BUFFER"`xclip -o`" ; zle end-of-line }
 start-silent() { BUFFER=$BUFFER" &>/dev/null" ; zle accept-line }
 repeat-second-last() { zle up-history ; zle up-history ; zle accept-line ; }
 zle -N repeat-second-last
+zle -N clear-screen-motd
 zle -N start-background
 zle -N exec-alsamixer
 zle -N comment-line
@@ -683,13 +715,13 @@ function settitle () {
   a=${(V)1//\%/\%\%}
 
   # Truncate command, and join lines.
-  a=$(print -Pn "%40>...>$a" | tr -d "\n")
+  a=$(print -Pn "%40>...>$a" | tr -d "\r\n")
 
   case $TERM in
     screen)
       print -Pn "\ek$a:$3\e\\"      # screen title (in ^H")
       ;;
-    xterm*|rxvt)
+    xterm*|rxvt*)
       print -Pn "\e]2;$2 | $a:$3\a" # plain xterm title
       ;;
   esac
@@ -698,6 +730,15 @@ function settitle () {
 # The function precmd is called just before the prompt is printed. (by an unknown guy)
 function precmd () {
   settitle "zsh" "$USER@%m" "%55<...<%~"
+
+  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+    vcs_warning=""
+  } else {
+    vcs_warning="%F{red}*"
+  }
+
+  zstyle ':vcs_info:*' formats "./%S" "%f>>> %F{green}%s%f(%f%F{green}%b%c%u$vcs_warning%f):%F{green}%r%f"
+  vcs_info
 }
 
 # The function preexec is called just before any command line is executed. (by an unknown guy)
@@ -811,18 +852,23 @@ fi
 # Clear screen on logout
 trap clear 0
 
+# Load new 256 colors if the file exists
+test -e ~/.dir_colors && eval `dircolors ~/.dir_colors`
+
 # Print the MOTD (not after "su" / "tmux" or in a TTY)
 if [[ -e /etc/motd.conf && -z $(egrep "^(su|tmux|/bin/login)" /proc/$PPID/cmdline) ]]; then
     clear
     cat /etc/motd.conf
-else
-    echo ""
 fi
+echo ""
 
 # Go to home. (not after "tmux")
 if [[ -z $(egrep "^(tmux)" /proc/$PPID/cmdline) ]]; then
-    cd
+#    cd
 fi
+
+# Use Ruby Version Manager
+rvm use 1.9.2-head --default >/dev/null
 
 # Load additional file
 if [ -e .zshext ]; then
