@@ -1,0 +1,150 @@
+[submodule "vim-fugitive"]
+	path = vim/bundle/fugitive
+	url = http://github.com/tpope/vim-fugitive.git
+[submodule "vim-ruby"]
+	path = vim/bundle/ruby
+	url = https://github.com/vim-ruby/vim-ruby
+[submodule "vim-rails"]
+	path = vim/bundle/rails
+	url = https://github.com/tpope/vim-rails.git
+[submodule "vim-code-overview"]
+	path = vim/bundle/code-overview
+	url = https://github.com/Twinside/vim-codeoverview.git
+[submodule "vim-haml"]
+	path = vim/bundle/haml
+	url = https://github.com/tpope/vim-haml
+[submodule "vim-coffee-script"]
+	path = vim/bundle/coffee-script
+	url = https://github.com/kchmck/vim-coffee-script
+[submodule "vim-yaml"]
+	path = vim/bundle/yaml
+	url = https://github.com/lukeorland/yaml-vim
+[submodule "vim-snipmate"]
+	path = vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim
+[submodule "vim-snipmate-snippets"]
+	path = vim/bundle/snipmate-snippets
+	url = https://github.com/scrooloose/snipmate-snippets
+[submodule "vim-nerdcommenter"]
+	path = vim/bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter
+[submodule "vim-nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree
+[submodule "vim-delimit-mate"]
+	path = vim/bundle/delimit-mate
+	url = https://github.com/Raimondi/delimitMate
+[submodule "vim-matchit"]
+	path = vim/bundle/matchit
+	url = https://github.com/tsaleh/vim-matchit
+[submodule "vim-checksyntax"]
+	path = vim/bundle/checksyntax
+	url = https://github.com/tomtom/checksyntax_vim
+[submodule "vim-supertab"]
+	path = vim/bundle/supertab
+	url = https://github.com/ervandew/supertab
+[submodule "vim-html-autoclosetag"]
+	path = vim/bundle/html-autoclosetag
+	url = https://github.com/vim-scripts/HTML-AutoCloseTag
+[submodule "vim-color-lucius"]
+	path = vim/bundle/color-lucius
+	url = https://github.com/vim-scripts/Lucius
+[submodule "vim-color-wombat"]
+	path = vim/bundle/color-wombat
+	url = https://github.com/mikesimons/vim-color-wombat
+[submodule "vim-color-wombat256"]
+	path = vim/bundle/color-wombat256
+	url = https://github.com/vim-scripts/wombat256.vim
+[submodule "vim-color-railscasts"]
+	path = vim/bundle/color-railscasts
+	url = https://github.com/jpo/vim-railscasts-theme
+[submodule "vim-vimball"]
+	path = vim/bundle/vimball
+	url = https://github.com/vim-scripts/Vimball
+[submodule "vim-zencoding"]
+	path = vim/bundle/zencoding
+	url = https://github.com/mattn/zencoding-vim
+[submodule "vim-google-translate"]
+	path = vim/bundle/google-translate
+	url = https://github.com/mattn/googletranslate-vim
+[submodule "vim-a"]
+	path = vim/bundle/a
+	url = https://github.com/vim-scripts/a.vim
+[submodule "vim-bclose"]
+	path = vim/bundle/bclose
+	url = https://github.com/rbgrouleff/bclose.vim
+[submodule "vim-endwise"]
+	path = vim/bundle/endwise
+	url = https://github.com/tpope/vim-endwise
+[submodule "vim-rvm"]
+	path = vim/bundle/rvm
+	url = https://github.com/tpope/vim-rvm
+[submodule "vim-surround"]
+	path = vim/bundle/surround
+	url = https://github.com/tpope/vim-surround
+[submodule "vim-bundler"]
+	path = vim/bundle/bundler
+	url = https://github.com/tpope/vim-bundler
+[submodule "vim-rake"]
+	path = vim/bundle/rake
+	url = https://github.com/tpope/vim-rake
+[submodule "vim-cucumber"]
+	path = vim/bundle/cucumber
+	url = https://github.com/tpope/vim-cucumber
+[submodule "vim-afterimage"]
+	path = vim/bundle/afterimage
+	url = https://github.com/tpope/vim-afterimage
+[submodule "vim-csapprox"]
+	path = vim/bundle/csapprox
+	url = https://github.com/godlygeek/csapprox.git
+[submodule "vim-minibufexpl"]
+	path = vim/bundle/minibufexpl
+	url = https://github.com/fholgado/minibufexpl.vim
+[submodule "vim-fuzzy-finder"]
+	path = vim/bundle/fuzzy-finder
+	url = https://github.com/vim-scripts/FuzzyFinder
+[submodule "vim-indexed-search"]
+	path = vim/bundle/indexed-search
+	url = https://github.com/vim-scripts/IndexedSearch
+[submodule "vim-gundo"]
+	path = vim/bundle/gundo
+	url = https://github.com/sjl/gundo.vim
+[submodule "vim-l9"]
+	path = vim/bundle/l9
+	url = https://github.com/vim-scripts/L9
+[submodule "vim-align"]
+	path = vim/bundle/align
+	url = https://github.com/pix/vim-align
+[submodule "vim-netrw"]
+	path = vim/bundle/netrw
+	url = https://github.com/vim-scripts/netrw.vim
+[submodule "vim-ragtag"]
+	path = vim/bundle/ragtag
+	url = https://github.com/tpope/vim-ragtag
+[submodule "vim-quicksilver"]
+	path = vim/bundle/quicksilver
+	url = https://github.com/Bogdanp/quicksilver.vim
+[submodule "vim-lorem-ipsum"]
+	path = vim/bundle/lorem-ipsum
+	url = https://github.com/vim-scripts/loremipsum
+[submodule "vim-vcs-command"]
+	path = vim/bundle/vcs-command
+	url = git://repo.or.cz/vcscommand
+[submodule "vim-taglist"]
+	path = vim/bundle/taglist
+	url = https://github.com/vim-scripts/taglist.vim
+[submodule "vim-grep"]
+	path = vim/bundle/grep
+	url = https://github.com/vim-scripts/grep.vim
+[submodule "vim-drawit"]
+	path = vim/bundle/drawit
+	url = https://github.com/vim-scripts/DrawIt
+[submodule "vim-easymotion"]
+	path = vim/bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion
+[submodule "vim-snipmate-snippets-franciscosouza"]
+	path = vim/bundle/snipmate-snippets-franciscosouza
+	url = https://github.com/franciscosouza/snipmate-snippets
+[submodule "vim-jquery"]
+	path = vim/bundle/jquery
+	url = https://github.com/itspriddle/vim-jquery
