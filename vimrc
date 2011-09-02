@@ -109,7 +109,7 @@ endif
 let g:snips_author = "William Hubault"
 
 let g:NERDTreeMouseMode = 2
-let g:NERDTreeWinSize = 40
+let g:NERDTreeWinSize = 31
 
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
@@ -251,4 +251,5 @@ nnoremap <C-L> :nohls<CR><C-L>
 inoremap <C-L> <C-O>:nohls<CR>
 " Permet d'utiliser le plugin grep facilement
 map <C-F> <esc>:Grep<CR>
-
+" Utiliser SnimMate et SuperTab
+let g:SuperTabDefaultCompletionType = "context"
