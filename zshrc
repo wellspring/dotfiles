@@ -44,7 +44,7 @@ export ROWS
 zmodload -i zsh/complist
 autoload -U compinit
 compinit
-autoload -U promptinit 
+autoload -U promptinit
 promptinit
 autoload -Uz vcs_info
 autoload -U colors
@@ -239,7 +239,7 @@ bindkey '^R'      history-incremental-search-backward # Ctrl+R
 bindkey '^[[5~'   history-search-backward             # PgUp
 bindkey '^[[6~'   history-search-forward              # PgDn
 
-if [[ $TERM == "rxvt" || $TERM == "xterm" ]]; then
+if [[ $TERM == "rxvt" || $TERM == "xterm" || $TERM == "xterm-256color" ]]; then
     bindkey '^?'      backward-delete-char                # Ctrl+Backspace
     bindkey '^H'      backward-delete-word                # Backspace
     bindkey '^[[1;5D' backward-word                       # Ctrl+Left
@@ -512,7 +512,7 @@ else
         alias sscreen="screen -c ~/Documents/SupInfo/Autre/screenrc"
         alias webshare='python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
         alias forwardtetrinet='ssh -L 31457:87.98.131.200:31457 wellspring.is-a-geek.net'
-        
+
         alias fruityloops="wine ~/.wine/drive_c/Program\ Files/Image-Line/FL\ Studio\ 8/FL.exe"
 	alias glogs='git log --pretty=format:"%h %an %ar - %s"'
     fi
@@ -794,7 +794,7 @@ if [ $UID == 0 ]; then
 
         local package=$(eix --only-names -e "$1")
         [[ -z $package ]] && echo "Error: Unknown package $1" && return 1
-        
+
         shift
         flags=$*
 
