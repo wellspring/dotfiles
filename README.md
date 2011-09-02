@@ -13,13 +13,14 @@ Clone the repository :
 
     git clone git://github.com/wellspring/dotfiles.git ~/.dotfiles
 
-Create symlinks :
-
-    for file in ~/.dotfiles/*; do ln -sf $file ~/.$(basename $file)
-
 Switch to the `~/.dotfiles` directory, and fetch submodules :
 
     (cd ~/.dotfiles && git submodule update --init --recursive)
+
+Create symlinks :
+
+    for file in ~/.dotfiles/*; do ln -sf $file ~/.$(basename "$file"); done
+    rm ~/.README.md
 
 
 ## Update
