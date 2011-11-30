@@ -1,0 +1,506 @@
+# ********************************************************************* #
+#                            * .zshrc file *                            #
+#                              ~~~~~~~~~~~                              #
+#   Author         : wellspring <wellspring.fr A T gmail.com>           #
+#   Description    : BASHrc/ZSHrc mix of configurations (dotfiles...)   #
+#   Last modified  : 30/11/2011                                         #
+#   Version        : 1.7                                                #
+# ********************************************************************* #
+
+####
+# Variables
+########
+export WATCHFMT="%w %T ${HOST%%.*} watch: %n %a %(l:tty%l:unknown tty) %(M:from %M:locally)"
+export LOGCHECK=5
+export WATCH=all
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=1000
+export SAVEHIST=1000
+export DIRSTACKSIZE=64
+export SVN_EDITOR="vi"
+export BROWSER="elinks"
+export NULLCMD="cat"
+export VISUAL="vim"
+export PAGER="less"
+export EDITOR="vi"
+
+####
+# Load ZSH addins
+########
+zmodload -i zsh/complist
+autoload -U compinit
+compinit
+autoload -U promptinit
+promptinit
+autoload -Uz vcs_info
+autoload -U colors
+autoload -U zargs
+autoload -U zmv
+autoload -U age
+# Use # symbol for comments in the shell.
+setopt INTERACTIVECOMMENTS
+# Export all variables by default.
+setopt ALL_EXPORT
+# Add some globbing features.
+setopt EXTENDEDGLOB
+# Something like foo/$arr result as foo/b foo/a foo/r.
+setopt RCEXPANDPARAM
+# Show tab choices just after the first TAB.
+unsetopt LIST_AMBIGUOUS
+# Perform a path search even on command names with slashes in them. (dangerous)
+unsetopt PATH_DIRS
+# Remove useless jockers, instead of giving an error.
+setopt NULLGLOB
+# When a number is found, do sort numerically.
+setopt NUMERIC_GLOB_SORT
+# Do not treat \ in echo if -e is not specified. (like in bash)
+setopt BSD_ECHO
+# Resolve  symbolic links to their true values when changing directory.
+setopt CHASE_LINKS
+# If the command is invalid but a folder exist, go to this folder.
+setopt AUTO_CD
+# Do not assign lower priority to background processes.
+unsetopt BG_NICE
+# Do not use = to replace with full pathname.
+setopt NOEQUALS
+# Do not add duplicate commands to history.
+setopt HIST_IGNORE_DUPS
+# Try  to  correct  the  spelling of commands.
+setopt CORRECT
+# Create hash table to find faster commands and directories, and correct them.
+setopt HASH_CMDS
+setopt HASH_DIRS
+# Log old paths automatically with pushd when using cd.
+setopt AUTO_PUSHD
+setopt PUSHD_SILENT
+setopt PUSHD_TO_HOME
+# Display PID and exit value on suspend and report them immediatly or at exit.
+setopt PRINT_EXIT_VALUE
+setopt LONG_LIST_JOBS
+setopt CHECKJOBS
+setopt NOTIFY
+# Some nice options for history
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt APPEND_HISTORY
+#setopt SHARE_HISTORY
+setopt BANG_HIST
+# Authorize prompt variable substitution (used by vcs)
+setopt prompt_subst
+
+
+####
+# Prompt
+########
+
+# Set the right prompt with Versionning info of the folder
+export RPS1='%b ${vcs_info_msg_1_}'
+
+# Set the prompt
+if [ $UID == 0 ]; then
+    export PS1='%B%k%F{red}<%F{yellow}%n%F{red}@%F{yellow}%m%F{red}:%F{yellow}%1~%F{red}>%b%k%F{red} # '
+else
+    export PS1='%B%k%F{green}<%F{yellow}%n%F{green}@%F{yellow}%m%F{green}:%F{yellow}%1~%F{green}>%b%k%F{green} $ '
+fi
+#    prompt adam2 red yellow red blackk
+#    prompt adam2 cyan green cyan blackk
+
+
+####
+# Version Control Systems infos
+########
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
+zstyle ':vcs_info:*' nvcsformats '%1~' '<%T'
+zstyle ':vcs_info:*' unstagedstr '%F{yellow}*'
+zstyle ':vcs_info:*' stagedstr '%F{green}*'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' enable git cvs svn bzr hg
+
+
+####
+# Completion
+########
+# Use cache for commands with big list of results.
+#zstyle ':completion:*' use-cache on
+#zstyle ':completion:*' cache-path ~/.zsh/cache
+# Prevent CVS files/directories from being completed.
+zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
+zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
+# Fuzzy matching of completions
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+# Ignore completion functions for commands you don't have:
+zstyle ':completion:*:functions' ignored-patterns '_*'
+# Command cd will never select the parent directory
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+# Complete process IDs (with menu)
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*'   force-list always
+
+#zstyle ':completion:*' menu select=0
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}'
+zstyle ':completion:*' max-errors 3 numeric
+zstyle ':completion:*' use-compctl false
+
+# Completion for "man" (by Gossamer)
+compctl -f -x 'S[1][2][3][4][5][6][7][8][9]' -k '(1 2 3 4 5 6 7 8 9)' \
+  - 'R[[1-9nlo]|[1-9](|[a-z]),^*]' -K 'match-man' \
+  - 's[-M],c[-1,-M]' -g '*(-/)' \
+  - 's[-P],c[-1,-P]' -c \
+  - 's[-S],s[-1,-S]' -k '( )' \
+  - 's[-]' -k '(a d f h k t M P)' \
+  - 'p[1,-1]' -c + -K 'match-man' \
+  -- man
+
+# Other completitions
+compctl -b bindkey
+compctl -v export
+compctl -o setopt
+compctl -v unset
+compctl -o unsetopt
+compctl -v vared
+compctl -c which
+
+####
+# Bindings
+########
+# Emacs mode (vim: -v)
+bindkey -e
+# My bindings
+bindkey '^[[7~'   beginning-of-line                   # Home
+bindkey '^[[1~'   beginning-of-line                   # Home
+bindkey '^[[H'    beginning-of-line                   # Home
+bindkey '^[OH'    beginning-of-line                   # Home
+bindkey '^[OF'    end-of-line                         # End
+bindkey '^[[F'    end-of-line                         # End
+bindkey '^[[4~'   end-of-line                         # End
+bindkey '^[[8~'   end-of-line                         # End
+
+bindkey '^R'      history-incremental-search-backward # Ctrl+R
+bindkey '^[[5~'   history-search-backward             # PgUp
+bindkey '^[[6~'   history-search-forward              # PgDn
+
+if [[ $TERM == "rxvt" || $TERM == "xterm" || $TERM == "xterm-256color" || $TERM == "screen" ]]; then
+    bindkey '^?'      backward-delete-char                # Ctrl+Backspace
+    bindkey '^H'      backward-delete-word                # Backspace
+    bindkey '^[[1;5D' backward-word                       # Ctrl+Left
+    bindkey '^[[1;5C' forward-word                        # Ctrl+Right
+    bindkey '^[[3;5~' delete-word                         # Ctrl+Del
+    bindkey '^[[3~'   delete-char                         # Del
+    bindkey '^[[2~'   overwrite-mode                      # Ins
+else
+    bindkey '^H'      backward-delete-char                # Ctrl+Backspace
+    bindkey '^?'      backward-delete-word                # Backspace
+fi
+
+bindkey '^U'      undo                                # Ctrl+U
+bindkey '^B'      start-background                    # Ctrl+B
+bindkey '^P'      push-line                           # Ctrl+P
+bindkey '^L'      clear-screen-motd                   # Ctrl+L
+bindkey '^N'      comment-line                        # Ctrl+N
+bindkey '^Y'      start-silent                        # Ctrl+Y
+bindkey '^J'      start-root                          # Ctrl+J
+bindkey '^F'      repeat-second-last                  # Ctrl+F
+bindkey '^K'      kill-line                           # Ctrl+K
+
+bindkey '§'       vi-match-bracket                    # Shift+!
+bindkey '¡'       vi-join                             # Alt+!
+bindkey '¬'       what-cursor-position                # Alt+?
+bindkey '¿'       what-cursor-position                # Alt+Shift+?
+bindkey 'º'       vi-find-next-char                   # Alt+:
+bindkey '»'       insert-last-word                    # Alt+.
+bindkey '®'       insert-last-word                    # Alt+Shift+.
+
+bindkey ' '       magic-space                         # Space
+
+####
+# Global aliases
+########
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+alias -g .......='../../../../../..'
+alias -g ........='../../../../../../..'
+alias -g .........='../../../../../../../..'
+alias -g ..........='../../../../../../../../..'
+alias -g ...........='../../../../../../../../../..'
+
+####
+# Suffix aliases
+########
+# Auto edit files
+alias -s {c,cc,cpp,h,hh,hpp,sh,com,bat,rb,pl,py,css,scss,sass,html,htm,xml,txt,lst,list,rc,conf,cfg,.htaccess,.htpasswd}=$EDITOR
+# Auto open links
+alias -s {com,org,net,fr}=$BROWSER
+
+####
+# Aliases
+########
+alias zshrc=$EDITOR' ~/.zshrc ; source ~/.zshrc'
+alias reload='source ~/.zshrc'
+alias zs='zshrc'
+
+alias ls='ls -vF --color=auto --group-directories-first'
+alias ll='ls -l' mm='ll'
+alias l='ls -dF'
+alias la='ls -la'
+alias lh='ls -lh'
+alias lx='ls -lXB'
+alias l.='ls -d .[^.]*'
+alias lse='ls -d *(/^F)'
+alias lll='ls -la | less'
+alias lsx='ls -l *(*[1,10])'
+alias lsd='ls -d [^.]*(-/DN)'
+alias lsbig="ls -flh *(.OL[1,10])"
+alias lsnew="ls -rl *(D.om[1,10])"
+alias lsold="ls -rtlh *(D.om[1,10])"
+alias lssmall="ls -Srl *(.oL[1,10])"
+
+alias cd..='cd ..'
+alias '..'='cd ..'
+alias mv='nocorrect mv'
+alias cp='nocorrect cp'
+alias bigfiles='BLOCKSIZE=1048576 du -x | sort -nr | head -10'
+alias mkdir='nocorrect mkdir -p'
+alias grep='grep --color=auto'
+alias duf='du -sh *(/)'
+alias chmod='chmod -c'
+alias chown='chown -v'
+alias tree='tree -FC'
+alias duh='du -sh'
+alias dfh='df -ah'
+alias md='mkdir'
+alias rd='rmdir'
+
+alias build="./configure --prefix=/usr && make && su -c 'make install'"
+alias hex='od -t x1'
+alias ps='ps auxfww'
+
+alias pig='ping -c 3 www.google.fr'
+alias scan='nmap localhost'
+alias route='route -n'
+alias ports='lsof -i'
+
+alias x='extract'
+alias xx='extractlast'
+alias nano='nano -w'
+
+# Git (versionning tool)
+which git &>/dev/null
+if [ $? -ne 0 ]; then
+    alias gd="git diff"
+    alias gl="git rlog"
+    alias gll="git slog"
+    alias gs="git status"
+    alias gc="git commit"
+    alias gca="git commit -a"
+fi
+
+# Set sudo if we are not root (and use su if sudo doesn't exists)
+if [ $UID != 0 ]; then
+    which sudo &>/dev/null
+    if [ $? -eq 0 ]; then
+        sudo() { su -c "$*" }
+        start-root() { BUFFER='su -c "'$BUFFER'"' ; zle accept-line }
+    else
+        start-root() { BUFFER='sudo '$BUFFER ; zle accept-line }
+    fi
+    SUCMD="sudo "
+else
+    SUCMD=""
+fi
+
+# Debian/Ubuntu package manager
+which aptitude &>/dev/null
+if [ $? -ne 0 ]; then
+    alias a="${SUCMD}aptitude"
+    alias as="${SUCMD}aptitude search"
+    alias ai="${SUCMD}aptitude install"
+    alias ar="${SUCMD}aptitude remove"
+else
+    which apt-get &>/dev/null
+    if [ $? -ne 0 ]; then
+        alias a="${SUCMD}apt-get"
+        alias as="${SUCMD}apt-cache search"
+        alias ai="${SUCMD}apt-get install"
+        alias ar="${SUCMD}apt-get remove"
+    fi
+fi
+
+
+####
+# Small functions
+########
+cx () { chmod +x $* }
+.grep() { grep "$*" -R . }
+mdc() { mkdir -p "$1" && cd "$1" }
+psg() { ps | grep $1 | grep -vv grep }
+backup() { tar jcvf $HOME/Backups/`basename $1`-`date +%Y%m%d%H%M`.tar.bz2 $1 }
+
+clear-screen-motd() { test -e /etc/motd.conf && cat /etc/motd.conf && zle push-input && zle send-break }
+comment-line() { BUFFER="#"$BUFFER ; zle accept-line }
+start-background() { BUFFER=$BUFFER" &" ; zle accept-line }
+start-silent() { BUFFER=$BUFFER" &>/dev/null" ; zle accept-line }
+repeat-second-last() { zle up-history ; zle up-history ; zle accept-line ; }
+zle -N repeat-second-last
+zle -N clear-screen-motd
+zle -N start-background
+zle -N comment-line
+zle -N start-silent
+zle -N start-root
+
+####
+# Big functions
+########
+# Display ANSI colors (by grml-team)
+ansi-colors () {
+    typeset esc="\033[" line1 line2
+    echo " _ _ _40 _ _ _41_ _ _ _42 _ _ 43_ _ _ 44_ _ _45 _ _ _ 46_ _ _ 47_ _ _ 49_ _"
+    for fore in 30 31 32 33 34 35 36 37; do
+        line1="$fore "
+        line2="   "
+        for back in 40 41 42 43 44 45 46 47 49; do
+            line1="${line1}${esc}${back};${fore}m Normal ${esc}0m"
+            line2="${line2}${esc}${back};${fore};1m Bold   ${esc}0m"
+        done
+        echo -e "$line1\n$line2"
+    done
+}
+
+# Uncompress any kind of known archive. (by an unknown guy)
+extract () {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjvf $1     ;;
+            *.tar.gz)    tar xzvf $1     ;;
+            *.tgz)       tar xzvf $1     ;;
+            *.tbz2)      tar xjvf $1     ;;
+            *.tar)       tar xvf $1      ;;
+            *.gz)        gunzip $1       ;;
+            *.bz2)       bunzip2 $1      ;;
+            *.lzma)      extractlzma $1  ;;
+            *.rar)       unrar x $1      ;;
+            *.ace)       unace x $1      ;;
+            *.zip)       unzip $1        ;;
+            *.deb)       ar -x $1        ;;
+            *.Z)         uncompress $1   ;;
+            *.7z)        7z x $1         ;;
+            *)           echo "Error: '$1' cannot be extracted via extract()." ;;
+        esac
+    else
+        echo "Error: '$1' is not a valid file."
+    fi
+}
+
+# Extract the file and delete it. (by wellspring)
+extractlast () {
+    filename=$(basename $_)
+    if [ -e $filename ]; then
+        extract $filename
+        rm $filename
+    else
+        echo "Error: file $filename doesn't exist."
+    fi
+}
+
+# Jump between directories (by Nikolai Weibull)
+d () {
+    emulate -L zsh
+    autoload -U colors
+    local color=$fg_bold[blue]
+    integer i=0
+    dirs -p | while read dir; do
+        local num="${$(printf "%-4d " $i)/ /.}"
+        printf " %s  $color%s$reset_color\n" $num $dir
+        (( i++ ))
+    done
+    integer dir=-1
+    read -r 'dir?Jump to directory: ' || return
+    (( dir == -1 )) && return
+    if (( dir < 0 || dir >= i )); then
+        echo d: no such directory stack entry: $dir
+        return 1
+    fi
+    cd ~$dir
+}
+
+# Clean up directory by removing well known tempfiles (by grml-team)
+purge () {
+    FILES=(*~(N) .*~(N) \#*\#(N) *.o(N) a.out(N) *.core(N) *.cmo(N) *.cmi(N) .*.swp(N))
+    NBFILES=${#FILES}
+    if [[ $NBFILES > 0 ]] ; then
+        print $FILES
+        local ans
+        echo -n "Remove these files? [y/n] "
+        read -q ans
+        if [[ $ans == "y" ]] ; then
+            rm ${FILES}
+            echo ">> $PWD purged, $NBFILES files removed"
+        else
+            echo "Ok. .. than not.."
+        fi
+    fi
+}
+
+# Replacement for command cp with a progress bar. (by wellspring)
+function ccp () {
+    ! [[ $# -ge 2 ]] && echo "Usage : $0 <src> <dest>" && return 1
+    rsync --progress -av $*
+}
+
+# Slowly print out parameters (by grml-team)
+slow_print() {
+    for argument in "${@}" ; do
+        for ((i = 1; i <= ${#1} ;i++)) ; do
+            print -n "${argument[i]}"
+            sleep 0.08
+        done
+        print -n " "
+    done
+    print ""
+}
+
+# The function precmd is called just before the prompt is printed. (by an unknown guy)
+function precmd () {
+  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+    vcs_warning=""
+  } else {
+    vcs_warning="%F{red}*"
+  }
+
+  zstyle ':vcs_info:*' formats "./%S" "%f>>> %F{green}%s%f(%f%F{green}%b%c%u$vcs_warning%f):%F{green}%r%f"
+  vcs_info
+}
+
+
+####
+# Execute late commands
+########
+
+# Load new 256 colors if the file exists
+test -e ~/.dir_colors && eval `dircolors ~/.dir_colors`
+
+# Load additional file
+if [ -e ~/.zshext ]; then
+    source ~/.zshext
+fi
+
+# Clear screen on logout
+trap clear 0
+
+# Print the MOTD (not after "su" / "tmux" or in a TTY)
+if [[ -e /etc/motd.conf && -z $(egrep "^(su|tmux|/bin/login)" /proc/$PPID/cmdline) ]]; then
+    clear
+    cat /etc/motd.conf
+fi
+
+# Print the access granted message
+echo -ne "[02m"
+slow_print "  >>> Access Granted."
+echo -e "[00m"
+
