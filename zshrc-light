@@ -292,7 +292,7 @@ alias nano='nano -w'
 
 # Git (versionning tool)
 which git &>/dev/null
-if [ $? -ne 0 ]; then
+if [ $? -eq 0 ]; then
     alias gd="git diff"
     alias gl="git rlog"
     alias gll="git slog"
@@ -317,14 +317,14 @@ fi
 
 # Debian/Ubuntu package manager
 which aptitude &>/dev/null
-if [ $? -ne 0 ]; then
+if [ $? -eq 0 ]; then
     alias a="${SUCMD}aptitude"
     alias as="${SUCMD}aptitude search"
     alias ai="${SUCMD}aptitude install"
     alias ar="${SUCMD}aptitude remove"
 else
     which apt-get &>/dev/null
-    if [ $? -ne 0 ]; then
+    if [ $? -eq 0 ]; then
         alias a="${SUCMD}apt-get"
         alias as="${SUCMD}apt-cache search"
         alias ai="${SUCMD}apt-get install"
