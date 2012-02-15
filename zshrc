@@ -432,10 +432,10 @@ alias gll="git slog"
 alias gs="git status"
 alias gc="git commit"
 alias gca="git commit -a"
+alias ga="git add"
 
 alias a="sudo aptitude"
-alias as="sudo aptitude search"
-alias ai="sudo apt-fast install"
+alias as="aptitude search"
 alias gem="rvmsudo gem"
 [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
 
@@ -544,6 +544,8 @@ shtbz2() { tar -tvjf $1 | $PAGER }
 mdc() { mkdir -p "$1" && cd "$1" }
 plap() { ls -l ${^path}/*$1*(*N) }
 suidfind() { ls -latg $path/*(sN) }
+ar () { sudo aptitude remove $* && rehash }
+ai () { sudo aptitude install $* && rehash }
 psg() { ps auxww | grep $1 | grep -vv grep }
 isocdrom() { dd if=/dev/cdrom of=$1 bs=2048 }
 isoburner() { dd if=/dev/burner of=$1 bs=2048 }
@@ -559,7 +561,7 @@ backup() { tar jcvf $HOME/Backups/`basename $1`-`date +%Y%m%d%H%M`.tar.bz2 $1 }
 getlinks() { perl -ne 'while ( m/"((www|ftp|http):\/\/.*?)"/gc ) { print $1, "\n"; }' $* }
 timezone() { ruby -e "require 'tzinfo'; puts Time.parse('$*').strftime('=> %Hh%M - %d/%m/%Y (%Z)');" }
 
-clear-screen-motd() { test -e /etc/motd.conf && cat /etc/motd.conf && zle push-input && zle send-break }
+clear-screen-motd() { test -e /etc/motd.conf && cat /etc/motd.conf ; zle push-input && zle send-break }
 exec-ncmpc() { BUFFER="ncmpc" ; zle accept-line }
 exec-alsamixer() { BUFFER="alsamixer" ; zle accept-line }
 comment-line() { BUFFER="#"$BUFFER ; zle accept-line }
@@ -877,7 +879,7 @@ if [[ -z $(egrep "^(tmux)" /proc/$PPID/cmdline) ]]; then
 fi
 
 # Use Ruby Version Manager
-rvm use 1.9.2-head --default >/dev/null
+rvm use 1.9.2-head --default &>/dev/null
 
 # Load additional file
 if [ -e .zshext ]; then
