@@ -16,7 +16,10 @@ export WATCH=all
 
 #export CDPATH="~:/disk:/usr/src:/usr:/var"
 #export FPATH="~/.zsh/functions"
-export PATH=/usr/local/rvm/bin/:/usr/local/rvm/gems/ruby-1.9.2-head/bin/:$PATH:/opt/android/tools:/opt/android/platform-tools #:/var/lib/gems/1.9.1/bin/
+#export PATH=/usr/local/rvm/bin/:/usr/local/rvm/gems/ruby-1.9.2-head/bin/:$PATH:/opt/android/tools:/opt/android/platform-tools:/usr/local/sbin #:/var/lib/gems/1.9.1/bin/
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512M"
+export JREBEL_PATH=/Users/william/.jrebel/app/jrebel.jar
 
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=1000
@@ -53,56 +56,56 @@ autoload -U zmv
 autoload -U age
 # Use # symbol for comments in the shell.
 setopt INTERACTIVECOMMENTS
-# Export all variables by default.
-setopt ALL_EXPORT
-# Add some globbing features.
-setopt EXTENDEDGLOB
-# Something like foo/$arr result as foo/b foo/a foo/r.
-setopt RCEXPANDPARAM
-# Show tab choices just after the first TAB.
-unsetopt LIST_AMBIGUOUS
-# Perform a path search even on command names with slashes in them. (dangerous)
-unsetopt PATH_DIRS
-# Remove useless jockers, instead of giving an error.
-setopt NULLGLOB
-# When a number is found, do sort numerically.
-setopt NUMERIC_GLOB_SORT
-# Do not show a question when "rm *".
-#setopt RM_STAR_SILENT
-# Do not treat \ in echo if -e is not specified. (like in bash)
-setopt BSD_ECHO
-# Resolve  symbolic links to their true values when changing directory.
-setopt CHASE_LINKS
-# If the command is invalid but a folder exist, go to this folder.
-setopt AUTO_CD
-# Do not assign lower priority to background processes.
-unsetopt BG_NICE
-# Do not use = to replace with full pathname.
-setopt NOEQUALS
-# Do not add duplicate commands to history.
-setopt HIST_IGNORE_DUPS
-# Try  to  correct  the  spelling of commands.
-setopt CORRECT
-# Create hash table to find faster commands and directories, and correct them.
-setopt HASH_CMDS
-setopt HASH_DIRS
-# Log old paths automatically with pushd when using cd.
-setopt AUTO_PUSHD
-setopt PUSHD_SILENT
-setopt PUSHD_TO_HOME
-# Display PID and exit value on suspend and report them immediatly or at exit.
-setopt PRINT_EXIT_VALUE
-setopt LONG_LIST_JOBS
-setopt CHECKJOBS
-setopt NOTIFY
-# Some nice options for history
-setopt HIST_REDUCE_BLANKS
-setopt INC_APPEND_HISTORY
-setopt EXTENDED_HISTORY
-setopt APPEND_HISTORY
-#setopt SHARE_HISTORY
-setopt BANG_HIST
-# Authorize prompt variable substitution (used by vcs)
+    # Export all variables by default.
+    setopt ALL_EXPORT
+    # Add some globbing features.
+    setopt EXTENDEDGLOB
+    # Something like foo/$arr result as foo/b foo/a foo/r.
+    setopt RCEXPANDPARAM
+    # Show tab choices just after the first TAB.
+    unsetopt LIST_AMBIGUOUS
+    # Perform a path search even on command names with slashes in them. (dangerous)
+    unsetopt PATH_DIRS
+    # Remove useless jockers, instead of giving an error.
+    setopt NULLGLOB
+    # When a number is found, do sort numerically.
+    setopt NUMERIC_GLOB_SORT
+    # Do not show a question when "rm *".
+    #setopt RM_STAR_SILENT
+    # Do not treat \ in echo if -e is not specified. (like in bash)
+    setopt BSD_ECHO
+    # Resolve  symbolic links to their true values when changing directory.
+    setopt CHASE_LINKS
+    # If the command is invalid but a folder exist, go to this folder.
+    setopt AUTO_CD
+    # Do not assign lower priority to background processes.
+    unsetopt BG_NICE
+    # Do not use = to replace with full pathname.
+    setopt NOEQUALS
+    # Do not add duplicate commands to history.
+    setopt HIST_IGNORE_DUPS
+    # Try  to  correct  the  spelling of commands.
+    setopt CORRECT
+    # Create hash table to find faster commands and directories, and correct them.
+    setopt HASH_CMDS
+    setopt HASH_DIRS
+    # Log old paths automatically with pushd when using cd.
+    setopt AUTO_PUSHD
+    setopt PUSHD_SILENT
+    setopt PUSHD_TO_HOME
+    # Display PID and exit value on suspend and report them immediatly or at exit.
+    setopt PRINT_EXIT_VALUE
+    setopt LONG_LIST_JOBS
+    setopt CHECKJOBS
+    setopt NOTIFY
+    # Some nice options for history
+    setopt HIST_REDUCE_BLANKS
+    setopt INC_APPEND_HISTORY
+    setopt EXTENDED_HISTORY
+    setopt APPEND_HISTORY
+    #setopt SHARE_HISTORY
+    setopt BANG_HIST
+    # Authorize prompt variable substitution (used by vcs)
 setopt prompt_subst
 
 ####
@@ -150,9 +153,7 @@ case $HOST in
 
   *)
     if [ $UID == 0 ]; then
-        prompt gentoo
-    else
-        prompt gentoo
+        # Do nothing
     fi
     ;;
 esac
@@ -342,7 +343,7 @@ alias x='extract'
 alias p='mplayer -msgcolor -msglevel all=0:statusline=9 -monitoraspect 4:3'
 alias m='ncmpc'
 
-alias cl='/usr/bin/grc -es --colour=auto'
+alias cl='grc -es --colour=auto'
 alias wcc='cl i686-mingw32-gcc'
 alias as='cl as'
 alias ld='cl ld'
@@ -358,8 +359,10 @@ alias traceroute='cl /usr/sbin/traceroute'
 alias build="./configure --prefix=/usr && make && su -c 'make install'"
 alias nomake='/usr/bin/make -s'
 alias vcm='vi **/CMakeLists.txt'
+alias mk='make -j5'
+alias mi='make install'
 
-alias ls='ls -vF --color=auto --group-directories-first'
+alias ls='ls -vFG'
 alias ll='ls -l' mm='ll'
 alias l='ls -dF'
 alias la='ls -la'
@@ -387,12 +390,11 @@ alias rd='rmdir'
 alias screenshot='clear && echo "ScreenShot  !" | figlet | cowsay -n -f kitty && scrot -c -d 5 -e "display $f"'
 
 alias grep='grep --color=auto'
-alias chmod='chmod -c'
+#alias chmod='chmod -c' # not working on OS-X
 alias chown='chown -v'
 alias tree='tree -FC'
-alias ps='ps auxfww'
+alias ps='ps auxww' #'f' not working on OS-X
 alias hex='od -t x1'
-alias cal='cal -m'
 
 alias getkey='gpg --recv-keys --keyserver wwwkeys.pgp.net'
 alias killthefox='kill `pidof firefox-bin`'
@@ -433,11 +435,21 @@ alias gs="git status"
 alias gc="git commit"
 alias gca="git commit -a"
 alias ga="git add"
+alias gt="git tag"
+alias gb="git branch"
+alias gj="git checkout"
+alias gjc="git checkout -b"
+alias gm="git merge --no-ff"
+alias gcl="git clone"
 
 alias a="sudo aptitude"
+alias ai="sudo aptitude install"
 alias as="aptitude search"
 alias gem="rvmsudo gem"
 [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
+
+alias c="rails console"
+alias s="rails server"
 
 
 # [Asus laptop alias only]
@@ -544,6 +556,7 @@ shtbz2() { tar -tvjf $1 | $PAGER }
 mdc() { mkdir -p "$1" && cd "$1" }
 plap() { ls -l ${^path}/*$1*(*N) }
 suidfind() { ls -latg $path/*(sN) }
+lower() { tr '[:upper:]' '[:lower:]' }
 ar () { sudo aptitude remove $* && rehash }
 ai () { sudo aptitude install $* && rehash }
 psg() { ps auxww | grep $1 | grep -vv grep }
@@ -557,7 +570,7 @@ wikifr() { ${=BROWSER} http://fr.wikipedia.org/wiki/"${(C)*}" }
 disassemble() { gcc -pipe -S -o - -O -g $* | as -aldh -o /dev/null }
 google() { ${=BROWSER} "http://www.google.com/search?&num=100&q=$*" }
 gethrefs() { perl -ne 'while ( m/href="([^"]*)"/gc ) { print $1, "\n"; }' $* }
-backup() { tar jcvf $HOME/Backups/`basename $1`-`date +%Y%m%d%H%M`.tar.bz2 $1 }
+backup() { tar jcvf "$HOME/Backups/`basename $1`-`date +%Y%m%d%H%M`.tar.bz2" $1 }
 getlinks() { perl -ne 'while ( m/"((www|ftp|http):\/\/.*?)"/gc ) { print $1, "\n"; }' $* }
 timezone() { ruby -e "require 'tzinfo'; puts Time.parse('$*').strftime('=> %Hh%M - %d/%m/%Y (%Z)');" }
 
@@ -864,7 +877,7 @@ fi
 trap clear 0
 
 # Load new 256 colors if the file exists
-test -e ~/.dir_colors && eval `dircolors ~/.dir_colors`
+test -e ~/.dir_colors && eval `gdircolors ~/.dir_colors`
 
 # Print the MOTD (not after "su" / "tmux" or in a TTY)
 if [[ -e /etc/motd.conf && -z $(egrep "^(su|tmux|/bin/login)" /proc/$PPID/cmdline) ]]; then
@@ -874,15 +887,15 @@ fi
 echo ""
 
 # Go to home. (not after "tmux")
-if [[ -z $(egrep "^(tmux)" /proc/$PPID/cmdline) ]]; then
+#if [[ -z $(egrep "^(tmux)" /proc/$PPID/cmdline) ]]; then
 #    cd
-fi
+#fi
 
 # Use Ruby Version Manager
 rvm use 1.9.2-head --default &>/dev/null
 
 # Load additional file
-if [ -e .zshext ]; then
-    source .zshext
+if [ -e ~/.zshext ]; then
+    source ~/.zshext
 fi
 

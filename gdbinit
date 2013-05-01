@@ -3319,13 +3319,6 @@ document attsyntax
 Change disassembly syntax to at&t flavor.
 end
 
-define exit
-    quit
-end
-document exit
-Quit gdb
-end
-
 #EOF
 
 # Older change logs:
@@ -3494,3 +3487,10 @@ end
 #
 #   Version 2
 #     Radix bugfix by elaine
+
+define exit
+    quit
+end
+document exit
+Quit gdb
+end

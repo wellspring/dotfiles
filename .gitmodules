@@ -142,9 +142,9 @@
 [submodule "vim-easymotion"]
 	path = vim/bundle/easymotion
 	url = https://github.com/Lokaltog/vim-easymotion
-[submodule "vim-snipmate-snippets-franciscosouza"]
-	path = vim/bundle/snipmate-snippets-franciscosouza
-	url = https://github.com/franciscosouza/snipmate-snippets
 [submodule "vim-jquery"]
 	path = vim/bundle/jquery
 	url = https://github.com/itspriddle/vim-jquery
+[submodule "tmux/powerline"]
+	path = tmux/powerline
+	url = git://github.com/erikw/tmux-powerline.git

@@ -1,0 +1,5 @@
+bind "^R" em-inc-search-prev
+bind "^[O5C" vi-next-word
+bind "^[O5D" vi-prev-word
+bind ^I rl_complete
+bind "^Y" em-yank
