@@ -1,0 +1,33 @@
+script import os, sys
+
+# Import external utilities
+#command script import ~/.lldb_utilities.py
+
+# Make ~/utils.py takes precedence.
+#script sys.path[:0] = [os.path.expanduser('~')]
+#script import utils
+
+# Load FScript automatically
+command alias f_init p (char)[[NSBundle bundleWithPath:@"/Library/Frameworks/FScript.framework"] load]
+command alias f_start p (void)[FScriptMenuItem insertInMainMenu]
+
+# Set prompt
+#settings set prompt [lldb]$
+
+# Aliases
+command alias pwd script print os.getcwd()
+command alias p/s register read
+command alias jump register write pc
+command alias jmp register write pc
+command alias j register write pc
+#command alias b breakpoint set
+command alias bl breakpoint list
+command alias be breakpoint enable
+command alias bd breakpoint disable
+command alias bdel breakpoint delete %1
+command alias bfl breakpoint set -f %1 -l %2
+command alias bcommand breakpoint command add
+command alias commands breakpoint command list
+command alias v thread step-over
+command alias t thread step-out
+

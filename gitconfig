@@ -1,8 +1,6 @@
 [user]
 	name = William Hubault
 	email = william.hubault@gmail.com
-	#name = wellspring
-	#email = wellspring.fr@gmail.com
 [core]
     excludesfile = ~/.gitignore
     whitespace = trailing-space,space-before-tab
@@ -13,13 +11,17 @@
 	ci = commit
 	co = checkout
 	br = branch
+    ds = diff --staged
 	amend = commit --amend
+    undo = reset --soft HEAD^
 	branches = branch --verbose -a
 	remotes = remote --verbose show
-    graph = log --graph --pretty=oneline
+    graph = log --graph --pretty=format':%C(blue bold)%h%Cblue%d%Creset %s -- %C(reset)(%C(green bold)%an%Creset, %C(green)%ar%Creset)'
+    standup = log --since '1 day ago' --oneline --author william.hubault@gmail.com
 	rlog = log --pretty=format:'%C(green)%ar%Creset, by %C(red bold)%an %Creset-> %C(cyan)%s'
 	slog = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --abbrev-commit --date=short
 	pull-submodules = submodule foreach git pull origin master
+	g = grep --break --heading --line-number
 [color]
 	ui = auto
 [color "status"]
@@ -41,7 +43,8 @@
 [difftool]
     prompt = false
 [grep]
-    lineNumber = true
-[url "git@github.com:"]
-    insteadOf = "gh:"
-    pushInsteadOf = "git://github.com/"
+	lineNumber = true
+	extendRegexp = true
+#[url "git@github.com:"]
+#    insteadOf = "gh:"
+#    pushInsteadOf = "git://github.com/"

@@ -51,13 +51,13 @@ set $64BITS = 0
 set $COLOUREDPROMPT = 1
 # Colour the first line of the disassembly - default is green, if you want to change it search for
 # SETCOLOUR1STLINE and modify it :-)
-set $SETCOLOUR1STLINE = 0
+set $SETCOLOUR1STLINE = 1
 # set to 0 to remove display of objectivec messages (default is 1)
 set $SHOWOBJECTIVEC = 1
 # set to 0 to remove display of cpu registers (default is 1)
 set $SHOWCPUREGISTERS = 1
 # set to 1 to enable display of stack (default is 0)
-set $SHOWSTACK = 0
+set $SHOWSTACK = 1
 # set to 1 to enable display of data window (default is 0)
 set $SHOWDATAWIN = 0
 # set to 0 to disable coloured display of changed registers
@@ -3494,3 +3494,20 @@ end
 document exit
 Quit gdb
 end
+
+# Add some cool/simple debugging txt (possible to use $arg0, $arg1, $arg2... but no sprintf)
+define d1
+  echo \033[44m*** [\033[33m
+end
+define d2
+  echo \033[37m]
+  printf " "
+end
+define d3
+  printf " ***"
+  echo \033[0m\n
+end
+
+# Save the history!
+set history filename ~/.gdb_history
+set history save

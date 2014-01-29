@@ -17,7 +17,7 @@ export WATCH=all
 #export CDPATH="~:/disk:/usr/src:/usr:/var"
 #export FPATH="~/.zsh/functions"
 #export PATH=/usr/local/rvm/bin/:/usr/local/rvm/gems/ruby-1.9.2-head/bin/:$PATH:/opt/android/tools:/opt/android/platform-tools:/usr/local/sbin #:/var/lib/gems/1.9.1/bin/
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=/usr/local/sbin:/usr/local/bin:$PATH:$HOME/.rvm/bin
 export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512M"
 export JREBEL_PATH=/Users/william/.jrebel/app/jrebel.jar
 
@@ -395,6 +395,7 @@ alias chown='chown -v'
 alias tree='tree -FC'
 alias ps='ps auxww' #'f' not working on OS-X
 alias hex='od -t x1'
+alias fixsound='sudo killall -u _coreaudiod'
 
 alias getkey='gpg --recv-keys --keyserver wwwkeys.pgp.net'
 alias killthefox='kill `pidof firefox-bin`'
@@ -402,7 +403,10 @@ alias pig='ping -c 3 www.google.fr'
 alias scan='nmap localhost'
 alias route='route -n'
 alias ports='lsof -i'
+alias wget-fast='axel -a'
 
+alias e='sublime' #sublime, mate, vim
+alias ee='sublime ./'
 alias nano='nano -w'
 alias vim='vi -S $(pwd)/Session.vim'
 alias :e=$EDITOR
@@ -420,9 +424,9 @@ alias W0='watch -n 0'
 alias W1='watch -n 1'
 
 alias bigfiles='BLOCKSIZE=1048576 du -x | sort -nr | head -10'
-alias duf='du -sh *(/)'
+alias duf='du -sh * | gsort -h'
 alias duh='du -sh'
-alias dfh='df -ah'
+alias dfh='df -lPH'
 
 alias xlog="grep --binary-files=without-match --color -nsie '(EE)' -e '(WW)' /var/log/Xorg.0.log"
 alias lastkernel='lynx -dump http://kernel.org/kdist/finger_banner' lk='lastkernel'
@@ -442,11 +446,13 @@ alias gjc="git checkout -b"
 alias gm="git merge --no-ff"
 alias gcl="git clone"
 
+alias cm="cmake -H. -Bbuild && (cd build && make -j5)"
+
 alias a="sudo aptitude"
-alias ai="sudo aptitude install"
+#alias ai="sudo aptitude install"
 alias as="aptitude search"
-alias gem="rvmsudo gem"
-[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
+#alias gem="rvmsudo gem"
+#[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
 
 alias c="rails console"
 alias s="rails server"
@@ -609,6 +615,19 @@ ansi-colors () {
         done
         echo -e "$line1\n$line2"
     done
+}
+
+# Compress
+roll () {
+    FILE=$1
+    case $FILE in
+        *.tar.bz2) shift && tar cjf $FILE $* ;;
+        *.tar.gz) shift && tar czf $FILE $* ;;
+        *.tar.xz) shift && tar cJf $FILE $* ;;
+        *.tgz) shift && tar czf $FILE $* ;;
+        *.zip) shift && zip $FILE $* ;;
+        *.rar) shift && rar $FILE $* ;;
+    esac
 }
 
 # Uncompress any kind of known archive. (by an unknown guy)
@@ -892,7 +911,7 @@ echo ""
 #fi
 
 # Use Ruby Version Manager
-rvm use 1.9.2-head --default &>/dev/null
+#rvm use 1.9.2-head --default &>/dev/null
 
 # Load additional file
 if [ -e ~/.zshext ]; then
