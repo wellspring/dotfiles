@@ -1,6 +1,6 @@
-"**************************************************************************"
-"*** .vimrc wellspring's file -- Thanks to the authors of the functions ***"
-"**************************************************************************"
+"*********************************"
+"*** .vimrc configuration file ***"
+"*********************************"
 
 " [Pathogen]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -8,12 +8,14 @@ call pathogen#infect()
 
 " [General]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set maxline in registers (copy/paste...) to 1000 instead of 50
+set viminfo='20,<1000,s10,h
 " Activer toutes fonctionalités de VIM (imcompatible avec VI)
 set nocompatible
 " Changer le nombre de ligne gardée dans l'historique de vim
 set history=200
 " Changer le <leader>
-let mapleader = ","
+"let mapleader = ","
 " Activer la detection de type de fichier
 filetype plugin on
 " Laisser une marge de 3 lignes lors d'un scroll
@@ -61,6 +63,7 @@ set listchars=eol:¤,trail:-
 set shortmess=a
 "set cmdheight=2
 " Definir une palette de couleurs
+colors industry
 colors lucius
 set t_Co=256
 "let xterm16_brightness = 'default'
@@ -102,12 +105,17 @@ if has('statusline')
     set statusline+=\ [HEX=0x\%02.2B]  " ASCII / Hexadecimal value of char
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 endif
+" Configure airline (for status line too) -- base16/murmur/sol/jellybeans theme are nice too
+let g:airline_theme             = 'murmur'
+let g:airline_enable_branch     = 1
+let g:airline_enable_syntastic  = 1
 
 
 " [Plugins]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:snips_author = "William Hubault"
 
+autocmd vimenter * if !argc() | NERDTree | endif
 let g:NERDTreeMouseMode = 2
 let g:NERDTreeWinSize = 31
 
@@ -117,16 +125,19 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 let g:miniBufExplUseSingleClick = 1
 
-let OmniCpp_NamespaceSearch = 2
-let OmniCpp_DisplayMode = 1
-let OmniCpp_ShowScopeInAbbr = 0
-let OmniCpp_ShowPrototypeInAbbr = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_DefaultNamespaces = ["std"]
-let OmniCpp_MayCompleteDot = 1
-let OmniCpp_MayCompleteArrow = 1
-let OmniCpp_MayCompleteScope = 1
-let OmniCpp_SelectFirstItem = 0
+":NeoCompleteEnable
+"let g:neocomplete#enable_at_startup = 1
+
+"let OmniCpp_NamespaceSearch = 2
+"let OmniCpp_DisplayMode = 1
+"let OmniCpp_ShowScopeInAbbr = 0
+"let OmniCpp_ShowPrototypeInAbbr = 1
+"let OmniCpp_ShowAccess = 1
+"let OmniCpp_DefaultNamespaces = ["std"]
+"let OmniCpp_MayCompleteDot = 1
+"let OmniCpp_MayCompleteArrow = 1
+"let OmniCpp_MayCompleteScope = 1
+"let OmniCpp_SelectFirstItem = 0
 
 "let g:code_overview_autostart = 1
 "let g:codeoverview_autoupdate = 1
@@ -198,6 +209,9 @@ noremap <F3> <Esc>:w!<CR>
 " Passer ou non en mode collage avec la touche F4
 "noremap <F4> <Esc>:call ToggleMousePaste()<CR>
 :set pastetoggle=<F4>
+" Coller le contenu du presse papier via Ctrl+P
+noremap <C-p> <Esc>:set paste<CR>"*p:set nopaste<CR>o
+"noremap <C-S-p> <Esc>:set paste<CR>"+p:set nopaste<CR>o
 " Activer ou desactiver NerdTree avec la touche F12
 noremap <F12> <Esc>:NERDTreeToggle<CR>
 " Redessine la fenetre (en cas de bug d'affichage)
@@ -208,26 +222,44 @@ inoremap <C-s> <Esc>:w!<CR>
 noremap <C-w> <Esc>:Bclose<CR>
 " Passe du fichier source au fichier de header (.c <-> .h)
 noremap . <Esc>:A<CR>
-" Va au tampon precedent/suivant
-noremap + <Esc>:MBEbp<CR>
-noremap - <Esc>:MBEbn<CR>
-" Se déplacer dans les fenetres plus rapidement avec CTRL+h/j/k/l
-noremap <C-j> <C-W>j
-noremap <C-k> <C-W>k
-noremap <C-h> <C-W>h
-noremap <C-l> <C-W>l
-" Utiliser les onglets plus rapidement
-noremap <leader>tn :tabnew %<CR>
-noremap <leader>te :tabedit
-noremap <leader>tc :tabclose<CR>
-noremap <leader>tm :tabmove
+" Se déplacer dans les fenetres plus rapidement
+noremap <C-Right> <C-W>l
+noremap <C-Left> <C-W>h
+noremap <C-Down> <C-W>j
+noremap <C-Up> <C-W>k
+" Easy tab control (create, close, move)
+noremap <C-t> <ESC>:tabnew<CR>
+"noremap <C-S-w> <Esc>:tabclose<CR>
+"noremap <C-S-Right> <ESC>:tabnext<CR>
+"noremap <C-S-Left> <ESC>:tabprev<CR>
+" Easy buffer control (move)
+noremap ` <Esc>:Unite -quick-match buffer<CR>
+noremap <A-Right> <ESC>:MBEbn<CR>
+noremap <A-Left> <ESC>:MBEbp<CR>
+"map <A-1> 1gt
+"map <A-2> 2gt
+"map <A-3> 3gt
+"map <A-4> 4gt
+"map <A-5> 5gt
+"map <A-6> 6gt
+"map <A-7> 7gt
+"map <A-8> 8gt
+"map <A-9> 9gt
+" Other easy control using Unite plugin
+let g:unite_update_time = 200
+let g:unite_enable_start_insert = 1
+let g:unite_source_file_mru_limit = 1000
+let g:unite_source_history_yank_enable = 1
+noremap ~ <Esc>:Unite history/yank<cr>
+noremap - <Esc>:Unite file_rec/async<cr>
+noremap <C-F> <esc>:Unite grep:.<cr>
 " Cree le fichier ctags
 noremap <F2> <Esc>:silent !ctags --fields=afiKmsSzn *<CR>:redraw!<CR>
 " Smart mapping for tab completion (Tip #102)
-inoremap <Tab> <c-r>=InsertTabWrapper()<CR>
-inoremap <S-Tab> <C-x><C-o>
+"inoremap <Tab> <c-r>=InsertTabWrapper()<CR>
+"inoremap <S-Tab> <C-x><C-o>
 " Ecrit rapidement un main en C
-iab xmain int main (int argc, char **argv<right><cr>{
+iab xmain int main (int argc, char *argv[<right><right><cr>{<cr><cr><up>   
 " Dupliquer la ligne en mode insertion
 inoremap <C-d> <Esc>yypi
 " Inserer rapidement le chemin et dossier du fichier
@@ -250,7 +282,6 @@ vmap <C-<> <Plug>MarkersMark
 nnoremap <C-L> :nohls<CR><C-L>
 inoremap <C-L> <C-O>:nohls<CR>
 " Permet d'utiliser le plugin grep facilement
-map <C-F> <esc>:Grep<CR>
 " Utiliser SnimMate et SuperTab
-let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "context"
 

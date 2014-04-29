@@ -11,15 +11,16 @@ please Read The Fine Manual for more information...
 
 Clone the repository :
 
-    git clone git://github.com/wellspring/dotfiles.git ~/.dotfiles
+    git clone git://github.com/wellspring/dotfiles.git /usr/share/dotfiles
 
-Switch to the `~/.dotfiles` directory, and fetch submodules :
+Switch to the `/usr/share/dotfiles` directory, and fetch submodules :
 
-    (cd ~/.dotfiles && git submodule update --init --recursive)
+    (cd /usr/share/dotfiles && git submodule update --init --recursive)
 
 Create symlinks :
 
-    for file in ~/.dotfiles/*; do ln -sf $file ~/.$(basename "$file"); done
+    for file in /usr/share/dotfiles/*; do ln -sf $file ~/.$(basename "$file"); done
+    ln -s /usr/share/dotfiles ~/.dotfiles
     rm ~/.README.md
 
 

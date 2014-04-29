@@ -3,8 +3,8 @@
 #                              ~~~~~~~~~~~                              #
 #   Author         : wellspring <wellspring.fr A T gmail.com>           #
 #   Description    : BASHrc/ZSHrc mix of configurations (dotfiles...)   #
-#   Last modified  : 07/07/2011                                         #
-#   Version        : 1.6.1                                              #
+#   Last modified  : 31/01/2014                                         #
+#   Version        : 1.7.0                                              #
 # ********************************************************************* #
 
 ####
@@ -14,12 +14,10 @@ export WATCHFMT="%w %T ${HOST%%.*} watch: %n %a %(l:tty%l:unknown tty) %(M:from 
 export LOGCHECK=5
 export WATCH=all
 
+export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512M"
+export PATH=/usr/local/bin:/usr/local/rvm/bin:$PATH
 #export CDPATH="~:/disk:/usr/src:/usr:/var"
 #export FPATH="~/.zsh/functions"
-#export PATH=/usr/local/rvm/bin/:/usr/local/rvm/gems/ruby-1.9.2-head/bin/:$PATH:/opt/android/tools:/opt/android/platform-tools:/usr/local/sbin #:/var/lib/gems/1.9.1/bin/
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH:$HOME/.rvm/bin
-export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512M"
-export JREBEL_PATH=/Users/william/.jrebel/app/jrebel.jar
 
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=1000
@@ -27,11 +25,12 @@ export SAVEHIST=1000
 export DIRSTACKSIZE=64
 
 export BROWSER="firefox"
-export SVN_EDITOR="vi"
+export TERMINAL="terminology"
+export SVN_EDITOR="vim"
 export NULLCMD="cat"
 export VISUAL="vim"
 export PAGER="less"
-export EDITOR="vi"
+export EDITOR="vim"
 
 export VMWARE_USE_SHIPPED_GTK="yes"
 export RAILS_ENV=development
@@ -86,9 +85,9 @@ setopt INTERACTIVECOMMENTS
     setopt HIST_IGNORE_DUPS
     # Try  to  correct  the  spelling of commands.
     setopt CORRECT
-    # Create hash table to find faster commands and directories, and correct them.
-    setopt HASH_CMDS
-    setopt HASH_DIRS
+    # Create hash table to find faster commands and directories, and correct them. (removed: need to rehash all the time)
+    #setopt HASH_CMDS
+    #setopt HASH_DIRS
     # Log old paths automatically with pushd when using cd.
     setopt AUTO_PUSHD
     setopt PUSHD_SILENT
@@ -109,7 +108,7 @@ setopt INTERACTIVECOMMENTS
 setopt prompt_subst
 
 ####
-# Prompt
+# Prompt (see .zshext for the rest)
 ########
 
 if [ $TERM != "screen" ]; then
@@ -117,46 +116,6 @@ if [ $TERM != "screen" ]; then
 else
     export RPS1="%b"
 fi
-
-case $HOST in
-  "Gentoo")
-    if [ $UID == 0 ]; then
-        prompt adam2 red yellow red blackk
-    else
-        prompt adam2 cyan green cyan blackk
-    fi
-    ;;
-
-  "Laptop")
-    if [ $UID == 0 ]; then
-        export PS1="%b%k%F{white}[%F{red}r00t@%m%F{white}] %F{yellow}%1~ %# %B%f%k"
-    else
-        export PS1="%b%k%F{yellow}%n@%m%F{white}: %F{red}%1~ \$ %B%f%k"
-    fi
-    ;;
-
-  "ethics")
-    if [ $UID == 0 ]; then
-        export PS1="%b%k%F{white}(%F{cyan}r00t%F{white}@%F{cyan}%m%F{white}:%F{cyan}%1~%F{white}) %F{red}%# %B%f%k"
-    else
-        export PS1="%b%k%F{cyan}(~o~) %F{white}%n%F{cyan}@%F{white}%m%F{cyan}:%F{white}%1~ %F{cyan}(~o~) %B%f%k"
-    fi
-    ;;
-
-  "fork")
-    if [ $UID == 0 ]; then
-        export PS1='%B%k%K{red}%F{yellow}(~o~) %F{white}%n%F{yellow}@%F{white}%m%F{yellow}:%F{white}%1~ %F{yellow}(~o~)%b%k%F{red} '
-    else
-        export PS1='%b%k%F{green}(~o~) %f%n%F{green}@%f%m%F{green}:%f${vcs_info_msg_0_} %F{green}(~o~) %B%f%k'
-    fi
-    ;;
-
-  *)
-    if [ $UID == 0 ]; then
-        # Do nothing
-    fi
-    ;;
-esac
 
 
 ####
@@ -240,20 +199,13 @@ bindkey '^R'      history-incremental-search-backward # Ctrl+R
 bindkey '^[[5~'   history-search-backward             # PgUp
 bindkey '^[[6~'   history-search-forward              # PgDn
 
-if [[ $TERM == "rxvt" || $TERM == "xterm" || $TERM == "xterm-256color" ]]; then
-    bindkey '^?'      backward-delete-char                # Ctrl+Backspace
-    bindkey '^H'      backward-delete-word                # Backspace
-    bindkey '^[[1;5D' backward-word                       # Ctrl+Left
-    bindkey '^[[1;5C' forward-word                        # Ctrl+Right
-    bindkey '^[[3;5~' delete-word                         # Ctrl+Del
-    bindkey '^[[3~'   delete-char                         # Del
-    bindkey '^[[2~'   overwrite-mode                      # Ins
-else
-    bindkey '^H'      backward-delete-char                # Ctrl+Backspace
-    bindkey '^?'      backward-delete-word                # Backspace
-    bindkey '^[[23~'  exec-alsamixer                      # F11
-    bindkey '^[[24~'  exec-ncmpc                          # F12
-fi
+bindkey '^H'      backward-delete-char                # Backspace
+bindkey '^?'      backward-delete-word                # Alt+Backspace
+bindkey '^[[1;5D' backward-word                       # Ctrl+Left
+bindkey '^[[1;5C' forward-word                        # Ctrl+Right
+bindkey '^[[3;5~' delete-word                         # Ctrl+Del
+bindkey '^[[3~'   delete-char                         # Del
+bindkey '^[[2~'   overwrite-mode                      # Ins
 
 bindkey '^U'      undo                                # Ctrl+U
 bindkey '^O'      paste-xclip                         # Ctrl+O
@@ -284,7 +236,6 @@ bindkey -s '^|s'  ' | sed -e "s///g"ODODODOD' # C-| s
 ####
 # Global aliases
 ########
-alias -g wd='root@192.168.0.8'
 alias -g :l="| $PAGER"
 alias -g :g='| grep'
 alias -g :h='| head'
@@ -333,36 +284,46 @@ alias -s iso='k3b'
 alias zshrc=$EDITOR' ~/.zshrc ; source ~/.zshrc'
 alias reload='source ~/.zshrc'
 alias zs='zshrc'
+alias i3c=$EDITOR' ~/.i3/config ; i3-msg restart'
+alias vimrc=$EDITOR' ~/.vimrc'
 
 alias bestof="history | awk '{a[\$2]++ }END{for(i in a){print a[i]" "i}}' | sort -rn | head"
 alias sounduse='fuser -v /dev/snd/* /dev/dsp*'
 
 alias xx='extractlast'
-alias oo='ooffice'
 alias x='extract'
-alias p='mplayer -msgcolor -msglevel all=0:statusline=9 -monitoraspect 4:3'
-alias m='ncmpc'
 
-alias cl='grc -es --colour=auto'
-alias wcc='cl i686-mingw32-gcc'
-alias as='cl as'
-alias ld='cl ld'
-alias gcc='cl gcc'
-alias g++='cl g++'
-alias gas='cl gas'
-alias diff='cl diff'
-alias make='cl make'
-alias ping='cl ping -c 3'
-alias netstat='cl netstat'
-alias configure='cl ./configure'
-alias traceroute='cl /usr/sbin/traceroute'
+alias oo='ooffice'
+alias p='mplayer -msgcolor -msglevel all=0:statusline=9 -monitoraspect 4:3'
+alias fastplay='mplayer -af scaletempo -speed'
+alias m='cmus'
+
+# Is there any grc app installed (to colorize output)?
+if [ `hash grc 2>/dev/null` ]; then
+    alias cl='grc -es --colour=auto'
+    alias wcc='cl i686-mingw32-gcc'
+    alias as='cl as'
+    alias ld='cl ld'
+    alias gcc='cl gcc'
+    alias g++='cl g++'
+    alias gas='cl gas'
+    alias diff='cl diff'
+    alias make='cl make'
+    alias ping='cl ping -c 3'
+    alias netstat='cl netstat'
+    alias configure='cl ./configure'
+    alias traceroute='cl /usr/sbin/traceroute'
+fi
+
 alias build="./configure --prefix=/usr && make && su -c 'make install'"
 alias nomake='/usr/bin/make -s'
 alias vcm='vi **/CMakeLists.txt'
 alias mk='make -j5'
 alias mi='make install'
+alias cm="cmake -H. -Bbuild && (cd build && make -j5)"
+alias menuconfig='nomake menuconfig'
 
-alias ls='ls -vFG'
+alias ls='ls -vFG --color=auto'
 alias ll='ls -l' mm='ll'
 alias l='ls -dF'
 alias la='ls -la'
@@ -387,28 +348,26 @@ alias mkdir='nocorrect mkdir -p'
 alias md='mkdir'
 alias rd='rmdir'
 
-alias screenshot='clear && echo "ScreenShot  !" | figlet | cowsay -n -f kitty && scrot -c -d 5 -e "display $f"'
+alias screenshot='clear && archey && scrot -c -d 5 -e "display $f"'
 
 alias grep='grep --color=auto'
 #alias chmod='chmod -c' # not working on OS-X
-alias chown='chown -v'
+#alias chown='chown -v'
 alias tree='tree -FC'
 alias ps='ps auxww' #'f' not working on OS-X
 alias hex='od -t x1'
-alias fixsound='sudo killall -u _coreaudiod'
 
 alias getkey='gpg --recv-keys --keyserver wwwkeys.pgp.net'
-alias killthefox='kill `pidof firefox-bin`'
-alias pig='ping -c 3 www.google.fr'
+alias pig='ping -c 3 www.google.com'
 alias scan='nmap localhost'
 alias route='route -n'
-alias ports='lsof -i'
+alias ports='lsof -Pn +M -i4 -sTCP:LISTEN'
 alias wget-fast='axel -a'
 
 alias e='sublime' #sublime, mate, vim
 alias ee='sublime ./'
 alias nano='nano -w'
-alias vim='vi -S $(pwd)/Session.vim'
+alias vi='vim'
 alias :e=$EDITOR
 alias @=$EDITOR
 alias :q='exit'
@@ -424,7 +383,7 @@ alias W0='watch -n 0'
 alias W1='watch -n 1'
 
 alias bigfiles='BLOCKSIZE=1048576 du -x | sort -nr | head -10'
-alias duf='du -sh * | gsort -h'
+alias duf='du -sh * | sort -h'
 alias duh='du -sh'
 alias dfh='df -lPH'
 
@@ -445,105 +404,24 @@ alias gj="git checkout"
 alias gjc="git checkout -b"
 alias gm="git merge --no-ff"
 alias gcl="git clone"
+alias gh="hub clone"
 
-alias cm="cmake -H. -Bbuild && (cd build && make -j5)"
+alias webshare='python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
+alias rc="rails console"
+alias rs="rails server"
 
-alias a="sudo aptitude"
+alias netip="curl icanhazip.com"
+alias lanip='ip addr show dev $(ip route | awk "/^default/ {print \$5}") | awk -F"[ /]*" "/scope global/ { print \$3 }"'
+alias lanprefix='ip addr show dev $(ip route | awk "/^default/ {print \$5}") | awk -F"[ /]*" "/scope global/ { print \$4 }"'
+
+#alias a="sudo aptitude"
 #alias ai="sudo aptitude install"
-alias as="aptitude search"
-#alias gem="rvmsudo gem"
-#[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
+#alias as="aptitude search"
 
-alias c="rails console"
-alias s="rails server"
+#systemctl enable ...
+#systemctl start ...
 
 
-# [Asus laptop alias only]
-if [[ $HOST == "Laptop" || $HOST == "ethics" ]]; then
-    alias b='battery'
-    alias entervm="ssh root@192.168.86.2"
-    alias netip='echo Your internet IP address : $(wget -qO- www.whatismyip.com/automation/n09230945.asp)'
-    alias lanip='echo -n "Your IP address on the lan is : " && ip addr show dev $(ip route | awk "/^default/ {print \$5}") | awk "/scope global/ { print \$2 }"'
-    alias stdioe='lsof -a -p $$ -d0,1,2'
-fi
-
-# [Root alias only]
-if [ $UID == 0 ]; then
-    alias saydone='su '$MYNAME' -c "notify-send -i exclamation Information Done."'
-    alias menuconfig='nomake menuconfig'
-
-    alias sysupdate='layman -S && eix-sync && emerge -uavDN world'
-    alias perlupdater='emerge -av1 `qfile /usr/lib/perl* -Cq | sort -u`'
-    alias x86emerge='ACCEPT_KEYWORDS="~x86" emerge -av'
-    alias aemerge='emerge -av'
-    alias pemerge='emerge -pf'
-    alias femerge='emerge -fv'
-    alias unmerge='emerge -C'
-    alias umerge='emerge -C'
-    alias temerge='time emerge -v'
-
-    alias vmake='vi /etc/make.conf'
-    alias vuse='vi /etc/portage/package.use'
-    alias vkeyw='vi /etc/portage/package.keywords'
-
-    alias lan='arpdiscover 192.168.0.0 255 $(ip route | grep default | sed "s/.*dev //") | grep received | sort | uniq -c -f 7 -w $((3*6))'
-
-    # [Asus laptop alias only]
-    if [ $HOST == "Laptop" ]; then
-        alias offline='switchto offline'
-        alias s='switchto -s'
-
-        alias bscr='echo 7 > /proc/acpi/asus/brn'
-        alias sscr='echo 15 > /proc/acpi/asus/brn'
-
-    alias ephemere='mount -t smbfs -o username=ESI\\67922 //paris2/Ephemere /mnt/ephemere'
-    alias ephechat'clear && ls -c /mnt/ephemere/Discussions/ | sed "s/\.[a-zA-Z]\{3\}//" | tail'
-    fi
-
-    # [Ethics netbook alias only]
-    if [ $HOST == "ethics" ]; then
-        alias wifi='ifconfig eth0 down && ifconfig wlan0 up && wpa_supplicant -B -iwlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf && dhclient wlan0'
-        alias eth='killall -q wpa_supplicant; ifconfig wlan0 down && ifconfig eth0 up && dhclient eth0'
-        alias offline='killall -q wpa_supplicant; killall -q dhclient; ifconfig wlan0 down; ifconfig eth0 down'
-
-	alias powerfull='cpufreq-set -c 0 -g performance && cpufreq-set -c 1 -g performance'
-	alias powersave='cpufreq-set -c 0 -g powersave && cpufreq-set -c 1 -g powersave'
-	alias powerauto='cpufreq-set -c 0 -g conservative && cpufreq-set -c 1 -g conservative'
-	alias poweruser='cpufreq-set -c 0 -g userspace && cpufreq-set -c 1 -g userspace'
-
-        alias ephemere='mount -t cifs -o username=ESI\\67922 //paris2/Ephemere /mnt/ephemere'
-        alias ephechat'clear && ls -c /mnt/ephemere/Discussions/ | sed "s/\.[a-zA-Z]\{3\}//" | tail'
-    fi
-
-# [User alias only]
-else
-    alias freq3="mpg123 -v http://stream-hautdebit.frequence3.fr:8000/ 2> ~/.freq3"
-    alias title="cat ~/.freq3 | grep --color=never StreamTitle | grep --color=never -vv \"A suivre: \" | tail -n 1 | sed -e \"s/.*e='\(.*\)';S.*/\1/\""
-
-    alias vlcppc="vlc --sout '#transcode{vcodec=mp4v,vb=512,scale=1,acodec=mp3,ab=96,channels=2}:std{access=http,mux=asf,dst=:8080}' -I http [--http-src /disk/ftp/ --http-host :56443]"
-    alias lcdd="mplayer /home/wellspring/Telechargements/lachansonsdudimanche/audio/*/*.mp3"
-    alias scanner="xsane hpaio:/net/Photosmart_C6100_series?ip=192.168.0.7"
-    alias c0de="screen -Am -S c0ding -t 'Programmation with VIM.'"
-
-    alias windows="vmplayer '/disk/win/WindowsXP/actual/WinXP Virtual Machine.vmx'"
-    alias winvnc="socat TCP-LISTEN:5649,fork TCP:172.16.243.129:22094"
-
-    alias gunz="wine /home/wellspring/.wine/drive_c/Program\ Files/Gunz/GunzLauncher.exe"
-    alias gunzonline="wine /home/wellspring/.wine/drive_c/Program\ Files/Gunz/eurogzz.exe"
-
-    alias fastplay='mplayer -af scaletempo -speed'
-    alias webcam='mplayer -vf screenshot tv:// -tv driver=v4l2:device=/dev/video0 -fps 16'
-
-    # [Asus laptop alias only]
-    if [ $HOST == "Laptop" ]; then
-        alias wp='display -geometry 1440x900+0+0 -window root /home/wellspring/Documents/Images/wallpaper/artdigital/fresh-paper.com-wallpaper-3025-1440x900.jpg'
-        alias sscreen="screen -c ~/Documents/SupInfo/Autre/screenrc"
-        alias webshare='python -c "import SimpleHTTPServer;SimpleHTTPServer.test()"'
-        alias forwardtetrinet='ssh -L 31457:87.98.131.200:31457 wellspring.is-a-geek.net'
-
-        alias fruityloops="wine ~/.wine/drive_c/Program\ Files/Image-Line/FL\ Studio\ 8/FL.exe"
-    fi
-fi
 
 ####
 # Small functions
@@ -616,6 +494,12 @@ ansi-colors () {
         echo -e "$line1\n$line2"
     done
 }
+ansi256 () {
+    ( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done; )
+    echo Compact version:
+    for i in $(seq 0 $(tput colors) ) ; do tput setaf $i ; echo -n "¿" ; done ; tput setaf 15 ; echo
+    #for i in $(seq 0 $(tput colors) ) ; do tput setaf $i ; echo -n "¿$i¿  " ; done ; tput setaf 15 ; echo)
+}
 
 # Compress
 roll () {
@@ -634,6 +518,7 @@ roll () {
 extract () {
     if [ -f $1 ] ; then
         case $1 in
+            *.tar.xz)    tar xJvf $1     ;;
             *.tar.bz2)   tar xjvf $1     ;;
             *.tar.gz)    tar xzvf $1     ;;
             *.tgz)       tar xzvf $1     ;;
@@ -685,6 +570,32 @@ d () {
         return 1
     fi
     cd ~$dir
+}
+
+# Jump between project directories (by wellspring)
+g () {
+    if [ ! -e ~/.zshdirs ]; then
+        echo "Please use the command gadd to add a new directory in ~/.zshdirs"
+        return
+    fi
+    dirs=$(sed '/^$/d' ~/.zshdirs)
+    max=$(echo $dirs | wc -l)
+    dir=-1
+    echo $dirs | nl
+    read -r 'dir?Jump to directory: ' || return
+    if (( dir < 0 || dir >= max )); then
+        echo g: no such directory number $dir
+        return 1
+    fi
+    cd $(echo $dirs | sed -n "${dir}p")
+}
+gadd () {
+    if [ ! -d "$1" ]; then
+        echo "Usage: $0 <dir>"
+        echo "  (then use the cmd 'g' to select a directory to goto)"
+        exit
+    fi
+    ls -d "$*" >> ~/.zshdirs
 }
 
 # Find out which libs define a symbol (by grml-team)
@@ -765,14 +676,15 @@ function settitle () {
       print -Pn "\ek$a:$3\e\\"      # screen title (in ^H")
       ;;
     xterm*|rxvt*)
-      print -Pn "\e]2;$2 | $a:$3\a" # plain xterm title
+      #print -Pn "\e]2;$2 | $a:$3\a" # plain xterm title
+      print -Pn "\e]2; $1 \a" # plain xterm title
       ;;
   esac
 }
 
 # The function precmd is called just before the prompt is printed. (by an unknown guy)
 function precmd () {
-  settitle "zsh" "$USER@%m" "%55<...<%~"
+  #settitle "zsh" "$USER@%m" "%55<...<%~"
 
   if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
     vcs_warning=""
@@ -786,7 +698,7 @@ function precmd () {
 
 # The function preexec is called just before any command line is executed. (by an unknown guy)
 function preexec () {
-  settitle "$1" "$USER@%m" "%35<...<%~"
+  #settitle "$1" "$USER@%m" "%35<...<%~"
 }
 
 # Replacement for command cp with a progress bar. (by wellspring)
@@ -795,8 +707,23 @@ function ccp () {
     rsync --progress -av $*
 }
 
-# [Root functions only]
+# [Gentoo only]
 if [ $UID == 0 ]; then
+
+    # Add some alias for portage
+    alias sysupdate='layman -S && eix-sync && emerge -uavDN world'
+    alias perlupdater='emerge -av1 `qfile /usr/lib/perl* -Cq | sort -u`'
+    alias x86emerge='ACCEPT_KEYWORDS="~x86" emerge -av'
+    alias aemerge='emerge -av'
+    alias pemerge='emerge -pf'
+    alias femerge='emerge -fv'
+    alias unmerge='emerge -C'
+    alias umerge='emerge -C'
+    alias temerge='time emerge -v'
+    alias vmake='vi /etc/make.conf'
+    alias vuse='vi /etc/portage/package.use'
+    alias vkeyw='vi /etc/portage/package.keywords'
+
     # Say if the package is unmasked or not. (by wellspring)
     ismasked () {
         [[ -z "$1" ]] && echo "Usage : $0 <package>" && return 1
@@ -895,8 +822,9 @@ fi
 # Clear screen on logout
 trap clear 0
 
-# Load new 256 colors if the file exists
-test -e ~/.dir_colors && eval `gdircolors ~/.dir_colors`
+# Load a 256 colorsheme (if the file exists)
+#[[ `hash dircolors` ]] && alias dircolors='gdircolors'
+test -e ~/.dir_colors && eval `dircolors ~/.dir_colors`
 
 # Print the MOTD (not after "su" / "tmux" or in a TTY)
 if [[ -e /etc/motd.conf && -z $(egrep "^(su|tmux|/bin/login)" /proc/$PPID/cmdline) ]]; then
@@ -905,13 +833,11 @@ if [[ -e /etc/motd.conf && -z $(egrep "^(su|tmux|/bin/login)" /proc/$PPID/cmdlin
 fi
 echo ""
 
-# Go to home. (not after "tmux")
-#if [[ -z $(egrep "^(tmux)" /proc/$PPID/cmdline) ]]; then
-#    cd
-#fi
-
 # Use Ruby Version Manager
-#rvm use 1.9.2-head --default &>/dev/null
+if [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
+    source /usr/local/rvm/scripts/rvm
+    #rvm use 2.1.0 --default >/dev/null
+fi
 
 # Load additional file
 if [ -e ~/.zshext ]; then
