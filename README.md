@@ -9,13 +9,9 @@ please Read The Fine Manual for more information...
 
 ## Installation
 
-Clone the repository :
+Clone the repository (with submodules) :
 
-    git clone git://github.com/wellspring/dotfiles.git /usr/share/dotfiles
-
-Switch to the `/usr/share/dotfiles` directory, and fetch submodules :
-
-    (cd /usr/share/dotfiles && git submodule update --init --recursive)
+    git clone --recursive https://github.com/wellspring/dotfiles.git /usr/share/dotfiles
 
 Create symlinks :
 
