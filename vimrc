@@ -210,7 +210,7 @@ noremap <F3> <Esc>:w!<CR>
 "noremap <F4> <Esc>:call ToggleMousePaste()<CR>
 :set pastetoggle=<F4>
 " Coller le contenu du presse papier via Ctrl+P
-noremap <C-p> <Esc>:set paste<CR>"*p:set nopaste<CR>o
+noremap <C-p> <Esc>:set paste<CR>"*p:set nopaste<CR>
 "noremap <C-S-p> <Esc>:set paste<CR>"+p:set nopaste<CR>o
 " Activer ou desactiver NerdTree avec la touche F12
 noremap <F12> <Esc>:NERDTreeToggle<CR>
