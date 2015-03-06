@@ -1,5 +1,5 @@
 # Turn colorisation on
-alias ls='ls -vFG --color=auto'
+alias ls='ls -vF --color=auto'
 alias grep='grep --color=auto'
 alias tree='tree -FC'
 
