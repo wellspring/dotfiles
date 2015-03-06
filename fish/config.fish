@@ -3,12 +3,12 @@
 #                              ~~~~~~~~~~~                              #
 #   Author         : wellspring <wellspring.fr A T gmail.com>           #
 #   Description    : BASHrc/ZSHrc mix of configurations (dotfiles...)   #
-#   Last modified  : 24/03/2014                                         #
-#   Version        : 1.8.1                                              #
+#   Last modified  : 27/02/2015                                         #
+#   Version        : 1.8.2                                              #
 # ********************************************************************* #
 
 # Configure the environment variables
-set -x TERMINAL terminology
+set -x TERMINAL st
 set -x BROWSER chromium
 set -x SUDO_EDITOR vim
 set -x SVN_EDITOR vim
