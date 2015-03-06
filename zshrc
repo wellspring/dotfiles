@@ -25,7 +25,7 @@ export SAVEHIST=1000
 export DIRSTACKSIZE=64
 
 export BROWSER="firefox"
-export TERMINAL="terminology"
+export TERMINAL="st"
 export SVN_EDITOR="vim"
 export NULLCMD="cat"
 export VISUAL="vim"
@@ -835,7 +835,7 @@ echo ""
 
 # Use Ruby Version Manager
 if [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
-    source /usr/local/rvm/scripts/rvm
+    #source /usr/local/rvm/scripts/rvm
     #rvm use 2.1.0 --default >/dev/null
 fi
 
