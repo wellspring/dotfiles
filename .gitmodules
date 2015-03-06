@@ -2,13 +2,13 @@
 	path = vim/bundle/fugitive
 	url = http://github.com/tpope/vim-fugitive.git
 [submodule "vim-ruby"]
-	path = vim/bundle/ruby
+	path = vim/bundle-disabled/ruby
 	url = https://github.com/vim-ruby/vim-ruby
 [submodule "vim-rails"]
 	path = vim/bundle/rails
 	url = https://github.com/tpope/vim-rails.git
 [submodule "vim-code-overview"]
-	path = vim/bundle/code-overview
+	path = vim/bundle-disabled/code-overview
 	url = https://github.com/Twinside/vim-codeoverview.git
 [submodule "vim-haml"]
 	path = vim/bundle/haml
@@ -38,10 +38,10 @@
 	path = vim/bundle/matchit
 	url = https://github.com/vim-scripts/matchit.zip
 [submodule "vim-checksyntax"]
-	path = vim/bundle/checksyntax
+	path = vim/bundle-disabled/checksyntax
 	url = https://github.com/tomtom/checksyntax_vim
 [submodule "vim-supertab"]
-	path = vim/bundle/supertab
+	path = vim/bundle-disabled/supertab
 	url = https://github.com/ervandew/supertab
 [submodule "vim-html-autoclosetag"]
 	path = vim/bundle/html-autoclosetag
@@ -101,7 +101,7 @@
 	path = vim/bundle/minibufexpl
 	url = https://github.com/fholgado/minibufexpl.vim
 [submodule "vim-fuzzy-finder"]
-	path = vim/bundle/fuzzy-finder
+	path = vim/bundle-disabled/fuzzy-finder
 	url = https://github.com/vim-scripts/FuzzyFinder
 [submodule "vim-indexed-search"]
 	path = vim/bundle/indexed-search
@@ -149,7 +149,7 @@
 	path = tmux/powerline
 	url = git://github.com/erikw/tmux-powerline.git
 [submodule "vim/bundle/vundle"]
-	path = vim/bundle/vundle
+	path = vim/bundle-disabled/vundle
 	url = https://github.com/gmarik/vundle.git
 [submodule "vim/bundle/vim-auto-save"]
 	path = vim/bundle/vim-auto-save
