@@ -1,7 +1,7 @@
-" Set tab size
-setlocal shiftwidth=4
-setlocal tabstop=4
+"________________________________________________________________________________________________________________________________________
+" [local config]
+"================
 
-" Autosave when typing (every 200ms)
-let b:auto_save = 1
+setlocal ts=4 sts=4 sw=4 expandtab textwidth=500
+
 

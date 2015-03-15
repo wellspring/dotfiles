@@ -1,0 +1,25 @@
+
+ TODO
+ ====
+
+- ccc language textobj (string/number/regexp, functions, class, ...)
+- c/c++ language motions (add include, add argument/localvar to current function, add attribute to current class, ...) + visual selection between arguments
+
+
+
+
+" ??? : create a new project directory (poc or not; + init with template?)
+" ??? : edit class definition (.h, in C/C++)
+" ??? : goto include section (in C/C++)
+" ??? : goto last arguments + add ', ' (in C/C++)
+" ??? : goto local variables section
+" ??? : goto column XX + start comment there
+" ??? : replace argument
+" ??? : goto prev/next arg (+select?)
+" ??? : goto function name (+select)
+" va2 : select argument #2
+" +   : increment the number you're on (CTRL+A ?)
+" add a breakpoint in the program on this line
+"-----
+
+
