@@ -844,3 +844,4 @@ if [ -e ~/.zshext ]; then
     source ~/.zshext
 fi
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
