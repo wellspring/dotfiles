@@ -507,7 +507,7 @@ map       <D-g>       <C-g>|map <T-g> <C-g>|                                    
 nnoremap  <Leader>gi  :!git init<CR>|                                             "                 \gi : init a new git directory
 nnoremap  <Leader>gc  :Gcommit<CR>|                                               "                 \gc : commit the changes
 nnoremap  <Leader>gC  :Gcommit -a<CR>|                                            "                 \gC : add all files & commit the changes
-nnoremap  <Leader>gt  :Gwrite<CR>:GCommit<CR>|                                    "                 \gt : add this file & commit
+nnoremap  <Leader>gt  :Gwrite<CR>:Gcommit<CR>|                                    "                 \gt : add this file & commit
 nnoremap  <Leader>ga  :Gwrite<CR>|                                                "                 \ga : add this file
 nnoremap  <Leader>gA  :Git add .<CR>|                                             "                 \gA : add all files
 nnoremap  <Leader>gs  :Gstatus<CR>|                                               "                 \gs : show git status (- to add/reset, or p to add with --patch)
