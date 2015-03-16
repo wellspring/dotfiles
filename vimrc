@@ -64,7 +64,7 @@ call plug#begin('~/.vim/plugged')
  "Plug 'vim-scripts/simple-pairs'                                                 "|auto-closing brackets/quotes (similar to auto-pairs, less aggressive -- needs python)
  "Plug 'Raimondi/delimitMate'                                                     "|auto-closing brackets/quotes (similar to auto-pairs -- doesnt work with html :/)
  "Plug 'vim-scripts/netrw.vim'                                                    "|File explorer (in the current window, without using a separated project drawer)
-  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }                          " File explorer
+  Plug 'scrooloose/nerdtree'                                                      " File explorer
   Plug 'tomtom/tcomment_vim'                                                      " Comments (better than nerdcommenter)
  "Plug 'scrooloose/nerdcommenter'                                                 "|Comments
   Plug 'scrooloose/syntastic'                                                     " Syntax checking (> 80 lang!!)
@@ -420,8 +420,8 @@ command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>|           
 
 " --- (automatic)
 autocmd BufWritePost vimrc source %                                               " Reload automatically the '.vimrc' config when saved.
-autocmd vimenter * if !argc() | NERDTree | endif                                  " If no file/arg is specified, open nerdtree to select a file.
-autocmd vimenter * start                                                          " Start VIM in INSERT mode. (wheather it's a new or existing file)
+autocmd StdinReadPre * let s:std_in=1                                             " Define a variable to indicate there's text coming from stdin (e.g. via a unix pipe).
+autocmd VimEnter * if !argc()&&!exists("s:std_in")|NERDTree|else|start|endif      " If no file/arg is specified, open nerdtree to select a file. Otherwise, start VIM in INSERT mode
 
 
 "________________________________________________________________________________________________________________________________________________________________________
