@@ -355,7 +355,7 @@ let g:textobj_clang_more_mappings = 1                                           
 let g:tcommentMaps = 0                                                            " [TComment] disable the default keyboard mappings
 
 " --- (style)
-colors industry                                                                   " Set colorscheme (default one, if no plugin installed)
+colors desert                                                                     " Set colorscheme (default one, if no plugin installed)
 colors jellybeans                                                                 " Set colorscheme
 highlight Cursor guifg=white guibg=steelblue|                                     " [CURSOR] Normal cursor color (blue)
 highlight vCursor guifg=white guibg=orange|                                       " [CURSOR] Selection cursor color (orange)
