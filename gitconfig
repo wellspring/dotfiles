@@ -1,52 +1,128 @@
 [user]
-	name = William Hubault
-	email = william.hubault@gmail.com
+    name = William Hubault
+    email = william.hubault@gmail.com
+
+# --- (generic settings) ---
 [core]
-    excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore-global
+    attributesfile = ~/.gitattributes-global
     whitespace = trailing-space,space-before-tab
-[apply]
-	whitespace = fix
-[alias]
-	st = status
-	ci = commit
-	co = checkout
-	br = branch
-    ds = diff --staged
-	amend = commit --amend
-    undo = reset --soft HEAD^
-	branches = branch --verbose -a
-	remotes = remote --verbose show
-    graph = log --graph --pretty=format':%C(blue bold)%h%Cblue%d%Creset %s -- %C(reset)(%C(green bold)%an%Creset, %C(green)%ar%Creset)'
-    standup = log --since '1 day ago' --oneline --author william.hubault@gmail.com
-	rlog = log --pretty=format:'%C(green)%ar%Creset, by %C(red bold)%an %Creset-> %C(cyan)%s'
-	slog = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --abbrev-commit --date=short
-	pull-submodules = submodule foreach git pull origin master
-	g = grep --break --heading --line-number
+    editor = /usr/bin/vim
+    [apply]
+    whitespace = fix
+    [push]
+    default = matching
+    [diff]
+    tool = vimdiff
+    [difftool]
+    prompt = false
+    [grep]
+    lineNumber = true
+    extendRegexp = true
+    [hub]
+    protocol = https
+    [github]
+	user = wellspring
+
+# --- (style) ---
 [color]
-	ui = auto
-[color "status"]
+    ui = auto
+    [color "status"]
     added = green
     changed = red
     untracked = yellow
-[color "diff"]
+    [color "diff"]
     meta = cyan
     frag = magenta
     old = red bold
     new = green bold
     whitespace = green reverse
-[color "branch"]
+    [color "branch"]
     current = bold blue
     local = green
     remote = yellow
-[diff]
-    tool = vimdiff
-[difftool]
-    prompt = false
-[grep]
-	lineNumber = true
-	extendRegexp = true
-#[url "git@github.com:"]
-#    insteadOf = "gh:"
-#    pushInsteadOf = "git://github.com/"
-[hub]
-	protocol = https
+
+# --- (repositories) ---
+[url "gitlab@privategit:william/"]
+    insteadOf = "p:"
+    insteadOf = "private:"
+    insteadOf = "william:"
+    pushInsteadOf = "william:"
+    pushInsteadOf = "private:"
+    pushInsteadOf = "p:"
+
+[url "https://github.com/wellspring/"]
+    insteadOf = "my:"
+    insteadOf = "mygithub:"
+    insteadOf = "wellspring:"
+[url "git@github.com:wellspring/"]
+    pushInsteadOf = "https://github.com/wellspring/"
+    pushInsteadOf = "http://github.com/wellspring/"
+    pushInsteadOf = "git://github.com/wellspring/"
+    pushInsteadOf = "wellspring:"
+    pushInsteadOf = "mygithub:"
+    pushInsteadOf = "my:"
+
+[url "https://github.com/"]
+    insteadOf = "g:"
+    insteadOf = "gh:"
+    insteadOf = "github:"
+[url "git@github.com:"]
+    pushInsteadOf = "g:"
+    pushInsteadOf = "gh:"
+    pushInsteadOf = "github:"
+    pushInsteadOf = "https://github.com/"
+    pushInsteadOf = "http://github.com/"
+    pushInsteadOf = "git://github.com/"
+    pushInsteadOf = "ssh://github.com"
+
+[url "git@bitbucket.org:"]
+    pushInsteadOf = "bb:"
+    pushInsteadOf = "bitbucket:"
+    pushInsteadOf = "https://bitbucket.org/"
+    pushInsteadOf = "http://bitbucket.org/"
+    pushInsteadOf = "git://bitbucket.org/"
+    pushInsteadOf = "ssh://bitbucket.org/"
+[url "https://bitbucket.org/"]
+    insteadOf = "bb:"
+    insteadOf = "bitbucket:"
+
+[url "git@gist.github.com:"]
+    insteadOf = "gist:"
+    pushInsteadOf = "https://gist.github.com/"
+    pushInsteadOf = "http://gist.github.com/"
+    pushInsteadOf = "git://gist.github.com/"
+    pushInsteadOf = "ssh://gist.github.com/"
+
+[url "git@heroku.com:"]
+    insteadOf = "heroku:"
+    insteadOf = "h:"
+
+# --- (shortcuts) ---
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    ds = diff --staged
+    wdiff = diff --word-diff
+    branches = branch --verbose -a
+    remotes = remote --verbose show
+    graph = log --graph --pretty=format':%C(blue bold)%h%Cblue%d%Creset %s -- %C(reset)(%C(green bold)%an%Creset, %C(green)%ar%Creset)'
+    standup = log --since '1 day ago' --oneline --author william.hubault@gmail.com
+    rlog = log --pretty=format:'%C(green)%ar%Creset, by %C(red bold)%an %Creset-> %C(cyan)%s'
+    slog = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --abbrev-commit --date=short
+    pull-submodules = submodule foreach git pull origin master
+    g = grep --break --heading --line-number
+    ec = config --global -e
+    up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+    cob = checkout -b
+    cm = !git add -A && git commit -m
+    save = !git add -A && git commit -m "SAVEPOINT"
+    wip = !git add -u && git commit -m "WIP"
+    undo = reset HEAD~1 --mixed
+    amend = commit -a --amend
+    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+    bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+
