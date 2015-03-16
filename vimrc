@@ -400,7 +400,7 @@ if has('gui_running')
   if has("gui_gtk2")
     set guifont=Inconsolata\ 7                                                    " Linux   -> use font Inconsolata (small)
   elseif has("gui_macvim")
-    set guifont=Menlo\ Regular:h12                                                " OS X    -> use font Menlo
+    set guifont=Anonymice\ Powerline:h12                                          " OS X    -> use font Anonymice
   elseif has("gui_win32")
     set guifont=Consolas:h11:cANSI                                                " Windows -> use font Consolas
   endif
