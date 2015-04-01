@@ -1,5 +1,5 @@
-function RUN_AS_ROOT -d 'Run the specified function as root'
-    if [ $USER = 'root' ]
+function RUN_AS_ROOT --description 'Run the specified function as root'
+	if [ $USER = 'root' ]
         eval "$argv"
     else if type -P sudo >/dev/null
         sudo -E $argv
@@ -9,4 +9,3 @@ function RUN_AS_ROOT -d 'Run the specified function as root'
         echo "Can't run the command '$argv' as root: sudo/su not found."
     end
 end
-
