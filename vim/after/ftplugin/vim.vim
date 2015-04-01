@@ -9,6 +9,7 @@ setlocal ts=2 sts=2 sw=2
 "=============
 
 " Add a vim comment at column 83
-nmap <Leader>c A<Bar>                                                                                        <Esc>83<Bar>r"<Right><Right><Right>Di[
+nmap <Leader>c A                                                                                        <Esc>83<Bar>r"<Right><Right>Di
+nmap <Leader>C A<Bar>                                                                                        <Esc>83<Bar>r"<Right><Right><Right>Di[
 
 
