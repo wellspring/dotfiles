@@ -1,10 +1,12 @@
-function package -d 'Cross platform package manager.'
-    set a $argv[2..-1]
+function package --description 'Cross platform package manager.'
+	set a $argv[2..-1]
     switch $argv[1]
 
         case help
-            echo "Usage: package <install|remove|search> <package-name> [...]"
-            echo "Usage: package <upgrade> [...]"
+            echo "Usage: package install <package-name> [...]"
+            echo "Usage: package remove <package-name> [...]"
+            echo "Usage: package search <package-name> [...]"
+            echo "Usage: package upgrade"
 
         case upgrade
             switch $os
@@ -39,7 +41,7 @@ function package -d 'Cross platform package manager.'
                     echo "Command not supported on this Operating System."
             end
 
-        case remove
+        case remove uninstall
             switch $os
                 case arch
                     yaourt -R $a
@@ -88,4 +90,3 @@ function package -d 'Cross platform package manager.'
             end
     end
 end
-

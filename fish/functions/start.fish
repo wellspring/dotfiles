@@ -1,5 +1,5 @@
-function start -d 'Start the specified service.'
-    switch $os
+function start --description 'Start the specified service.'
+	switch $os
         case arch
             RUN_AS_ROOT systemctl start $argv[1]
         case gentoo
@@ -10,4 +10,3 @@ function start -d 'Start the specified service.'
             echo "Command not supported on this Operating System."
     end
 end
-

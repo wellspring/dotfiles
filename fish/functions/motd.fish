@@ -1,9 +1,14 @@
 function motd --description 'Display a nice Message-of-the-day. (at init, or when clearing the screen)'
-  if test -e ~/.motd.conf
-	  cat ~/.motd.conf
+	set -l MOTD_FILENAME "motd.conf"
+  if test $COLUMNS -lt 100
+    set MOTD_FILENAME "motd-short.conf"
+  end
+
+	if test -e ~/.$MOTD_FILENAME
+	  cat ~/.$MOTD_FILENAME
     echo
-  else if test -e /etc/motd.conf
-	  cat /etc/motd.conf
+  else if test -e /etc/$MOTD_FILENAME
+	  cat /etc/$MOTD_FILENAME
     echo
   else
     clear
