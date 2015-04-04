@@ -1,3 +1,3 @@
 function gl
-	git rlog $argv; 
+	git trlog $argv;
 end

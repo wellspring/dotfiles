@@ -10,6 +10,11 @@
     editor = /usr/bin/vim
     [apply]
     whitespace = fix
+    [advice]
+    statusHints = false
+    [status]
+    short = false
+    branch = true
     [push]
     default = matching
     [diff]
@@ -22,15 +27,18 @@
     [hub]
     protocol = https
     [github]
-	user = wellspring
+    user = wellspring
 
 # --- (style) ---
 [color]
     ui = auto
     [color "status"]
+    header = 240
+    branch = 0 240
     added = green
     changed = red
-    untracked = yellow
+    untracked = 235
+    nobranch = yellow
     [color "diff"]
     meta = cyan
     frag = magenta
@@ -105,11 +113,13 @@
     co = checkout
     br = branch
     ds = diff --staged
+    ready = diff --staged
     wdiff = diff --word-diff
     branches = branch --verbose -a
     remotes = remote --verbose show
     graph = log --graph --pretty=format':%C(blue bold)%h%Cblue%d%Creset %s -- %C(reset)(%C(green bold)%an%Creset, %C(green)%ar%Creset)'
     standup = log --since '1 day ago' --oneline --author william.hubault@gmail.com
+    trlog = log -n10 --pretty=format:'- %C(198)%s %C(234)(%C(238)%ar%C(234))%C(reset)'
     rlog = log --pretty=format:'%C(green)%ar%Creset, by %C(red bold)%an %Creset-> %C(cyan)%s'
     slog = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --abbrev-commit --date=short
     pull-submodules = submodule foreach git pull origin master
