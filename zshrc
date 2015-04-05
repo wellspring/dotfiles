@@ -852,3 +852,31 @@ if [ -e ~/.zshext ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Setup zsh-autosuggestions
+source /home/william/.zsh-autosuggestions/autosuggestions.zsh
+
+# Enable autosuggestions automatically
+zle-line-init() {
+    zle autosuggest-start
+}
+
+zle -N zle-line-init
+
+# use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
+# zsh-autosuggestions is designed to be unobtrusive)
+bindkey '^T' autosuggest-toggle
+
+# Setup zsh-autosuggestions
+source /home/william/.zsh-autosuggestions/autosuggestions.zsh
+
+# Enable autosuggestions automatically
+zle-line-init() {
+    zle autosuggest-start
+}
+
+zle -N zle-line-init
+
+# use ctrl+t to toggle autosuggestions(hopefully this wont be needed as
+# zsh-autosuggestions is designed to be unobtrusive)
+bindkey '^T' autosuggest-toggle
