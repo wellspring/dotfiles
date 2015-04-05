@@ -55,56 +55,56 @@ autoload -U zmv
 autoload -U age
 # Use # symbol for comments in the shell.
 setopt INTERACTIVECOMMENTS
-    # Export all variables by default.
-    setopt ALL_EXPORT
-    # Add some globbing features.
-    setopt EXTENDEDGLOB
-    # Something like foo/$arr result as foo/b foo/a foo/r.
-    setopt RCEXPANDPARAM
-    # Show tab choices just after the first TAB.
-    unsetopt LIST_AMBIGUOUS
-    # Perform a path search even on command names with slashes in them. (dangerous)
-    unsetopt PATH_DIRS
-    # Remove useless jockers, instead of giving an error.
-    setopt NULLGLOB
-    # When a number is found, do sort numerically.
-    setopt NUMERIC_GLOB_SORT
-    # Do not show a question when "rm *".
-    #setopt RM_STAR_SILENT
-    # Do not treat \ in echo if -e is not specified. (like in bash)
-    setopt BSD_ECHO
-    # Resolve  symbolic links to their true values when changing directory.
-    setopt CHASE_LINKS
-    # If the command is invalid but a folder exist, go to this folder.
-    setopt AUTO_CD
-    # Do not assign lower priority to background processes.
-    unsetopt BG_NICE
-    # Do not use = to replace with full pathname.
-    setopt NOEQUALS
-    # Do not add duplicate commands to history.
-    setopt HIST_IGNORE_DUPS
-    # Try  to  correct  the  spelling of commands.
-    setopt CORRECT
-    # Create hash table to find faster commands and directories, and correct them. (removed: need to rehash all the time)
-    #setopt HASH_CMDS
-    #setopt HASH_DIRS
-    # Log old paths automatically with pushd when using cd.
-    setopt AUTO_PUSHD
-    setopt PUSHD_SILENT
-    setopt PUSHD_TO_HOME
-    # Display PID and exit value on suspend and report them immediatly or at exit.
-    setopt PRINT_EXIT_VALUE
-    setopt LONG_LIST_JOBS
-    setopt CHECKJOBS
-    setopt NOTIFY
-    # Some nice options for history
-    setopt HIST_REDUCE_BLANKS
-    setopt INC_APPEND_HISTORY
-    setopt EXTENDED_HISTORY
-    setopt APPEND_HISTORY
-    #setopt SHARE_HISTORY
-    setopt BANG_HIST
-    # Authorize prompt variable substitution (used by vcs)
+# Export all variables by default.
+setopt ALL_EXPORT
+# Add some globbing features.
+setopt EXTENDEDGLOB
+# Something like foo/$arr result as foo/b foo/a foo/r.
+setopt RCEXPANDPARAM
+# Show tab choices just after the first TAB.
+unsetopt LIST_AMBIGUOUS
+# Perform a path search even on command names with slashes in them. (dangerous)
+unsetopt PATH_DIRS
+# Remove useless jockers, instead of giving an error.
+setopt NULLGLOB
+# When a number is found, do sort numerically.
+setopt NUMERIC_GLOB_SORT
+# Do not show a question when "rm *".
+#setopt RM_STAR_SILENT
+# Do not treat \ in echo if -e is not specified. (like in bash)
+setopt BSD_ECHO
+# Resolve  symbolic links to their true values when changing directory.
+setopt CHASE_LINKS
+# If the command is invalid but a folder exist, go to this folder.
+setopt AUTO_CD
+# Do not assign lower priority to background processes.
+unsetopt BG_NICE
+# Do not use = to replace with full pathname.
+setopt NOEQUALS
+# Do not add duplicate commands to history.
+setopt HIST_IGNORE_DUPS
+# Try  to  correct  the  spelling of commands.
+setopt CORRECT
+# Create hash table to find faster commands and directories, and correct them. (removed: need to rehash all the time)
+#setopt HASH_CMDS
+#setopt HASH_DIRS
+# Log old paths automatically with pushd when using cd.
+setopt AUTO_PUSHD
+setopt PUSHD_SILENT
+setopt PUSHD_TO_HOME
+# Display PID and exit value on suspend and report them immediatly or at exit.
+setopt PRINT_EXIT_VALUE
+setopt LONG_LIST_JOBS
+setopt CHECKJOBS
+setopt NOTIFY
+# Some nice options for history
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt APPEND_HISTORY
+#setopt SHARE_HISTORY
+setopt BANG_HIST
+# Authorize prompt variable substitution (used by vcs)
 setopt prompt_subst
 
 ####
