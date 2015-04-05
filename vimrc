@@ -341,7 +341,7 @@ elseif executable('ack-grep')                                                   
   let g:unite_source_grep_default_opts = '--no-heading --no-color -a -H'          " [Unite] Set the grep options
   let g:unite_source_grep_recursive_opt = ''                                      " [Unite] Set the grep options (recursive)
 endif                                                                             " (-)
-let g:airline_theme='murmur'                                                      " [Airline] Set the theme (other interesting themes... :AirlineTheme *badwolf*/powerlineish/kalisi/laederon/wombat (green), *murmur*/jellybeans/*simple*/zenburn (blue), monochrome/raven/serene/lucius/*ubaryd* (dark), sol (light))
+let g:airline_theme='powerlineish'                                                " [Airline] Set the theme (other interesting themes... :AirlineTheme *badwolf*/powerlineish/kalisi/laederon/wombat (green), *murmur*/jellybeans/*simple*/zenburn (blue), monochrome/raven/serene/lucius/*ubaryd* (dark), sol (light))
 let g:airline#extensions#syntastic#enabled = 1                                    " [Airline] Enable syntax checking plugin
 let g:airline#extensions#tabline#enabled = 1                                      " [Airline] Enable light tab switching for airline (not only buffers!)
 let g:airline#extensions#branch#enabled = 1                                       " [Airline] Enable branch detection
