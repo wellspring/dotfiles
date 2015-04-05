@@ -361,7 +361,7 @@ let g:tcommentMaps = 0                                                          
 
 " --- (style)
 colors desert                                                                     " Set colorscheme (default one, if no plugin installed)
-colors jellybeans                                                                 " Set colorscheme
+colors molokai                                                                    " Set colorscheme
 highlight Cursor guifg=white guibg=steelblue|                                     " [CURSOR] Normal cursor color (blue)
 highlight vCursor guifg=white guibg=orange|                                       " [CURSOR] Selection cursor color (orange)
 highlight iCursor guifg=white guibg=green|                                        " [CURSOR] Insert cursor color (green)
