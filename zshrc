@@ -598,6 +598,13 @@ gadd () {
     ls -d "$*" >> ~/.zshdirs
 }
 
+# Add the specified path to the $PATH if it's not there yet
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+
 # Find out which libs define a symbol (by grml-team)
 lcheck () {
     if [[ -n "$1" ]] ; then
