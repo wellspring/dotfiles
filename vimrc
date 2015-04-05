@@ -35,6 +35,8 @@ call plug#begin('~/.vim/plugged')
  "Plug 'gregsexton/Atom'                                                          "|[ColorScheme] Atom (silverblue/red OR light)               ++
  "Plug 'zeis/vim-kolor'                                                           "|[ColorScheme] Kolor (darkbrown/yellow/purple/orange/red)   +
  "Plug 'jeetsukumaran/vim-mochalatte'                                             "|[ColorScheme] MochaLatte (brown/orange/beige/green)        +
+ "Plug 'vim-scripts/3DGlasses.vim'                                                "|[ColorScheme] 3dglasses (very blue + a bit red)            +
+ "Plug 'vimfiles/chlordane.vim'                                                   "|[ColorScheme] chlordane (very green, matrix style)         +
  "Plug 'vim-scripts/greenvision'                                                  "|[ColorScheme] greenvision (dark & green, matrix style)     +
  "Plug 'vyshane/vydark-vim-color'                                                 "|[ColorScheme] vydark (dark/lightgreen/lightblue/beige)    ?
  "Plug 'adlawson/vim-sorcerer'                                                    "|[ColorScheme] Sorcerer (dark/green/blue/beige/orange)     ?
@@ -91,6 +93,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'chrisbra/NrrwRgn', { 'on': ['NR'] }                                       " edit the visual in another tab/window (inspired by the narrow feature of emacs)
   Plug 'duff/vim-scratch', { 'on': ['Scratch','sScratch'] }                       " tmp scratch buffer (discarded when vim exit)
   Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesEnable' }          " Color the indentation
+  Plug 'deris/vim-visualinc'                                                      " Increment/decrement numbers in visualmode too (with CTRL+A / CTRL+X)
   Plug 'moll/vim-bbye', { 'on': 'Bdelete' }                                       " Simple buffer close (inspired by Bclose.vim, but rewritten to be perfect)
  "Plug 'rbgrouleff/bclose.vim', { 'on': 'Bclose' }                                "|Simple buffer close
  "Plug 'fholgado/minibufexpl.vim'                                                 "|Buffer explorer/switcher (elegant & minimal)
@@ -192,6 +195,7 @@ call plug#begin('~/.vim/plugged')
  "Plug 'tfnico/vim-gradle'                                                        "|Gradle syntax (for groovy files)
 
   " --- (textobj)
+  Plug 'machakann/vim-textobj-functioncall'                                       " function call helpers: select (vif) or delete (daf)
   Plug 'vim-scripts/argtextobj.vim'                                               " function arguments helpers: delete (daa) or change (cia)
   Plug 'kana/vim-textobj-user'                                                    " create new textobj easily
   Plug 'jceb/vim-textobj-uri'                                                     " uri/url helpers: select (viu)
@@ -202,6 +206,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'deris/vim-textobj-ipmac'                                                  " ipv4/ipv6/mac addresses helper: select (viA)
   Plug 'haya14busa/vim-textobj-number'                                            " number helpers: select (vin / van)
   Plug 'saihoooooooo/vim-textobj-space'                                           " space helpers: select (viS) or delete (daS) or change (ciS)
+  Plug 'anyakichi/vim-textobj-xbrackets'                                          " x(), x<>, x[], x{}: select (vax(), select (vax<), ...
   Plug 'rhysd/vim-textobj-clang', { 'for': ['c','cpp'] }                          " [C/C++] helpers: most inner def (vi;m), class block (vi;c), function block (vi;f), expression (vi;e), statement (vi;s), parameter/template (vi;p), namespace (vi;n), element under cursor (vi;u), anything (vi;a).
   Plug 'anyakichi/vim-textobj-ifdef', { 'for': ['c','cpp'] }                      " [C/C++] ifdef helpers: select (vi# / va# / vi3 / va3)
   Plug 'tokorom/vim-textobj-objc', { 'for': ['objc'] }                            " [OBJECTIVE_C] @ literals (vi@ / va@) and ^ blocks (vi^ and va^)
