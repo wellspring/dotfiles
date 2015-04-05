@@ -20,4 +20,7 @@ function fish_user_key_bindings -d "My keybindings :)"
   bind \er 'commandline "RUN_AS_ROOT "(commandline -b); commandline -f repaint; commandline -f execute'
   bind \eb 'commandline (commandline -b)" &"; commandline -f repaint; commandline -f execute'
   bind \es 'commandline (commandline -b)" >/dev/null 2>/dev/null"; commandline -f repaint; commandline -f execute'
+
+  # [ALT+D] File explorer
+  bind \ed 'ranger-cd; commandline -f repaint'
 end
