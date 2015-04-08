@@ -1,3 +1,3 @@
 function downcase --description 'Transform text to lower case'
-	lower
+	lower $argv;
 end
