@@ -189,7 +189,8 @@ assign [class="Skype"] 4
 exec feh --bg-tile /usr/share/wallpaper.png
 exec setxkbmap -option grp:switch,grp:alt_shift_toggle us,se,fr
 exec xrandr --output VGA1 --auto --right-of LVDS1
-exec xset r rate 200 25
+exec xset r rate 150 40
+#exec xset r rate 200 25
 #exec /usr/local/bin/start-media-player
 exec /usr/local/bin/start-scratchpad
 #compton --config ~/.i3/compton.conf & # composition manager
