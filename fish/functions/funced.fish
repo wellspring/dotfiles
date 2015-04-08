@@ -57,7 +57,7 @@ function funced --description 'Edit function definition'
             set editor fish
         end
     end
-    
+
     # If no editor is specified, use fish
     if test -z "$editor"
         set editor fish
@@ -88,6 +88,7 @@ function funced --description 'Edit function definition'
     else
         echo $init > $tmpname
     end
+    echo -e "\n# vim:ft=fish" >> $tmpname
     if eval $editor $tmpname
         . $tmpname
     end
