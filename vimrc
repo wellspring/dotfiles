@@ -377,8 +377,8 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/                             
 autocmd BufWinLeave * call clearmatches()                                         " [TRAILING WHITESPACES] -
 highlight Pmenu    ctermfg=230 ctermbg=238 guifg=#ffffd7 guibg=#444444|           " [POPUP MENU] normal color (grey; from wombat256)
 highlight PmenuSel ctermfg=232 ctermbg=192 guifg=#080808 guibg=#cae982|           " [POPUP MENU] selection color (yellowish; from wombat256)
-hi SignColumn term=standout ctermfg=242 ctermbg=236 guifg=#777777 guibg=#333333A| " [GitGutter] sign column (greish)
-hi LineNr     term=standout ctermfg=242 ctermbg=236 guifg=#777777 guibg=#333333A| " number column (greish; same as gitgutter)
+hi SignColumn term=standout ctermfg=242 ctermbg=236 guifg=#777777 guibg=#333333|  " [GitGutter] sign column (greish)
+hi LineNr     term=standout ctermfg=242 ctermbg=236 guifg=#777777 guibg=#333333|  " number column (greish; same as gitgutter)
 
 
 " --- (statusline)
@@ -386,8 +386,8 @@ if has('statusline')
   set laststatus=2                                                                " [STATUS] Always show the status bar
   set statusline=%<%f\                                                            " [STATUS-LEFT] filename
   set statusline+=%w%h%m%r                                                        " [STATUS-LEFT] options
- "set statusline+=%{fugitive#statusline()}                                        "|[STATUS-LEFT] git
- "set statusline+=\ [%{&ff}/%Y]                                                   "|[STATUS-LEFT] filetype
+  set statusline+=%{fugitive#statusline()}                                        "|[STATUS-LEFT] git
+  set statusline+=\ [%{&ff}/%Y]                                                   "|[STATUS-LEFT] filetype
   set statusline+=\ [%{getcwd()}]                                                 " [STATUS-LEFT] current directory
   set statusline+=\ [HEX=0x\%02.2B]                                               " [STATUS-LEFT] ASCII / Hexadecimal value of char
   set statusline+=%=%-14.(%l,%c%V%)\ %p%%                                         " [STATUS-RIGHT] line/column/percentage
@@ -405,7 +405,7 @@ if has('gui_running')
   set guicursor+=r-cr:block-rCursor-blinkoff0                                     " [CURSOR] replace: block cursor (without blinking)
   set guicursor+=i-c-ci:ver25-iCursor-blinkoff0                                   " [CURSOR] insert: vertical bar cursor (without blinking)
   if has("gui_gtk2")
-    set guifont=Inconsolata\ 7                                                    " Linux   -> use font Inconsolata (small)
+    set guifont=Liberation\ Mono\ for\ Powerline\ 7.5"                            " Linux   -> use font Inconsolata (small)
   elseif has("gui_macvim")
     set guifont=Anonymice\ Powerline:h12                                          " OS X    -> use font Anonymice
   elseif has("gui_win32")
