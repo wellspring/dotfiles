@@ -263,6 +263,8 @@ call plug#end()
 " ==================
 
 set nocompatible                                                                  " Enable all the features of VIM (incompatible with the old VI)
+set ttyfast                                                                       " Make redrawing smoother (tell vim we have a fast terminal connection)
+set lazyredraw                                                                    " Do not redraw while executing macro/registers/commands to avoid flickering
 set modeline                                                                      " Allow per-file settings via modeline
 filetype plugin on                                                                " Enable the filetype detection
 filetype plugin indent on                                                         " Enable the filetype detection
