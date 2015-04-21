@@ -1,3 +1,3 @@
 function .grep
-	grep "$argv" -R .
+	grep -R $argv .;
 end
