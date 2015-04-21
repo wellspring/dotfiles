@@ -5,7 +5,9 @@ function package --description 'Cross platform package manager.'
         case help
             echo "Usage: package install <package-name> [...]"
             echo "Usage: package remove <package-name> [...]"
-            echo "Usage: package search <package-name> [...]"
+            echo "Usage: package search <package-name>"
+            echo "Usage: package info <package-name>"
+            echo "Usage: package files <package-name>"
             echo "Usage: package upgrade"
 
         case upgrade
@@ -74,17 +76,44 @@ function package --description 'Cross platform package manager.'
                     echo "Command not supported on this Operating System."
             end
 
+        case show info query
+            switch $os
+                case arch
+                    yaourt -Sii $a
+                    #or: RUN_AS_ROOT pacman -Sii $a
+                case debian
+                    RUN_AS_ROOT aptitude show $a
+                    #or: RUN_AS_ROOT apt-cache show $a
+                case osx
+                    brew info $a
+                case '*'
+                    echo "Command not supported on this Operating System."
+            end
+
+        case list 'file*'
+            switch $os
+                case arch
+                    yaourt -Ql $a
+                    #or: RUN_AS_ROOT pacman -Ql $a
+                case debian
+                    RUN_AS_ROOT apt-file list $a
+                case osx
+                    brew list $a
+                case '*'
+                    echo "Command not supported on this Operating System."
+            end
+
         case '*'
             switch $os
                 case arch
-                    yaourt $argv
-                    # or: RUN_AS_ROOT pacman $argv
+                    yaourt $a
+                    # or: RUN_AS_ROOT pacman $a
                 case gentoo
-                    RUN_AS_ROOT emerge $argv
+                    RUN_AS_ROOT emerge $a
                 case debian
-                    RUN_AS_ROOT aptitude $argv
+                    RUN_AS_ROOT aptitude $a
                 case osx
-                    brew $argv
+                    brew $a
                 case '*'
                     echo "Command not supported on this Operating System."
             end
