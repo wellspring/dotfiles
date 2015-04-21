@@ -8,6 +8,7 @@ function package --description 'Cross platform package manager.'
             echo "Usage: package search <package-name>"
             echo "Usage: package info <package-name>"
             echo "Usage: package files <package-name>"
+            echo "Usage: package installed"
             echo "Usage: package upgrade"
 
         case upgrade
@@ -99,6 +100,19 @@ function package --description 'Cross platform package manager.'
                     RUN_AS_ROOT apt-file list $a
                 case osx
                     brew list $a
+                case '*'
+                    echo "Command not supported on this Operating System."
+            end
+
+        case installed
+            switch $os
+                case arch
+                    yaourt -Slq
+                    #or: RUN_AS_ROOT pacman -Slq
+                case debian
+                    dpkg --get-selections
+                case osx
+                   brew list
                 case '*'
                     echo "Command not supported on this Operating System."
             end
