@@ -1,0 +1,7 @@
+#!/bin/sh
+for app in $BROWSER firefox chromium luakit; do
+    if command -v $app > /dev/null 2>&1; then
+        exec $app "$@"
+    fi
+done
+i3-nagbar -m 'i3-sensible-webbrowser could not find a web browser. Please install one.'

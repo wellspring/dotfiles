@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Start the music player Cmus in a new terminal if it's not started yet
+if [ -z $(pgrep cmus) ]; then
+    mrxvt -title "Music Player" -e cmus
+fi
+

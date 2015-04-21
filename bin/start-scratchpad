@@ -1,0 +1,11 @@
+#!/bin/bash
+
+file=$HOME/NOTES
+
+# Start the vim in a terminal
+if [ -z $(pgrep -a vim | grep $file) ]; then
+    $TERMINAL --title="Notes :: vim" -e "vim $file"
+else
+    i3-msg '[title="^Notes ::"] scratchpad show'
+fi
+
