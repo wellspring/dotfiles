@@ -20,8 +20,8 @@ bindsym Mod1+F9 exec ~/.bin/play-firefox-video --xbmc
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+s [title="^Notes ::"] scratchpad show
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 1dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 1dB- unmute
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym $mod+Shift+c kill
 bindsym $mod+l exec i3lock
@@ -84,12 +84,15 @@ bar {
 	position top
 	hidden_state show
 	tray_output primary
-  status_command $HOME/.i3/startconky
+  separator_symbol " // "
+  status_command ~/.i3/i3status.extra.sh
   colors {
-    statusline         #AAAAAA
+    statusline         #666666
     background         #000000
+    separator          #333333
     focused_workspace  #333333 #333333 #bbbbbb
     inactive_workspace #000000 #000000 #444444
+    urgent_workspace   #000000 #000000 #ef3460
   }
 }
 
