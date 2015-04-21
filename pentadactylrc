@@ -1,0 +1,79 @@
+" ~/.pentadactyrc (plugin for firefox to have vim bindings)
+
+loadplugins '\.(js|penta)$'
+group user
+
+" change the title back to firefox (we already know we're using Pentadactyl)
+set titlestring=Mozilla\ Firefox
+
+" go to the download folder (useful when executing commands)
+cd ~/Downloads
+
+" gui: display tab bar and url bar
+set guioptions=bCrsT
+set scrolltime=0
+
+" default search engine: google
+set defsearch=google
+
+" show URLs of links (on hover or other focus) in command line
+set showstatuslinks='command'
+
+" hide close buttons on tabs (less mouse temptation)
+set! browser.tabs.closeButtons=2
+
+" don't let the dastardly `d` key delete the last tab (and close the window)
+set! browser.tabs.closeWindowWithLastTab=false
+
+" [GMAIL]: don't take the focus away when moving, and pass through some useful navigation and jump keys in gmail
+set strictfocus='google.com':laissez-faire,*:moderate,'chrome:*':laissez-faire,*:moderate
+set passkeys+=mail\.google\.com:jkv<CR>rau#T/<space><S-space>?,gi,gl,*u,*i,*n,gi,gc,gl
+" [FACEBOOK]: disable (generally annoying with Pentadactyl)
+:autocmd LocationChange facebook.com :normal! <C-z>
+
+" search: show highlights, search incrementally, and ignore case in searches unless caps are entered in search term
+set hlfind
+set incfind
+set findcase=smart
+
+" completions (s=search, l=locationbar, h=history, b=bookmarks) + if one match, show it; if more list all matches until longest common
+set complete=slb
+set wildmode=list:full
+
+" colors
+highlight Hint font:bold 11px "Droid Sans Mono", monospace !important; color: white; background:#744E7A !important; padding 1px 3px; text-transform: uppercase;
+highlight HintElem background: #744E7A !important;
+highlight HintActive background: #FF9999 !important;
+highlight StatusLine font: 13px "Droid Sans Mono", monospace !important; background: #0C0094; color: #F2FF00; font: 12px "Droid Sans Mono", monospace !important;
+highlight StatusLineBroken font: 13px "Droid Sans Mono", monospace !important; background: #0C0094; color: #F2FF00; font: 12px "Droid Sans Mono", monospace !important;
+highlight StatusLineExtended font: 13px "Droid Sans Mono", monospace !important; background: #0C0094; color: #F2FF00; font: 12px "Droid Sans Mono", monospace !important;
+highlight StatusLineSecure font: 13px "Droid Sans Mono", monospace !important; background: #0C0094; color: #F2FF00; font: 12px "Droid Sans Mono", monospace !important;
+hi CmdLine padding: 8px 0 8px 0; font:normal 13px "Droid Sans Mono", monospace !important; color: white !important; background: #0C0094 !important;
+hi CmdInput color: white !important; background: #0C0094 !important;
+"hi CmdCmdLine font:normal 13px "Droid Sans Mono", monospace !important;
+hi CompTitle font:normal 13px "Droid Sans Mono", monospace !important; color: white; background: #4760FF;
+hi CompItem font:normal 13px "Droid Sans Mono", monospace !important; color: white; background: #4760FF;
+hi CompItem:nth-child(2n+1) font:normal 13px "Droid Sans Mono", monospace !important; color: white !important; background: #697DFF;
+hi CompDesc color: #F2F2F2 !important;
+hi CompTitleSep background: #000396 !important; height: 1px !important;
+hi CompItem[selected] background: #0c0094 !important;
+hi Keyword color: yellow !important; font-weight: bold !important; font-size: 15px !important;
+hi URL color: #DEDEDE !important;
+
+" shortcuts
+map -count -modes=i,n,v <C-Left> <count><C-p>
+map -count -modes=i,n,v <C-Right> <count><C-n>
+map -count -modes=n <Right> <count><C-n>
+map -count -modes=n <Left> <count><C-p>
+map -builtin <M-up> gg
+map -builtin <M-down> G
+map -builtin r R
+map -builtin R r
+map -builtin = zi
+map -builtin "-" zo
+map ,r :so<Space> ~/.pentadactylrc<CR>
+nmap -builtin ,p :set private!<CR>
+map <F2> :noh<cr>
+nmap ; :
+
+" vim: set ft=pentadactyl:
