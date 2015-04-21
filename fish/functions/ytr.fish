@@ -6,5 +6,5 @@ function ytr --description 'Play a youtuberss video with vlc (Usage: ytr <#line>
   echo Playing (echo "$title" | colorize 198) ...
   echo " -> youtube url: $url"
 
-  vlc "$url" 2>/dev/null &
+  vlc --play-and-exit --quiet --no-video-title-show --fullscreen "$url" 2>/dev/null &
 end
