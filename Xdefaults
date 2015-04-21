@@ -1,0 +1,94 @@
+# urxvt terminal config
+
+URxvt.title: Terminal (urxvt)
+URxvt.termName: rxvt-unicode-256color
+URxvt.saveLines: 2000
+URxvt.urgentOnBell: true
+URxvt.transparent: true
+URxvt.blurRadius: 0x0
+URxvt.shading: 90
+URxvt.depth: 24
+URxvt.cursorBlink: false
+URxvt.borderLess: false
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.scrollstyle: rxvt
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyOutput: false
+URxvt.scrollTtyKeypress: true
+URxvt.iso14755: false
+URxvt.perl-ext-common: default,matcher,clipboard,searchable-scrollback
+URxvt.urlLauncher: xdg-open
+URxvt.copyCommand:  xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.S-C-C: perl:clipboard:copy
+URxvt.keysym.S-C-V: perl:clipboard:paste
+URxvt.keysym.M-v: perl:clipboard:paste_escaped
+URxvt.cutchars: "()*,<>[]{}|''"
+URxvt.selection-autotransform.0: s/^([^:[:space:]]+):(\\d+):?$/+$2 \\Q$1\\E/
+URxvt.selection.pattern-0: >>>[ ]+(.+)
+URxvt.selection.pattern-1: .+?@.+? .+? %%?[ ]+(.+)
+URxvt.print-pipe: cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
+#URxvt.font: xft:Liberation Mono for Powerline:pixelsize=10:antialias=true:hinting=true
+#URxvt.font: 10x20
+#URxvt.font: 6x10
+URxvt.font: 6x13
+URxvt.boldFont: 6x13
+
+*VT100.utf8: 1
+*charClass: 33:48,35:48,37-38:48,43-47:48,58:48,61:48,63-64:48,95:48,126:48
+*VT100.Translations: #override \
+             Shift <Key>Up:         scroll-back(1, halfpage) \n\
+             Shift <Key>Down:       scroll-forw(1, halfpage) \n\
+            ~Ctrl<Key>BackSpace:    string(0x08)  \n\
+             Ctrl<Key>BackSpace:    string(0x1b) string(0x08)  \n\
+            ~Ctrl<Key>Tab:          string(0x09)  \n\
+             Ctrl<Key>Tab:          string(0x1b) string("r") \n\
+      ~Meta  Shift  Ctrl <Key>V:    insert-selection(CLIPBOARD) \n\
+       Meta  Shift  Ctrl <Key>V:    insert-selection(PRIMARY) \n\
+            ~Shift ~Ctrl <Btn2Up>:  insert-selection(PRIMARY, CUT_BUFFER0) \n\
+             Shift ~Ctrl <Btn2Up>:  insert-selection(CLIPBOARD, CUT_BUFFER1) \n\
+            ~Shift       <BtnUp>:   select-end(PRIMARY, CUT_BUFFER0) \n\
+             Shift       <BtnUp>:   select-end(CLIPBOARD, CUT_BUFFER1) \n
+
+!terminal
+URxvt.background:         #010101
+URxvt.foreground:         #e3e3e3
+URxvt.cursorColor:        #bbbbbb
+URxvt.highlightColor:     #222222
+URxvt.highlightTextColor: #dddddd
+
+!black
+URxvt*color0:  #464444
+URxvt*color8:  #8a8888
+!red
+URxvt*color1:  #ef3460
+URxvt*color9:  #f25a7d
+!green
+URxvt*color2:  #bdef34
+URxvt*color10: #dcf692
+!yellow
+URxvt*color3:  #efc334
+URxvt*color11: #f6df92
+!blue
+URxvt*color4:  #4e82aa
+URxvt*color12: #92aaf6
+!magenta
+URxvt*color5:  #b300ff
+URxvt*color13: #df92f6
+!cyan
+URxvt*color6:  #3dd8ff
+URxvt*color14: #5af2ce
+!white
+URxvt*color7:  #ffffff
+URxvt*color15: #ffffff
+
+! font
+Xft.dpi: 96
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+Xft.autohint: 0
+
