@@ -1,3 +1,3 @@
 function hex
-	od -t x1 $argv; 
+	od -vAx -t x1z $argv;
 end
