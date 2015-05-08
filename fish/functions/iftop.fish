@@ -1,3 +1,3 @@
 function iftop --description 'display bandwidth usage on an interface by host (alias with sudo)'
-	sudo iftop -B
+	RUN_AS_ROOT iftop -B
 end
