@@ -8,6 +8,7 @@ function package --description 'Cross platform package manager.'
             echo "Usage: package search <package-name>"
             echo "Usage: package info <package-name>"
             echo "Usage: package files <package-name>"
+            echo "Usage: package thathave <file>"
             echo "Usage: package installed"
             echo "Usage: package upgrade"
 
@@ -91,6 +92,10 @@ function package --description 'Cross platform package manager.'
                     echo "Command not supported on this Operating System."
             end
 
+        case 'bin*'
+            pkg list $a | grep --color=never 'bin/.'
+        case 'lib*'
+            pkg list $a | grep --color=never 'lib/.'
         case list 'file*'
             switch $os
                 case arch
@@ -107,12 +112,21 @@ function package --description 'Cross platform package manager.'
         case installed
             switch $os
                 case arch
-                    yaourt -Slq
-                    #or: RUN_AS_ROOT pacman -Slq
+                    yaourt -Qet
+                    #or: RUN_AS_ROOT pacman -Qet
                 case debian
                     dpkg --get-selections
                 case osx
                    brew list
+                case '*'
+                    echo "Command not supported on this Operating System."
+            end
+
+        case thathave
+            switch $os
+                case arch
+                    yaourt -Qo
+                    #or: RUN_AS_ROOT pacman -Qo
                 case '*'
                     echo "Command not supported on this Operating System."
             end
