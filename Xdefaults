@@ -1,7 +1,7 @@
 # urxvt terminal config
 
 URxvt.title: Terminal (urxvt)
-URxvt.termName: rxvt-unicode-256color
+URxvt.termName: xterm-256color
 URxvt.saveLines: 2000
 URxvt.urgentOnBell: true
 URxvt.transparent: true
