@@ -113,7 +113,7 @@ call plug#begin('~/.vim/plugged')
  "Plug 'vim-scripts/DrawIt'                                                       "|ASCII drawing
  "Plug 'Twinside/vim-codeoverview.git'                                            "|Overview on the side (like sublimetext's minimap, resize automatically!)
  "Plug 'jpalardy/vim-slime'                                                       "|Send text to screen/tmux/REPL easily from vim!
- "Plug 'FredKSchott/CoVim'                                                        "|Shared vim session (like googledoc) with multi cursors
+ "Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }                                     "|Shared vim session (like googledoc) with multi cursors
 
   " --- (specific languages)
   Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}                                 " [C/C++] Statement oriented editing of C / C++ programs (to speed up writing code)
@@ -428,7 +428,7 @@ command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>|           
 " --- (automatic)
 autocmd BufWritePost vimrc source %                                               " Reload automatically the '.vimrc' config when saved.
 autocmd StdinReadPre * let s:std_in=1                                             " Define a variable to indicate there's text coming from stdin (e.g. via a unix pipe).
-autocmd VimEnter * if !argc()&&!exists("s:std_in")|NERDTree|else|start|endif      " If no file/arg is specified, open nerdtree to select a file. Otherwise, start VIM in INSERT mode
+"autocmd VimEnter * if !argc()&&!exists("s:std_in")|NERDTree|else|start|endif      " If no file/arg is specified, open nerdtree to select a file. Otherwise, start VIM in INSERT mode
 
 
 "________________________________________________________________________________________________________________________________________________________________________
@@ -559,8 +559,8 @@ nnoremap  <C-]>       a<C-t><Esc>|                                              
 inoremap  <C-]>       <C-t>|                                                      "            CTRL + ] : indent the line
 vnoremap  <S-Tab>     <|                                                          "         SHIFT + TAB : un-indent the selection
 vnoremap  <Tab>       >|                                                          "                 TAB : indent the selection
-nnoremap  <S-Esc>     <C-i>|                                                      "         SHIFT + ESC : go to the next cursor location (in the jumplist)
-nnoremap  <Esc>       <C-o>|                                                      "                 ESC : go to the previous cursor location
+" nnoremap  <S-Esc>     <C-i>|                                                      "         SHIFT + ESC : go to the next cursor location (in the jumplist)
+" nnoremap  <Esc>       <C-o>|                                                      "                 ESC : go to the previous cursor location
 noremap   +           <C-a>|                                                      "                   + : increment the number
 noremap   -           <C-x>|                                                      "                   + : decrement the number
 "map      \           :|                                                          "                   \ : lazy ':' on qwerty keyboards (\ instead of using shift+;)
