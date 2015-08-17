@@ -24,3 +24,4 @@ function fish_user_key_bindings -d "My keybindings :)"
   # [ALT+D] File explorer
   bind \ed 'ranger-cd; commandline -f repaint'
 end
+fzf_key_bindings
