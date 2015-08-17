@@ -2,6 +2,6 @@
 " [local config]
 "================
 
-setlocal ts=2 sts=2 sw=2 expandtab textwidth=500
+setlocal ff=unix ts=2 sts=2 sw=2 expandtab textwidth=80
 
 
