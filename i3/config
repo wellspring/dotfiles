@@ -4,14 +4,18 @@
 # [ general ]
 set $mod Mod4
 floating_modifier $mod
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Liberation Mono for Powerline 20
+#    set guifont=Liberation\ Mono\ for\ Powerline\ 7.5"                            " Linux   -> use font Inconsolata (small)
+#    set guifont=Anonymice\ Powerline:h12                                          " OS X    -> use font Anonymice
+#    set guifont=Consolas:h11:cANSI                                                " Windows -> use font Consolas
+
 default_orientation horizontal
 popup_during_fullscreen smart
 focus_follows_mouse no
 new_window 1pixel
 
 # [ shortcuts ]
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec terminology #i3-sensible-terminal
 bindsym $mod+n exec ~/.bin/i3-sensible-webbrowser
 bindsym $mod+m exec ~/.bin/start-media-player
 bindsym $mod+r exec dmenu_run
@@ -24,7 +28,7 @@ bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym $mod+Shift+c kill
-bindsym $mod+l exec i3lock
+bindsym $mod+l exec i3lock -fl
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -70,10 +74,10 @@ bindsym $mod+w mode "resize"
 
 # [ functions ]
 mode "resize" {
-  bindsym Right resize shrink width 10 px or 10 ppt
-  bindsym Up resize grow height 10 px or 10 ppt
-  bindsym Down resize shrink height 10 px or 10 ppt
-  bindsym Left resize grow width 10 px or 10 ppt
+  bindsym Right resize shrink width   10 px or 10 ppt
+  bindsym Up    resize grow   height  10 px or 10 ppt
+  bindsym Down  resize shrink height  10 px or 10 ppt
+  bindsym Left  resize grow   width   10 px or 10 ppt
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
@@ -93,16 +97,21 @@ bar {
     focused_workspace  #333333 #333333 #bbbbbb
     inactive_workspace #000000 #000000 #444444
     urgent_workspace   #000000 #000000 #ef3460
+    # colorclass       border  bg      text
   }
 }
 
 # [ style ]
-client.background #342826
-client.focused    #222222 #222222 #bbbbbb
-client.unfocused  #222222 #111111 #444444
+# class                 TabBord WinBord text    indicator
+client.urgent           #ff0000 #ef3460 #ef3460 #ffffff
+client.focused          #333333 #555555 #bbbbbb #ffffff
+client.focused_inactive #333333 #202020 #bbbbbb #ffffff      # <= WTF?! Window border's color = tab background color?
+client.unfocused        #000000 #000000 #444444 #ffffff
+client.placeholder      #000000 #000000 #000000 #ffffff
+client.background       #000000
 
 # [ App specific ]
-for_window [class="^.*$"] border pixel 1
+for_window [class="^.*$"] border pixel 3
 for_window [class="Guake"] floating enable
 for_window [title="^Notes ::"] move to scratchpad
 assign [class="Chromium"] 2:www
@@ -115,11 +124,12 @@ assign [class="Skype"] 4
 # [ Autostart ]
 exec feh --bg-tile ~/.wallpaper.png
 exec setxkbmap -option grp:switch,grp:alt_shift_toggle us,se,fr
-exec xrandr --output VGA1 --auto --right-of LVDS1
 exec xset r rate 200 40
 exec urxvtd -q -f -o
 exec ~/.bin/start-scratchpad
 
+exec xrandr    --output eDP-0 --auto    --output HDMI-1 --auto --rotate normal --left-of eDP-0    --output DisplayPort-0 --auto --rotate normal --right-of eDP-0
+#exec xrandr --output VGA1 --auto --right-of LVDS1
 
 #exec ~/.bin/start-media-player
 #compton --config ~/.i3/compton.conf & # composition manager
