@@ -17,11 +17,17 @@
     short = false
     branch = true
     [push]
-    default = matching
+    default = simple
     [diff]
     tool = vimdiff
     [difftool]
     prompt = false
+    [fetch]
+    prune = true
+    [rebase]
+    autosquash = true
+    [rerere]
+    enabled = true
     [grep]
     lineNumber = true
     extendRegexp = true
