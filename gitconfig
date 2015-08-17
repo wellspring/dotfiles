@@ -1,6 +1,6 @@
 [user]
-    name = William Hubault
-    email = william.hubault@gmail.com
+	  name = William Hubault
+	  email = william.hubault@gmail.com
 
 # --- (generic settings) ---
 [core]
@@ -8,6 +8,7 @@
     attributesfile = ~/.gitattributes-global
     whitespace = trailing-space,space-before-tab
     editor = /usr/bin/vim
+	  autocrlf = input
     [apply]
     whitespace = fix
     [advice]
