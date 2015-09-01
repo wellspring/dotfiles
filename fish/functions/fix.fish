@@ -1,3 +1,3 @@
-function fix --description 'git commit with fixup (syntax: fix <commit-id>)'
-	git commit -a --fixup $argv;
+function fix --description 'git commit --fixup <commit-id>'
+	git commit --fixup $argv;
 end
