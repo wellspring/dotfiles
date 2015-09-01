@@ -3,10 +3,10 @@ function vs -d 'Attach screen to the currently started vagrant vm'
   set -l gitrepo (basename $gitpath)_ssh_screen
 
   # Is there a Vagrant file in the current directory? If not, try to find a vagrant dir, and go to it.
-  if ! test -f Vagrantfile
+  if test ! -f Vagrantfile
     set -l vagrantdir (ag -g Vagrantfile | head -1)
     if test -n $vagrantdir
-      cd $vagrantdir
+      cd (dirname $vagrantdir)
     else
       echo 'Error! Vagrant file not found.'
     end
