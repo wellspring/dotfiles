@@ -1,3 +1,3 @@
-function vi
-	vim --servername vim $argv; 
+function vi -d "alias for vim"
+	vim $argv; 
 end
