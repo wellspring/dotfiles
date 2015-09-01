@@ -1,3 +1,9 @@
+#----------------------
+# Project config files
+#----------------------
+.gitconfig
+.agignore
+
 #-----------------------
 # System & IDE tmp file
 #-----------------------
