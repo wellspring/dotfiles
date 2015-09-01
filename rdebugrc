@@ -1,0 +1,4 @@
+# Ruby debugger (config)
+set autolist   on
+set autoeval   on
+set autoreload on
