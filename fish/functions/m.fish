@@ -1,3 +1,3 @@
-function m
-	f -e mplayer $argv; 
+function m -d "change git branch to master"
+	git checkout $argv master;
 end
