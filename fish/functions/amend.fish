@@ -1,3 +1,3 @@
 function amend --description 'git commit --amend'
-	git commit --amend $argv;
+	git commit --allow-empty --amend $argv;
 end
