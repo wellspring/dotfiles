@@ -1,16 +1,23 @@
 function workon --description 'Create a new branch to work on a task defined on redmine'
-  if test -z "$argv"
-    echo "Usage: workon <url_OR_issue#>"
-    return -1
-  end
+  set -l issue_id (redmine-issue-id $argv)
+  set -l issue_name (redmine-issue-name $argv)
+  set -l issue_name_nospace (echo $issue_name | sed 's/[^A-Za-z0-9 ]//g;  s/ \([A-Za-z0-9]\)/-\1/g;  s/[A-Z]/\L&/g')
 
-  set -l url (echo $argv | tr -d '#' | awk '!/^http/{printf "'$REDMINE_URL'issues/"} //{print $0".json"}')
-  set -l newbranch (curl -sH "X-Redmine-API-Key: $REDMINE_KEY" $url | jq -r '"'$REDMINE_USER'/"+(.issue.id|tostring)+"-\n"+.issue.subject' | sed -e '2 s/[^A-Za-z0-9 ]//g' -e 's/ \([A-Za-z0-9]\)/-\1/g' -e 's/[A-Z]/\L&/g' | tr -d '\n')
-
-  if test -z "$newbranch"
+  if test -z "$issue_name_nospace"
     echo "Error: task not found. Is '$argv[1]' a correct url or issue number?"
     return -1
   end
 
-  git checkout -b $newbranch
+  set -l new_branch {$REDMINE_USER}/{$issue_id}-{$issue_name_nospace}
+  git checkout -b $new_branch
+
+  set -l desc_file (current-git-dir)/.git/BRANCH_DESCRIPTION
+  set -l issue_url (redmine-issue-url $argv | sed 's/\.json$//')
+  echo "-----" > $desc_file
+  echo "issue id ............. #$issue_id" >> $desc_file
+  echo "issue name ........... $issue_name" >> $desc_file
+  echo "issue url ............ $issue_url" >> $desc_file
+  echo "branch name .......... $new_branch" >> $desc_file
+  echo "author ............... $REDMINE_USER" >> $desc_file
+  echo "-----" >> $desc_file
 end
