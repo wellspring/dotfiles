@@ -19,18 +19,20 @@
     [push]
     default = simple
     [diff]
-    tool = vimdiff
+    tool = meld
+    algorithm = histogram
     [difftool]
     prompt = false
     [fetch]
     prune = true
     [rebase]
-    autosquash = true
+    autosquash = false
     [rerere]
     enabled = true
     [grep]
-    lineNumber = true
+    lineNUmber = true
     extendRegexp = true
+    extendedRegexp = true
     [hub]
     protocol = https
     [github]
@@ -126,7 +128,7 @@
     remotes = remote --verbose show
     graph = log --graph --pretty=format':%C(blue bold)%h%Cblue%d%Creset %s -- %C(reset)(%C(green bold)%an%Creset, %C(green)%ar%Creset)'
     standup = log --since '1 day ago' --oneline --author william.hubault@gmail.com
-    trlog = !git --no-pager log -n10 --pretty=format:'- %C(198)%s %C(234)(%C(238)%ar%C(234))%C(reset)'
+    trlog = !git --no-pager log -n10 --pretty=format:'- %C(198)%s %C(234)(%C(238)%ar [%h]%C(234))%C(reset)'
     rlog = log --pretty=format:'%C(green)%ar%Creset, by %C(red bold)%an %Creset-> %C(cyan)%s'
     slog = log --pretty=format:'%Creset%C(red bold)[%ad] %C(blue bold)%h %Creset%C(magenta bold)%d %Creset%s %C(green bold)(%an)%Creset' --abbrev-commit --date=short
     pull-submodules = submodule foreach git pull origin master
