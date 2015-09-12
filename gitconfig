@@ -1,14 +1,18 @@
 [user]
-	  name = William Hubault
-	  email = william.hubault@gmail.com
+    name = William Hubault
+    email = william.hubault@gmail.com
 
 # --- (generic settings) ---
 [core]
     excludesfile = ~/.gitignore-global
     attributesfile = ~/.gitattributes-global
     whitespace = trailing-space,space-before-tab
-    editor = /usr/bin/vim
-	  autocrlf = input
+    editor = vim
+    #pager =
+    #[pager]
+    #color = false
+    #show = vim -R -
+    autocrlf = input
     [apply]
     whitespace = fix
     [advice]
