@@ -11,4 +11,5 @@ pentadactyl/info/default/register-ring
 pentadactyl/info/default/registers
 weechat/weechat_fifo_*
 weechat/weechat.log
+weechat/urls.log
 weechat/logs/*
