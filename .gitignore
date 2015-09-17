@@ -4,6 +4,7 @@ vim/.netrwhist
 vim/plugged
 vim/view
 vim/clipboard.txt
+vim/autoload/plug.vim.old
 pentadactyl/info/default/command-history
 pentadactyl/info/default/local-marks
 pentadactyl/info/default/register-ring
