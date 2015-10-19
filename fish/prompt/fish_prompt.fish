@@ -16,8 +16,6 @@ function fish_prompt
   set -l pink (set_color ff55ff)
   set -l pink2 (set_color ff00ff)
 
-  set -l cwd $cyan(basename (prompt_pwd))
-
   # Prompt
   set -l prompt
   if [ "$UID" = "0" ]
@@ -48,11 +46,11 @@ function fish_prompt
     #set pwd {$yellow}\(\(git:{$pink}{$gitrepo}{$yellow}\)\){/$gitpwd}
     set pwd {$yellow}\(git:{$pink}{$gitrepo}{$yellow}\){/$gitpwd}
   else
-    set pwd $yellow(prompt_pwd)
+    set pwd $yellow(pwd | sed "s:^$HOME:~:")
   end
 
   # Display the prompt and terminate with a nice prompt char
-  echo -n -s $green (whoami) $dark_green @ $green (hostname|cut -d . -f 1) $dark_green › $pwd $ret_status $dark_yellow ⁑ $normal
+  echo -n -s $green "<"(whoami)">" $dark_green ' ' $pwd $ret_status $dark_yellow \$ $normal
   echo -n -s ' ' $normal
 
 end
