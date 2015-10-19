@@ -113,6 +113,7 @@ client.background       #000000
 # [ App specific ]
 for_window [class="^.*$"] border pixel 3
 for_window [class="Guake"] floating enable
+for_window [title=" - VLC media player$"] floating enable
 for_window [title="^pentadactyl.* - GVIM$"] floating enable
 for_window [title="^Screen Layout Editor$"] floating enable
 for_window [title="^Notes ::"] move to scratchpad
