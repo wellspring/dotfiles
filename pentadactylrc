@@ -29,7 +29,7 @@ map -description "Go fullscreen: put the movie in fullscreen. (works with flash 
 map -description "(github) Download the current file in raw format to the download folder." -silent gF :echo 'Downloading...'<CR>:js "url=content.document.getElementById('raw-url').href; filename=url.match('([^/?]*)\?([^/]*)$')[1]; Downloads.getPreferredDownloadsDirectory().then(function(dir){ Downloads.fetch(url, dir+'/'+filename); })"<CR>
 map -description "(github) Clone the github repository to ~/Downloads/." -silent gcl :echo 'Cloning github repository...'<CR>:exec '!cd ~/Downloads/; git clone -q '+content.document.location.href.match('https?://(www.)?github.com(/[^/?#]+){2}')[0]+' >/dev/null &';<CR>
 map -description "(solarmovies) Search for the trailer of the movie on youtube." gt -javascript _=content.document.getElementsByTagName('h1')[0].innerHTML.match('</span>[ \t\n]*([^<>]+?)[ \t\n]*<a[^>]*>[ \t\n]*([^<>+?]*)[ \t\n]*');title=_[1];year=_[2]; content.document.location = 'https://www.youtube.com/results?search_query=trailer ' + title + ' (' + year + ')'
-map -description "Open the video/link in vlc" gv :silent execute "!vlc --qt-minimal-view '" + buffer.URL + "' &"<enter>
+map -description "Open the video/link in vlc" gv :silent execute "!vlc --qt-minimal-view '" + buffer.URL + "' &"<enter>d
 set cdpath=''
 set complete=search,location,bookmark
 set hintkeys=asdfjkl;
