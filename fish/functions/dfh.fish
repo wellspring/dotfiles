@@ -1,3 +1,3 @@
 function dfh
-	df -lPH $argv; 
+	df -lPH -x tmpfs -x devtmpfs $argv;
 end
