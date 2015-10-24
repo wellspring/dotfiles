@@ -1,0 +1,24 @@
+startup_message off
+termcapinfo rxvt-unicode ti@:te@
+terminfo rxvt-unicode ti@:te@
+terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+term xterm-256color
+setenv DISPLAY ':0'
+setenv LC_CTYPE en_US.UTF-8
+hardcopydir ~/.screen
+altscreen on
+autodetach on
+defbce on
+deflogin on
+defflow off
+defscrollback 2048
+defutf8 on
+msgwait 1
+nethack on
+nonblock on
+vbell off
+vbell_msg ""
+activity ""
+hardstatus on
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H%{g} ][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][ %{G}%c%{g} ]'
