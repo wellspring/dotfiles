@@ -84,7 +84,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-endwise'                                                        " Automatically add 'end' (lua/elixir/ruby/crystal/sh/zsh/vb/vim/c/cpp/objc/matlab)
   Plug 'vim-scripts/IndexedSearch'                                                " when searching with /,?,n,N,*,#, display 'at match #XX out of YY'
   Plug 'rking/ag.vim', { 'on': 'Ag' }                                             " grep/ack search alternative (faster)
-  Plug 'Shougo/unite.vim', {'on': 'Unite'}                                        " Search easily for files and buffers (alt to fuzzyfinder/ctrlp)
+  Plug 'kien/ctrlp.vim', { 'on': 'CtrlP' }                                        " Search easily for files and buffers (still the best search!)
+  Plug 'Shougo/unite.vim'                                                         " Search easily for files and buffers (alt to fuzzyfinder/ctrlp)
   Plug 'tsukkee/unite-tag', {'on': 'Unite'}                                       " Search easily for tags -- plugin for Unite
   Plug 'Shougo/unite-outline', {'on': 'Unite'}                                    " Search easily for headlines (class structure, html titles, ...) -- plugin for Unite
  "Plug 'szw/vim-ctrlspace'                                                        "|Alternative to unite (to search easily file/buffers)
@@ -328,6 +329,8 @@ let g:ycm_use_ultisnips_completer = 1                                           
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']                        " [YouCompleteMe] make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']                        " [YouCompleteMe] make YCM compatible with UltiSnips (using supertab)
 let g:SuperTabDefaultCompletionType = '<C-n>'                                     " [SuperTab] make YCM compatible with UltiSnips (using supertab)
+call unite#filters#matcher_default#use(['matcher_fuzzy'])                         " [Unite] Set the default matcher
+call unite#filters#sorter_default#use(['sorter_rank'])                            " [Unite] Set the default sorter
 let g:unite_source_history_yank_enable = 1                                        " [Unite] Enable clipboard history search
 let g:unite_source_history_yank_save_clipboard = 1                                " [Unite] Sync with the system clipboard
 let g:unite_source_history_yank_limit = 10000                                     " [Unite] Limit the clipboard to 10k
@@ -478,7 +481,8 @@ noremap   <C-w>       <Esc>:Bdelete<CR>|                                        
 noremap   <C-l>       <Esc>:redraw<CR>|                                           "            CTRL + L : redraw screen (in case of a display bug)
 vnoremap  <C-l>       o0O$|                                                       "            CTRL + L : select the full line(s)
 noremap   <C-f>       <Esc>:Unite grep:.<CR>|                                     "            CTRL + F : [Unite] search in file content (classic grep, like ack/ag)
-noremap   <C-g>       <Esc>:Unite file_rec/async<CR>|                             "            CTRL + G : [Unite] recursive file list (async)
+noremap   <C-g>       <Esc>:CtrlP<CR>|                                            "            CTRL + G : [CtrlP] recursive file list (async)
+noremap   <C-p>       <Esc>:CtrlP<CR>|                                            "            CTRL + P : [CtrlP] recursive file list (async)
 noremap   <C-Right>   <C-W>l|                                                     "        CTRL + RIGHT : move to the split on the right
 noremap   <C-Left>    <C-W>h|                                                     "         CTRL + LEFT : move to the split on the left
 noremap   <C-Down>    <C-W>j|                                                     "         CTRL + DOWN : move to the split below
@@ -543,9 +547,9 @@ nmap      <Leader>h   <Plug>(easymotion-linebackward)|                          
 
 " --- other
 nmap      s           <Plug>(easymotion-s)|                                       "                   s : easy bidirectional motion (pick a letter; try also -s2)
-noremap   .           <Esc>:A<CR>|                                                "                   . : switch from source to header (.c <-> .h)
-noremap   `           <Esc>:Unite -quick-match buffer<CR>|                        "                   ` : select buffer (quick & lazy way)
-noremap   ~           <Esc>:Unite history/yank<CR>|                               "                   ~ : select clipboard
+"noremap   .           <Esc>:A<CR>|                                                "                   . : switch from source to header (.c <-> .h)
+noremap   `           <Esc>:CtrlPBuffer<CR>|                                      "                   ` : [CtrlP] select buffer (quick & lazy way)
+noremap   ~           <Esc>:Unite history/yank<CR>|                               "                   ~ : [CtrlP] select clipboard
 nmap      ga          <Plug>(EasyAlign)|                                          "                  ga : align
 vmap      <CR>        <Plug>(EasyAlign)|                                          "               ENTER : align selection
 nnoremap  <BS>        <Esc>cc|                                                    "                 DEL : delete line (+ start insert mode)
