@@ -457,6 +457,7 @@ noremap   <F9>        <Esc>:TagbarToggle<cr>|                                   
 noremap   <F10>       <Esc>:GitGutterToggle<CR>|                                  "                 F10 : display/hide line git modifications (left side)
 noremap   <F11>       <Esc>:set number!<CR>|                                      "                 F11 : display/hide line numbers (left side)
 noremap   <F12>       <Esc>:NERDTreeToggle<CR>|                                   "                 F12 : display/hide file explorer
+noremap   <S-F12>     <Esc>:NERDTreeFind<CR>|                                     "         SHIFT + F12 : find the current file in nerd tree file explorer
 
 " --- ctrl keys
 noremap   <C-x>       dd|                                                         "            CTRL + X : cut (the line)
