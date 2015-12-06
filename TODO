@@ -1,0 +1,9 @@
+ for id in (grep -Po '/[0-9]+' /tmp/plop | tr -d /)
+   echo Finding branch for issue "#$id ("(redmine-issue-name $id)") ..."
+   git branch -r | grep --color=none $id"[-_]" | sed 's/^\s*//' | indent
+ end
+
+
+ for v2:
+ ======
+ - add links to file added to the repository (maybe a git hook? :)
