@@ -1,0 +1,9 @@
+Copy redmine issue_id + name in the clipboard:
+=============================================
+'#' + /issues\/(\d+)/.exec(window.location.href)[1] + ' (' + document.getElementsByClassName('subject')[0].getElementsByTagName('h3')[0].textContent + ') '
+
+Copy gitlab filename in the clipboard:
+=====================================
+var diffs=$('.diff-file'); var current_diff=diffs[0]; for(var i=0;
+i<diffs.length; i++){ if(diffs[i].getBoundingClientRect().y < 0){ current_diff =
+diffs[i]; } else { break; } };current_file;
