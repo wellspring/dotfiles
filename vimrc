@@ -93,7 +93,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Shougo/vinarise.vim', {'on': 'Vinarise'}                                  " Hex editing
   Plug 'chrisbra/vim-diff-enhanced'                                               " Diff  (better side-by-side view)
   Plug 'chrisbra/NrrwRgn', { 'on': ['NR'] }                                       " edit the visual in another tab/window (inspired by the narrow feature of emacs)
-  Plug 'duff/vim-scratch', { 'on': ['Scratch','sScratch'] }                       " tmp scratch buffer (discarded when vim exit)
+  Plug 'duff/vim-scratch', { 'on': ['Scratch'] }                                  " tmp scratch buffer (discarded when vim exit)
   Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesEnable' }          " Color the indentation
   Plug 'deris/vim-visualinc'                                                      " Increment/decrement numbers in visualmode too (with CTRL+A / CTRL+X)
   Plug 'moll/vim-bbye', { 'on': 'Bdelete' }                                       " Simple buffer close (inspired by Bclose.vim, but rewritten to be perfect)
