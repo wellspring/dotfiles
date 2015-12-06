@@ -19,14 +19,14 @@ call plug#begin('~/.vim/plugged')
 
   " --- (color schemes)
   Plug 'vim-scripts/Lucius'                                                       " [ColorScheme] Lucius                                       +++
-  Plug 'tomasr/molokai'                                                           "|[ColorScheme] Molokai                                      +++
-  Plug 'vim-scripts/BusyBee'                                                      "|[ColorScheme] BusyBee (dark/blue/supergreen/grey/orange)   +++  // super clear !
- "Plug 'reedes/vim-colors-pencil'                                                 "|[ColorScheme] Pencil (dark/pink/blue OR light)             +++
-  Plug 'jordwalke/flatlandia'                                                     "|[ColorScheme] FlatLand (dark/orange/blue/green)            +++
- "Plug 'morhetz/gruvbox'                                                          "|[ColorScheme] Gruvbox (dark/green*3/pink/orange)           ++
-  Plug 'nanotech/jellybeans.vim'                                                  "|[ColorScheme] JellyBeans (dark/verypink/blue/green)        ++
+  Plug 'tomasr/molokai'                                                           " [ColorScheme] Molokai                                      +++
+  Plug 'vim-scripts/BusyBee'                                                      " [ColorScheme] BusyBee (dark/blue/supergreen/grey/orange)   +++  // super clear !
+  Plug 'reedes/vim-colors-pencil'                                                 " [ColorScheme] Pencil (dark/pink/blue OR light)             +++
+  Plug 'jordwalke/flatlandia'                                                     " [ColorScheme] FlatLand (dark/orange/blue/green)            +++
+  Plug 'morhetz/gruvbox'                                                          " [ColorScheme] Gruvbox (dark/green*3/pink/orange)           ++
+  Plug 'nanotech/jellybeans.vim'                                                  " [ColorScheme] JellyBeans (dark/verypink/blue/green)        ++
+  Plug 'nowk/genericdc'                                                           " [ColorScheme] genericdc (dark/blue/grey/orange OR light)   ++
  "Plug 'Lokaltog/vim-distinguished'                                               "|[ColorScheme] Distinguished (dark/orange/blue/green)       ++
- "Plug 'nowk/genericdc'                                                           "|[ColorScheme] genericdc (dark/blue/grey/orange OR light)   ++
  "Plug 'ChasingLogic/ChasingLogic-colorscheme-vim'                                "|[ColorScheme] ChasingLogic (dark/pink/blue)                ++
  "Plug 'vim-scripts/rdark'                                                        "|[ColorScheme] rdark (dark/orange/green)                    ++
  "Plug 'goatslacker/mango.vim'                                                    "|[ColorScheme] mango (dark/purple/orange/green OR light)    ++
@@ -36,8 +36,9 @@ call plug#begin('~/.vim/plugged')
  "Plug 'zeis/vim-kolor'                                                           "|[ColorScheme] Kolor (darkbrown/yellow/purple/orange/red)   +
  "Plug 'jeetsukumaran/vim-mochalatte'                                             "|[ColorScheme] MochaLatte (brown/orange/beige/green)        +
  "Plug 'vim-scripts/3DGlasses.vim'                                                "|[ColorScheme] 3dglasses (very blue + a bit red)            +
- "Plug 'vimfiles/chlordane.vim'                                                   "|[ColorScheme] chlordane (very green, matrix style)         +
- "Plug 'vim-scripts/greenvision'                                                  "|[ColorScheme] greenvision (dark & green, matrix style)     +
+  Plug 'whatyouhide/vim-gotham'                                                   " [ColorScheme] gotham (dark blueish/greenish, matrix style) +
+ "Plug 'vim-scripts/chlordane.vim'                                                " [ColorScheme] chlordane (very green, matrix style)         +
+  Plug 'vim-scripts/greenvision'                                                  " [ColorScheme] greenvision (dark & green, matrix style)     +
  "Plug 'vyshane/vydark-vim-color'                                                 "|[ColorScheme] vydark (dark/lightgreen/lightblue/beige)    ?
  "Plug 'adlawson/vim-sorcerer'                                                    "|[ColorScheme] Sorcerer (dark/green/blue/beige/orange)     ?
  "Plug 'gilsondev/lizard'                                                         "|[ColorScheme] Lizard256 (dark/red/green)                  ?
