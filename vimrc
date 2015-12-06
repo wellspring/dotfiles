@@ -366,6 +366,8 @@ let g:gitgutter_max_signs = 5000                                                
 let g:investigate_command_for_python = '/usr/bin/zeal --query ^s'                 " [Investigate] Set 'zeal' path (Dash alternative for linux) for browsing documentation
 let g:textobj_clang_more_mappings = 1                                             " [vim-textobj-clang] enable extended objects (class, function, ...)
 let g:tcommentMaps = 0                                                            " [TComment] disable the default keyboard mappings
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_ruby_rubocop_exec = '~/.bin/rubocop-fix.sh'
 
 " --- (style)
 colors desert                                                                     " Set colorscheme (default one, if no plugin installed)
