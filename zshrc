@@ -88,6 +88,8 @@ setopt CORRECT
 # Create hash table to find faster commands and directories, and correct them. (removed: need to rehash all the time)
 #setopt HASH_CMDS
 #setopt HASH_DIRS
+setopt NOHASHDIRS
+setopt NOHASHCMDS
 # Log old paths automatically with pushd when using cd.
 setopt AUTO_PUSHD
 setopt PUSHD_SILENT
