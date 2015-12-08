@@ -7,3 +7,5 @@
  for v2:
  ======
  - add links to file added to the repository (maybe a git hook? :)
+ - add a .history/ folder with links to history stuff (.{bash,fish,gdb,pry,scala,zsh}_history)
+ - make functions/aliases as lazy loaded in zsh AND bash! (using that file/function trick: http://unix.stackexchange.com/a/33898)
