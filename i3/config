@@ -125,21 +125,14 @@ assign [title="^Music Player$"] 9
 assign [class="Skype"] 4
 
 # [ Autostart ]
-exec feh --bg-tile ~/.wallpaper.png
-exec setxkbmap -option grp:switch,grp:alt_shift_toggle us,se,fr
-exec xset r rate 200 40
-exec urxvtd -q -f -o
-exec ~/.bin/start-scratchpad
-
-exec xrandr   --output eDP-1 --auto   --output HDMI-2 --auto --rotate normal --left-of eDP-1   --output DP-1 --auto --rotate normal --right-of eDP-1
-#exec xrandr --output VGA1 --auto --right-of LVDS1
-
-#exec ~/.bin/start-media-player
-#compton --config ~/.i3/compton.conf & # composition manager
-#eval `dbus-launch --sh-syntax --exit-with-session`
-#unclutter -root -visible & #(hide mouse cursor when not used)
-#dunst -config ~/.dunstrc &
-#udiskie &
-#[ -e /usr/bin/dropboxd ] && /usr/bin/dropboxd &
-#start-pulseaudio-x11
+exec feh --bg-tile ~/.wallpaper.png # set wallpaper
+exec setxkbmap -option grp:switch,grp:alt_shift_toggle us,se,ru,fr # set keyboard languages
+exec xset r rate 200 40        # set keyboard speed
+exec xset s off -dpms          # disable screen black
+exec urxvtd -q -f -o           # terminal daemon to keep only one process open
+exec compton -b --config ~/.i3/compton.conf # composition manager
+exec unclutter                 # hide mouse cursor
+exec udiskie                   # auto-mount usb disks
+exec ~/.bin/start-scratchpad   # note scratchpas (vim)
+#start-pulseaudio-x11          # (audio daemon)
 
