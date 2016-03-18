@@ -1,7 +1,7 @@
 function cl
-	if type -P grc >/dev/null
+  if type -P grc >/dev/null
     grc -es --colour=auto $argv;
   else
-    eval $argv;
+    eval "/usr/bin/$argv";
   end
 end
