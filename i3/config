@@ -105,7 +105,7 @@ bar {
 # class                 TabBord WinBord text    indicator
 client.urgent           #ff0000 #ef3460 #ef3460 #ffffff
 client.focused          #333333 #555555 #bbbbbb #ffffff
-client.focused_inactive #333333 #202020 #bbbbbb #ffffff      # <= WTF?! Window border's color = tab background color?
+client.focused_inactive #333333 #202020 #bbbbbb #ffffff
 client.unfocused        #000000 #000000 #444444 #ffffff
 client.placeholder      #000000 #000000 #000000 #ffffff
 client.background       #000000
