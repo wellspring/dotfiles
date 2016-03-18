@@ -4,7 +4,7 @@
 # [ general ]
 set $mod Mod4
 floating_modifier $mod
-font pango:Liberation Mono for Powerline 20
+font pango:Liberation Mono for Powerline 8
 #    set guifont=Liberation\ Mono\ for\ Powerline\ 7.5"                            " Linux   -> use font Inconsolata (small)
 #    set guifont=Anonymice\ Powerline:h12                                          " OS X    -> use font Anonymice
 #    set guifont=Consolas:h11:cANSI                                                " Windows -> use font Consolas
