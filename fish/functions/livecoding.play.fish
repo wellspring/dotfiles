@@ -1,12 +1,9 @@
 function livecoding.play --description 'Play a live coding stream on livecoding.tv'
-	set -l livecodinguser (lower $argv[1])
-  set -l chat_url "https://www.livecoding.tv/chat/$livecodinguser/"
-  set -l stream_url (curl -s "https://www.livecoding.tv/$livecodinguser/" -H 'Cookie: sessionid='(cat ~/.livecodingtv.session)';' | grep -Po 'rtmp://[^"]+')
+  set -l u $argv
 
-  echo Playing user (echo $livecodinguser | colorize 198) ...
-  echo "  -> stream: $stream_url" | colorize 242
-  echo "  -> chat: $chat_url" | colorize 242
+  echo -n Playing user (echo $u | colorize 198) ...
+  echo -ne "\n  -> stream: "(livecoding.url $u) | colorize 242
+  echo -e "\n  -> chat: "(livecoding.url.chat $u) | colorize 242
 
-  vlc $stream_url 2>/dev/null &
-  #eval $BROWSER $browser_url
+  xwinwrap -ov -fs -- mplayer -quiet -wid WID -loop 0 (livecoding.url $u) >/dev/null 2>/dev/null &
 end
