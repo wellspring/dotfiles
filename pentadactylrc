@@ -1,5 +1,6 @@
 loadplugins '\.(js|penta)$'
 colorscheme lucius
+command! issues -nargs=1 :tabopen! https://code.google.com/p/dactyl/issues/detail?id=<args>
 command tabrename -nargs=1 -literal=0 -js content.document.title = args[0];
 command hide :tabdo tabrename Wikipedia
 group user
