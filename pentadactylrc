@@ -1,5 +1,7 @@
 loadplugins '\.(js|penta)$'
 colorscheme lucius
+command tabrename -nargs=1 -literal=0 -js content.document.title = args[0];
+command hide :tabdo tabrename Wikipedia
 group user
 map -count -modes=n,v <Space> <count>F
 map -count -modes=i,n,v <C-Left> <count><C-p>
