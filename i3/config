@@ -111,7 +111,7 @@ client.placeholder      #000000 #000000 #000000 #ffffff
 client.background       #000000
 
 # [ App specific ]
-for_window [class="^.*$"] border pixel 3
+for_window [class="^.*$"] border pixel 1
 for_window [class="Guake"] floating enable
 for_window [title=" - VLC media player$"] floating enable
 for_window [title="^pentadactyl.* - GVIM$"] floating enable
