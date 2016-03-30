@@ -5,5 +5,6 @@ function livecoding.play --description 'Play a live coding stream on livecoding.
   echo -ne "\n  -> stream: "(livecoding.url $u) | colorize 242
   echo -e "\n  -> chat: "(livecoding.url.chat $u) | colorize 242
 
-  xwinwrap -ov -fs -- mplayer -quiet -wid WID -loop 0 (livecoding.url $u) >/dev/null 2>/dev/null &
+  vlc --qt-minimal-view (livecoding.url $u) >/dev/null 2>/dev/null &
+  #xwinwrap -ov -fs -- mplayer -quiet -wid WID -loop 0 (livecoding.url $u) >/dev/null 2>/dev/null &
 end
