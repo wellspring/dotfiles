@@ -843,10 +843,10 @@ fi
 echo ""
 
 # Setup zsh-autosuggestions
-source ~/.zsh-autosuggestions/autosuggestions.zsh
-zle-line-init() { zle autosuggest-start }
-zle -N zle-line-init
-bindkey '^T' autosuggest-toggle
+#source ~/.zsh-autosuggestions/autosuggestions.zsh
+#zle-line-init() { zle autosuggest-start }
+#zle -N zle-line-init
+#bindkey '^T' autosuggest-toggle
 
 # Use Ruby Version Manager
 if [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
@@ -859,5 +859,5 @@ if [ -e ~/.zshext ]; then
     source ~/.zshext
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
