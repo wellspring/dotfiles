@@ -67,7 +67,7 @@ call plug#begin('~/.vim/plugged')
  "Plug 'vim-scripts/simple-pairs'                                                 "|auto-closing brackets/quotes (similar to auto-pairs, less aggressive -- needs python)
  "Plug 'Raimondi/delimitMate'                                                     "|auto-closing brackets/quotes (similar to auto-pairs -- doesnt work with html :/)
  "Plug 'vim-scripts/netrw.vim'                                                    "|File explorer (in the current window, without using a separated project drawer)
-  Plug 'scrooloose/nerdtree'                                                      " File explorer
+  Plug 'scrooloose/nerdtree', {'on':['NERDTree','NERDTreeToggle','NERDTreeFind']} " File explorer
   Plug 'tomtom/tcomment_vim'                                                      " Comments (better than nerdcommenter)
  "Plug 'scrooloose/nerdcommenter'                                                 "|Comments
   Plug 'scrooloose/syntastic'                                                     " Syntax checking (> 80 lang!!)
@@ -75,7 +75,7 @@ call plug#begin('~/.vim/plugged')
  "Plug 'vim-scripts/taglist.vim'                                                  "|Tags
   Plug 'majutsushi/tagbar'                                                        " Tags                            { 'on': 'TagbarToggle' }
   Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }                           " Format/indent the code properly (C/C++/C#/ObjC/Java/Python/HTML/CSS/JS/RUBY)
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }       " Code completion (C/C++/Python/Ruby/PHP/...)
+ "Plug 'Valloric/YouCompleteMe', { 'do': 'python2 install.py --clang-completer' } "|Code completion (C/C++/Python/Ruby/PHP/...)
   Plug 'Shougo/neocomplete.vim'                                                   " Completion engine with cache (even for directories!!)
   Plug 'ervandew/supertab'                                                        " Allow to use TAB for completions (to make Ultisnips work with YouCompleteMe)
   Plug 'SirVer/ultisnips'                                                         " Snippets engine  (new snipmate)
@@ -197,31 +197,31 @@ call plug#begin('~/.vim/plugged')
  "Plug 'tfnico/vim-gradle'                                                        "|Gradle syntax (for groovy files)
 
   " --- (textobj)
-  Plug 'machakann/vim-textobj-functioncall'                                       " function call helpers: select (vif) or delete (daf)
-  Plug 'vim-scripts/argtextobj.vim'                                               " function arguments helpers: delete (daa) or change (cia)
-  Plug 'kana/vim-textobj-user'                                                    " create new textobj easily
-  Plug 'jceb/vim-textobj-uri'                                                     " uri/url helpers: select (viu)
-  Plug 'deris/vim-textobj-email'                                                  " emails helpers: select (vim) or delete (dam)
-  Plug 'glts/vim-textobj-comment'                                                 " comments helpers: select (vac) or delete (daC) or change (cic)
-  Plug 'machakann/vim-textobj-equation'                                           " equations/comparaisons helpers: whole (viee), or just left (viel) or right (vier)
-  Plug 'kana/vim-textobj-lastpat'                                                 " last searched pattern helpers (select stuff between using va/ or va? for example)
-  Plug 'deris/vim-textobj-ipmac'                                                  " ipv4/ipv6/mac addresses helper: select (viA)
-  Plug 'haya14busa/vim-textobj-number'                                            " number helpers: select (vin / van)
-  Plug 'saihoooooooo/vim-textobj-space'                                           " space helpers: select (viS) or delete (daS) or change (ciS)
-  Plug 'anyakichi/vim-textobj-xbrackets'                                          " x(), x<>, x[], x{}: select (vax(), select (vax<), ...
-  Plug 'rhysd/vim-textobj-clang', { 'for': ['c','cpp'] }                          " [C/C++] helpers: most inner def (vi;m), class block (vi;c), function block (vi;f), expression (vi;e), statement (vi;s), parameter/template (vi;p), namespace (vi;n), element under cursor (vi;u), anything (vi;a).
-  Plug 'anyakichi/vim-textobj-ifdef', { 'for': ['c','cpp'] }                      " [C/C++] ifdef helpers: select (vi# / va# / vi3 / va3)
-  Plug 'tokorom/vim-textobj-objc', { 'for': ['objc'] }                            " [OBJECTIVE_C] @ literals (vi@ / va@) and ^ blocks (vi^ and va^)
-  Plug 'kana/vim-textobj-function', { 'for': ['c','java','vim'] }                 " [C/JAVA/VIM] function helpers: select (vaf) or delete (daf) or change (cif)
-  Plug 'vimtaku/vim-textobj-keyvalue',{'for': ['javascript','coffee','python','perl','vim'] } " key/value helpers: select (vik / vak)
-  Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'xml']}                " [HTML] tags helpers: select (vix) or delete (dax) or change (cix)
-  Plug 'inotom/vim-textobj-cssprop', {'for': ['html', 'css', 'sass']}             " [CSS] css helpers to select value (vic) or 'key: value;' (vac)
-  Plug 'inotom/vim-textobj-csscolor', {'for': ['html', 'css', 'sass']}            " [CSS] css helpers to select hex color (vil) or rgb/rgba/hsl (vall)
-  Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}                          " [RUBY] helper for selecting ruby code blocks
-  Plug 'tek/vim-textobj-ruby', {'for': 'ruby'}                                    " [RUBY] helper for blocks (vir/var), functions (vif/vaf), class (vic/vac), name (van)
-  Plug 'whatyouhide/vim-textobj-erb', {'for': ['ruby','erb']}                     " [RUBY] helper for selecting erb <% %> blocks
-  Plug 'akiyan/vim-textobj-php', { 'for': 'php' }                                 " [PHP] php tags helper: select (viP) or delete (daP) or change (ciP)
-  Plug 'bps/vim-textobj-python', { 'for': 'python' }                              " [PYTHON] python helpers for functions (vaf/vif) and class (vac/vic)
+ "Plug 'machakann/vim-textobj-functioncall'                                       "|function call helpers: select (vif) or delete (daf)
+ "Plug 'vim-scripts/argtextobj.vim'                                               "|function arguments helpers: delete (daa) or change (cia)
+ "Plug 'kana/vim-textobj-user'                                                    "|create new textobj easily
+ "Plug 'jceb/vim-textobj-uri'                                                     "|uri/url helpers: select (viu)
+ "Plug 'deris/vim-textobj-email'                                                  "|emails helpers: select (vim) or delete (dam)
+ "Plug 'glts/vim-textobj-comment'                                                 "|comments helpers: select (vac) or delete (daC) or change (cic)
+ "Plug 'machakann/vim-textobj-equation'                                           "|equations/comparaisons helpers: whole (viee), or just left (viel) or right (vier)
+ "Plug 'kana/vim-textobj-lastpat'                                                 "|last searched pattern helpers (select stuff between using va/ or va? for example)
+ "Plug 'deris/vim-textobj-ipmac'                                                  "|ipv4/ipv6/mac addresses helper: select (viA)
+ "Plug 'haya14busa/vim-textobj-number'                                            "|number helpers: select (vin / van)
+ "Plug 'saihoooooooo/vim-textobj-space'                                           "|space helpers: select (viS) or delete (daS) or change (ciS)
+ "Plug 'anyakichi/vim-textobj-xbrackets'                                          "|x(), x<>, x[], x{}: select (vax(), select (vax<), ...
+ "Plug 'rhysd/vim-textobj-clang', { 'for': ['c','cpp'] }                          "|[C/C++] helpers: most inner def (vi;m), class block (vi;c), function block (vi;f), expression (vi;e), statement (vi;s), parameter/template (vi;p), namespace (vi;n), element under cursor (vi;u), anything (vi;a).
+ "Plug 'anyakichi/vim-textobj-ifdef', { 'for': ['c','cpp'] }                      "|[C/C++] ifdef helpers: select (vi# / va# / vi3 / va3)
+ "Plug 'tokorom/vim-textobj-objc', { 'for': ['objc'] }                            "|[OBJECTIVE_C] @ literals (vi@ / va@) and ^ blocks (vi^ and va^)
+ "Plug 'kana/vim-textobj-function', { 'for': ['c','java','vim'] }                 "|[C/JAVA/VIM] function helpers: select (vaf) or delete (daf) or change (cif)
+ "Plug 'vimtaku/vim-textobj-keyvalue',{'for': ['javascript','coffee','python','perl','vim'] } " key/value helpers: select (vik / vak)
+ "Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'xml']}                "|[HTML] tags helpers: select (vix) or delete (dax) or change (cix)
+ "Plug 'inotom/vim-textobj-cssprop', {'for': ['html', 'css', 'sass']}             "|[CSS] css helpers to select value (vic) or 'key: value;' (vac)
+ "Plug 'inotom/vim-textobj-csscolor', {'for': ['html', 'css', 'sass']}            "|[CSS] css helpers to select hex color (vil) or rgb/rgba/hsl (vall)
+ "Plug 'nelstrom/vim-textobj-rubyblock', {'for': 'ruby'}                          "|[RUBY] helper for selecting ruby code blocks
+ "Plug 'tek/vim-textobj-ruby', {'for': 'ruby'}                                    "|[RUBY] helper for blocks (vir/var), functions (vif/vaf), class (vic/vac), name (van)
+ "Plug 'whatyouhide/vim-textobj-erb', {'for': ['ruby','erb']}                     "|[RUBY] helper for selecting erb <% %> blocks
+ "Plug 'akiyan/vim-textobj-php', { 'for': 'php' }                                 "|[PHP] php tags helper: select (viP) or delete (daP) or change (ciP)
+ "Plug 'bps/vim-textobj-python', { 'for': 'python' }                              "|[PYTHON] python helpers for functions (vaf/vif) and class (vac/vic)
  "Plug 'vimtaku/vim-textobj-doublecolon'                                          "|helpers for 'Class::method'
 
   " --- (versioning)
@@ -245,6 +245,7 @@ call plug#begin('~/.vim/plugged')
 
   " --- (GVIM)
   Plug 'bling/vim-airline'                                                        " Powerline (faster, and with a lot of extensions)
+  Plug 'vim-airline/vim-airline-themes'                                           " Powerline themes
  "Plug 'itchyny/lightline.vim'                                                    "|Powerline (minimal)
  "Plug 'bilalq/lite-dfm', { 'on': 'LiteDFMToggle' }                               "|Distraction Free Mode (like sublimetext)
   if has('gui_running')
