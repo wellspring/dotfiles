@@ -5,9 +5,6 @@
 set $mod Mod4
 floating_modifier $mod
 font pango:Liberation Mono for Powerline 8
-#    set guifont=Liberation\ Mono\ for\ Powerline\ 7.5"                            " Linux   -> use font Inconsolata (small)
-#    set guifont=Anonymice\ Powerline:h12                                          " OS X    -> use font Anonymice
-#    set guifont=Consolas:h11:cANSI                                                " Windows -> use font Consolas
 
 default_orientation horizontal
 popup_during_fullscreen smart
@@ -117,21 +114,23 @@ for_window [title=" - VLC media player$"] floating enable
 for_window [title="^pentadactyl.* - GVIM$"] floating enable
 for_window [title="^Screen Layout Editor$"] floating enable
 for_window [title="^Notes ::"] move to scratchpad
-assign [class="Chromium"] 2
-assign [class="Firefox"] 2
-assign [class="luakit"] 2
-assign [class="Spotify"] 9
+assign [class="Chromium"]       2
+assign [class="Firefox"]        2
+assign [class="luakit"]         2
+assign [title="DeaDBeeF$"]      9
+assign [title="^cmus v"]        9
+assign [class="Spotify"]        9
 assign [title="^Music Player$"] 9
-assign [class="Skype"] 4
+assign [class="Skype"]          4
 
 # [ Autostart ]
 exec feh --bg-tile ~/.wallpaper.png # set wallpaper
 exec setxkbmap -option grp:switch,grp:alt_shift_toggle us,se,ru,fr # set keyboard languages
 exec xset r rate 200 40        # set keyboard speed
-exec xset s off -dpms          # disable screen black
+#exec xset s off -dpms          # disable screen black
 exec urxvtd -q -f -o           # terminal daemon to keep only one process open
-exec compton -b --config ~/.compton.conf # composition manager
-exec unclutter                 # hide mouse cursor
+#exec compton -b --config ~/.compton.conf # composition manager
+exec unclutter                 # hide mouse cursor when innactive
 exec udiskie                   # auto-mount usb disks
 exec ~/.bin/start-scratchpad   # note scratchpas (vim)
 #start-pulseaudio-x11          # (audio daemon)
