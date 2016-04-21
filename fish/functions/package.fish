@@ -32,8 +32,8 @@ function package --description 'Cross platform package manager.'
         case install
             switch $os
                 case arch
-                    yaourt -S $a
-                    #or: RUN_AS_ROOT pacman -S $a
+                    yaourt -S --needed $a
+                    #or: RUN_AS_ROOT pacman -S --needed $a
                 case gentoo
                     RUN_AS_ROOT emerge -av
                 case debian
