@@ -126,6 +126,7 @@ assign [class="Skype"]          4
 # [ Autostart ]
 exec feh --bg-tile ~/.wallpaper.png # set wallpaper
 exec setxkbmap -option grp:switch,grp:alt_shift_toggle us,se,ru,fr # set keyboard languages
+exec setxkbmap -option keypad:pointerkeys # enable keypad mouse
 exec xset r rate 200 40        # set keyboard speed
 #exec xset s off -dpms          # disable screen black
 exec urxvtd -q -f -o           # terminal daemon to keep only one process open
