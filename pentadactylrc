@@ -1,8 +1,23 @@
 loadplugins '\.(js|penta)$'
 colorscheme lucius
-command! issues -nargs=1 :tabopen! https://code.google.com/p/dactyl/issues/detail?id=<args>
+
+command config -description "Edit .pentadactylrc file" -js editor.editFileExternally("file://~/.pentadactylrc")
+command view-config -description "Open .pentadactylrc file" :tabopen ~/.pentadactylrc
+command play execute "!vlc --qt-minimal-view '" + buffer.URL + "' &"
+command issues -nargs=1 :tabopen! https://code.google.com/p/dactyl/issues/detail?id=<args>
 command tabrename -nargs=1 -literal=0 -js content.document.title = args[0];
 command hide :tabdo tabrename Wikipedia
+command related execute "tabopen related:" + window.content.location.hostname
+command -nargs=* siteSearch execute "tabopen <args> site:" + window.content.location.hostname
+command -nargs=* -complete=search search execute 'tabopen <args> ' + content.getSelection().toString()
+command jstoggle -js (function() { var p = "javascript.enabled"; prefs.set(p, !prefs.get(p)); dactyl.echo(p+" is now set to "+prefs.get(p)+"\n") })()
+command imgtoggle -js (function() { var p = "permissions.default.image"; prefs.set(p, prefs.get(p)==1 ? 2 : 1); dactyl.echo(p+" is now set to "+prefs.get(p)+"\n") })()
+command smartReload -js if (buffer.URL.spec.contains('#')) { dactyl.execute("reload"); } else { dactyl.open(buffer.URL.spec); }
+command flushdns set! network.dnsCacheExpiration=0 | set! network.dnsCacheExpiration&
+command unload -js unloadTabObj.bContextUnloadTab(gBrowser.mCurrentTab)
+command unloadOthers -js unloadTabObj.bContextUnloadOther(gBrowser.mCurrentTab)
+command copyAllURLsToClipboard yank :tabdo :echo buffer.uri.spec
+command openAllURLsInClipboard -js (function() { var urls = dactyl.clipboardRead(); var urlsArray = urls.split(options.get("urlseparator").value); for(var i in urlsArray) { dactyl.open(urlsArray[i], { from: "paste", where: dactyl.NEW_TAB }); } })()
 group user
 map -count -modes=n,v <Space> <count>F
 map -count -modes=i,n,v <C-Left> <count><C-p>
@@ -11,10 +26,10 @@ map -count -modes=n <Right> <count><C-n>
 map -count -modes=n <Left> <count><C-p>
 map -count -modes=n,v <C-l> <count><C-n>
 map -count -modes=n,v <C-h> <count><C-p>
-map -count -modes=n <S-l> :tabmove +1<Return>
-map -count -modes=n <S-h> :tabmove -1<Return>
-map -count -modes=n <S-Right> :tabmove +1<Return>
-map -count -modes=n <S-Left> :tabmove -1<Return>
+map -count -modes=n <S-l> -ex :tabmove +1
+map -count -modes=n <S-h> -ex :tabmove -1
+map -count -modes=n <S-Right> -ex :tabmove +1
+map -count -modes=n <S-Left> -ex :tabmove -1
 map -count -modes=n,v <M-Down> -builtin <count>G
 map -count -modes=n,v <M-Up> -builtin <count>gg
 map -count -modes=n,v '-' -builtin <count>zo
@@ -24,6 +39,18 @@ map -count -modes=n,v <F2> <count>:noh<Return>
 map -count -modes=n,v = -builtin <count>zi
 map -count -modes=n,v r -builtin <count>R
 map -count -modes=n,v R -builtin <count>r
+map -modes=i,c <C-f> -builtin <Right>
+map -modes=i,c <C-b> -builtin <Left>
+map -modes=i,c <C-a> -builtin <C-t>0<Esc>
+map -modes=i,c <C-e> -builtin <C-t>$<Esc>
+map -modes=i,c <C-d> -builtin <C-t>x<Esc>
+map -modes=i,c <C-h> -builtin <C-t>hx<Esc>
+map -modes=i,c <A-f> -builtin <C-t>e<Esc>
+map -modes=i,c <A-b> -builtin <C-t>b<Esc>
+map -modes=i,c <A-d> -builtin <C-t>dw<Esc>
+map -modes=i,c <C-w> -builtin <C-t>vbx<Esc><Esc>
+map -modes=i,c <C-k> -builtin <C-t>D<Esc>
+map -modes=i,c <C-u> -builtin <C-t>vggx<Esc><Esc>
 map -description "Reload pentadactyl config" ,r :so ~/.pentadactylrc<CR>:echo "Loaded config"<CR>
 map -description "Copy"  <C-c> -builtin Y
 map -description "Paste" <C-v> -modes=i,t -builtin <C-v><C-v>
@@ -36,19 +63,41 @@ map -description "Go fullscreen: put the movie in fullscreen. (works with flash 
 map -description "(github) Download the current file in raw format to the download folder." -silent gF :echo 'Downloading...'<CR>:js "url=content.document.getElementById('raw-url').href; filename=url.match('([^/?]*)\?([^/]*)$')[1]; Downloads.getPreferredDownloadsDirectory().then(function(dir){ Downloads.fetch(url, dir+'/'+filename); })"<CR>
 map -description "(github) Clone the github repository to ~/Downloads/." -silent gcl :echo 'Cloning github repository...'<CR>:exec '!cd ~/Downloads/; git clone -q '+content.document.location.href.match('https?://(www.)?github.com(/[^/?#]+){2}')[0]+' >/dev/null &';<CR>
 map -description "(solarmovies) Search for the trailer of the movie on youtube." gt -javascript _=content.document.getElementsByTagName('h1')[0].innerHTML.match('</span>[ \t\n]*([^<>]+?)[ \t\n]*<a[^>]*>[ \t\n]*([^<>+?]*)[ \t\n]*');title=_[1];year=_[2]; content.document.location = 'https://www.youtube.com/results?search_query=trailer ' + title + ' (' + year + ')'
-map -description "Open the video/link in vlc" gv :silent execute "!vlc --qt-minimal-view '" + buffer.URL + "' &"<enter>d
-map -description "Go to private mode (by oppening a new window)" gp :private winopen<Return>
+map -description "Open the video/link in vlc" -silent gv :play<enter>d
+map -description='Yank all locations to the clipboard' -modes=n,v,c <C-y> -ex :copyAllURLsToClipboard
+map -description='Open all locations from the clipboard' -modes=n,v,c <C-p> -ex :openAllURLsInClipboard
+nmap <Leader>l -description='Select all http/ftp urls' /\r((htt|f)ps?:\/\/[^ '"]*|www\.[^ '"]*|[A-Za-z0-9._-]*\.com(/[^ '"]*| ))<cr>
+cmap <C-Return> -builtin <End>.com<Home><C-Right><Right>www.<Return>
+nmap <Leader>d -builtin -ex :downloads
+nmap <Leader>h -builtin -ex :history
+nmap <Leader>a -builtin -ex :dialog addons
+nmap <Leader>s -builtin -ex :tab viewsource
+nmap <Leader>c -builtin -ex :tabopen about:config
+nmap <Leader>p -builtin -ex :private winopen
+nmap gp -ex :private winopen
+nmap <Leader>r -ex :related
+nmap s -ex :search
+nmap <C-/> :siteSearch<space>
+nmap U -builtin :undo<Space>
+nmap r -builtin -ex :smartReload
 set cdpath=''
 set complete=search,location,bookmark
 set hintkeys=asdfjkl;
 set hlfind
-set passkeys=mail.google.com:jkv<CR>rau#T/<space><S-space>?,gi,gl,*u,*i,*n,gi,gc,gl
+set passkeys=
+set passkeys+='mail.google.com':jkv<CR>rau#T/<space><S-space>?,gi,gl,*u,*i,*n,gi,gc,gl
+set passkeys+='youtube.com':<space>
 set scrolltime=0
 set showstatuslinks=command
 set showtabline=multitab
 set strictfocus=google.com:laissez-faire,*:moderate,'chrome:*':laissez-faire,*:moderate
 set titlestring='Mozilla Firefox'
 set guioptions=rb
+set! browser.pocket.enabled=false
+set! network.http.pipelining=true
+set! network.http.pipelining.ssl=true
+"set! browser.newtab.url=~/.pentadactyl/home.html
+"set! browser.startup.homepage=~/.pentadactyl/home.html
 
 
 " vim: set ft=pentadactyl:
