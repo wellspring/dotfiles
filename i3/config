@@ -16,6 +16,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+n exec ~/.bin/i3-sensible-webbrowser
 bindsym $mod+m exec ~/.bin/start-media-player
 bindsym $mod+r exec dmenu_run
+bindsym $mod+t exec scrot -s -e 'mv $f ~/Images/Screenshots/'
 bindsym F9 exec ~/.bin/play-firefox-video
 bindsym Mod1+F9 exec ~/.bin/play-firefox-video --xbmc
 bindsym $mod+Shift+minus move scratchpad
