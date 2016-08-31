@@ -280,7 +280,7 @@ set hidden                                                                      
 set autoindent smartindent                                                        " Enable automatic code intendation (dev)
 set autoread                                                                      " Auto-reload the file when it's modified by an external app
 set colorcolumn=+1                                                                " Display a vertical line at {textwidth+1} to know where vim will wrap
-set textwidth=80                                                                  " Wrap the text at 80char (stupid guideline)
+set textwidth=0                                                                   " Wrap the text at 80char (stupid guideline)
 set wrap                                                                          " Automatically wrap text to the next line
 "set listchars=tab:▸\ ,eol:·                                                      "|Display invisible EOL trailing characters (dev) -- alternative: 'set list'
 "set list                                                                         "|If enabled, display those invisible characters (see above)
