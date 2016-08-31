@@ -56,7 +56,7 @@ call plug#begin('~/.vim/plugged')
 
   " --- (general)
   Plug 'junegunn/vim-easy-align', { 'on' : 'EasyAlign' }                          " Align
- "Plug 'vim-scripts/Align', { 'on' : 'Align' }                                    "|Align
+  Plug 'vim-scripts/Align', { 'on' : 'Align' }                                    "|Align
  "Plug 'godlygeek/tabular', { 'on' : 'Tab' }                                      "|Align
   Plug 'terryma/vim-multiple-cursors'                                             " Multi-cursor editing in vim (like sublime text)
   Plug 'Lokaltog/vim-easymotion'                                                  " Goto part of the code quickly (\w for target char, \\s, \\f, ...)
