@@ -115,6 +115,7 @@ for_window [class="Gedit"] fullscreen enable
 for_window [title=" - VLC media player$"] floating enable
 for_window [title="^pentadactyl.* - GVIM$"] floating enable
 for_window [title="^Screen Layout Editor$"] floating enable
+for_window [title="^demo::tty"] floating enable
 for_window [title="^Notes ::"] move to scratchpad
 assign [class="Chromium"]       2
 assign [class="Firefox"]        2
