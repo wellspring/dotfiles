@@ -8,7 +8,8 @@ function package --description 'Cross platform package manager.'
             echo "Usage: package search <package-name>"
             echo "Usage: package info <package-name>"
             echo "Usage: package files <package-name>"
-            echo "Usage: package thathave <file>"
+            echo "Usage: package thathave <cmd>"
+            echo "Usage: package thatown <file>"
             echo "Usage: package installed"
             echo "Usage: package upgrade"
 
@@ -122,11 +123,20 @@ function package --description 'Cross platform package manager.'
                     echo "Command not supported on this Operating System."
             end
 
-        case thathave
+        case thathave thathas
             switch $os
                 case arch
-                    yaourt -Qo
-                    #or: RUN_AS_ROOT pacman -Qo
+                    pkgfile -b -v $a
+                    #or: RUN_AS_ROOT pacman -Qo $a
+                case '*'
+                    echo "Command not supported on this Operating System."
+            end
+
+        case thatown
+            switch $os
+                case arch
+                    yaourt -Qo $a
+                    #or: RUN_AS_ROOT pacman -Qo $a
                 case '*'
                     echo "Command not supported on this Operating System."
             end
