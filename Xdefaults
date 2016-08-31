@@ -17,8 +17,15 @@ URxvt.scrollWithBuffer: true
 URxvt.scrollTtyOutput: false
 URxvt.scrollTtyKeypress: true
 URxvt.iso14755: false
-URxvt.perl-ext-common: default,matcher,clipboard,searchable-scrollback
+URxvt.perl-ext-common: default,matcher,clipboard,searchable-scrollback,url-select,resize-font
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
 URxvt.urlLauncher: xdg-open
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 URxvt.copyCommand:  xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 URxvt.keysym.S-C-C: perl:clipboard:copy
