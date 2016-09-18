@@ -3,6 +3,7 @@ colorscheme lucius
 
 command config -description "Edit .pentadactylrc file" -js editor.editFileExternally("file://~/.pentadactylrc")
 command view-config -description "Open .pentadactylrc file" :tabopen ~/.pentadactylrc
+command cfg config
 command play execute "!vlc --qt-minimal-view '" + buffer.URL + "' &"
 command issues -nargs=1 :tabopen! https://code.google.com/p/dactyl/issues/detail?id=<args>
 command tabrename -nargs=1 -literal=0 -js content.document.title = args[0];
@@ -16,26 +17,27 @@ command smartReload -js if (buffer.URL.spec.contains('#')) { dactyl.execute("rel
 command flushdns set! network.dnsCacheExpiration=0 | set! network.dnsCacheExpiration&
 command unload -js unloadTabObj.bContextUnloadTab(gBrowser.mCurrentTab)
 command unloadOthers -js unloadTabObj.bContextUnloadOther(gBrowser.mCurrentTab)
+command unpause -description "Reload/unpause unloaded tabs" tabdo echo
 command copyAllURLsToClipboard yank :tabdo :echo buffer.uri.spec
 command openAllURLsInClipboard -js (function() { var urls = dactyl.clipboardRead(); var urlsArray = urls.split(options.get("urlseparator").value); for(var i in urlsArray) { dactyl.open(urlsArray[i], { from: "paste", where: dactyl.NEW_TAB }); } })()
 group user
-map -count -modes=n,v <Space> <count>F
-map -count -modes=i,n,v <C-Left> <count><C-p>
-map -count -modes=i,n,v <C-Right> <count><C-n>
-map -count -modes=n <Right> <count><C-n>
-map -count -modes=n <Left> <count><C-p>
-map -count -modes=n,v <C-l> <count><C-n>
-map -count -modes=n,v <C-h> <count><C-p>
-map -count -modes=n <S-l> -ex :tabmove +1
-map -count -modes=n <S-h> -ex :tabmove -1
-map -count -modes=n <S-Right> -ex :tabmove +1
-map -count -modes=n <S-Left> -ex :tabmove -1
+map -count -modes=n,v <Space> -builtin <count>F
+map -count -modes=i,n,v <C-Left> -builtin <count><C-p>
+map -count -modes=i,n,v <C-Right> -builtin <count><C-n>
+map -count -modes=n <Right> -builtin <count><C-n>
+map -count -modes=n <Left> -builtin <count><C-p>
+map -count -modes=n,v <C-l> -builtin <count><C-n>
+map -count -modes=n,v <C-h> -builtin <count><C-p>
+map -count -modes=n <S-l> -builtin -ex :tabmove +1
+map -count -modes=n <S-h> -builtin -ex :tabmove -1
+map -count -modes=n <S-Right> -builtin -ex :tabmove +1
+map -count -modes=n <S-Left> -builtin -ex :tabmove -1
 map -count -modes=n,v <M-Down> -builtin <count>G
 map -count -modes=n,v <M-Up> -builtin <count>gg
 map -count -modes=n,v '-' -builtin <count>zo
 map -count -modes=n ,p -builtin <count>:set<Space>private!<Return>
-map -count -modes=n ; <count>:
-map -count -modes=n,v <F2> <count>:noh<Return>
+map -count -modes=n ; -builtin :
+map -count -modes=n,v <F2> -builtin <count>:noh<Return>
 map -count -modes=n,v = -builtin <count>zi
 map -count -modes=n,v r -builtin <count>R
 map -count -modes=n,v R -builtin <count>r
@@ -80,6 +82,7 @@ nmap s -ex :search
 nmap <C-/> :siteSearch<space>
 nmap U -builtin :undo<Space>
 nmap r -builtin -ex :smartReload
+nmap <esc><esc> -ex unpause
 set cdpath=''
 set complete=search,location,bookmark
 set hintkeys=asdfjkl;
