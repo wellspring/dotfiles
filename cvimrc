@@ -1,0 +1,19 @@
+set secure
+set viminfo=
+set noswapfile
+set nobackup
+set nowritebackup
+set history=0
+set noshelltemp
+set cryptmethod=blowfish2
+
+function Scramble()
+    %!gpg -q --cipher-algo aes256 --symmetric --armor 2>/dev/null
+endfunction
+
+function Unscramble()
+    %!gpg -q --cipher-algo aes256 --decrypt --armor 2>/dev/null
+endfunction
+
+map <silent> <F7> :call Scramble()<Esc>
+map <silent> <F8> :call Unscramble()<Esc>
