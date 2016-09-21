@@ -116,6 +116,7 @@ call plug#begin('~/.vim/plugged')
  "Plug 'Twinside/vim-codeoverview.git'                                            "|Overview on the side (like sublimetext's minimap, resize automatically!)
  "Plug 'jpalardy/vim-slime'                                                       "|Send text to screen/tmux/REPL easily from vim!
  "Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }                                     "|Shared vim session (like googledoc) with multi cursors
+ Plug 'metakirby5/codi.vim', { 'on': 'Codi' }                                     " Interactive REPL thingy, with result on the right, to use as a scratchpad
 
   " --- (specific languages)
   Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}                                 " [C/C++] Statement oriented editing of C / C++ programs (to speed up writing code)
