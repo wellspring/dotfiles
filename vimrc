@@ -182,6 +182,7 @@ call plug#begin('~/.vim/plugged')
  "Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }                       "|[CLOJURE] Colorize parenthesis
  "Plug 'kballard/vim-swift', { 'for': 'swift' }                                   "|[SWIFT] Swift lang (Apple's new language)
  "Plug 'sgeb/vim-matlab', { 'for': 'matlab' }                                     "|[MATHLAB] MathLab lang
+ Plug 'mzlogin/vim-smali'                                                         " [SMALI] Used for reverse engineering apk/dex
 
   " --- (other syntaxes)
   Plug 'chrisbra/csv.vim'                                                         " [CSV] CSV syntax
