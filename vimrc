@@ -305,11 +305,12 @@ set iskeyword+=/,.,:                                                            
 set shiftwidth=2 tabstop=2                                                        " [TAB] Set the Tab size
 set expandtab smarttab                                                            " [TAB] Use spaces instead of real \t (better for align) -- use :retab for manual
 set wildmode=list:longest,full                                                    " [TAB] Show a list when pressing tab
-set nonumber                                                                      " [001] Disable line number on the left (dev)  -- add 'ru' for relative lines numbers
-set numberwidth=3                                                                 " [001] Set the left number bar size to 3 digits (by default, but have more if needed)
-set backup                                                                        " [BACKUP] Enable file backups
-set backupdir=~/.vim/backups                                                      " [BACKUP] Set a unique backup directory (to avoid having files in project dir)
-set directory=~/.vim/tmp                                                          " [TMP] Set a unique tmp directory (to avoid having files in project dir)
+set nonumber                                                                      " [LINENBR] Disable line number on the left (dev)  -- add 'ru' for relative lines numbers
+set numberwidth=3                                                                 " [LINENBR] Set the left number bar size to 3 digits (by default, but have more if needed)
+set backup                                                                        " [DIR] Enable file backups
+set backupdir=~/.vim/backups//                                                    " [DIR] Set a unique backup directory (to avoid having files in project dir; the ending double // makes it create subfolders too to avoid name collision :))
+set directory=~/.vim/tmp//                                                        " [DIR] Set a unique tmp directory (to avoid having files in project dir)
+set undodir=~/.vim/undo//                                                         " [DIR] Set a directory for undo files
 set showmode                                                                      " [STATUS2] Show the current mode in the statusbar (e.g. INSERT)
 set showcmd                                                                       " [STATUS2] Show partial command (Note: if the terminal is slow, try putting it off!)
 set ruler                                                                         " [STATUS1/CURSOR] Display the cursor position (line,column)
