@@ -445,6 +445,16 @@ autocmd StdinReadPre * let s:std_in=1                                           
 " [Shortcuts]
 "=============
 
+" --- motion keys
+noremap   <Up>        gk|                                                         "                  Up : Move one line up, taking care of wrap.
+inoremap  <Up>        <C-o>gk|                                                    "                  Up : Move one line up, taking care of wrap.
+inoremap  <Down>      <C-o>gj|                                                    "                Down : Move one line down, taking care of wrap.
+noremap   <Down>      gj|                                                         "                Down : Move one line down, taking care of wrap.
+noremap   <Home>      g<Home>                                                     "                Home : Go to the beginning of the line, taking care of wrap.
+inoremap  <Home>      <C-o>g<Home>                                                "                Home : Go to the beginning of the line, taking care of wrap.
+inoremap  <End>       <C-o>g<End>                                                 "                 End : Go to the end the line, taking care of wrap.
+noremap   <End>       g<End>                                                      "                 End : Go to the end the line, taking care of wrap.
+
 " --- F1 to F12 keys
 noremap   <F1>        <Esc>:help<Space>|                                          "                  F1 : Help
 noremap   <F2>        <Esc>:nohl<CR>|                                             "                  F2 : disable search highlighting
