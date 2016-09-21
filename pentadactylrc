@@ -13,7 +13,7 @@ command -nargs=* siteSearch execute "tabopen <args> site:" + window.content.loca
 command -nargs=* -complete=search search execute 'tabopen <args> ' + content.getSelection().toString()
 command jstoggle -js (function() { var p = "javascript.enabled"; prefs.set(p, !prefs.get(p)); dactyl.echo(p+" is now set to "+prefs.get(p)+"\n") })()
 command imgtoggle -js (function() { var p = "permissions.default.image"; prefs.set(p, prefs.get(p)==1 ? 2 : 1); dactyl.echo(p+" is now set to "+prefs.get(p)+"\n") })()
-command smartReload -js if (buffer.URL.spec.contains('#')) { dactyl.execute("reload"); } else { dactyl.open(buffer.URL.spec); }
+command smartReload -js if (buffer.URL.spec.indexOf('#') > 0) { dactyl.execute("reload"); } else { dactyl.open(buffer.URL.spec); }
 command flushdns set! network.dnsCacheExpiration=0 | set! network.dnsCacheExpiration&
 command unload -js unloadTabObj.bContextUnloadTab(gBrowser.mCurrentTab)
 command unloadOthers -js unloadTabObj.bContextUnloadOther(gBrowser.mCurrentTab)
