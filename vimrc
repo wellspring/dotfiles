@@ -318,6 +318,7 @@ set ruler                                                                       
 set go+=a                                                                         " [CLIPBOARD] Visual selection automatically copied to the clipboard
 set clipboard=unnamed,unnamedplus                                                 " [CLIPBOARD] Make yanking/deleting automatically copy to the system clipboard
 set nopaste                                                                       " [CLIPBOARD] Disable the paste mode by default
+set cryptmethod=blowfish2                                                         " [SECURITY] encrypt using blowfish2 and not the weak pkzip
 
 " --- (plugins)
 let g:NERDTreeMouseMode = 2                                                       " [NerdTree] clicking with the mouse open instantly (no double-click needed)
