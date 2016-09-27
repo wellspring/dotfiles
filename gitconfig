@@ -13,6 +13,7 @@
     #color = false
     #show = vim -R -
     autocrlf = input
+	  pager = diff-so-fancy | less --tabs=4 -RFX
     [apply]
     whitespace = fix
     [advice]
@@ -128,7 +129,7 @@
     ds = diff --staged
     ready = diff --staged
     wdiff = diff --word-diff
-    rdiff = "!bash -c 'regex=$1;shift; git diff -U0 -G $regex $* | sed -n \"/^\\([^-+]\\|[-+].*$regex.*\\)/p\" | awk \"/^@@/{p=\\$0} !/^@@/{if(p!=\\\"\\\"){print p;p=\\\"\\\"};print \\$0}\" | colordiff' -" # `git diff` that filters by regex (usage: git rdiff <regex> [files [...]])
+    rdiff = "!bash -c 'regex=$1;shift; git diff -U0 -G $regex $* | sed -n \"/^\\([^-+]\\|[-+].*$regex.*\\)/p\" | awk \"/^@@/{p=\\$0} !/^@@/{if(p!=\\\"\\\"){print p;p=\\\"\\\"};print \\$0}\" | diff-so-fancy' -" # `git diff` that filters by regex (usage: git rdiff <regex> [files [...]])
     radd = "!bash -c 'regex=$1;shift; git diff -U0 -G $regex $* | sed -n \"/^\\([^-+]\\|[-+].*$regex.*\\)/p\" | awk \"/^@@/{p=\\$0} !/^@@/{if(p!=\\\"\\\"){print p;p=\\\"\\\"};print \\$0}\" | git apply --cached --unidiff-zero -' -" # `git add` that selectively filters by regex (usage: git rdiff <regex> [files [...]])
     branches = branch --verbose -a
     remotes = remote --verbose show
