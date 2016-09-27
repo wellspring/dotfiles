@@ -128,6 +128,8 @@
     ds = diff --staged
     ready = diff --staged
     wdiff = diff --word-diff
+    rdiff = "!bash -c 'regex=$1;shift; git diff -U0 -G $regex $* | sed -n \"/^\\([^-+]\\|[-+].*$regex.*\\)/p\" | awk \"/^@@/{p=\\$0} !/^@@/{if(p!=\\\"\\\"){print p;p=\\\"\\\"};print \\$0}\" | colordiff' -" # `git diff` that filters by regex (usage: git rdiff <regex> [files [...]])
+    radd = "!bash -c 'regex=$1;shift; git diff -U0 -G $regex $* | sed -n \"/^\\([^-+]\\|[-+].*$regex.*\\)/p\" | awk \"/^@@/{p=\\$0} !/^@@/{if(p!=\\\"\\\"){print p;p=\\\"\\\"};print \\$0}\" | git apply --cached --unidiff-zero -' -" # `git add` that selectively filters by regex (usage: git rdiff <regex> [files [...]])
     branches = branch --verbose -a
     remotes = remote --verbose show
     graph = log --graph --pretty=format':%C(blue bold)%h%Cblue%d%Creset %s -- %C(reset)(%C(green bold)%an%Creset, %C(green)%ar%Creset)'
