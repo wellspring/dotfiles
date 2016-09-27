@@ -66,6 +66,11 @@ else
   # nothing to do
 end
 
+# Other
+def files
+  Dir['*']
+end
+
 # Intro
 intro = "Interactive Ruby Shell :: #{ENV["USER"]} @ Ruby(#{RUBY_VERSION})"
 puts intro
