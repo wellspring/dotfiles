@@ -1,6 +1,9 @@
 require 'rubygems'                       # Load rubygems (only needed in 1.8)
 require 'irb/completion'                 # Enable completion with TAB key
 require 'base64'                         # Because i use it often :p
+require 'json'                           # Because i use it often :p
+require 'yaml'                           # Because i use it often :p
+require 'openssl'                        # Because i use it often :p
 
 # Enable colorization
 begin
