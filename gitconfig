@@ -132,6 +132,7 @@
     co = checkout
     br = branch
     ds = diff --staged
+    patch = --no-pager diff --no-color
     ready = diff --staged
     wdiff = diff --word-diff
     rdiff = "!bash -c 'regex=$1;shift; git diff -U0 -G $regex $* | sed -n \"/^\\([^-+]\\|[-+].*$regex.*\\)/p\" | awk \"/^@@/{p=\\$0} !/^@@/{if(p!=\\\"\\\"){print p;p=\\\"\\\"};print \\$0}\" | diff-so-fancy' -" # `git diff` that filters by regex (usage: git rdiff <regex> [files [...]])
