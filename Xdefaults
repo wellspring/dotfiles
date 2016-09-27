@@ -6,7 +6,7 @@ URxvt.saveLines: 2000
 URxvt.urgentOnBell: true
 URxvt.transparent: true
 URxvt.blurRadius: 0x0
-URxvt.shading: 90
+URxvt.shading: 0
 URxvt.depth: 24
 URxvt.cursorBlink: false
 URxvt.borderLess: false
