@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=xHamster Slideshow
+GenericName=Pr0n Slideshow
+Comment=Slideshow of random pr0n pictures from xhamster.
+Type=Application
+Categories=Network;
+Keywords=internet;porn;pr0n;pron;fucd
+StartupNotify=true
+Terminal=false
+Version=1.0
+Icon=utilities-terminal
+Exec=/usr/share/dotfiles/bin/pr0n
