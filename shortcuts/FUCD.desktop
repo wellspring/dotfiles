@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=FUCD
+GenericName=Pr0n Browser
+Comment=Browse the Pr0n
+Type=Application
+Categories=Network;WebBrowser;
+Keywords=web;browser;internet;porn;pr0n;pron;fucd
+Actions=new-window;new-private-window;
+StartupNotify=true
+Terminal=false
+Version=1.0
+Icon=firefox
+Exec=firefox --private-window http://www.fucd.com/
