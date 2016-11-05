@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 ###############
-# Pr0n slideshow v1.1 - by wellspring
+# Pr0n slideshow v1.2 - by wellspring
 ######
 #
 # KEYS
@@ -18,6 +18,11 @@
 #   SIGUSR2 : Go to the previous picture.
 #
 ######
+
+#.config
+window_width=480
+window_height=360
+window_margin=20
 
 #.dependencies
 archlinux_install() { has pacman && has pkgfile && sudo pacman -S $(pkgfile $1 | head -1); } # SEE: `install`
@@ -51,8 +56,9 @@ xh_get_latest_slideshow() { xh_slideshow_from_url $(xh_recentlyviewed_galleries 
 xh_get_random_latest_slideshow() { xh_slideshow_from_url $(xh_recentlyviewed_galleries | shuf -n1); }
 xh_get_random_slideshow() { xh_slideshow_from_url $(xh_extract_redir 'https://xhamster.com/random.php?type=gallery'); }
 
-xh_download_and_display_new_slideshow() { echo " [+] Downloading images..."; wget -nv -P demo/slideshow $(xh_get_latest_slideshow) | sed -E 's/\S+ \S+ /   > /'; echo " [+] Starting slideshow..."; feh --title 'pr0n slideshow' -g 480x360+1420+680 -B black --cycle-once -xzYND2 demo/slideshow/; echo " [+] Done."; }
-xh_display_new_slideshow() { feh --title 'pr0n slideshow' -g 480x360+1420+680 -B black --cycle-once -xzYND2 $(xh_get_latest_slideshow); }
+xh_size_and_position() { read screen_width screen_height <<<$(xrandr | awk '/\*\+$/{print $1}' | tr 'x' ' '); echo "${window_width}x${window_height}+$(($screen_width-$window_width-$window_margin))+$(($screen_height-$window_height-2*$window_margin))"; }
+xh_download_and_display_new_slideshow() { echo " [+] Downloading images..."; wget -nv -P demo/slideshow $(xh_get_latest_slideshow) | sed -E 's/\S+ \S+ /   > /'; echo " [+] Starting slideshow..."; feh --title 'pr0n slideshow' -g $(xh_size_and_position) -B black --cycle-once -xzYND2 demo/slideshow/; echo " [+] Done."; }
+xh_display_new_slideshow() { feh --title 'pr0n slideshow' -g $(xh_size_and_position) -B black --cycle-once -xzYND2 $(xh_get_latest_slideshow); }
 xh_start_slideshow() { while true; do xh_display_new_slideshow; done; }
 
 #.start
