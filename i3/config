@@ -1,142 +1,263 @@
 # i3 config file
-# (please see http://i3wm.org/docs/userguide.html for a complete reference)
+# (please see http://i3wt.org/docs/userguide.html for a complete reference)
 
 # [ general ]
 set $mod Mod4
 floating_modifier $mod
-font pango:Liberation Mono for Powerline 8
+font pango:FontAwesome 11
 
 default_orientation horizontal
 popup_during_fullscreen smart
+workspace_auto_back_and_forth no
 focus_follows_mouse no
 new_window 1pixel
 
+smart_borders on
+gaps inner 5
+gaps outer 15
+#smart_gaps on
+#workspace $workspace2 gaps inner 0
+#workspace $workspace2 gaps outer 0
+
+# [ workspaces ]
+# ICONS AT http://fontawesome.io/cheatsheet/ (code; terminal; www; WINDOWS; im; ..., ..., ..., ..., music)
+set $workspace0 "0:"
+set $workspace1 "1:"
+set $workspace2 "2:"
+set $workspace3 "3:"
+set $workspace4 "4:"
+set $workspace5 "5:"
+set $workspace6 "6:"
+set $workspace7 "7:"
+set $workspace8 "8:"
+set $workspace9 "9:"
+
 # [ shortcuts ]
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+n exec ~/.bin/i3-sensible-webbrowser
-bindsym $mod+m exec ~/.bin/start-media-player
-bindsym $mod+r exec dmenu_run
-bindsym $mod+t exec scrot -s -e 'mv $f ~/Images/Screenshots/'
-bindsym F9 exec ~/.bin/play-firefox-video
-bindsym Mod1+F9 exec ~/.bin/play-firefox-video --xbmc
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
-bindsym $mod+s [title="^Notes ::"] scratchpad show
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
-bindsym $mod+Shift+c kill
-bindsym $mod+l exec i3lock -fl
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-bindsym $mod+h split h
-bindsym $mod+v split v
-bindsym $mod+f fullscreen
-bindsym $mod+e layout toggle all
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
-bindsym $mod+p focus parent
-bindsym $mod+o focus child
-bindsym Control+Mod1+Left workspace prev
-bindsym Control+Mod1+Right workspace next
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 0
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 0
-bindsym $mod+Shift+i reload
-bindsym $mod+Shift+r restart
-bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+w mode "resize"
+# LIST: xmodmap -pke
+# GET: xev
+bindsym Control+Mod1+Left     workspace prev
+bindsym Control+Mod1+Right    workspace next
+bindsym $mod+Tab              workspace back_and_forth
+bindsym $mod+1                workspace $workspace1
+bindsym $mod+2                workspace $workspace2
+bindsym $mod+3                workspace $workspace3
+bindsym $mod+4                workspace $workspace4
+bindsym $mod+5                workspace $workspace5
+bindsym $mod+6                workspace $workspace6
+bindsym $mod+7                workspace $workspace7
+bindsym $mod+8                workspace $workspace8
+bindsym $mod+9                workspace $workspace9
+bindsym $mod+0                workspace $workspace0
+bindsym $mod+Shift+1          move container to workspace $workspace1
+bindsym $mod+Shift+2          move container to workspace $workspace2
+bindsym $mod+Shift+3          move container to workspace $workspace3
+bindsym $mod+Shift+4          move container to workspace $workspace4
+bindsym $mod+Shift+5          move container to workspace $workspace5
+bindsym $mod+Shift+6          move container to workspace $workspace6
+bindsym $mod+Shift+7          move container to workspace $workspace7
+bindsym $mod+Shift+8          move container to workspace $workspace8
+bindsym $mod+Shift+9          move container to workspace $workspace9
+bindsym $mod+Shift+0          move container to workspace $workspace0
+bindsym $mod+Shift+Left       move left
+bindsym $mod+Shift+Down       move down
+bindsym $mod+Shift+Up         move up
+bindsym $mod+Shift+Right      move right
+bindsym $mod+Left             focus left
+bindsym $mod+Down             focus down
+bindsym $mod+Up               focus up
+bindsym $mod+Right            focus right
+bindsym $mod+Shift+Tab        focus mode_toggle
+bindsym $mod+Shift+space      floating toggle
+bindsym $mod+y                gaps inner current minus 5
+bindsym $mod+u                gaps inner current plus 5
+bindsym $mod+Shift+y          gaps outer current minus 5
+bindsym $mod+Shift+u          gaps outer current plus 5
+bindsym $mod+backslash        split horizontal
+bindsym $mod+bar              split horizontal
+bindsym $mod+h                split horizontal
+bindsym $mod+apostrophe       split vertical
+bindsym $mod+quotedbl         split vertical
+bindsym $mod+minus            split vertical
+bindsym $mod+v                split vertical
+bindsym $mod+l                layout toggle all
+bindsym $mod+f                fullscreen
+bindsym $mod+r                mode "resize"
+bindsym $mod+m                mode "move" focus floating
+bindsym $mod+Mod2+KP_0        mode "tv-remote"
+bindsym $mod+KP_Insert        mode "tv-remote"
+bindsym $mod+Shift+c          kill
+bindsym $mod+Shift+i          reload
+bindsym $mod+Shift+r          restart
+bindsym $mod+Shift+q          exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# [ functions ]
+bindsym Control+Mod1+Up       exec lock
+bindsym $mod+t                exec terminal
+bindsym $mod+Return           exec terminal
+bindsym $mod+space            exec launcher
+bindsym Mod1+space            exec launcher
+bindsym Control+space         exec launcher
+bindsym $mod+equal            exec calculator
+bindsym $mod+e                exec editor-gui
+bindsym $mod+g                exec editor-gui
+bindsym $mod+Shift+f          exec file-manager
+bindsym $mod+w                exec web-browser
+bindsym $mod+p                exec tvremote.sendclipboard # or google-clipboard ?
+bindsym $mod+n               [title="^Scratchpad :: Notes"] scratchpad show
+bindsym $mod+c               [title="^Scratchpad :: Code"]  scratchpad show
+bindsym $mod+grave                                          scratchpad show
+bindsym $mod+asciitilde                                     move to scratchpad sticky enable
+#TODO: scratchpad for task manager / htop?
+
+bindsym Print        --release exec screenshot --screen
+bindsym Mod1+Sys_Req --release exec screenshot --current-window
+bindsym Shift+Print  --release exec screenshot --select-area
+
+bindsym XF86AudioRaiseVolume  exec volume up
+bindsym XF86AudioLowerVolume  exec volume down
+bindsym XF86AudioMute         exec volume mute
+bindsym XF86AudioPlay         exec music play-pause
+bindsym XF86AudioStop         exec music stop
+bindsym XF86AudioPrev         exec music previous
+bindsym XF86AudioNext         exec music next
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightness up
+bindsym XF86MonBrightnessDown exec --no-startup-id brightness down
+bindsym $mod+button4          exec transparency up
+bindsym $mod+button5          exec transparency down
+
+bindsym $mod+Escape mode "pass-through"
+
+mode "pass-through" {
+  bindsym $mod+Escape         mode "default"
+}
 mode "resize" {
-  bindsym Right resize shrink width   1 px or 1 ppt
-  bindsym Up    resize grow   height  1 px or 1 ppt
-  bindsym Down  resize shrink height  1 px or 1 ppt
-  bindsym Left  resize grow   width   1 px or 1 ppt
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
+  bindsym Right               resize grow   width   1 px or 1 ppt
+  bindsym Up                  resize shrink height  1 px or 1 ppt
+  bindsym Down                resize grow   height  1 px or 1 ppt
+  bindsym Left                resize shrink width   1 px or 1 ppt
+  bindsym Return              mode "default"
+  bindsym Escape              mode "default"
+}
+mode "move" {
+  bindsym $mod+Tab            focus right
+  bindsym Right               move right
+  bindsym Up                  move up
+  bindsym Down                move down
+  bindsym Left                move left
+  bindsym Mod2+KP_7           exec move.window.to topleft
+  bindsym KP_Home             exec move.window.to topleft
+  bindsym Mod2+KP_8           exec move.window.to top
+  bindsym KP_Up               exec move.window.to top
+  bindsym Mod2+KP_9           exec move.window.to topright
+  bindsym KP_Prior            exec move.window.to topright
+  bindsym Mod2+KP_4           exec move.window.to left
+  bindsym KP_Left             exec move.window.to left
+  bindsym Mod2+KP_5           exec move.window.to center
+  bindsym KP_Begin            exec move.window.to center
+  bindsym Mod2+KP_6           exec move.window.to right
+  bindsym KP_Right            exec move.window.to right
+  bindsym Mod2+KP_1           exec move.window.to bottomleft
+  bindsym KP_End              exec move.window.to bottomleft
+  bindsym Mod2+KP_2           exec move.window.to bottom
+  bindsym KP_Down             exec move.window.to bottom
+  bindsym Mod2+KP_3           exec move.window.to bottomright
+  bindsym KP_Next             exec move.window.to bottomright
+  bindsym Return              mode "default"
+  bindsym Escape              mode "default"
+}
+mode "tv-remote" {
+  bindsym Right               exec tvremote.sendkey Right
+  bindsym Up                  exec tvremote.sendkey Up
+  bindsym Down                exec tvremote.sendkey Down
+  bindsym Left                exec tvremote.sendkey Left
+  bindsym Backspace           exec tvremote.sendkey Back
+  bindsym space               exec tvremote.sendkey Select
+  bindsym Return              exec tvremote.sendkey Select
+  bindsym i                   exec tvremote.sendkey Info
+  bindsym c                   exec tvremote.sendkey ContextMenu
+  bindsym button2             exec tvremote.sendkey ContextMenu
+  bindsym $mod+Return         exec tvremote.sendtext
+  bindsym p                   exec tvremote.sendclipboard
+  bindsym Control+v           exec tvremote.sendclipboard
+  bindsym bracketleft         exec tvremote.speed up
+  bindsym bracketright        exec tvremote.speed down
+  bindsym XF86AudioRaiseVolume exec tvremote.volume up
+  bindsym XF86AudioLowerVolume exec tvremote.volume down
+  bindsym XF86AudioMute       exec tvremote.volume mute
+  bindsym XF86AudioPlay       exec tvremote play-pause
+  bindsym XF86AudioStop       exec tvremote stop
+  bindsym XF86AudioPrev       exec tvremote previous
+  bindsym XF86AudioNext       exec tvremote next
+  bindsym $mod+KP_Insert      mode "default"
+  bindsym $mod+Mod2+KP_0      mode "default"
+  bindsym Escape              mode "default"
+  bindsym g                   mode "tv-remote-goto"
+}
+mode "tv-remote-goto" {
+  bindsym h                   exec tvremote.goto Home, mode "tv-remote"
+  bindsym m                   exec tvremote.goto Movie, mode "tv-remote"
+  bindsym v                   exec tvremote.goto Videos, mode "tv-remote"
+  bindsym t                   exec tvremote.goto TVShow, mode "tv-remote"
+  bindsym p                   exec tvremote.goto Picture, mode "tv-remote"
+  bindsym i                   exec tvremote.goto Picture, mode "tv-remote"
+  bindsym f                   exec tvremote.goto Favorites, mode "tv-remote"
+  bindsym Shift+s             exec tvremote.goto Settings, mode "tv-remote"
+  bindsym $mod+KP_Insert      mode "default"
+  bindsym $mod+Mod2+KP_0      mode "default"
+  bindsym Escape              mode "tv-remote"
+  bindsym g                   mode "tv-remote"
 }
 
-# [ bar ]
-bar {
-	mode dock
-	position top
-	hidden_state show
-	tray_output primary
-  separator_symbol " // "
-  status_command ~/.i3/i3status.extra.sh
-  colors {
-    statusline         #666666
-    background         #000000
-    separator          #333333
-    focused_workspace  #333333 #333333 #bbbbbb
-    inactive_workspace #000000 #000000 #444444
-    urgent_workspace   #000000 #000000 #ef3460
-    # colorclass       border  bg      text
-  }
-}
+# [ App specific ] -- using `xprop | grep ^WM_ | grep STRING`
+for_window [class="^.*$"]                   border pixel 2
+for_window [class="albert"]                 border none
+for_window [class="trayer"]                 floating enable border none
+for_window [class="gnuplot"]                floating enable border none
+for_window [class="Guake"]                  floating enable
+for_window [class="Nasc"]                   floating enable
+for_window [class="Qalculate-gtk"]          floating enable sticky enable
+for_window [class="smplayer"]               floating enable sticky enable
+for_window [class="Vlc"]                    floating enable sticky enable
+for_window [class="Kodi"]                   floating enable sticky enable
+for_window [title="^pr0n slideshow$"]       floating enable sticky enable
+for_window [title="^pentadactyl.* - GVIM$"] floating enable
+for_window [title="^Screen Layout Editor$"] floating enable
+for_window [title="^demo::tty"]             floating enable
+for_window [title="^Scratchpad :: "]        move to scratchpad sticky enable
+assign [class="Chromium"]                   $workspace2
+assign [class="Firefox"]                    $workspace2
+assign [class="luakit"]                     $workspace2
+assign [class="uget-gtk"]                   $workspace6
+assign [title="DeaDBeeF$"]                  $workspace9
+assign [title="^cmus v"]                    $workspace9
+assign [class="Spotify"]                    $workspace9
+assign [title="^Music Player$"]             $workspace9
+assign [class="Skype"]                      $workspace4
 
 # [ style ]
 # class                 TabBord WinBord text    indicator
 client.urgent           #ff0000 #ef3460 #ef3460 #ffffff
-client.focused          #333333 #555555 #bbbbbb #ffffff
+client.focused          #333333 #ffffff #bbbbbb #ffffff
 client.focused_inactive #333333 #202020 #bbbbbb #ffffff
 client.unfocused        #000000 #000000 #444444 #ffffff
 client.placeholder      #000000 #000000 #000000 #ffffff
 client.background       #000000
 
-# [ App specific ]
-for_window [class="^.*$"] border pixel 1
-for_window [class="Guake"] floating enable
-for_window [class="Gedit"] fullscreen enable
-for_window [title=" - VLC media player$"] floating enable
-for_window [title="^pr0n slideshow$"] floating enable sticky enable
-for_window [title="^pentadactyl.* - GVIM$"] floating enable
-for_window [title="^Screen Layout Editor$"] floating enable
-for_window [title="^demo::tty"] floating enable
-for_window [title="^Notes ::"] move to scratchpad
-assign [class="Chromium"]       2
-assign [class="Firefox"]        2
-assign [class="luakit"]         2
-assign [title="DeaDBeeF$"]      9
-assign [title="^cmus v"]        9
-assign [class="Spotify"]        9
-assign [title="^Music Player$"] 9
-assign [class="Skype"]          4
+# [ bars ]
+bar {
+  i3bar_command "bar"
+}
 
 # [ Autostart ]
-exec feh --bg-tile ~/.wallpaper.png # set wallpaper
+#exec feh --bg-fill ~/.wallpaper.jpg                                # set wallpaper
+exec setxkbmap -option keypad:pointerkeys                          # enable keypad mouse
 exec setxkbmap -option grp:switch,grp:alt_shift_toggle us,se,ru,fr # set keyboard languages
-exec setxkbmap -option keypad:pointerkeys # enable keypad mouse
-exec xset r rate 200 40        # set keyboard speed
-#exec xset s off -dpms          # disable screen black
-exec urxvtd -q -f -o           # terminal daemon to keep only one process open
-#exec compton -b --config ~/.compton.conf # composition manager
-exec unclutter                 # hide mouse cursor when innactive
-exec udiskie                   # auto-mount usb disks
-exec ~/.bin/start-scratchpad   # note scratchpas (vim)
-#start-pulseaudio-x11          # (audio daemon)
+exec xset r rate 200 40                                            # set keyboard speed
+#exec xset s off -dpms                                             # disable screen black
+exec urxvtd -q -f -o                                               # terminal daemon to keep only one process open
+exec compton -b --config ~/.compton.conf                           # composition manager
+exec unclutter                                                     # hide mouse cursor when innactive
+exec udiskie                                                       # auto-mount usb disks
+#exec start-scratchpad                                             # note scratchpas (vim)
+#exec albert                                                       # launcher
+#start-pulseaudio-x11                                              # (audio daemon)
 
