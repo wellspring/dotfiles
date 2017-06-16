@@ -1,25 +1,29 @@
 loadplugins '\.(js|penta)$'
 colorscheme lucius
 
-command config -description "Edit .pentadactylrc file" -js editor.editFileExternally("file://~/.pentadactylrc")
-command view-config -description "Open .pentadactylrc file" :tabopen ~/.pentadactylrc
-command cfg config
-command play execute "!vlc --qt-minimal-view '" + buffer.URL + "' &"
-command issues -nargs=1 :tabopen! https://code.google.com/p/dactyl/issues/detail?id=<args>
-command tabrename -nargs=1 -literal=0 -js content.document.title = args[0];
-command hide :tabdo tabrename Wikipedia
-command related execute "tabopen related:" + window.content.location.hostname
-command -nargs=* siteSearch execute "tabopen <args> site:" + window.content.location.hostname
-command -nargs=* -complete=search search execute 'tabopen <args> ' + content.getSelection().toString()
-command jstoggle -js (function() { var p = "javascript.enabled"; prefs.set(p, !prefs.get(p)); dactyl.echo(p+" is now set to "+prefs.get(p)+"\n") })()
-command imgtoggle -js (function() { var p = "permissions.default.image"; prefs.set(p, prefs.get(p)==1 ? 2 : 1); dactyl.echo(p+" is now set to "+prefs.get(p)+"\n") })()
-command smartReload -js if (buffer.URL.spec.indexOf('#') > 0) { dactyl.execute("reload"); } else { dactyl.open(buffer.URL.spec); }
-command flushdns set! network.dnsCacheExpiration=0 | set! network.dnsCacheExpiration&
-command unload -js unloadTabObj.bContextUnloadTab(gBrowser.mCurrentTab)
-command unloadOthers -js unloadTabObj.bContextUnloadOther(gBrowser.mCurrentTab)
-command unpause -description "Reload/unpause unloaded tabs" tabdo echo
-command copyAllURLsToClipboard yank :tabdo :echo buffer.uri.spec
-command openAllURLsInClipboard -js (function() { var urls = dactyl.clipboardRead(); var urlsArray = urls.split(options.get("urlseparator").value); for(var i in urlsArray) { dactyl.open(urlsArray[i], { from: "paste", where: dactyl.NEW_TAB }); } })()
+command! config -description "Edit .pentadactylrc file" -js editor.editFileExternally("file://~/.pentadactylrc")
+command! view-config -description "Open .pentadactylrc file" :tabopen ~/.pentadactylrc
+command! cfg config
+command! print dialog print
+command! p dialog print
+command! play2 execute "!vlc --qt-minimal-view '" + buffer.URL + "' &"
+command! play execute "!smplayer '" + buffer.URL + "' &"
+command! issues -nargs=1 :tabopen! https://code.google.com/p/dactyl/issues/detail?id=<args>
+command! tabrename -nargs=1 -literal=0 -js content.document.title = args[0];
+command! hide :tabdo tabrename Wikipedia
+command! related execute "tabopen related:" + window.content.location.hostname
+command! -nargs=* siteSearch execute "tabopen <args> site:" + window.content.location.hostname
+command! -nargs=* -complete=search search execute 'tabopen <args> ' + content.getSelection().toString()
+command! jstoggle -js (function() { var p = "javascript.enabled"; prefs.set(p, !prefs.get(p)); dactyl.echo(p+" is now set to "+prefs.get(p)+"\n") })()
+command! imgtoggle -js (function() { var p = "permissions.default.image"; prefs.set(p, prefs.get(p)==1 ? 2 : 1); dactyl.echo(p+" is now set to "+prefs.get(p)+"\n") })()
+command! smartReload -js if (buffer.URL.spec.indexOf('#') > 0) { dactyl.execute("reload"); } else { dactyl.open(buffer.URL.spec); }
+command! flushdns set! network.dnsCacheExpiration=0 | set! network.dnsCacheExpiration&
+command! unload -js unloadTabObj.bContextUnloadTab(gBrowser.mCurrentTab)
+command! unloadOthers -js unloadTabObj.bContextUnloadOther(gBrowser.mCurrentTab)
+command! unpause -description "Reload/unpause unloaded tabs" tabdo echo
+command! copyAllURLsToClipboard yank :tabdo :echo buffer.uri.spec
+command! openAllURLsInClipboard -js (function() { var urls = dactyl.clipboardRead(); var urlsArray = urls.split(options.get("urlseparator").value); for(var i in urlsArray) { dactyl.open(urlsArray[i], { from: "paste", where: dactyl.NEW_TAB }); } })()
+command! scihub -js content.document.location = content.document.location.href.replace(/([^\/:])\//, "$1.sci-hub.io/")
 group user
 map -count -modes=n,v <Space> -builtin <count>F
 map -count -modes=i,n,v <C-Left> -builtin <count><C-p>
@@ -43,9 +47,12 @@ map -count -modes=n,v r -builtin <count>R
 map -count -modes=n,v R -builtin <count>r
 map -modes=i,c <C-f> -builtin <Right>
 map -modes=i,c <C-b> -builtin <Left>
-map -modes=i,c <C-a> -builtin <C-t>0<Esc>
-map -modes=i,c <C-e> -builtin <C-t>$<Esc>
-map -modes=i,c <C-d> -builtin <C-t>x<Esc>
+map -modes=c <C-e> -builtin <C-t>$<Esc>
+map -modes=c <C-a> -builtin <C-t>0<Esc>
+map -modes=c <C-S-a> -builtin <C-t>Gvgg
+map -modes=i <C-S-a> -builtin <C-t>0<Esc>
+map -modes=i <C-S-e> -builtin <C-t>$<Esc>
+map -modes=i,t <C-a> -builtin <C-t>Gvgg
 map -modes=i,c <C-h> -builtin <C-t>hx<Esc>
 map -modes=i,c <A-f> -builtin <C-t>e<Esc>
 map -modes=i,c <A-b> -builtin <C-t>b<Esc>
@@ -76,6 +83,7 @@ nmap <Leader>a -builtin -ex :dialog addons
 nmap <Leader>s -builtin -ex :tab viewsource
 nmap <Leader>c -builtin -ex :tabopen about:config
 nmap <Leader>p -builtin -ex :private winopen
+nmap gd -description "Download on sci-hub" -ex scihub
 nmap gp -ex :private winopen
 nmap <Leader>r -ex :related
 nmap s -ex :search
@@ -95,7 +103,7 @@ set showstatuslinks=command
 set showtabline=multitab
 set strictfocus=google.com:laissez-faire,*:moderate,'chrome:*':laissez-faire,*:moderate
 set titlestring='Mozilla Firefox'
-set guioptions=rb
+set guioptions=Cnrs
 set! browser.pocket.enabled=false
 set! network.http.pipelining=true
 set! network.http.pipelining.ssl=true
