@@ -3,6 +3,7 @@ require 'irb/completion'                 # Enable completion with TAB key
 require 'base64'                         # Because i use it often :p
 require 'json'                           # Because i use it often :p
 require 'yaml'                           # Because i use it often :p
+require 'csv'                            # Because i use it often :p
 require 'openssl'                        # Because i use it often :p
 
 # Enable colorization
@@ -20,6 +21,12 @@ begin
 rescue LoadError
 end
 
+# Enable activesupport niceties even outside Rails (e.g. `3.years.ago`)
+begin
+  require 'active_support/all'
+rescue LoadError
+end
+
 # Other stuff...
 begin
   require 'what_methods'                 # Enable '3.88.what? 4' to show 'ceil' method
@@ -33,6 +40,11 @@ end
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:AUTO_INDENT] = true
 #IRB.conf[:USE_READLINE] = false
+
+# Local history
+require 'irb/ext/save-history'
+IRB.conf[:SAVE_HISTORY] = 10000
+IRB.conf[:HISTORY_FILE] = "./irb_history.txt"
 
 # Load gems automatically
 # if File.exists?('Gemfile') && Object.const_defined?('Bundle')
