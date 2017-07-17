@@ -1,42 +1,78 @@
 # ********************************************************************* #
 #                            * .zshrc file *                            #
 #                              ~~~~~~~~~~~                              #
-#   Author         : wellspring <wellspring.fr A T gmail.com>           #
-#   Description    : BASHrc/ZSHrc mix of configurations (dotfiles...)   #
-#   Last modified  : 31/01/2014                                         #
-#   Version        : 1.7.0                                              #
+#   Author         : William Hubault <contact A T williamhubault.com>   #
+#   Description    : configuration for zsh (shell)                      #
+#   Last modified  : 11/04/2017                                         #
+#   Version        : 2.0.0                                              #
 # ********************************************************************* #
 
 ####
-# Variables
+# ZSH Config
 ########
-export WATCHFMT="%w %T ${HOST%%.*} watch: %n %a %(l:tty%l:unknown tty) %(M:from %M:locally)"
-export LOGCHECK=5
-export WATCH=all
+ZDOTDIR="$HOME"
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'     # (exclude "/")
+SPROMPT="$PS0%K{7}%F{0} %BDid you mean \\\`%F{28}%r%F{0}\\\`?%b %F{7}%k %F{235}[Yes, No, Abort, Edit]%f " #Unknown \\\`%F{1}%R%F{0}\\\`
+REPORTMEMORY=100    # If the command uses more than 100MB, also do as if it was ran with `time`.
+REPORTTIME=3        # If the command takes more than 3 seconds (of non-wait time), do as if executed with time.
+TIMEFMT="$(tput setaf 240)---
+Time spent: %E   (%U in user mode, %S in kernel -- used %P CPU + up to %MMB memory)"
+WATCHFMT="%(a.$(tput setaf 22)>>>.$(tput setaf 160)<<<)  %n $(tput op) has %a %(l.on TTY %l .)(connected from %(M.'%M'.this machine), at %w)."
+WATCH=all
+LOGCHECK=5
+TMPPREFIX=/tmp/shellfile_
+TMPSUFFIX=.tmp
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern root line)
+ZSH_HIGHLIGHT_PATTERNS+=('sudo *' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+#ZSH_HIGHLIGHT_STYLES[default]=none
+#ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=009
+#ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=009,standout
+#ZSH_HIGHLIGHT_STYLES[alias]=fg=white,bold
+#ZSH_HIGHLIGHT_STYLES[builtin]=fg=white,bold
+#ZSH_HIGHLIGHT_STYLES[function]=fg=white,bold
+#ZSH_HIGHLIGHT_STYLES[command]=fg=white,bold
+#ZSH_HIGHLIGHT_STYLES[precommand]=fg=white,underline
+#ZSH_HIGHLIGHT_STYLES[commandseparator]=none
+#ZSH_HIGHLIGHT_STYLES[hashed-command]=fg=009
+#ZSH_HIGHLIGHT_STYLES[path]=fg=214,underline
+#ZSH_HIGHLIGHT_STYLES[globbing]=fg=063
+#ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=white,underline
+#ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=none
+#ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=none
+#ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=none
+#ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=063
+#ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=063
+#ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=009
+#ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=009
+#ZSH_HIGHLIGHT_STYLES[assign]=none
 
+# TODO: [ HAVE THE `autoload` / `setopt` here! as it contains always_export! ]
+
+####
+# Variables  TODO: [MOVE THAT SECTION AT THE END]
+########
 export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512M"
 export PATH=/usr/local/bin:/usr/local/rvm/bin:$PATH
-#export CDPATH="~:/disk:/usr/src:/usr:/var"
+export CDPATH="~:/disk" #"~:/disk:/usr/src:/usr:/var"
 #export FPATH="~/.zsh/functions"
 
 export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=10000
+export SAVEHIST=10000
 export DIRSTACKSIZE=64
 
-export BROWSER="firefox"
-export TERMINAL="st"
-export SVN_EDITOR="vim"
-export NULLCMD="cat"
-export VISUAL="vim"
-export PAGER="less"
-export EDITOR="vim"
+export EDITOR="/usr/bin/vim"
+export PAGER="/usr/bin/less"
+export BROWSER="/usr/bin/qutebrowser"
+export TERMINAL="/usr/bin/urxvtc"
+export SVN_EDITOR="$EDITOR"
+export VISUAL="$EDITOR"
 
 export VMWARE_USE_SHIPPED_GTK="yes"
 export RAILS_ENV=development
 export LC_COLLATE="C"
 
-export MYNAME="william"
 export COLUMNS
 export ROWS
 
@@ -107,30 +143,7 @@ setopt APPEND_HISTORY
 #setopt SHARE_HISTORY
 setopt BANG_HIST
 # Authorize prompt variable substitution (used by vcs)
-setopt prompt_subst
-
-####
-# Prompt (see .zshext for the rest)
-########
-
-if [ $TERM != "screen" ]; then
-    export RPS1='%b ${vcs_info_msg_1_}'
-else
-    export RPS1="%b"
-fi
-
-
-####
-# Version Control Systems infos
-########
-#zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-#zstyle ':vcs_info:*' formats       '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
-zstyle ':vcs_info:*' nvcsformats '%1~' '<%T'
-zstyle ':vcs_info:*' unstagedstr '%F{yellow}*'
-zstyle ':vcs_info:*' stagedstr '%F{green}*'
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' enable git cvs svn bzr hg
+setopt PROMPT_SUBST
 
 
 ####
@@ -201,8 +214,8 @@ bindkey '^R'      history-incremental-search-backward # Ctrl+R
 bindkey '^[[5~'   history-search-backward             # PgUp
 bindkey '^[[6~'   history-search-forward              # PgDn
 
-bindkey '^H'      backward-delete-char                # Backspace
-bindkey '^?'      backward-delete-word                # Alt+Backspace
+bindkey '^?'      backward-delete-char                # Backspace
+bindkey '^H'      backward-delete-word                # Alt+Backspace
 bindkey '^[[1;5D' backward-word                       # Ctrl+Left
 bindkey '^[[1;5C' forward-word                        # Ctrl+Right
 bindkey '^[[3;5~' delete-word                         # Ctrl+Del
@@ -220,13 +233,13 @@ bindkey '^J'      start-root                          # Ctrl+J
 bindkey '^F'      repeat-second-last                  # Ctrl+F
 bindkey '^K'      kill-line                           # Ctrl+K
 
-bindkey '�'       vi-match-bracket                    # Shift+!
-bindkey '�'       vi-join                             # Alt+!
-bindkey '�'       what-cursor-position                # Alt+?
-bindkey '�'       what-cursor-position                # Alt+Shift+?
-bindkey '�'       vi-find-next-char                   # Alt+:
-bindkey '�'       insert-last-word                    # Alt+.
-bindkey '�'       insert-last-word                    # Alt+Shift+.
+bindkey '§'       vi-match-bracket                    # Shift+!
+bindkey '¡'       vi-join                             # Alt+!
+bindkey '¬'       what-cursor-position                # Alt+?
+bindkey '¿'       what-cursor-position                # Alt+Shift+?
+bindkey 'º'       vi-find-next-char                   # Alt+:
+bindkey '»'       insert-last-word                    # Alt+.
+bindkey '®'       insert-last-word                    # Alt+Shift+.
 
 bindkey ' '       magic-space                         # Space
 
@@ -238,14 +251,7 @@ bindkey -s '^|s'  ' | sed -e "s///g"ODODODOD' # C-| s
 ####
 # Global aliases
 ########
-alias -g :l="| $PAGER"
-alias -g :g='| grep'
-alias -g :h='| head'
-alias -g :t='| tail'
-alias -g :s='| sed'
-alias -g :a='| awk'
-alias -g :w='| wc'
-
+alias -g ~~=\`current-git-dir\`
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
@@ -260,7 +266,7 @@ alias -g ...........='../../../../../../../../../..'
 # Suffix aliases
 ########
 # Auto edit files
-alias -s {c,cpp,h,com,bat,css,xml,txt,lst,list,rc,conf,.htaccess,.htpasswd}=$EDITOR
+alias -s {c,cc,cpp,h,com,bat,css,xml,txt,lst,list,rc,conf,.htaccess,.htpasswd}=$EDITOR
 # Auto open links
 alias -s {com,org,net,fr,htm,html}=$BROWSER
 # Auto open documents
@@ -283,8 +289,8 @@ alias -s iso='k3b'
 ####
 # Aliases
 ########
-alias zshrc=$EDITOR' ~/.zshrc ; source ~/.zshrc'
-alias reload='source ~/.zshrc'
+alias reload='source ~/.zshrc; rehash'
+alias zshrc=$EDITOR' ~/.zshrc ; reload'
 alias zs='zshrc'
 alias i3c=$EDITOR' ~/.i3/config ; i3-msg restart'
 alias vimrc=$EDITOR' ~/.vimrc'
@@ -299,6 +305,8 @@ alias oo='ooffice'
 alias p='mplayer -msgcolor -msglevel all=0:statusline=9 -monitoraspect 4:3'
 alias fastplay='mplayer -af scaletempo -speed'
 alias m='cmus'
+
+alias -- -='cd -'
 
 # Is there any grc app installed (to colorize output)?
 if [ `hash grc 2>/dev/null` ]; then
@@ -325,8 +333,9 @@ alias mi='make install'
 alias cm="cmake -H. -Bbuild && (cd build && make -j5)"
 alias menuconfig='nomake menuconfig'
 
-alias ls='ls -vFG --color=auto'
+alias ls='ls -vFG --color=auto' sl='ls'
 alias ll='ls -l' mm='ll'
+alias l1='ls -1'
 alias l='ls -dF'
 alias la='ls -la'
 alias lh='ls -lh'
@@ -344,9 +353,12 @@ alias lssmall="ls -Srl *(.oL[1,10])"
 alias cd..='cd ..'
 alias '..'='cd ..'
 
-alias mv='nocorrect mv'
-alias cp='nocorrect cp'
+[ -f "/usr/bin/acp" ] && alias cp='nocorrect acp -g ' || alias cp='nocorrect cp'
+[ -f "/usr/bin/amv" ] && alias mv='nocorrect amv -g ' || alias mv='nocorrect mv'
+nocorrect rmcd() { cd .. && rmdir -v "$OLDPWD"; }
+nocorrect mcd(){ mkdir -vp "$1" && cd "$1"; }
 alias mkdir='nocorrect mkdir -p'
+alias mkcd='mcd'
 alias md='mkdir'
 alias rd='rmdir'
 
@@ -385,9 +397,11 @@ alias W0='watch -n 0'
 alias W1='watch -n 1'
 
 alias bigfiles='BLOCKSIZE=1048576 du -x | sort -nr | head -10'
-alias duf='du -sh * | sort -h'
+alias duf='du -sh * .* | sort -h'
 alias duh='du -sh'
-alias dfh='df -lPH'
+alias sizeof='duh'
+alias dfh='df -lPH | grep -v "^tmpfs" | sort -hk3'
+alias dff='df -lPH | awk "NR==1 || /^tmpfs/" | sort -hk3'
 
 alias xlog="grep --binary-files=without-match --color -nsie '(EE)' -e '(WW)' /var/log/Xorg.0.log"
 alias lastkernel='lynx -dump http://kernel.org/kdist/finger_banner' lk='lastkernel'
@@ -416,6 +430,7 @@ alias netip="curl icanhazip.com"
 alias lanip='ip addr show dev $(ip route | awk "/^default/ {print \$5}") | awk -F"[ /]*" "/scope global/ { print \$3 }"'
 alias lanprefix='ip addr show dev $(ip route | awk "/^default/ {print \$5}") | awk -F"[ /]*" "/scope global/ { print \$4 }"'
 
+alias please='sudo $(fc -ln -1)'
 #alias a="sudo aptitude"
 #alias ai="sudo aptitude install"
 #alias as="aptitude search"
@@ -423,34 +438,26 @@ alias lanprefix='ip addr show dev $(ip route | awk "/^default/ {print \$5}") | a
 #systemctl enable ...
 #systemctl start ...
 
+alias cx="chmod +x"
 
 
 ####
 # Small functions
 ########
-cx () { chmod +x $* }
+load() { for conf; do [ -e "$conf" ] && source "$conf"; done }
 calc() { echo "$*" | bc }
 sdate() { date +%d-%m-%Y }
 .grep() { grep "$*" -R . }
-getline() { sed $1'!d' $2 }
+
 arg() { awk "{print \$$1}" }
-shrar() { unrar l $1 | $PAGER }
-shzip() { unzip -l $1 | $PAGER }
-shtgz() { tar -tvzf $1 | $PAGER }
-spell() { echo "$@" | aspell -a }
-shtbz2() { tar -tvjf $1 | $PAGER }
 mdc() { mkdir -p "$1" && cd "$1" }
 plap() { ls -l ${^path}/*$1*(*N) }
 suidfind() { ls -latg $path/*(sN) }
-lower() { tr '[:upper:]' '[:lower:]' }
-ar () { sudo aptitude remove $* && rehash }
-ai () { sudo aptitude install $* && rehash }
 psg() { ps auxww | grep $1 | grep -vv grep }
 isocdrom() { dd if=/dev/cdrom of=$1 bs=2048 }
 isoburner() { dd if=/dev/burner of=$1 bs=2048 }
 hgrep() { grep $1 ~/.zsh_history | sed s"/[^;]*;//" }
 remindme() { sleep $1 && zenity --info --text "$2" & }
-rot13() { tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]" }
 wikien() { ${=BROWSER} http://en.wikipedia.org/wiki/"${(C)*}" }
 wikifr() { ${=BROWSER} http://fr.wikipedia.org/wiki/"${(C)*}" }
 disassemble() { gcc -pipe -S -o - -O -g $* | as -aldh -o /dev/null }
@@ -460,7 +467,7 @@ backup() { tar jcvf "$HOME/Backups/`basename $1`-`date +%Y%m%d%H%M`.tar.bz2" $1 
 getlinks() { perl -ne 'while ( m/"((www|ftp|http):\/\/.*?)"/gc ) { print $1, "\n"; }' $* }
 timezone() { ruby -e "require 'tzinfo'; puts Time.parse('$*').strftime('=> %Hh%M - %d/%m/%Y (%Z)');" }
 
-clear-screen-motd() { test -e /etc/motd.conf && cat /etc/motd.conf ; zle push-input && zle send-break }
+clear-screen-motd() { clear; motd; zle push-input; zle send-break }
 exec-ncmpc() { BUFFER="ncmpc" ; zle accept-line }
 exec-alsamixer() { BUFFER="alsamixer" ; zle accept-line }
 comment-line() { BUFFER="#"$BUFFER ; zle accept-line }
@@ -482,65 +489,6 @@ zle -N start-root
 ####
 # Big functions
 ########
-# Display ANSI colors (by grml-team)
-ansi-colors () {
-    typeset esc="\033[" line1 line2
-    echo " _ _ _40 _ _ _41_ _ _ _42 _ _ 43_ _ _ 44_ _ _45 _ _ _ 46_ _ _ 47_ _ _ 49_ _"
-    for fore in 30 31 32 33 34 35 36 37; do
-        line1="$fore "
-        line2="   "
-        for back in 40 41 42 43 44 45 46 47 49; do
-            line1="${line1}${esc}${back};${fore}m Normal ${esc}0m"
-            line2="${line2}${esc}${back};${fore};1m Bold   ${esc}0m"
-        done
-        echo -e "$line1\n$line2"
-    done
-}
-ansi256 () {
-    ( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done; )
-    echo Compact version:
-    for i in $(seq 0 $(tput colors) ) ; do tput setaf $i ; echo -n "�" ; done ; tput setaf 15 ; echo
-    #for i in $(seq 0 $(tput colors) ) ; do tput setaf $i ; echo -n "�$i�  " ; done ; tput setaf 15 ; echo)
-}
-
-# Compress
-roll () {
-    FILE=$1
-    case $FILE in
-        *.tar.bz2) shift && tar cjf $FILE $* ;;
-        *.tar.gz) shift && tar czf $FILE $* ;;
-        *.tar.xz) shift && tar cJf $FILE $* ;;
-        *.tgz) shift && tar czf $FILE $* ;;
-        *.zip) shift && zip $FILE $* ;;
-        *.rar) shift && rar $FILE $* ;;
-    esac
-}
-
-# Uncompress any kind of known archive. (by an unknown guy)
-extract () {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.xz)    tar xJvf $1     ;;
-            *.tar.bz2)   tar xjvf $1     ;;
-            *.tar.gz)    tar xzvf $1     ;;
-            *.tgz)       tar xzvf $1     ;;
-            *.tbz2)      tar xjvf $1     ;;
-            *.tar)       tar xvf $1      ;;
-            *.gz)        gunzip $1       ;;
-            *.bz2)       bunzip2 $1      ;;
-            *.lzma)      extractlzma $1  ;;
-            *.rar)       unrar x $1      ;;
-            *.ace)       unace x $1      ;;
-            *.zip)       unzip $1        ;;
-            *.deb)       ar -x $1        ;;
-            *.Z)         uncompress $1   ;;
-            *.7z)        7z x $1         ;;
-            *)           echo "Error: '$1' cannot be extracted via extract()." ;;
-        esac
-    else
-        echo "Error: '$1' is not a valid file."
-    fi
-}
 
 # Extract the file and delete it. (by wellspring)
 extractlast () {
@@ -641,16 +589,6 @@ urlencode () {
     print ${(j::)input/(#b)([^A-Za-z0-9_.!~*\'\(\)-])/%${(l:2::0:)$(([##16]#match))}}
 }
 
-# Create small urls via tinyurl.com (by wellspring)
-tinyurl () {
-    [[ -z $1 ]] && print "Usage: tinyurl <url>" && return 1
-
-    local url="http://tinyurl.com/create.php?url=$(urlencode $1)"
-
-    print -n "Tiny URL : "
-    wget -O - -o /dev/null "$url" | grep '^copy' | sed "s/.*'\([^']\+\)'.*/\1/"
-}
-
 # Slowly print out parameters (by grml-team)
 slow_print() {
     for argument in "${@}" ; do
@@ -663,201 +601,76 @@ slow_print() {
     print ""
 }
 
-# Print :( if the last command failed or :) otherwise. (by an unknown guy)
-smiley () {
-    if [ $? == 0 ]; then
-        echo ':)'
-    else
-        echo ":( $?"
-    fi
-}
-
-# Format titles for screen and rxvt. (by an unknown guy)
-function settitle () {
-  # Escape '%' chars in $1, make nonprintables visible
-  a=${(V)1//\%/\%\%}
-
-  # Truncate command, and join lines.
-  a=$(print -Pn "%40>...>$a" | tr -d "\r\n")
-
-  case $TERM in
-    screen)
-      print -Pn "\ek$a:$3\e\\"      # screen title (in ^H")
-      ;;
-    xterm*|rxvt*)
-      #print -Pn "\e]2;$2 | $a:$3\a" # plain xterm title
-      print -Pn "\e]2; $1 \a" # plain xterm title
-      ;;
-  esac
-}
-
-# The function precmd is called just before the prompt is printed. (by an unknown guy)
-function precmd () {
-  #settitle "zsh" "$USER@%m" "%55<...<%~"
-
-  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-    vcs_warning=""
-  } else {
-    vcs_warning="%F{red}*"
-  }
-
-  zstyle ':vcs_info:*' formats "./%S" "%f>>> %F{green}%s%f(%f%F{green}%b%c%u$vcs_warning%f):%F{green}%r%f"
-  vcs_info
-}
-
-# The function preexec is called just before any command line is executed. (by an unknown guy)
-function preexec () {
-  #settitle "$1" "$USER@%m" "%35<...<%~"
-}
-
 # Replacement for command cp with a progress bar. (by wellspring)
 function ccp () {
     ! [[ $# -ge 2 ]] && echo "Usage : $0 <src> <dest>" && return 1
     rsync --progress -av $*
 }
 
-# [Gentoo only]
-if [ $UID == 0 ]; then
+#-- NEW--
+ssh() { if [ $# -eq 0 ]; then ssh-select; else command ssh "$@"; fi }
 
-    # Add some alias for portage
-    alias sysupdate='layman -S && eix-sync && emerge -uavDN world'
-    alias perlupdater='emerge -av1 `qfile /usr/lib/perl* -Cq | sort -u`'
-    alias x86emerge='ACCEPT_KEYWORDS="~x86" emerge -av'
-    alias aemerge='emerge -av'
-    alias pemerge='emerge -pf'
-    alias femerge='emerge -fv'
-    alias unmerge='emerge -C'
-    alias umerge='emerge -C'
-    alias temerge='time emerge -v'
-    alias vmake='vi /etc/make.conf'
-    alias vuse='vi /etc/portage/package.use'
-    alias vkeyw='vi /etc/portage/package.keywords'
 
-    # Say if the package is unmasked or not. (by wellspring)
-    ismasked () {
-        [[ -z "$1" ]] && echo "Usage : $0 <package>" && return 1
+#---------------------------------------------------------------------------------------------------
+# Security:
+# ========
+trap clear 0  # Clear screen on logout
+umask 077     # Set the default permissions
 
-        local package=$(eix --only-names -e "$1")
-        [[ -z $package ]] && echo "Error: Unknown package $1" && return 1
 
-        if [[ -n $(grep "$package" /etc/portage/package.keywords) ]]; then
-            echo "The package $package has been masked."
-        else
-            echo "This package isn't masked."
-        fi
-    }
+#---------------------------------------------------------------------------------------------------
+# Prompt:
+# ======
 
-    # Unmask a package. (by wellspring)
-    unmask () {
-        [[ -z "$1" ]] && echo "Usage : $0 <package> [package [...]]" && return 1
+# -- Set the prefix for the terminal's window.
+TITLE_PREFIX="  "
 
-        for package in $*
-        do
-            local fullname=$(eix --only-names -e "$package")
-
-            [[ -z $fullname ]] && echo "Warning: Unknown package $package" && continue
-            package=$fullname
-
-            if [[ -n $(grep "$package" /etc/portage/package.keywords) ]]; then
-                echo "The package $package is already unmasked."
-            else
-                echo "$package ~x86" >> /etc/portage/package.keywords &&
-                echo "The package $package has been unmasked."
-            fi
-        done
-    }
-
-    # Add useflags to a package. (by wellspring)
-    use () {
-        [[ -z "$1" ]] && echo "Usage : $0 <package> <useflag> [useflag [...]]" && return 1
-
-        local package=$(eix --only-names -e "$1")
-        [[ -z $package ]] && echo "Error: Unknown package $1" && return 1
-
-        shift
-        flags=$*
-
-        if [[ -n $(grep "$package" /etc/portage/package.keywords) ]]; then
-            sed -i "s/^\(${package//\//\\\/}\) .*/\1 $flags/" package.use
-        else
-            echo "$package $flags" >> /etc/portage/package.use
-        fi
-
-    }
-
-    # Install kernel correctly. (by wellspring)
-    install-kernel () {
-        if ![ -f .config ]; then
-            echo "Error: Please run menuconfig command first"
-            exit
-        fi
-
-        if [ $PWD == "/usr/src/linux" ]; then
-            KERNEL_VERSION=$(readlink /usr/src/linux | sed "s/^linux-//;s/\/$//")
-        else
-            if [ -n "$(echo $PWD | grep '/usr/src')" ]; then
-                echo "Warning: Current kernel directory is not /usr/src/linux."
-                KERNEL_VERSION=$(basename $PWD)
-            else
-                echo "Error: $PWD is an unknown path to install a kernel."
-                exit
-            fi
-        fi
-
-        mount /boot/
-        cp .config /boot/config-$KERNEL_VERSION
-        cp System.map /boot/system-$KERNEL_VERSION
-        cp arch/x86/boot/bzImage /boot/kernel-$KERNEL_VERSION
-        umount /boot/
-
-        echo "The new kernel $KERNEL_VERSION is ready. Please reboot."
-    }
-    alias ikernel='install-kernel' ik='install-kernel'
-
-    # Start the service.
-    sstart()   { /etc/init.d/$1 start     }
-    # Stop the service.
-    sstop()    { /etc/init.d/$1 stop      }
-    # Restart the service.
-    srestart() { /etc/init.d/$1 restart   }
-    # Add service at boot.
-    rcadd()    { rc-update add $1 default }
-    # Del service at boot.
-    rcdel()    { rc-update del $1 default }
-    # Show the changelog of the package.
-    changelog(){ $PAGER "/usr/portage/$(eix --only-names -e $1)/ChangeLog" }
+# -- Set the powerline prompt
+if [ -n "$SSH_CLIENT" ]; then
+  c=${DOCKER_MACHINE_NAME:+30}${DOCKER_MACHINE_NAME:-240}
+  HOST_PS1="%K{160}%F{7} SSH @ %m %F{160}%K{$c}%F{7}"
+  TITLE_PREFIX="${TITLE_PREFIX}SSH @ $HOST » "
 fi
-
-# Clear screen on logout
-trap clear 0
-
-# Load a 256 colorsheme (if the file exists)
-#[[ `hash dircolors` ]] && alias dircolors='gdircolors'
-test -e ~/.dir_colors && eval `dircolors ~/.dir_colors`
-
-# Print the MOTD (not after "su" / "tmux" or in a TTY)
-if [[ -e /etc/motd.conf && -z $(egrep "^(su|tmux|/bin/login)" /proc/$PPID/cmdline) ]]; then
-    clear
-    cat /etc/motd.conf
+if [ -n "$DOCKER_MACHINE_NAME" ]; then
+  HOST_PS1="${HOST_PS1}%K{30}%F{7} DOCKER @ $DOCKER_MACHINE_NAME %F{30}%K{240}%F{7}"
+  TITLE_PREFIX="${TITLE_PREFIX}DOCKER @ $DOCKER_MACHINE_NAME » "
 fi
-echo ""
+DIR_PS1='%K{240} ${vcs_info_msg_0_/\/.\///}'
 
-# Setup zsh-autosuggestions
-#source ~/.zsh-autosuggestions/autosuggestions.zsh
-#zle-line-init() { zle autosuggest-start }
-#zle -N zle-line-init
-#bindkey '^T' autosuggest-toggle
+NL=$'\n'
+PS0="%f%k${HOST_PS1}${DIR_PS1}"                     # (base prompt)
+PS1="$NL$PS0%k%f "                                 # Normal prompt (left): ssh/docker, dir/vcs
+RPS1="%F{234}❰ %T ❱%f%(1j. [%j].)%(!. %B%F{160}%f%K{160}|%n|.%b)%f%k" # Normal prompt (right): time, bg jobs, isroot
+PS2="$PS0%K{7}%F{0} %_ %F{7}%k%f "                # Special prompt (for/quote/if/...): re-use the base prompt.
+PS3=" "                                            # Special prompt (select): as simple as possible.
 
-# Use Ruby Version Manager
-if [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
-    #source /usr/local/rvm/scripts/rvm
-    #rvm use 2.1.0 --default >/dev/null
-fi
+echo -en "\e[5 q"                                   # set term cursor: 1/2: "#", 3/4: "_", 5/6: "|" (blink/not)
 
-# Load additional file
-if [ -e ~/.zshext ]; then
-    source ~/.zshext
-fi
+# -- Version Control System support
+zstyle ':vcs_info:*' enable             git svn cvs hg
+zstyle ':vcs_info:*' check-for-changes  true
+zstyle ':vcs_info:*' use-prompt-escapes true
+zstyle ':vcs_info:*' nvcsformats        '%~ %F{240}%K{234}'
+zstyle ':vcs_info:*' formats            '(%s:%F{6}%r%F{7})/%S/ %F{240}%K{234}%F{7}%K{234} %u%c%b %F{234}'
+zstyle ':vcs_info:*' actionformats      '(%s:%F{6}%r%F{7})/%S/ %F{240}%K{234}%F{7}%K{234} %u%c%b [%a] %F{234} '
+zstyle ':vcs_info:*' unstagedstr        $'%F{1}\uE0A0 ✱'
+zstyle ':vcs_info:*' stagedstr          $'%F{3}\uE0A0 ✚'
 
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# -- Set hooks (for VCS, title, and printing a newline before the command output)
+preexec(){echo; title "Terminal » $1"; _CMDSTARTTIME=$EPOCHSECONDS } # after prompt / before exec cmd
+precmd(){vcs_info; title "ZSH"; (( ${EPOCHSECONDS:-0} - ${_CMDSTARTTIME:-0} > $REPORTTIME )) && notify-window } # before prompt / after exec cmd
 
+#---------------------------------------------------------------------------------------------------
+# .start
+# ======
+load /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+load /usr/share/autojump/autojump.zsh
+load /usr/share/doc/pkgfile/command-not-found.zsh
+load /etc/zsh_command_not_found
+load ~/.fzf.zsh
+load ~/.zshrc.local
+load ~/.zshext
+motd
+
+
+# vim: ft=zsh fileencoding=utf8
