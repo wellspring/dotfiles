@@ -18,6 +18,7 @@
 call plug#begin('~/.vim/plugged')
 
   " --- (color schemes)
+  Plug 'dylanaraps/wal'                                                           " [ColorScheme] WAL: CUSTOM THEME GENERATOR (from wallpaper) +++
   Plug 'vim-scripts/Lucius'                                                       " [ColorScheme] Lucius                                       +++
   Plug 'tomasr/molokai'                                                           " [ColorScheme] Molokai                                      +++
   Plug 'vim-scripts/BusyBee'                                                      " [ColorScheme] BusyBee (dark/blue/supergreen/grey/orange)   +++  // super clear !
@@ -106,7 +107,7 @@ call plug#begin('~/.vim/plugged')
  "Plug 'vim-scripts/recover.vim'                                                  "|When using file recovery, show a diff :)
  "Plug 'tpope/vim-eunuch'                                                         "|sugar for UNIX shell commands that need it the most (Remove, Move, Mkdir, ...)
  "Plug 'tpope/vim-speeddating'                                                    "|increment/decrement dates (with ctrl+a / ctrl+x)
- "Plug 'editorconfig/editorconfig-vim'                                            "|help to maintain config by projects (indentation, charset, ...)
+ Plug 'editorconfig/editorconfig-vim'                                             " help to maintain config by projects (indentation, charset, ...)
  "Plug 'sjl/gundo.vim'                                                            "|visualize your Vim undo tree
  "Plug 'sjbach/lusty'                                                             "|fast file opener + buffer switcher
  "Plug 'tpope/vim-repeat'                                                         "|Enable to use '.' (repeat action) with various plugins too
@@ -116,9 +117,14 @@ call plug#begin('~/.vim/plugged')
  "Plug 'Twinside/vim-codeoverview.git'                                            "|Overview on the side (like sublimetext's minimap, resize automatically!)
  "Plug 'jpalardy/vim-slime'                                                       "|Send text to screen/tmux/REPL easily from vim!
  "Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }                                     "|Shared vim session (like googledoc) with multi cursors
- Plug 'metakirby5/codi.vim', { 'on': 'Codi' }                                     " Interactive REPL thingy, with result on the right, to use as a scratchpad
+  Plug 'metakirby5/codi.vim'                                                      " Interactive REPL thingy, with result on the right, to use as a scratchpad
+  Plug 'mhinz/vim-rfc'                                                            " RFC search/browser plugin (requires internet)
+  Plug 'KabbAmine/zeavim.vim', {'on': [ 'Zeavim', 'Docset', '<Plug>Zeavim', '<Plug>ZVVisSelection', '<Plug>ZVKeyDocset', '<Plug>ZVMotion' ]} " Zeal documentation viewer
+  Plug 'vim-scripts/LargeFile'                                                    " Vim support for big files.
+  Plug 'junegunn/vim-emoji'                                                       " Meh. Emojis/emoticons in vim. Can't believe I just installed that...
 
   " --- (specific languages)
+  Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' }                                 " [RFC] rfc documentation format
   Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}                                 " [C/C++] Statement oriented editing of C / C++ programs (to speed up writing code)
   Plug 'vim-scripts/cSyntaxAfter', {'for': ['c', 'cpp']}                          " [C/C++] Operator highlighting for C-like languages
   Plug 'vim-scripts/gtk-vim-syntax', {'for': ['c', 'cpp']}                        " [C/C++] Syntax highlighting for GLib, Gtk+, Xlib, Gimp, Gnome, and more.
@@ -136,7 +142,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'slim-template/vim-slim', {'for': 'slim'}                                  " [HTML/SLIM] Slim syntax
   Plug 'digitaltoad/vim-jade', {'for': 'jade'}                                    " [HTML/JADE] Jade syntax
   Plug 'tpope/vim-haml', {'for': ['haml', 'scss', 'sass']}                        " [HTML/HAML] HAML/SASS/SCSS syntax
-  Plug 'lilydjwg/colorizer', {'for': ['css','javascript','json']}                 " [CSS] Colorize colors (#XXX, #XXXXXX, rgb/rgba)
+  Plug 'lilydjwg/colorizer'                                                       " [CSS] Colorize colors (#XXX, #XXXXXX, rgb/rgba)
   Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }                                 " [CSS] CSS3 syntax
   Plug 'rstacruz/vim-ultisnips-css', { 'for': ['css', 'scss'] }                   " [CSS] Extra snippets for css (to write much faster, lazy 2 char :D)
   Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }                             " [CSS/SCSS] SASS/SCSS syntax
@@ -182,7 +188,7 @@ call plug#begin('~/.vim/plugged')
  "Plug 'kien/rainbow_parentheses.vim', { 'for': 'clojure' }                       "|[CLOJURE] Colorize parenthesis
  "Plug 'kballard/vim-swift', { 'for': 'swift' }                                   "|[SWIFT] Swift lang (Apple's new language)
  "Plug 'sgeb/vim-matlab', { 'for': 'matlab' }                                     "|[MATHLAB] MathLab lang
- Plug 'mzlogin/vim-smali'                                                         " [SMALI] Used for reverse engineering apk/dex
+  Plug 'mzlogin/vim-smali'                                                        " [SMALI] Used for reverse engineering apk/dex
 
   " --- (other syntaxes)
   Plug 'chrisbra/csv.vim'                                                         " [CSV] CSV syntax
@@ -197,6 +203,9 @@ call plug#begin('~/.vim/plugged')
  "Plug 'vim-scripts/scons.vim'                                                    "|SCons (build tool) syntax
  "Plug 'rodjek/vim-puppet'                                                        "|Puppet syntax
  "Plug 'tfnico/vim-gradle'                                                        "|Gradle syntax (for groovy files)
+  Plug 'vim-scripts/gnuplot.vim'                                                  " GnuPlot (graphs/plotting language)
+  Plug 'lervag/vimtex'                                                            " LaTeX editing
+  Plug 'xuhdev/vim-latex-live-preview'                                            " Real-time LaTeX compilation/preview
 
   " --- (textobj)
  "Plug 'machakann/vim-textobj-functioncall'                                       "|function call helpers: select (vif) or delete (daf)
@@ -258,6 +267,7 @@ call plug#begin('~/.vim/plugged')
    "Plug 'godlygeek/csapprox'                                                     "|Make gvim-only colorschemes work transparently in terminal vim
    "Plug 'vim-scripts/vim-auto-save'                                              "|Automatically save (each seconds)
   endif
+  Plug 'ryanoasis/vim-devicons'                                                   " Adds icons to many popular Vim plugins
 
 call plug#end()
 
@@ -354,7 +364,7 @@ elseif executable('ack-grep')                                                   
   let g:unite_source_grep_default_opts = '--no-heading --no-color -a -H'          " [Unite] Set the grep options
   let g:unite_source_grep_recursive_opt = ''                                      " [Unite] Set the grep options (recursive)
 endif                                                                             " (-)
-let g:airline_theme='powerlineish'                                                " [Airline] Set the theme (other interesting themes... :AirlineTheme *badwolf*/powerlineish/kalisi/laederon/wombat (green), *murmur*/jellybeans/*simple*/zenburn (blue), monochrome/raven/serene/lucius/*ubaryd* (dark), sol (light))
+let g:airline_theme='zenburn'                                                     " [Airline] Set the theme (other interesting themes... :AirlineTheme *badwolf*/powerlineish/kalisi/laederon/wombat (green), *murmur*/jellybeans/*simple*/zenburn (blue), monochrome/raven/serene/lucius/*ubaryd* (dark), sol (light))
 let g:airline#extensions#syntastic#enabled = 1                                    " [Airline] Enable syntax checking plugin
 let g:airline#extensions#tabline#enabled = 1                                      " [Airline] Enable light tab switching for airline (not only buffers!)
 let g:airline#extensions#branch#enabled = 1                                       " [Airline] Enable branch detection
@@ -372,11 +382,12 @@ let g:investigate_command_for_python = '/usr/bin/zeal --query ^s'               
 let g:textobj_clang_more_mappings = 1                                             " [vim-textobj-clang] enable extended objects (class, function, ...)
 let g:tcommentMaps = 0                                                            " [TComment] disable the default keyboard mappings
 let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_ruby_rubocop_exec = '~/.bin/rubocop-fix.sh'
+"let g:syntastic_ruby_rubocop_exec = '~/.bin/rubocop-fix.sh'
+let g:livepreview_previewer = 'zathura'                                           " [vim-latex-live-preview] set the PDF editor to use (then use :LLPStartPreview to start)
 
 " --- (style)
 colors desert                                                                     " Set colorscheme (default one, if no plugin installed)
-colors molokai                                                                    " Set colorscheme
+colors wal                                                                        " Set colorscheme
 highlight Cursor guifg=white guibg=steelblue|                                     " [CURSOR] Normal cursor color (blue)
 highlight vCursor guifg=white guibg=orange|                                       " [CURSOR] Selection cursor color (orange)
 highlight iCursor guifg=white guibg=green|                                        " [CURSOR] Insert cursor color (green)
@@ -418,7 +429,7 @@ if has('gui_running')
   set guicursor+=r-cr:block-rCursor-blinkoff0                                     " [CURSOR] replace: block cursor (without blinking)
   set guicursor+=i-c-ci:ver25-iCursor-blinkoff0                                   " [CURSOR] insert: vertical bar cursor (without blinking)
   if has("gui_gtk2")
-    set guifont=Liberation\ Mono\ for\ Powerline\ 7.5"                            " Linux   -> use font Inconsolata (small)
+    set guifont=Meslo\ LG\ M\ Nerd\ Font\ 8.5"                                      " Linux   -> use font Meslo LG (patched with nerdfont/fontawesome for icons)
   elseif has("gui_macvim")
     set guifont=Anonymice\ Powerline:h12                                          " OS X    -> use font Anonymice
   elseif has("gui_win32")
@@ -435,14 +446,154 @@ endif
 "============
 
 " --- (cmd)
-command! Wroot :w !sudo tee %|                                                    "               Wroot : save the current file as root (using sudo)
-command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>|             "              Bclose : Alias for bbye's Bdelete (when used to the old Bclose plugin)
+command! Wroot :w !sudo tee %|                                                    " Wroot : save the current file as root (using sudo)
+command! -bang -complete=buffer -nargs=? Bclose Bdelete<bang> <args>|             " Bclose : Alias for bbye's Bdelete (when used to the old Bclose plugin)
+command! -nargs=+ Get r!curl <args>
 
 " --- (automatic)
 autocmd BufWritePost vimrc source %                                               " Reload automatically the '.vimrc' config when saved.
 autocmd StdinReadPre * let s:std_in=1                                             " Define a variable to indicate there's text coming from stdin (e.g. via a unix pipe).
 "autocmd VimEnter * if !argc()&&!exists("s:std_in")|NERDTree|else|start|endif      " If no file/arg is specified, open nerdtree to select a file. Otherwise, start VIM in INSERT mode
 
+
+"________________________________________________________________________________________________________________________________________________________________________
+"
+" [Abreviations]
+"===============
+
+" Typo and lazyness
+iabbrev teh         the
+iabbrev i           I
+iabbrev Im          I'm
+iabbrev Ive         I've
+iabbrev Ill         I'll
+iabbrev dont        don't
+iabbrev Dont        Don't
+iabbrev doesnt      doesn't
+iabbrev rnr         Rock'n'Roll
+iabbrev tbh         to be honest
+iabbrev asap        as soon as possible
+iabbrev tc          Terms & Conditions
+
+" Shorter way to use symbols (see also :digraphs and <Ctrl+k> in insert mode)
+iabbrev \u\         μ
+iabbrev \uA\        μA
+iabbrev \us\        μs
+iabbrev \pi\        π
+iabbrev \phi\       φ
+iabbrev \MO\        MΩ
+iabbrev \kO\        kΩ
+iabbrev \o\         Ω
+iabbrev \O\         Ω
+iabbrev \ohm\       Ω
+iabbrev \Ohm\       Ω
+iabbrev \ohms\      Ω
+iabbrev \Ohms\      Ω
+iabbrev \omega\     Ω
+iabbrev \lambda\    λ
+iabbrev \alpha\     α
+iabbrev \beta\      β
+iabbrev \gamma\     γ
+iabbrev \theta\     θ 
+iabbrev \l\         λ
+iabbrev \i\         ∞
+iabbrev \inf\       ∞
+iabbrev \infinity\  ∞
+iabbrev \sum\       Σ
+iabbrev \delta\     ∆
+iabbrev \d\         ∆
+iabbrev \0\         ∅
+iabbrev \null\      ∅
+iabbrev \diameter\  ∅
+iabbrev \deg\       °
+iabbrev \degres\    °
+iabbrev \degrees\   °
+iabbrev \C\         °C
+iabbrev \F\         °F
+iabbrev \K\         °K
+iabbrev \x\         ×
+iabbrev \/\         ÷
+iabbrev \+\         ±
+iabbrev \+-\        ±
+iabbrev \-+\        ±
+iabbrev \~\         ∼
+iabbrev \~~\        ≈
+iabbrev \~=\        ≃
+iabbrev \~==\       ≅
+iabbrev \!=\        ≠
+iabbrev \<=\        ≤
+iabbrev \>=\        ≥
+iabbrev \_\         ¯
+iabbrev \<->\       ↔
+iabbrev \^V\        ↕
+iabbrev \==>\       ⇒
+iabbrev \<==\       ⇐
+iabbrev \->\        →
+iabbrev \<-\        ←
+iabbrev \o.\        ⊙
+iabbrev \ox\        ⊗
+iabbrev \o+\        ⊕
+iabbrev \xor\       ⊕
+iabbrev \or\        ∨
+iabbrev \and\       ∧
+iabbrev \not\       ¬
+iabbrev \U\         ∪
+iabbrev \UN\        ∩
+iabbrev \1\         ¹
+iabbrev \2\         ²
+iabbrev \3\         ³
+iabbrev \4\         ⁴
+iabbrev \5\         ⁵
+iabbrev \6\         ⁶
+iabbrev \7\         ⁷
+iabbrev \8\         ⁸
+iabbrev \9\         ⁹
+iabbrev \0\         ⁰
+iabbrev \1/2\       ½
+iabbrev \1/4\       ¼
+iabbrev \3/4\       ¾
+iabbrev \1/3\       ¾
+iabbrev \2/3\       ⅓
+iabbrev \!\         ⅔
+iabbrev \?\         ¿
+
+iabbrev \oe\        œ
+iabbrev \ae\        æ
+iabbrev \:a\        ä
+iabbrev \:e\        ë
+iabbrev \:i\        ï
+iabbrev \:o\        ö
+iabbrev \:u\        ü
+iabbrev \:y\        ÿ
+iabbrev \<<\        «
+iabbrev \>>\        »
+iabbrev \"\         ‟
+iabbrev \""\        ”
+iabbrev \''\        ‛
+iabbrev \'\         ’
+
+iabbrev \para\      ¶
+iabbrev \star\      ★
+iabbrev \music\     ♫
+iabbrev \ok\        ✓
+iabbrev \OK\        ✓
+iabbrev \check\     ✓
+iabbrev \X\         ✗
+iabbrev \fail\      ✗
+iabbrev \cross\     ✗
+
+iabbrev \copy\      ©
+iabbrev \reg\       ®
+iabbrev \tm\        ™
+
+iabbrev \E\         €
+iabbrev \EUR\       €
+iabbrev \euros\     €
+iabbrev \USD\       $
+iabbrev \dollars\   $
+
+inoreabbrev <expr> copyright    "Copyright © " . strftime("%Y")
+inoreabbrev <expr> #!!          "#!/usr/bin/"  . (&filetype)
 
 "________________________________________________________________________________________________________________________________________________________________________
 "
@@ -484,14 +635,17 @@ nnoremap  <C-v>       <Esc>:set paste<CR>"*p:set nopaste<CR>|                   
 vnoremap  <C-v>       "*p|                                                        "            CTRL + V : paste into the selection
 inoremap  <C-v>       <C-r>*|                                                     "            CTRL + V : paste
 cnoremap  <C-v>       <C-r>*|                                                     "            CTRL + V : paste
+noremap   <C-i>       <Esc>:exec 'Get "'.getreg('+').'"'<CR>|                     "            CTRL + I : download and insert the content of the file pointed by the url in the clipboard.
+noremap   <C-k>       <Esc>:exec "!firefox https://www.aliexpress.com/item//".matchstr(getline('.'), '[0-9]\+$').".html"<CR>
 noremap   <C-n>       <Esc>:ene<CR>|                                              "            CTRL + N : new file (unnamed)
 noremap   <C-s>       <Esc>:w!<CR>|                                               "            CTRL + S : save
 noremap   <C-S-z>     <Esc>:redo<CR>|                                             "    SHIFT + CTRL + Z : cancel last undo (redo)
 noremap   <C-z>       <Esc>:undo<CR>|                                             "            CTRL + Z : undo
-noremap   <C-d>       <Esc>yypi|                                                  "            CTRL + D : duplicate the line
+inoremap  <C-d>       <Esc>yypi|                                                  "            CTRL + D : duplicate the line
 vnoremap  <C-d>       yP|                                                         "            CTRL + D : duplicate the selection
 noremap   <C-j>       J|                                                          "            CTRL + J : join the current line(s) with the next one
 inoremap  <C-j>       <Esc>J|                                                     "            CTRL + J : join the current line with the next one
+noremap   <C-a>       <Esc>gg0vG$|                                                "            CTRL + A : select all
 noremap   <C-b>       <Esc>:make<CR>|                                             "            CTRL + B : build
 noremap   <C-t>       <Esc>:tabnew<CR>|                                           "            CTRL + T : create a new tab/layout
 noremap   <C-S-Left>  <Esc>:tabprev<CR>|                                          " SHIFT + CTRL + LEFT : go to the previous tab/layout
@@ -520,6 +674,10 @@ noremap   <A-Left>    <Esc>:bprevious<CR>|                                      
 noremap   <A-Right>   <Esc>:bnext<CR>|                                            "         ALT + RIGHT : goto next opened buffer/file
 noremap   <A-Down>    <Esc>:tabprevious<CR>|                                      "          ALT + DOWN : goto the previous tab/layout
 noremap   <A-Up>      <Esc>:tabnext<CR>|                                          "            ALT + UP : goto the next tab/layout
+"noremap   <Esc><Esc>[A <Esc>:tabnext<CR>|                                         "            ALT + UP : goto the next tab/layout
+"noremap   <Esc><Esc>[B <Esc>:tabprevious<CR>|                                     "          ALT + DOWN : goto the previous tab/layout
+"noremap   <Esc><Esc>[C <Esc>:bnext<CR>|                                           "         ALT + RIGHT : goto next opened buffer/file
+"noremap   <Esc><Esc>[D <Esc>:bprevious<CR>|                                       "          ALT + LEFT : goto previous opened buffer/file
 
 " --- super keys
 map       <D-x>       <C-x>|map <T-x> <C-x>|                                      "        [SUPER + X]  ->  [CTRL + X]
