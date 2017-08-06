@@ -1,0 +1,443 @@
+# radare2 config (disassembler/debugger)
+# r2 -AA -d -w -p <project> <bin> (or `ood+`)
+
+# -- Aliases
+$copy="pdf #!pipe xsel -b"         # Copy current function to clipboard
+
+# -- Style
+e asm.lineswidth = 20              # Number of columns for program flow arrows
+e asm.lineswide = true             # Put a space between lines
+e asm.lines = true                 # Show JUMPs lines at disassembly
+e asm.lines.call = false           # DO NOT show CALLs lines at disassembly
+e asm.lines.ret = true             # Show separator lines after ret
+e scr.utf8 = true                  # Show UTF-8 characters instead of ANSI (nice arrows, etc.)
+e scr.color = true                 # Enable colors
+e scr.truecolor = true             # Manage color palette (0: ansi 16, 1: 256, 2: 16M)
+e scr.pipecolor = false            # Enable colors when using pipes
+e scr.color.bytes = true           # Colorize bytes that represent the opcodes of the instruction
+e scr.color.ops = true             # Colorize numbers and registers in opcodes
+e scr.pager = less -R              # Select pager program (when output overflows the window)
+e cfg.fortunes = false             # DO NOT show tips/jokes at start
+e anal.nopskip = false             # DO NOT skip nops at the beginning of functions
+e graph.offset = true              # Show offsets in graphs
+e graph.comments = true            # Show disasm comments in graph
+e graph.cmtright = true            # Show comments at right
+e asm.cmtright = true              # Show comments/str/desc at right of disassembly if they fit in screen
+#eco ogray                         # theme (orange/gray/white)
+#eco consonance                    # theme (pink/cyan/grey/white)
+#eco xvilka                        # theme (red CALL, blue JUMP, green TEST/CMP, yellow OR/XOR/AND, white MOV)
+eco white                          # theme (green CALL/JUMP, grey/blue)
+#eco behelit                       # theme (green bg CALL, blue bg JUMP, pink comments/tests, orange OR)
+
+# -- Help
+e asm.describe = true              # Show opcode description
+e asm.pseudo = false               # [DISABLED] Shows pseudocode in disassembly. (e.g. `eax = str.ok`)
+e anal.jmptbl = false              # [DISABLED] Analyze jump tables in switch statements
+e asm.emu = false                  # [DISABLED] Run ESIL emulation analysis on disasm
+
+# -- Trust me.
+e asm.slow = false                 # Perform slow analysis operations in disasm
+e asm.middle = true                # Allow disassembling jumps in the middle of an instruction
+e dbg.forks = true                 # Stop execution if fork() is done (see dbg.threads)
+e dbg.threads = true               # Stop all threads when debugger breaks (see dbg.forks)
+e anal.searchstringrefs = true     # Search string references in data references
+e anal.afterjmp = false            # Continue analysis after jmp/ujmp
+e anal.hasnext = false             # Continue analysis after each function
+e anal.pushret = false             # Analyze push+ret as jmp
+e anal.noncode = false             # Analyze data as code
+e cfg.sandbox = false              # Sandbox mode disables systems and open on upper directories
+
+# -- Server
+e http.allow = 127.0.0.1           # Only accept clients from the comma separated IP list
+e http.bind = localhost            # Server address
+e http.port = 1337                 # Server port
+e http.ui = m                      # Default webui (enyo, m, p, t)
+e http.upload = false              # Enable file uploads to /up/<filename>
+
+# -- Other
+e bin.strings = true               # Load strings from rbin on startup
+e search.flags = false             # All search results are flagged, otherwise only printed
+e search.from = 0                  # Search start address
+e cfg.editor = vim                 # Select default editor program
+
+
+
+# DOCUMENTATION:  (e??)
+# =============
+#             asm.arch: Set the arch to be used by asm
+#        asm.assembler: Set the plugin name to use when assembling
+#           asm.bbline: Show empty line after every basic block
+#             asm.bits: Word size in bits at assembler
+#            asm.bytes: Display the bytes of each instruction
+#        asm.bytespace: Separate hexadecimal bytes with a whitespace
+#            asm.calls: Show callee function related info as comments in disasm
+#       asm.capitalize: Use camelcase at disassembly
+#           asm.cmtcol: Align comments at column 60
+#       asm.cmtflgrefs: Show comment flags associated to branch reference
+#          asm.cmtfold: Fold comments, toggle with Vz
+#         asm.cmtpatch: Show patch comments in disasm
+#          asm.cmtrefs: Show flag and comments from refs in disasm
+#         asm.comments: Show comments in disassembly view
+#           asm.cycles: Show CPU-cycles taken by instruction at disassembly
+#       asm.cyclespace: Indent instructions depending on CPU-cycles
+#           asm.decode: Use code analysis as a disassembler
+#           asm.decoff: Show segmented address in prompt (x86-16)
+#         asm.demangle: Show demangled symbols in disasm
+#            asm.dwarf: Show dwarf comment at disassembly
+#    asm.dwarf.abspath: Show absolute path in asm.dwarf
+#       asm.dwarf.file: Show filename of asm.dwarf in pd
+#          asm.emuskip: Skip metadata of given types in asm.emu (see e asm.emuskip=?)
+#           asm.emustr: Show only strings if any in the asm.emu output
+#         asm.emuwrite: Allow asm.emu to modify memory (WARNING)
+#             asm.esil: Show ESIL instead of mnemonic
+#           asm.family: Show family name in disasm
+#         asm.fcncalls: Show functions calls
+#         asm.fcnlines: Show function boundary lines
+#         asm.features: Specify supported features by the target CPU (=? for help)
+#           asm.filter: Replace numeric values by flags (e.g. 0x4003e0 -> sym.imp.printf)
+#            asm.flags: Show flags
+#     asm.flagsinbytes: Display flags inside the bytes space
+#           asm.flgoff: Show offset in flags
+#        asm.functions: Show functions in disassembly
+#            asm.hints: Show hints for magic numbers in disasm
+#           asm.indent: Indent disassembly based on reflines depth
+#      asm.indentspace: How many spaces to indent the code
+#           asm.invhex: Show invalid instructions as hexadecimal numbers
+#         asm.jmphints: Show jump hints [numbers] in disasm
+#           asm.lbytes: Align disasm bytes to left
+#         asm.leahints: Show LEA hints [numbers] in disasm
+#            asm.marks: Show marks before the disassembly
+#          asm.maxrefs: Maximum number of xrefs to be displayed as list (use columns above)
+#         asm.midflags: Realign disassembly if there is a flag in the middle of an instruction
+#         asm.minicols: Only show the instruction in the column disasm
+#           asm.nbytes: Number of bytes for each opcode at disassembly
+#            asm.nodup: Do not show dupped instructions (collapse disasm)
+#           asm.offset: Show offsets at disassembly
+#               asm.os: Select operating system (kernel) (linux, darwin, w32,..)
+#           asm.parser: Set the asm parser to use
+#          asm.pcalign: Only recognize as valid instructions aligned to this value
+#           asm.pseudo: Enable pseudo syntax
+#           asm.reloff: Show relative offsets instead of absolute address in disasm
+#     asm.reloff.flags: Show relative offsets to flags (not only functions)
+#           asm.relsub: Substitute pc relative expressions in disasm
+#          asm.section: Show section name before offset
+#      asm.section.col: Columns width to show asm.section
+#           asm.segoff: Show segmented address in prompt (x86-16)
+#             asm.size: Show size of opcodes in disassembly (pd)
+#            asm.spacy: Spacy disasm after calls and before flags
+#         asm.stackptr: Show stack pointer at disassembly
+#           asm.symbol: Show symbol+delta instead of absolute offset
+#       asm.symbol.col: Columns width to show asm.section
+#           asm.syntax: Select assembly syntax
+#             asm.tabs: Use tabs in disassembly
+#          asm.tabsoff: tabulate spaces after the offset
+#         asm.tabsonce: Only tabulate the opcode, not the arguments
+#            asm.trace: Show execution traces for each opcode
+#       asm.tracespace: Indent disassembly with trace.count information
+#            asm.ucase: Use uppercase syntax at disassembly
+#             asm.vars: Show local function variables in disassembly
+#           asm.varsub: Substitute variables in disassembly
+#            asm.varxs: Show accesses of local variables
+#            asm.xrefs: Show xrefs in disassembly
+#            bin.baddr: Base address of the binary
+#          bin.classes: Load classes from rbin on startup
+#          bin.dbginfo: Load debug information on startup if available
+#         bin.debase64: Try to debase64 all strings
+#         bin.demangle: Import demangled symbols from RBin
+#      bin.demanglecmd: run xcrun swift-demangle and similar if available (SLOW)
+#           bin.filter: Filter symbol names to fix dupped names
+#            bin.force: Force that rbin plugin
+#            bin.laddr: Base address for loading library ('*.so')
+#             bin.lang: Language for bin.demangle
+#             bin.libs: Try to load libraries after loading main binary
+#           bin.maxstr: Maximum string length for r_bin
+#        bin.maxstrbuf: Maximum size of range to load strings from
+#       bin.mergeflags: Merge symbols with the same name into the same flag
+#           bin.minstr: Minimum string length for r_bin
+#           bin.prefix: Prefix all symbols/sections/relocs with a specific string
+#           bin.rawstr: Load strings from raw binaries
+#        bin.strfilter: Filter strings (?:help, a:scii, e:mail, p:ath, u:rl, 8:utf8)
+#         bin.strpurge: Try to purge false positive strings
+#          bin.verbose: Show RBin warnings when loading binaries
+#        cfg.bigendian: Use little (false) or big (true) endianness
+#            cfg.debug: Debugger mode
+#  cfg.fortunes.clippy: Use ?E instead of ?e
+#     cfg.fortunes.tts: Speak out the fortune
+#    cfg.fortunes.type: Type of fortunes to show (tips, fun, nsfw, creepy)
+#        cfg.hashlimit: If the file is bigger than hashlimit, do not compute hashes
+#          cfg.plugins: Load plugins at startup
+#       cfg.prefixdump: Filename prefix for automated dumps
+#             cfg.user: Set current username/pid
+#            cfg.wseek: Seek after write
+#               cmd.bp: Run when a breakpoint is hit
+#          cmd.cprompt: Column visual prompt commands
+#            cmd.depth: Maximum command depth
+#        cmd.esil.intr: Command to run when an esil interrupt happens
+#        cmd.esil.trap: Command to run when an esil trap happens
+#       cmd.fcn.delete: Run when a function is deleted
+#          cmd.fcn.new: Run when new function is analyzed
+#       cmd.fcn.rename: Run when a function is renamed
+#          cmd.gprompt: Graph visual prompt commands
+#            cmd.graph: Command executed by 'agv' command to view graphs
+#              cmd.hit: Run when a search hit is found
+#          cmd.hitinfo: Show info when a tracepoint/breakpoint is hit
+#             cmd.open: Run when file is opened
+#           cmd.prompt: Prompt commands
+#           cmd.repeat: Empty command an alias for '..' (repeat last command)
+#            cmd.times: Run when a command is repeated (number prefix)
+#           cmd.visual: Replace current print mode
+#          cmd.vprompt: Visual prompt commands
+#            cmd.xterm: xterm command to spawn with V@
+#     dbg.aftersyscall: Stop execution before the syscall is executed (see dcs)
+#             dbg.args: Set the args of the program to debug
+#          dbg.backend: Select the debugger backend
+#              dbg.bep: break on entrypoint (loader, entry, constructor, main)
+#         dbg.bpinmaps: Force breakpoints to be inside a valid map
+#           dbg.bpsize: Size of software breakpoints
+#           dbg.btalgo: Select backtrace algorithm
+#          dbg.btdepth: Depth of backtrace
+#            dbg.clone: Stop execution if new thread is created
+#        dbg.consbreak: SIGINT handle for attached processes
+#            dbg.execs: Stop execution if new thread is created
+#        dbg.exitkills: Kill process on exit
+#           dbg.follow: Follow program counter when pc > core->offset + dbg.follow
+#     dbg.follow.child: Continue tracing the child process on fork. By default the parent process is traced
+#             dbg.hwbp: Set HW or SW breakpoints
+#             dbg.libs: If set stop when loading matching libname
+#          dbg.profile: Path to RRunProfile file
+#             dbg.slow: Show stack and regs in visual mode in a slow but verbose mode
+#           dbg.status: Set cmd.prompt to '.dr*' or '.dr*;drd;sr PC;pi 1;s-'
+#           dbg.swstep: Force use of software steps (code analysis+breakpoint)
+#            dbg.trace: Trace program execution (see asm.trace)
+#    dbg.trace.inrange: While tracing, avoid following calls outside specified range
+#        dbg.trace.tag: Trace tag
+#           dbg.unlibs: If set stop when unloading matching libname
+#            diff.bare: Never show function names in diff output
+#            diff.from: Set source diffing address for px (uses cc command)
+#      diff.levenstein: Use faster (and buggy) levenstein algorithm for buffer distance diffing
+#            diff.sort: Specify function diff sorting column see (e diff.sort=?)
+#              diff.to: Set destination diffing address for px (uses cc command)
+#            dir.magic: Path to r_magic files
+#          dir.plugins: Path to plugin files to be loaded at startup
+#         dir.projects: Default path for projects
+#           dir.source: Path to find source files
+#            dir.types: Default path to look for cparse type files
+#        esil.exectrap: trap when executing code in non-executable memory
+#       esil.fillstack: Initialize ESIL stack with (random, debrujn, sequence, zeros, ...)
+#       esil.gotolimit: Maximum number of gotos per ESIL expression
+#          esil.iotrap: invalid read or writes produce a trap exception
+#          esil.nonull: Prevent memory read, memory write at null pointer
+#         esil.prestep: Step before esil evaluation in `de` commands
+#           esil.romem: Set memory as read-only for ESIL
+#       esil.stacksize: Number of elements that can be pushed on the esilstack
+#           esil.stats: Statistics from ESIL emulation stored in sdb
+#         esil.verbose: Show ESIL verbose level (0, 1, 2)
+#            file.desc: User defined file description (used by projects)
+#       file.loadalign: Alignment of load addresses
+#      file.loadmethod: What to do when load addresses overlap: fail, overwrite, or append (next available)
+#        file.location: Is the file 'local', 'remote', or 'memory'
+#             file.md5: MD5 sum of current file
+#          file.nowarn: Suppress file loading warning messages
+#        file.openmany: Maximum number of files opened at once
+#            file.path: Path of current file
+#            file.sha1: SHA1 hash of current file
+#            file.type: Type of current file
+#              fs.view: Set visibility options for filesystems
+#           graph.font: Font for dot graphs
+#         graph.format: Specify output format for graphs (dot, gml, gmlfcn)
+#     graph.gv.current: Highlight the current node in graphviz graph.
+#        graph.gv.edge: Graphviz edge style. (arrowhead="vee")
+#       graph.gv.graph: Graphviz global style attributes. (bgcolor=white)
+#        graph.gv.node: Graphviz node style. (color=gray, style=filled shape=box)
+#      graph.invscroll: Invert scroll direction in ascii-art graph
+#         graph.layout: Graph layout (0=vertical, 1=horizontal)
+#       graph.linemode: Graph edges (0=diagonal, 1=square)
+#       graph.nodejmps: Enables shortcuts for every node.
+#           graph.refs: Graph references in callgraphs (.agc*;aggi)
+#         graph.scroll: Scroll speed in ascii-art graph
+#          graph.title: Title of the graph
+#            graph.web: Display graph in web browser (VV)
+#             hex.cols: Number of columns in hexdump
+#         hex.comments: Show comments in 'px' hexdump
+#            hex.depth: Maximal level of recurrence while telescoping memory
+#           hex.flagsz: If non zero, overrides the flag size in pxa
+#          hex.onechar: Number of columns in hexdump
+#            hex.pairs: Show bytes paired in 'px' hexdump
+#           hex.stride: Line stride in hexdump (default is 0)
+#             hud.path: Set a custom path for the HUD file
+#              io.0xff: Use this value instead of 0xff to fill unallocated areas
+#              io.aslr: Disable ASLR for spawn and such
+#            io.autofd: Change fd when opening a new file
+#            io.buffer: Load and use buffer cache if enabled
+#       io.buffer.from: Lower address of buffered cache
+#         io.buffer.to: Higher address of buffered cache
+#             io.cache: Enable cache for io changes
+#           io.enforce: Honor IO section permissions for 1=read , 2=write, 0=none
+#                io.ff: Fill invalid buffers with 0xff instead of returning error
+#              io.pava: Use EXPERIMENTAL paddr -> vaddr address mode
+#               io.raw: Ignore maps/sections and use raw io
+#          io.sectonly: Only read from sections (if any)
+#                io.va: Use virtual address layout
+#               io.vio: Enable the new vio (reading only) (WIP)
+#                key.S: override step over action
+#               key.f1: Run this when F1 key is pressed in visual mode
+#              key.f10: Run this when F10 key is pressed in visual mode
+#              key.f11: Run this when F11 key is pressed in visual mode
+#              key.f12: Run this when F12 key is pressed in visual mode
+#               key.f2: Run this when F2 key is pressed in visual mode
+#               key.f3: Run this when F3 key is pressed in visual mode
+#               key.f4: Run this when F4 key is pressed in visual mode
+#               key.f5: Run this when F5 key is pressed in visual mode
+#               key.f6: Run this when F6 key is pressed in visual mode
+#               key.f7: Run this when F7 key is pressed in visual mode
+#               key.f8: Run this when F8 key is pressed in visual mode
+#               key.f9: Run this when F9 key is pressed in visual mode
+#                key.s: override step into action
+#            lines.abs: Enable absolute line numbers
+#           lines.from: Start address for line seek
+#          magic.depth: Recursivity depth in magic description strings
+#          pdb.extract: Avoid extract of the pdb file, just download
+#           pdb.server: Base URL for Microsoft symbol server
+#        pdb.useragent: User agent for Microsoft symbol server
+#            prj.files: Save the target binary inside the project directory
+#              prj.git: Every project is a git repo and saving is commiting
+#              prj.gpg: TODO: Encrypt project with GnuPGv2
+#             prj.name: Name of current project
+#              prj.zip: Use ZIP format for project files
+#             rap.loop: Run rap as a forever-listening daemon
+#         rop.comments: Display comments in rop search output
+#      rop.conditional: Include conditional jump, calls and returns in ropsearch
+#               rop.db: Store rop search results in sdb
+#              rop.len: Maximum ROP gadget length
+#               rop.nx: Include NX/XN/XD sections in ropsearch
+#        rop.subchains: Display every length gadget from rop.len=X to 2 in /Rl
+#           scr.atport: V@ starts a background http server and spawns an r2 -C
+#        scr.breakword: Emulate console break (^C) when a word is printed (useful for pD)
+#          scr.columns: Force console column count (width)
+#             scr.echo: Show rcons output in realtime to stderr and buffer
+#         scr.feedback: Set visual feedback level (1=arrow on jump, 2=every key (useful for videos))
+#            scr.fgets: Use fgets() instead of dietline for prompt input
+#      scr.fix.columns: Workaround for Prompt iOS SSH client
+#         scr.fix.rows: Workaround for Linux TTY
+#            scr.flush: Force flush to console in realtime (breaks scripting)
+#              scr.fps: Show FPS in Visual
+#        scr.highlight: Highlight that word at RCons level
+#         scr.histsave: Always save history on exit
+#             scr.html: Disassembly uses HTML syntax
+#      scr.interactive: Start in interactive mode
+#        scr.linesleep: Flush sleeping some ms in every line
+#             scr.nkey: Select the seek mode in visual
+#             scr.null: Show no output
+#         scr.pagesize: Flush in pages when scr.linesleep is != 0
+#           scr.prompt: Show user prompt (used by r2 -q)
+#       scr.promptfile: Show user prompt file (used by r2 -q)
+#       scr.promptflag: Show flag name in the prompt
+#       scr.promptsect: Show section name in the prompt
+#          scr.randpal: Random color palete or just get the next one from 'eco'
+#       scr.responsive: Auto-adjust Visual depending on screen (e.g. unset asm.bytes)
+#         scr.rgbcolor: Use RGB colors (not available on Windows)
+#             scr.rows: Force console row count (height) (duplicate?)
+#             scr.seek: Seek to the specified address on startup
+#              scr.tee: Pipe output to file of this name
+#              scr.tts: Use tts if available by a command (see ic)
+#            scr.wheel: Mouse wheel in Visual; temporaryly disable/reenable by right click/Enter)
+#        scr.wheelnkey: Use sn/sp and scr.nkey on wheel instead of scroll
+#       scr.wheelspeed: Mouse wheel speed
+#        scr.zoneflags: Show zoneflags in visual mode before the title (see fz?)
+#         search.align: Only catch aligned search hits
+#         search.chunk: Chunk size for /+ (default size is asm.bits/8
+#    search.contiguous: Accept contiguous/adjacent search hits
+#         search.count: Start index number at search hits
+#      search.distance: Search string distance
+#     search.esilcombo: Stop search after N consecutive hits
+#            search.in: Specify search boundaries (raw, block, file, section, range)
+#         search.kwidx: Store last search index count
+#       search.maxhits: Maximum number of hits (0: no limit)
+#       search.overlap: Look for overlapped search hits
+#        search.prefix: Prefix name in search hits label
+#          search.show: Show search results
+#            search.to: Search end address
+#       stack.anotated: Show anotated hexdump in visual debug
+#          stack.bytes: Show bytes instead of words in stack
+#          stack.delta: Delta for the stack dump
+#           stack.size: Size in bytes of stack hexdump in visual debug
+#             time.fmt: Date format (%Y-%m-%d %H:%M:%S %z)
+#            time.zone: Time zone, in hours relative to GMT: +2, -1,..
+#             zign.max: Maximum zignature length to filter in 'zg'
+#             zign.min: Minimum zignature length to filter in 'zg'
+#          zign.prefix: Default prefix for signatures matches
+#-----
+
+# Analyze:
+# =======
+# af                    analyze functions
+# aa                    analyze everything
+# aap                   find functions by prelude instructions
+# aac                   Identify functions by following calls
+# aar                   Analyze opcode absolute and relative references
+# aae                   Emulate code to identify new pointer references
+# aas                   Use binary header information to find public functions
+# aat                   Assume functions are consecutive
+#
+# Navigate:
+# ========
+# pdf @ sym.<function>  Disassembly of the function
+# V @ sym.<function>    Interractive dissassembly of the function (_:search/goto func, V:graph, c:cursor, x:xref)
+# V! @ sym.<function>   Even more interractive dissassembly (m:menu!)
+# =H                    Start webserver/ui and browser
+#
+# Search:
+# ======
+# /x ff..33             search for hex string ignoring some nibbles
+# /x ff0033             search for hex string
+# /V                    Detect jump tables and pointers to code section
+# /r                    Find code/data/string references to a specific address
+# / <str>               find the string in the data
+# iz | grep -i <str>    find the strings in the data
+# izz | grep -i <str>   find the strings in the whole binary, not only data
+#
+# Work:
+# ====
+# s <addr>              goto addr
+# afn                   Rename function (e.g. afn strlen 0x080483f0)
+# axt                   Returns cross references to (xref to)
+# axf                   Returns cross references from (xref from)
+# S=                    List sections
+# pdf~call              grep CALLs
+# aeaf                  show the registers who are accesed/read/written/noneofthose
+# pdf                   disassemble func
+# VV                    disassemble function (graph)
+# V                     disassemble (whole listing, scrollable)
+# pd 1@str.<s>          display the XREFS OF A STRING, 'k' to access 'ar' (anal refs) database.
+#
+# Debug: (run with `r2 -d <file>`)
+# =====
+# dc             : Continue process execution
+# dcu <addr>     : Continue until symbol/addr (sort of breakpoint+continue, e.g. `dcu main`)
+# dcs*           : Trace all syscalls (like strace)
+# ds [steps]     : Step in
+# dso            : Step out
+# dss            : Skip instruction
+# dsi            : Conditional step (e.g. "dsi eax==3,ecx>0")
+# dbt            : Shows backtrace
+# drr            : Show registers references (what the registers are pointing to)
+# pxr @ rsp      : Show stackvalues references (what they are pointing to)
+# db             : List breakpoints
+# db <addr|func> : Set breakpoint
+# dr eax=33      : Set register value
+#
+# Patch: (run with `r2 -w <file>`)
+# =====
+# w <str> @<addr>: Write string at addr (e.g. `w "plop" @0x1234`)
+# wa <asm>       : Write opcode (e.g. `"wa xor eax,eax; ret" @0x1234`)
+# wx <bytes>     : Write hex bytes (e.g. `wx 90`)
+# wox 0x42       : Xor the current byte with 42
+#
+# Other Examples:
+# ==============
+# [0x00011111]> pdf @ 0x11111 | sed 's/^[^0]*//; s/ ; .*//' | awk -F'[^a-zA-Z0-9]+' '$3=="xor" && $4!=$5'
+#
+# SEE ALSO:
+# - http://www.academia.edu/26856063/Radare2-explorations
+# - https://github.com/radare/radare2/blob/master/doc/intro.md
+
