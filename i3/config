@@ -95,6 +95,7 @@ bindsym $mod+Shift+q          exec "i3-nagbar -t warning -m 'You pressed the exi
 bindsym Control+Mod1+Up       exec lock
 bindsym $mod+t                exec terminal
 bindsym $mod+Return           exec terminal
+bindsym $mod+Shift+Return     exec terminal-ssh
 bindsym $mod+space            exec launcher
 bindsym Mod1+space            exec launcher
 bindsym Control+space         exec launcher
