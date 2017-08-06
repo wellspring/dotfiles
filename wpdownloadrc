@@ -1,0 +1,46 @@
+# Wikipedia database dumps
+
+[Configuration]
+base_url = http://download.wikimedia.org
+
+[Templates]
+file_format = ${langcode}wiki-${date}-${filename}.${filetype}
+language_dir_format = ${langcode}wiki
+#language_dir_format = ${langcode}wiktionary
+#file_format = ${langcode}wiktionary-${date}-${filename}.${filetype}
+
+[Files]
+pages-articles = True
+redirect = True
+page = True
+category = True
+interwiki = True
+langlinks = True
+externallinks = True
+templatelinks = True
+imagelinks = True
+categorylinks = True
+pagelinks = True
+site_stats = True
+all-other-files = False
+
+[Filetypes]
+pages-articles  = xml.bz2
+redirect        = sql.gz
+page            = sql.gz
+category        = sql.gz
+interwiki       = sql.gz
+langlinks       = sql.gz
+externallinks   = sql.gz
+templatelinks   = sql.gz
+imagelinks      = sql.gz
+categorylinks   = sql.gz
+pagelinks       = sql.gz
+site_stats      = sql.gz
+
+[Languages]
+en = True
+#fr = True
+#ru = True
+#sv = True
+
