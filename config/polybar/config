@@ -1,0 +1,300 @@
+# PolyBar config (for i3wm/bspwm)
+
+# TODO:
+# - use $colors only
+# - better icons?
+# - disk info (filesystem)
+# - cat /tmp/pacman.packages_to_upgrade.count
+
+#-------------------------------------------------------------------------------
+[colors]
+  fg             = #ffffffff
+  bg             = #ff000000
+  date-underline = #c02942
+  cpu-underline  = #e97f02
+  disabled1      = #aaaaaa
+  disabled2      = #666666
+  separator      = #fff
+  highlight      = #5555ff
+  on             = #55ff55
+  off            = #ff5555
+  power          = #ff5555
+  urgent         = #ff0000
+
+#-------------------------------------------------------------------------------
+
+[bar/top]
+  bottom           = false
+  width            = 100%
+  height           = 32
+  line-size        = 2
+  padding          = 0
+  fixed-center     = true
+  enable-ipc       = true
+  override-redirect= false
+  font-0           = Droid Sans:pixelsize=12;2
+  font-1           = MaterialIcons:pixelsize=18;4
+  font-2           = FontAwesome:pixelsize=14;3
+  foreground       = ${colors.fg}
+  background       = ${colors.bg}
+  wm-restack       = i3
+  modules-left     = workspaces
+  modules-center   = date
+  modules-right    = diskusage :: plane-mode bluetooth vpn tor eth wifi net-details :: user :: powermenu
+#modules-right    = diskusage :: plane-mode bluetooth vpn tor eth wifi net-details :: messages mails rss downloads updates :: user :: powermenu
+
+[bar/bottom]
+  bottom           = true
+  width            = 100%
+  height           = 18
+  line-size        = 2
+  padding          = 2
+  fixed-center     = true
+  enable-ipc       = true
+  override-redirect= false
+  font-0           = Abel:pixelsize=10;2
+  font-1           = MaterialIcons:pixelsize=22;7
+  font-2           = FontAwesome:pixelsize=10;3
+  foreground       = ${colors.fg}
+  background       = ${colors.bg}
+  wm-restack       = i3
+  modules-left     = keyboard-layout :: currently window-name
+  modules-center   = now-playing
+  modules-right    = download :: upload :: volume :: ram :: cpu :: battery
+
+#-------------------------------------------------------------------------------
+[module/workspaces]
+  type                            = internal/i3
+  format                          = <label-state> <label-mode>
+  index-sort                      = true
+  strip-wsnumbers                 = true
+  fuzzy-match                     = true
+  label-focused-underline         = #555
+  label-focused-background        = #111
+  label-focused-foreground        = #ccc
+  label-unfocused-foreground      = #333
+  label-urgent-foreground         = ${colors.urgent}
+  label-focused-padding           = 3
+  label-unfocused-padding         = 3
+  label-urgent-padding            = 3
+  wrapping-scroll                 = false
+
+[module/date]
+  type                            = internal/date
+  label                           = %date%, %time%
+  format-prefix                   = 
+  date                            = %a %d %b
+  time                            = %H:%M:%S
+  format-underline                = #c02942
+  format-padding                  = 3
+  format-prefix-padding           = 2
+  interval                        = 1.0
+
+[module/vpn]
+  type = custom/script
+  exec = pgrep -x openvpn
+  exec-if = ! plane-mode status
+  interval = 5
+  label = vpn
+  label-underline = #5bf
+  format-prefix-underline = #5bf
+  format-foreground = #5bf
+  format-prefix = "  "
+  format-suffix = "  +  "
+  format-suffix-foreground = ${colors.fg}
+[module/tor]
+  type = custom/script
+  exec = pgrep -x tor
+  exec-if = ! plane-mode status
+  interval = 5
+  label = Tor
+  label-underline = #5bf
+  format-prefix-underline = #5bf
+  format-foreground = #5bf
+  format-prefix = " "
+  format-suffix = "  +  "
+  format-suffix-foreground = ${colors.fg}
+[module/eth]
+  type = internal/network
+  interface = eth
+[module/wifi]
+  type = internal/network
+  interface = wifi
+  format-connected = <ramp-signal> <label-connected>
+  format-disconnected = <label-disconnected>
+  format-packetloss = <animation-packetloss> <label-packetloss> <label-connected>
+  label-connected = %essid%
+  label-disconnected = not connected
+  label-packetloss = ???
+  label-connected-foreground = #fff
+  label-packetloss-foreground = #ff0
+  label-disconnected-foreground = #f00
+  ramp-signal-0 = 
+  ramp-signal-1 = 
+  ramp-signal-2 = 
+  ramp-signal-3 = 
+  ramp-signal-4 = 
+  ramp-signal-5 = 
+  ramp-signal-connected-foreground = #0f0
+  animation-packetloss-0 = ⚠
+  animation-packetloss-1 = 📶
+  animation-packetloss-0-foreground = #ffa64c
+  animation-packetloss-1-foreground = #000000
+  animation-packetloss-framerate = 500
+[module/bluetooth]
+#  type                            = custom/script
+  exec                            = bluetooth status
+  label                           = %output%
+  click-left                      = bluetooth toggle
+[module/plane-mode]
+#  type                            = custom/script
+  exec                            = plane-mode status
+  label                           = %output%
+  click-left                      = plane-mode toggle
+[module/user]
+  type                            = custom/script
+  exec                            = git config --get user.name | awk '{print $1" "}'
+[module/powermenu]
+  click-left                      = shutdown_menu
+  type                            = custom/text
+  content                         = 
+  content-foreground              = ${colors.power}
+  content-padding                 = 2
+
+#-------------------------------------------------------------------------------
+[module/::]
+  type                            = custom/text
+  content                         = ::
+  content-padding                 = 3
+  content-foreground              = ${colors.separator}
+
+[module/keyboard-layout]
+  type                            = internal/xkeyboard
+  format                          = <label-layout> <label-indicator>
+  format-spacing                  = 1
+  label-layout                    = %name%
+  label-indicator                 = + %name%
+  label-indicator-foreground      = #000
+  label-indicator-background      = ${colors.urgent}
+  label-indicator-padding         = 1
+  blacklist-0                     = scroll lock
+  blacklist-1                     = num lock
+[module/currently]
+  type                            = custom/script
+  exec                            = cat /tmp/currently
+  exec-if                         = test -f /tmp/currently
+  format-prefix                   = "// Currently: "
+  format-suffix                   = " //"
+  format-foreground               = #aaa
+  interval                        = 2
+[module/window-name]
+  type                            = internal/xwindow
+  label                           = %title:0:83:...%
+
+[module/now-playing]
+  type                            = custom/script
+  exec                            = now-playing
+  label                           = %output%
+  format-foreground               = #000
+  format-background               = #fff
+  format-padding                  = 10
+  interval                        = 0.5
+  click-left                      = music play-pause
+[module/volume]
+  type                            = internal/volume
+  format-volume                   = <ramp-volume> :  <bar-volume>
+  format-muted                    = <label-muted>
+  label-volume                    = %percentage%%
+  label-muted                     = (muted)
+  ramp-volume-0                   = 
+  ramp-headphones-0               = 
+  bar-volume-width                = 20
+  bar-volume-gradient             = false
+  bar-volume-foreground-0         = #ff5555
+  bar-volume-foreground-1         = #f5a70a
+  bar-volume-foreground-2         = #f5a70a
+  bar-volume-foreground-3         = #55aa55
+  bar-volume-foreground-4         = #55aa55
+  bar-volume-foreground-5         = #55aa55
+  bar-volume-foreground-6         = #55aa55
+  bar-volume-indicator-foreground = #ff
+  bar-volume-empty-foreground     = #55
+  bar-volume-indicator            = |
+  bar-volume-indicator-font       = 2
+  bar-volume-empty                = -
+  bar-volume-fill                 = -
+  click-right                     = pavucontrol
+#click-middle = ...
+
+[module/download]
+  type = internal/network
+  interface = wifi
+  accumulate-stats = true
+  label-connected = %downspeed% [DL]
+[module/upload]
+  type = internal/network
+  interface = wifi
+  accumulate-stats = true
+  label-connected = %upspeed% [UP]
+[module/ram]
+  type                            = internal/memory
+  label                           = RAM
+  format                          =   <label> » (<bar-used>)
+  bar-used-width                  = 40
+  bar-used-foreground-0           = #55aa55
+  bar-used-foreground-1           = #557755
+  bar-used-foreground-2           = #f5a70a
+  bar-used-foreground-3           = #ff5555
+  bar-used-fill                   = -
+  bar-used-empty                  = -
+  bar-used-indicator              = //
+  bar-used-empty-foreground       = #444444
+  interval                        = 3
+[module/cpu]
+  type                            = internal/cpu
+  label                           = CPU
+  format                          = <label> » (<bar-load>)
+  bar-load-width                  = 20
+  bar-load-gradient               = false
+  bar-load-foreground-0           = #55aa55
+  bar-load-foreground-1           = #55aa55
+  bar-load-foreground-2           = #55aa55
+  bar-load-foreground-3           = #55aa55
+  bar-load-foreground-4           = #f5a70a
+  bar-load-foreground-5           = #f5a70a
+  bar-load-foreground-6           = #ff5555
+  bar-load-indicator-foreground   = #aaa
+  bar-load-empty-foreground       = #333
+  bar-load-indicator              = //
+  bar-load-indicator-font         = 2
+  bar-load-empty                  = -
+  bar-load-fill                   = -
+  interval                        = 1
+[module/battery]
+  type                            = internal/battery
+  battery                         = BAT1
+  adapter                         = ACAD
+  full-at                         = 100
+  format-full                     = <label-full>
+  format-charging                 = <animation-charging> <label-charging>
+  format-discharging              = <ramp-capacity> <label-discharging>
+  label-full                      = 
+  label-charging                  = %percentage%%
+  label-discharging               = %percentage%%
+  format-discharging-foreground   = #ff0
+  format-charging-foreground      = #0f0
+  ramp-capacity-0                 = 
+  ramp-capacity-1                 = 
+  ramp-capacity-2                 = 
+  ramp-capacity-3                 = 
+  ramp-capacity-4                 = 
+  animation-charging-0            = 
+  animation-charging-1            = 
+  animation-charging-2            = 
+  animation-charging-3            = 
+  animation-charging-4            = 
+  animation-charging-framerate    = 750
+  poll-interval                   = 5
+
+
+; vim:ft=dosini
