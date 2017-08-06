@@ -362,8 +362,6 @@ alias mkcd='mcd'
 alias md='mkdir'
 alias rd='rmdir'
 
-alias screenshot='clear && archey && scrot -c -d 5 -e "display $f"'
-
 alias grep='grep --color=auto'
 #alias chmod='chmod -c' # not working on OS-X
 #alias chown='chown -v'
@@ -372,16 +370,9 @@ alias ps='ps auxww' #'f' not working on OS-X
 alias hex='od -t x1'
 
 alias getkey='gpg --recv-keys --keyserver wwwkeys.pgp.net'
-alias pig='ping -c 3 www.google.com'
-alias scan='nmap localhost'
 alias route='route -n'
-alias ports='lsof -Pn +M -i4 -sTCP:LISTEN'
-alias wget-fast='axel -a'
 
-alias e='sublime' #sublime, mate, vim
-alias ee='sublime ./'
 alias nano='nano -w'
-alias vi='vim'
 alias :e=$EDITOR
 alias @=$EDITOR
 alias :q='exit'
