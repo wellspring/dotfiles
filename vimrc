@@ -463,7 +463,7 @@ autocmd StdinReadPre * let s:std_in=1                                           
 
 " Typo and lazyness
 iabbrev teh         the
-iabbrev i           I
+"iabbrev i           I
 iabbrev Im          I'm
 iabbrev Ive         I've
 iabbrev Ill         I'll
