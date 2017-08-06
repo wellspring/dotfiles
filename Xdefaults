@@ -1,14 +1,61 @@
-# urxvt terminal config
+! .Xdefaults
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!           COLOR THEME           !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+URxvt.background:         #282a36
+URxvt.foreground:         #eff0eb
+URxvt.cursorColor:        #97979b
+URxvt.highlightColor:     #222222
+URxvt.highlightTextColor: #dddddd
+
+URxvt*color0:  #464444
+URxvt*color1:  #ef3460
+URxvt*color2:  #bdef34
+URxvt*color3:  #efc334
+URxvt*color4:  #4e82aa
+URxvt*color5:  #b300ff
+URxvt*color6:  #3dd8ff
+URxvt*color7:  #ffffff
+URxvt*color8:  #8a8888
+URxvt*color9:  #f25a7d
+URxvt*color10: #dcf692
+URxvt*color11: #f6df92
+URxvt*color12: #92aaf6
+URxvt*color13: #df92f6
+URxvt*color14: #5af2ce
+URxvt*color15: #ffffff
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!              FONT               !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Xft.autohint:       0
+Xft.lcdfilter:      lcddefault
+Xft.hintstyle:      hintfull
+Xft.hinting:        1
+Xft.antialias:      1
+Xft.dpi:            96
+Xft.rgba:           rgb
+URxvt.letterSpace:  -1
+
+URxvt*font:         xft:Meslo LG M Nerd Font:style=Regular:pixelsize=12
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!    TERMINAL (other settings)    !!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 URxvt.title: Terminal (urxvt)
 URxvt.termName: xterm-256color
-URxvt.saveLines: 2000
+URxvt.saveLines: 10000
 URxvt.urgentOnBell: true
 URxvt.transparent: true
 URxvt.blurRadius: 0x0
-URxvt.shading: 0
+URxvt.shading: 0.8
 URxvt.depth: 24
 URxvt.cursorBlink: false
+URxvt.cursorUnderline: false
 URxvt.borderLess: false
 URxvt.scrollBar: false
 URxvt.scrollBar_right: false
@@ -16,26 +63,32 @@ URxvt.scrollstyle: rxvt
 URxvt.scrollWithBuffer: true
 URxvt.scrollTtyOutput: false
 URxvt.scrollTtyKeypress: true
-URxvt.iso14755: false
 URxvt.perl-ext-common: default,matcher,clipboard,searchable-scrollback,url-select,resize-font
-URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/xdg-open
 URxvt.url-select.underline: true
 URxvt.urlLauncher: xdg-open
-URxvt.resize-font.smaller: C-Down
-URxvt.resize-font.bigger: C-Up
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.copyCommand:  xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
-URxvt.keysym.S-C-C: perl:clipboard:copy
-URxvt.keysym.S-C-V: perl:clipboard:paste
-URxvt.keysym.M-v: perl:clipboard:paste_escaped
 URxvt.cutchars: "()*,<>[]{}|''"
 URxvt.selection-autotransform.0: s/^([^:[:space:]]+):(\\d+):?$/+$2 \\Q$1\\E/
 URxvt.selection.pattern-0: >>>[ ]+(.+)
 URxvt.selection.pattern-1: .+?@.+? .+? %%?[ ]+(.+)
+URxvt.url-launcher:       firefox
+URxvt.matcher.button:     1
+URxvt.matcher.pattern.1:  \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
+URxvt.matcher.pattern.2:  \\B(/\\S+?):(\\d+)(?=:|$)
+URxvt.matcher.launcher.2: gvim +$2 $1
 URxvt.print-pipe: cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
+
+URxvt.keysym.C-f:         perl:searchable-scrollback:start
+URxvt.keysym.M-u:         perl:url-select:select_next
+URxvt.keysym.S-C-C:       perl:clipboard:copy
+URxvt.keysym.S-C-V:       perl:clipboard:paste
+URxvt.keysym.M-v:         perl:clipboard:paste_escaped
+URxvt.resize-font.smaller:C-Down
+URxvt.resize-font.bigger: C-Up
 
 *VT100.utf8: 1
 *charClass: 33:48,35:48,37-38:48,43-47:48,58:48,61:48,63-64:48,95:48,126:48
@@ -52,45 +105,4 @@ URxvt.print-pipe: cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
              Shift ~Ctrl <Btn2Up>:  insert-selection(CLIPBOARD, CUT_BUFFER1) \n\
             ~Shift       <BtnUp>:   select-end(PRIMARY, CUT_BUFFER0) \n\
              Shift       <BtnUp>:   select-end(CLIPBOARD, CUT_BUFFER1) \n
-
-!terminal
-URxvt.background:         #010101
-URxvt.foreground:         #e3e3e3
-URxvt.cursorColor:        #bbbbbb
-URxvt.highlightColor:     #222222
-URxvt.highlightTextColor: #dddddd
-
-!black
-URxvt*color0:  #464444
-URxvt*color8:  #8a8888
-!red
-URxvt*color1:  #ef3460
-URxvt*color9:  #f25a7d
-!green
-URxvt*color2:  #bdef34
-URxvt*color10: #dcf692
-!yellow
-URxvt*color3:  #efc334
-URxvt*color11: #f6df92
-!blue
-URxvt*color4:  #4e82aa
-URxvt*color12: #92aaf6
-!magenta
-URxvt*color5:  #b300ff
-URxvt*color13: #df92f6
-!cyan
-URxvt*color6:  #3dd8ff
-URxvt*color14: #5af2ce
-!white
-URxvt*color7:  #ffffff
-URxvt*color15: #ffffff
-
-! font
-Xft.dpi: 96
-Xft.antialias: 1
-Xft.hinting: 1
-Xft.hintstyle: hintslight
-Xft.rgba: rgb
-Xft.lcdfilter: lcddefault
-Xft.autohint: 0
 
