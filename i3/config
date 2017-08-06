@@ -82,6 +82,7 @@ bindsym $mod+minus            split vertical
 bindsym $mod+v                split vertical
 bindsym $mod+l                layout toggle all
 bindsym $mod+f                fullscreen
+bindsym $mod+o                exec resize.window --foreground
 bindsym $mod+r                mode "resize"
 bindsym $mod+m                mode "move" focus floating
 bindsym $mod+Mod2+KP_0        mode "tv-remote"
