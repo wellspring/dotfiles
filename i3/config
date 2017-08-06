@@ -1,5 +1,6 @@
 # i3 config file
 # (please see http://i3wt.org/docs/userguide.html for a complete reference)
+# (package: aur/i3-gaps-next-git)
 
 # [ general ]
 set $mod Mod4
