@@ -219,6 +219,7 @@ for_window [class="Guake"]                  floating enable
 for_window [class="Nasc"]                   floating enable
 for_window [class="Qalculate-gtk"]          floating enable sticky enable
 for_window [class="smplayer"]               floating enable sticky enable
+for_window [class="mpv"]                    floating enable sticky enable
 for_window [class="Vlc"]                    floating enable sticky enable
 for_window [class="Kodi"]                   floating enable sticky enable
 for_window [title="^pr0n slideshow$"]       floating enable sticky enable
