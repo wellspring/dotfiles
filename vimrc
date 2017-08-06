@@ -539,6 +539,7 @@ iabbrev \and\       ∧
 iabbrev \not\       ¬
 iabbrev \U\         ∪
 iabbrev \UN\        ∩
+" sup: 0S, 1S, ... 9S, -S, +S
 iabbrev \1\         ¹
 iabbrev \2\         ²
 iabbrev \3\         ³
@@ -549,6 +550,21 @@ iabbrev \7\         ⁷
 iabbrev \8\         ⁸
 iabbrev \9\         ⁹
 iabbrev \0\         ⁰
+iabbrev \\+\\       ⁺
+iabbrev \\-\\       ⁻
+" sub: 0s, 1s, ... 9s, -s, +s
+iabbrev \\0\\       ₀
+iabbrev \\1\\       ₁
+iabbrev \\2\\       ₂
+iabbrev \\3\\       ₃
+iabbrev \\4\\       ₄
+iabbrev \\5\\       ₅
+iabbrev \\6\\       ₆
+iabbrev \\7\\       ₇
+iabbrev \\8\\       ₈
+iabbrev \\9\\       ₉
+iabbrev \\+\\       ₊
+iabbrev \\-\\       ₋
 iabbrev \1/2\       ½
 iabbrev \1/4\       ¼
 iabbrev \3/4\       ¾
