@@ -21,7 +21,7 @@ set -Ux RAILS_ENV development
 set -U fish_complete_path ~/.config/fish/completions /etc/fish/completions /usr/share/fish/completions
 set -U fish_function_path ~/.config/fish/prompt ~/.config/fish/functions /etc/fish/functions /usr/share/fish/functions
 set -U fish_user_paths $fish_user_paths ~/.bin
-set -Ux CDPATH . ~
+set -Ux CDPATH . /disk ~
 
 # Try to guess the Operating System name
 set -Ux os 'UNKNOWN'
