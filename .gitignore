@@ -6,6 +6,9 @@ config
 history
 vim/plugged
 
+# -- Private
+gnupg
+
 # -- Logs
 **/*.log
 weechat/logs/*
