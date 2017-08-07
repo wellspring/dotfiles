@@ -1,0 +1,46 @@
+{
+	"name": "== General ==",
+	"type": 1,
+	"state": 0,
+	"info": {
+		"category": {
+			"hosts": [
+			],
+			"schemes": [
+				"http",
+				"https",
+				"ftp",
+				"ftps",
+				"rtmp"
+			],
+			"file-exts": [
+			],
+			"active-limit": 20,
+			"finished-limit": 3000,
+			"recycled-limit": 3000
+		},
+		"http": {
+			"user-agent": "user_agent = Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/53.0.2785.116 Safari\/537.36",
+			"redirection-limit": 30
+		},
+		"proxy": {
+			"port": 80,
+			"type": 0
+		},
+		"common": {
+			"folder": "\/home\/william\/Downloads",
+			"connect-timeout": 15,
+			"transmit-timeout": 30,
+			"retry-delay": 6,
+			"retry-limit": 10,
+			"retry-count": 0,
+			"max-connections": 1,
+			"max-upload-speed": 0,
+			"max-download-speed": 0,
+			"timestamp": 1
+		}
+	},
+	"children": [
+	]
+}
+

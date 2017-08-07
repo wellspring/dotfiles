@@ -1,0 +1,43 @@
+{
+	"name": "== Torrents ==",
+	"type": 1,
+	"state": 0,
+	"info": {
+		"category": {
+			"hosts": [
+			],
+			"schemes": [
+				"magnet"
+			],
+			"file-exts": [
+				"torrent",
+				"metalink"
+			],
+			"active-limit": 20,
+			"finished-limit": 3000,
+			"recycled-limit": 3000
+		},
+		"http": {
+			"redirection-limit": 30
+		},
+		"proxy": {
+			"port": 80,
+			"type": 0
+		},
+		"common": {
+			"folder": "\/disk\/Downloads\/_NEW(torrent)",
+			"connect-timeout": 15,
+			"transmit-timeout": 30,
+			"retry-delay": 6,
+			"retry-limit": 99,
+			"retry-count": 0,
+			"max-connections": 1,
+			"max-upload-speed": 0,
+			"max-download-speed": 0,
+			"timestamp": 1
+		}
+	},
+	"children": [
+	]
+}
+
