@@ -13,3 +13,4 @@ weechat/weechat_fifo_*
 weechat/weechat.log
 weechat/urls.log
 weechat/logs/*
+irssi/away.log
