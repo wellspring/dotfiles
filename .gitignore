@@ -1,4 +1,4 @@
-config/spotifile/spotifile.conf
+config
 fish/fish_history*
 fish/fishd.*
 irssi/away.log
