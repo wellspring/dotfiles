@@ -16,7 +16,7 @@ function package --description 'Cross platform package manager.'
         case upgrade
             switch $os
                 case arch
-                    yaourt -Syu
+                    pacaur -Syu
                     #or: RUN_AS_ROOT pacman -Syu
                 case gentoo
                     RUN_AS_ROOT layman -S; and RUN_AS_ROOT eix-sync; and RUN_AS_ROOT emerge -uavDN world
@@ -33,7 +33,7 @@ function package --description 'Cross platform package manager.'
         case install
             switch $os
                 case arch
-                    yaourt -S --needed $a
+                    pacaur -S --needed $a
                     #or: RUN_AS_ROOT pacman -S --needed $a
                 case gentoo
                     RUN_AS_ROOT emerge -av
@@ -49,8 +49,8 @@ function package --description 'Cross platform package manager.'
         case remove uninstall
             switch $os
                 case arch
-                    yaourt -R $a
-                    #or: RUN_AS_ROOT pacman -R $a
+                    pacaur -Rs $a
+                    #or: RUN_AS_ROOT pacman -Rs $a
                 case gentoo
                     RUN_AS_ROOT emerge -C $a
                 case debian
@@ -65,7 +65,7 @@ function package --description 'Cross platform package manager.'
         case search
             switch $os
                 case arch
-                    yaourt -Ss $a
+                    pacaur -Ss $a
                     #or: RUN_AS_ROOT pacman -Ss $a
                 case gentoo
                     RUN_AS_ROOT eix $a
@@ -82,7 +82,7 @@ function package --description 'Cross platform package manager.'
         case show info query
             switch $os
                 case arch
-                    yaourt -Sii $a
+                    pacaur -Sii $a
                     #or: RUN_AS_ROOT pacman -Sii $a
                 case debian
                     RUN_AS_ROOT aptitude show $a
@@ -100,7 +100,7 @@ function package --description 'Cross platform package manager.'
         case list 'file*'
             switch $os
                 case arch
-                    yaourt -Ql $a
+                    pacaur -Ql $a
                     #or: RUN_AS_ROOT pacman -Ql $a
                 case debian
                     RUN_AS_ROOT apt-file list $a
@@ -113,7 +113,7 @@ function package --description 'Cross platform package manager.'
         case installed
             switch $os
                 case arch
-                    yaourt -Qet
+                    pacaur -Qet
                     #or: RUN_AS_ROOT pacman -Qet
                 case debian
                     dpkg --get-selections
@@ -135,7 +135,7 @@ function package --description 'Cross platform package manager.'
         case thatown
             switch $os
                 case arch
-                    yaourt -Qo $a
+                    pacaur -Qo $a
                     #or: RUN_AS_ROOT pacman -Qo $a
                 case '*'
                     echo "Command not supported on this Operating System."
@@ -144,7 +144,7 @@ function package --description 'Cross platform package manager.'
         case '*'
             switch $os
                 case arch
-                    yaourt $a
+                    pacaur $a
                     # or: RUN_AS_ROOT pacman $a
                 case gentoo
                     RUN_AS_ROOT emerge $a
