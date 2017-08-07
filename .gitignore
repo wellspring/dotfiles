@@ -1,6 +1,7 @@
 fish/fish_history*
 fish/fishd.*
 irssi/away.log
+local
 pentadactyl/info/default/cache
 pentadactyl/info/default/command-history
 pentadactyl/info/default/local-marks
