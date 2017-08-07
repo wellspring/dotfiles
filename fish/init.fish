@@ -13,7 +13,7 @@ set -Ux BROWSER "qutebrowser"
 set -Ux TERMINAL "urxvtc"
 # Configure various apps using environement variables
 set -Ux LESS "-McifR"
-set -Ux TZ "Europe/Paris"
+set -Ux TZ "Europe/Stockholm"
 set -Ux SBT_OPTS "-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512M"
 set -Ux VMWARE_USE_SHIPPED_GTK yes
 set -Ux RAILS_ENV development
