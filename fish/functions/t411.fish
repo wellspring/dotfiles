@@ -1,0 +1,3 @@
+function t411
+	curl 'https://www.t411.ch/users/update/' -H 'Host: www.t411.ch' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0' -H 'Accept: application/json, text/javascript, */*; q=0.01' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'X-Requested-With: XMLHttpRequest' -H 'Referer: https://www.t411.ch/' -H 'Cookie: __cfduid=d4145471efc96b3336b7b7a191b553ab31474640509; uid=103761280; pass=8cad8eff18a5a9a53babfe3aebc84001f6c85fbd; authKey=6c8f324e2a06adaff43a4dc99a50fefc; authApi=103761280%3A266%3Ab299fb64f21b39d3d9351ffd48bc11c6; last_access=1474713142' -H 'DNT: 1' -H 'Connection: keep-alive' -H 'Content-Length: 0' | jq .data
+end
