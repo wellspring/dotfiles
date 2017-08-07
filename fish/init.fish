@@ -9,7 +9,7 @@ set -Ux SVN_EDITOR "$EDITOR"
 set -Ux SUDO_EDITOR "$EDITOR"
 set -Ux VISUAL "vim"
 set -Ux PAGER "less"
-set -Ux BROWSER "firefox"
+set -Ux BROWSER "qutebrowser"
 set -Ux TERMINAL "urxvtc"
 # Configure various apps using environement variables
 set -Ux LESS "-McifR"
