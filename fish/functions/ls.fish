@@ -1,3 +1,3 @@
 function ls
-	command ls -vF --color=auto $argv; 
+  command ls --color=auto -v -F -h -X --time-style=long-iso --group-directories-first $argv;
 end
