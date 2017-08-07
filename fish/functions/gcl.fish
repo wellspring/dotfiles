@@ -1,3 +1,3 @@
 function gcl
-	git clone $argv; 
+	git clone --depth=1 $argv;
 end
