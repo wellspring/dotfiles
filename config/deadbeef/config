@@ -1,0 +1,98 @@
+artwork.filemask *cover*.jpg;*front*.jpg;*folder*.jpg;*cover*.png;*front*.png;*folder*.png
+cli_add_playlist_name Default
+cli_add_to_specific_playlist 0
+deadbeef_version 0.7.2
+filechooser.lastdir file:///disk/music
+gtkui.columns.playlist [{"title":"♫","id":"1","format":"%playstatus%","size":"50","align":"0","color_override":"0","color":"#ff000000"},{"title":"Track No","id":"-1","format":"%tracknumber%","size":"50","align":"1","color_override":"0","color":"#ff000000"},{"title":"Artist / Album","id":"-1","format":"%artist% - %album%","size":"352","align":"0","color_override":"0","color":"#ff000000"},{"title":"Title","id":"-1","format":"%title%","size":"341","align":"0","color_override":"0","color":"#ff000000"},{"title":"Duration","id":"-1","format":"%length%","size":"50","align":"0","color_override":"0","color":"#ff000000"}]
+gtkui.hide_remove_from_disk 1
+gtkui.layout.0.6.2 vbox expand="0 1" fill="1 1" homogeneous=0 {hbox expand="0 1 0" fill="1 1 1" homogeneous=0 {playtb {} seekbar {} volumebar {} } tabbed_playlist hideheaders=0 width=1882 {} } 
+gtkui.mmb_delete_playlist 1
+gtkui.name_playlist_from_folder 1
+gtkui.statusbar.visible 1
+gtkui.tabscroll 0
+gtkui.titlebar_playing_tf %artist% - %title% - DeaDBeeF-%_deadbeef_version%
+gtkui.titlebar_stopped_tf DeaDBeeF-%_deadbeef_version%
+gui_plugin GTK2
+hotkey.key01 "Ctrl f" 0 0 find
+hotkey.key02 "Ctrl o" 0 0 open_files
+hotkey.key03 "Ctrl q" 0 0 quit
+hotkey.key04 "Ctrl n" 0 0 new_playlist
+hotkey.key05 "Ctrl a" 0 0 select_all
+hotkey.key06 "Escape" 0 0 deselect_all
+hotkey.key07 "Ctrl m" 0 0 toggle_stop_after_current
+hotkey.key08 "Ctrl j" 0 0 jump_to_current_track
+hotkey.key09 "F1" 0 0 help
+hotkey.key10 "Delete" 1 0 remove_from_playlist
+hotkey.key11 "Ctrl w" 0 0 remove_current_playlist
+hotkey.key14 "Return" 0 0 play
+hotkey.key15 "Ctrl p" 0 0 toggle_pause
+hotkey.key16 "Alt 1" 0 0 playlist1
+hotkey.key17 "Alt 2" 0 0 playlist2
+hotkey.key18 "Alt 3" 0 0 playlist3
+hotkey.key19 "Alt 4" 0 0 playlist4
+hotkey.key20 "Alt 5" 0 0 playlist5
+hotkey.key21 "Alt 6" 0 0 playlist6
+hotkey.key22 "Alt 7" 0 0 playlist7
+hotkey.key23 "Alt 8" 0 0 playlist8
+hotkey.key24 "Alt 9" 0 0 playlist9
+hotkey.key25 "Alt 0" 0 0 playlist10
+hotkey.key26 z 0 0 prev
+hotkey.key27 x 0 0 play
+hotkey.key28 c 0 0 toggle_pause
+hotkey.key29 v 0 0 stop
+hotkey.key30 b 0 0 next
+hotkey.key31 n 0 0 playback_random
+hotkey.key32 "Ctrl k" 0 0 toggle_stop_after_album
+hotkeys_created 1
+ignore_archives 0
+junk.enable_cp1251_detection 1
+mainwin.geometry.h 992
+mainwin.geometry.w 1882
+mainwin.geometry.x 19
+mainwin.geometry.y 51
+network.http_user_agent deadbeef
+network.proxy.port 8080
+network.proxy.type HTTP
+notify.albumart 1
+notify.albumart_size 64
+notify.enable 1
+notify.format_content_tf %artist% - %album%
+notify.format_title_tf %title%
+output_plugin PulseAudio output plugin
+playback.loop 0
+playback.order 2
+playback.volume 0.0000000
+playlist.current 2
+playlist.cursor.0 350
+playlist.cursor.1 213
+playlist.cursor.2 41
+playlist.cursor.3 45
+playlist.cursor.4 0
+playlist.cursor.5 0
+playlist.cursor.6 0
+playlist.scroll.0 10083
+playlist.scroll.1 5973
+playlist.scroll.2 813
+playlist.scroll.3 957
+playlist.scroll.4 0
+playlist.scroll.5 0
+playlist.scroll.6 0
+playlist.scroll.cursorfollowplayback 1
+playlist.tab.00000 _Bonkers Discography
+playlist.tab.00001 Infected Mushroom
+playlist.tab.00002 The Prodigy
+prefwin.geometry.h 560
+prefwin.geometry.w 638
+prefwin.geometry.x 641
+prefwin.geometry.y 258
+replaygain_mode 0
+replaygain_scale 0
+resume.paused 1
+resume.playlist 2
+resume.position 17.345375
+resume.track 41
+searchwin.geometry.h 150
+searchwin.geometry.w 450
+searchwin.geometry.x 733
+searchwin.geometry.y 457
+streamer.8_to_16 0
