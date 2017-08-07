@@ -1,3 +1,3 @@
 function netstat
-	cl netstat $argv; 
+	cl sudo netstat $argv; 
 end
