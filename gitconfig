@@ -158,4 +158,7 @@
     wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
     bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
     bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+    staged = diff --name-only --cached
+    modified = diff --name-only
+    untracked =  !git status --porcelain | grep "^?? " | sed -e 's/^[?]* //'
 
