@@ -4,7 +4,6 @@ fish/fishd.*
 irssi/away.log
 local
 pentadactyl/info/default/cache
-pentadactyl/info/default/command-history
 pentadactyl/info/default/local-marks
 pentadactyl/info/default/register-ring
 pentadactyl/info/default/registers

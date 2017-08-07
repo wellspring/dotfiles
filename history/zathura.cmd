@@ -1,0 +1,3 @@
+:print
+:q
+:help
