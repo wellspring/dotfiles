@@ -12,6 +12,7 @@ vim/clipboard.txt
 vim/plugged
 vim/view
 weechat/logs/*
+weechat/menu.conf
 weechat/urls.log
 weechat/weechat.log
 weechat/weechat_fifo_*
