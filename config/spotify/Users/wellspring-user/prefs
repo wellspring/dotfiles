@@ -1,0 +1,5 @@
+ui.show_friend_feed=false
+ui.show_unplayable_tracks=true
+audio.normalize_v2=false
+audio.sync_bitrate_enumeration=4
+audio.play_bitrate_enumeration=4

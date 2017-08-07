@@ -1,0 +1,6 @@
+app.autostart-configured=true
+app.autostart-mode=""
+core.clock_delta=0
+storage.last-location="/home/william/.cache/spotify/Storage"
+autologin.username="wellspring"
+autologin.canonical_username="wellspring"
