@@ -1,0 +1,51 @@
+[Default Applications]
+
+# -- File Browser
+inode/directory=spacefm-folder-handler.desktop;
+x-scheme-handler/file=spacefm-folder-handler.desktop;
+
+# -- Web Browser
+text/html=userapp-Firefox-5Y9GNY.desktop
+x-scheme-handler/http=userapp-Firefox-5Y9GNY.desktop
+x-scheme-handler/https=userapp-Firefox-5Y9GNY.desktop
+x-scheme-handler/ftp=userapp-Firefox-5Y9GNY.desktop
+x-scheme-handler/chrome=userapp-Firefox-5Y9GNY.desktop
+application/x-extension-htm=userapp-Firefox-5Y9GNY.desktop
+application/x-extension-html=userapp-Firefox-5Y9GNY.desktop
+application/x-extension-shtml=userapp-Firefox-5Y9GNY.desktop
+application/xhtml+xml=userapp-Firefox-5Y9GNY.desktop
+application/x-extension-xhtml=userapp-Firefox-5Y9GNY.desktop
+application/x-extension-xht=userapp-Firefox-5Y9GNY.desktop
+
+# -- Viewer
+application/pdf=zathura.desktop
+application/epub+zip=calibre-ebook-viewer.desktop;
+image/vnd.djvu=evince.desktop;okularApplication_djvu.desktop;
+
+# -- Office
+text/csv=libreoffice-calc.desktop;
+#...
+
+# -- Scripts
+#text/x-shellscript=
+
+
+# -- OTHER
+#...
+[Added Associations]
+x-scheme-handler/http=userapp-Firefox-5Y9GNY.desktop;
+x-scheme-handler/https=userapp-Firefox-5Y9GNY.desktop;
+x-scheme-handler/ftp=userapp-Firefox-5Y9GNY.desktop;
+x-scheme-handler/chrome=userapp-Firefox-5Y9GNY.desktop;
+text/html=userapp-Firefox-5Y9GNY.desktop;
+application/x-extension-htm=userapp-Firefox-5Y9GNY.desktop;
+application/x-extension-html=userapp-Firefox-5Y9GNY.desktop;
+application/x-extension-shtml=userapp-Firefox-5Y9GNY.desktop;
+application/xhtml+xml=userapp-Firefox-5Y9GNY.desktop;
+application/x-extension-xhtml=userapp-Firefox-5Y9GNY.desktop;
+application/x-extension-xht=userapp-Firefox-5Y9GNY.desktop;
+inode/directory=qdirstat.desktop;
+text/csv=libreoffice-calc.desktop;
+application/pdf=zathura-pdf-mupdf.desktop;
+image/vnd.djvu=evince.desktop;okularApplication_djvu.desktop;
+application/epub+zip=calibre-ebook-viewer.desktop;
