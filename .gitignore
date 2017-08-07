@@ -1,8 +1,20 @@
-config
-fish/fish_history*
-fish/fishd.*
-irssi/away.log
+# .gitignore
+
+# -- Big folders
 local
+config
+history
+vim/plugged
+
+# -- Logs
+**/*.log
+weechat/logs/*
+
+# -- tmp
+vim/view
+
+# -- Other
+fish/fishd.*
 pentadactyl/info/default/cache
 pentadactyl/info/default/local-marks
 pentadactyl/info/default/register-ring
@@ -10,10 +22,6 @@ pentadactyl/info/default/registers
 vim/.netrwhist
 vim/autoload/plug.vim.old
 vim/clipboard.txt
-vim/plugged
-vim/view
-weechat/logs/*
 weechat/menu.conf
-weechat/urls.log
-weechat/weechat.log
 weechat/weechat_fifo_*
+
