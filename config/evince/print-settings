@@ -1,0 +1,34 @@
+[Print Settings]
+cover-after=none
+print-at=now
+print-at-time=
+evince-print-setting-page-scale=2
+evince-print-setting-page-size=false
+cups-job-priority=50
+evince-print-setting-page-autorotate=true
+cover-before=none
+printer=Printer
+cups-number-up=1
+
+cups-InputSlot=Default
+duplex=simplex
+cups-Duplex=None
+cups-Quality=FromPrintoutMode
+cups-job-sheets=none,none
+default-source=Default
+cups-PrintoutMode=Draft.Gray
+cups-DryTime=Zero
+
+cups-number-up-layout=lrtb
+number-up-layout=lrtb
+
+[Page Setup]
+PPDName=A4
+DisplayName=A4
+Width=210
+Height=297
+MarginTop=6.3499999999999996
+MarginBottom=14.224
+MarginLeft=6.3499999999999996
+MarginRight=6.3499999999999996
+Orientation=portrait
