@@ -235,6 +235,7 @@ for_window [title="^Scratchpad :: "]        move to scratchpad sticky enable
 assign [class="Chromium"]                   $workspace2
 assign [class="Firefox"]                    $workspace2
 assign [class="luakit"]                     $workspace2
+assign [class="qutebrowser"]                $workspace2
 assign [class="uget-gtk"]                   $workspace6
 assign [title="DeaDBeeF$"]                  $workspace9
 assign [title="^cmus v"]                    $workspace9
