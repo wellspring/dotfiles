@@ -87,6 +87,7 @@ bindsym $mod+r                mode "resize"
 bindsym $mod+m                mode "move" focus floating
 bindsym $mod+Mod2+KP_0        mode "tv-remote"
 bindsym $mod+KP_Insert        mode "tv-remote"
+bindsym Mod1+F4               kill
 bindsym $mod+Shift+c          kill
 bindsym $mod+Shift+i          reload
 bindsym $mod+Shift+r          restart
