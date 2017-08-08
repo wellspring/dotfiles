@@ -258,16 +258,5 @@ bar {
 }
 
 # [ Autostart ]
-#exec feh --bg-fill ~/.wallpaper.jpg                                # set wallpaper
-exec setxkbmap -option keypad:pointerkeys                          # enable keypad mouse
-exec setxkbmap -option grp:switch,grp:alt_shift_toggle us,se,ru,fr # set keyboard languages
-exec xset r rate 200 40                                            # set keyboard speed
-#exec xset s off -dpms                                             # disable screen black
-exec urxvtd -q -f -o                                               # terminal daemon to keep only one process open
-exec compton -b --config ~/.compton.conf                           # composition manager
-exec unclutter                                                     # hide mouse cursor when innactive
-exec udiskie                                                       # auto-mount usb disks
-#exec start-scratchpad                                             # note scratchpas (vim)
-#exec albert                                                       # launcher
-#start-pulseaudio-x11                                              # (audio daemon)
+exec wallpaper-set ~/.wallpaper.jpg                                # reload wallpaper
 
