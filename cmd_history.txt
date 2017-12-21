@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+
+$ (for file in ~/.fish/functions/*; has $(basename $file .fish) || echo " >> \`$file\` has no equivalent.") | tee TODO.from.fish

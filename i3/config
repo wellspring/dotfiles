@@ -109,11 +109,13 @@ bindsym $mod+e                exec editor-gui
 bindsym $mod+g                exec editor-gui
 bindsym $mod+Shift+f          exec file-manager
 bindsym $mod+w                exec web-browser
+bindsym $mod+k                exec kodi
 bindsym $mod+p                exec tvremote.sendclipboard # or google-clipboard ?
-bindsym $mod+n               [title="^Scratchpad :: Notes"] scratchpad show
-bindsym $mod+c               [title="^Scratchpad :: Code"]  scratchpad show
-bindsym $mod+grave                                          scratchpad show
-bindsym $mod+asciitilde                                     move to scratchpad sticky enable
+bindsym $mod+c                exec code-browser
+#bindsym $mod+c               [title="^Scratchpad :: Code"]  scratchpad show
+bindsym $mod+n                [title="^Scratchpad :: Notes"] scratchpad show
+bindsym $mod+grave                                           scratchpad show
+bindsym $mod+asciitilde                                      move to scratchpad sticky enable
 
 bindsym Print        --release exec screenshot --screen
 bindsym Mod1+Sys_Req --release exec screenshot --current-window
@@ -172,11 +174,15 @@ mode "move" {
   bindsym Escape              mode "default"
 }
 mode "tv-remote" {
+  bindsym r                   exec reboot tv
+  bindsym Escape              exec tvremote.sendkey Back
+  bindsym Backspace           exec tvremote.sendkey Back
+  bindsym b                   exec tvremote.sendkey Back
+  bindsym q                   exec tvremote.sendkey Back
   bindsym Right               exec tvremote.sendkey Right
   bindsym Up                  exec tvremote.sendkey Up
   bindsym Down                exec tvremote.sendkey Down
   bindsym Left                exec tvremote.sendkey Left
-  bindsym Backspace           exec tvremote.sendkey Back
   bindsym space               exec tvremote.sendkey Select
   bindsym Return              exec tvremote.sendkey Select
   bindsym i                   exec tvremote.sendkey Info
@@ -196,7 +202,6 @@ mode "tv-remote" {
   bindsym XF86AudioNext       exec tvremote next
   bindsym $mod+KP_Insert      mode "default"
   bindsym $mod+Mod2+KP_0      mode "default"
-  bindsym Escape              mode "default"
   bindsym g                   mode "tv-remote-goto"
 }
 mode "tv-remote-goto" {
@@ -208,6 +213,7 @@ mode "tv-remote-goto" {
   bindsym i                   exec tvremote.goto Picture, mode "tv-remote"
   bindsym f                   exec tvremote.goto Favorites, mode "tv-remote"
   bindsym Shift+s             exec tvremote.goto Settings, mode "tv-remote"
+  bindsym b                   exec tvremote.sendkey Back, mode "tv-remote"
   bindsym $mod+KP_Insert      mode "default"
   bindsym $mod+Mod2+KP_0      mode "default"
   bindsym Escape              mode "tv-remote"
@@ -260,3 +266,5 @@ bar {
 # [ Autostart ]
 exec wallpaper-set ~/.wallpaper.jpg                                # reload wallpaper
 
+
+# vim:filetype=i3

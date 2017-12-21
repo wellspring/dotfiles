@@ -23,3 +23,4 @@ definition/
 
 # PHP
 --langmap=php:.engine.inc.module.theme.install.php --PHP-kinds=+cf-v
+

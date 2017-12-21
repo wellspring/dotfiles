@@ -1,19 +1,553 @@
-set secure
-set viminfo=
-set noswapfile
-set nobackup
-set nowritebackup
-set history=0
-set noshelltemp
-set cryptmethod=blowfish2
+" .cvimrc -- chromium-vim configuration file
 
-function Scramble()
-    %!gpg -q --cipher-algo aes256 --symmetric --armor 2>/dev/null
-endfunction
+" -- Settings
 
-function Unscramble()
-    %!gpg -q --cipher-algo aes256 --decrypt --armor 2>/dev/null
-endfunction
+let configpath = '/home/w/.cvimrc'
+let homedirectory = '/home/w'
+set localconfig " Read the cVimrc config from `configpath` -- when this is set, you connot save from cVim's options page (default: false)
 
-map <silent> <F7> :call Scramble()<Esc>
-map <silent> <F8> :call Unscramble()<Esc>
+set cncpcompletion                      " use `<C-n>` and `<C-p>` to cycle through completion results (default: false)
+set scalehints                          " animate link hints as they appear (default: false)
+set linkanimations                      " show fade effect when link hints open and close (default: false)
+set dimhintcharacters                   " dim letter matches in hint characters rather than remove them from the hint (default: true)
+set typelinkhints                       " (numerichints required) type text in the link to narrow down numeric hints (default: false)
+set autohidecursor                      " hide the mouse cursor when scrolling -- useful for Linux, which doesn't auto-hide the cursor on keydown (default: false)
+set noshowtabindices                    " DISABLE: display the tab index in the tab's title (default: false)
+set noautofocus                         " DISABLE: allows websites to automatically focus an input box when they are first loaded (default: true)
+set changelog                           " auto open the changelog when cVim is updated (default: true)
+
+let barposition = "top"                 " set the default position of the command bar (top/bottom, default: top)
+let mapleader = "\\"                    " set the default `<Leader>` key (default: \)
+let hintcharacters = "asdfghjkl;"       " set the default characters to be used in link hint mode (default: asdfgqwertzxcvb, but the homerow is much better!)
+let zoomfactor = 0.05                   " set the zoom factor (default: 0.1)
+let locale = "us"                       " set the locale of the site being completed/searched on (default: none)
+let searchlimit = 30                    " set the amount of results displayed in the command bar (default: 25)
+let defaultengine = "duckduckgo"        " set the default search engine (default: google)
+let searchalias d = "duckduckgo"        " d -> duckduckgo
+let searchalias g = "google"            " g -> google
+let searchalias w = "wikipedia"         " w -> wikipedia
+let searchalias i = "imdb"              " i -> imdb
+let vimcommand = 'gvim'                 " set the external editor command
+
+imap <C-o> editWithVim
+
+" -- Mappings
+
+"TODO: left/right (tab move)
+
+map <Down> scrollDown                   " [Movement] scroll down
+map <Up>scrollUp                        " [Movement] scroll up
+map <C-Down> scrollPageDown             " [Movement] scroll half-page down
+map <C-Up> scrollPageUp                 " [Movement] scroll half-page up
+map h scrollLeft                        " [Movement] scroll left
+map j scrollDown                        " [Movement] scroll down
+map J scrollPageDown                    " [Movement] scroll half-page down
+map K scrollPageUp                      " [Movement] scroll half-page up
+map k scrollUp                          " [Movement] scroll up
+map l scrollRight                       " [Movement] scroll right
+map gg scrollToTop                      " [Movement] scroll to the top of the page
+map <N>g% percentScroll                 " [Movement] scroll N percent down the page
+map G scrollToBottom                    " [Movement] scroll to the bottom of the page
+map 0 scrollToLeft                      " [Movement] scroll to the left of the page
+map $ scrollToRight                     " [Movement] scroll to the right of the page
+map i goToInput                         " [Movement] go to first input box
+"goToLastInput                          " [Movement] go to the last focused input box by `gi`
+map f createTabbedHint                  " [Link Hints] open link in new tab
+map F createHint                        " [Link Hints] open link in current tab
+map W createHintWindow                  " [Link Hints] open link in new window
+map A openLastHint                      " [Link Hints] repeat last hint command
+map <Leader>h createHoverHint           " [Link Hints] trigger a hover event (mouseover + mouseenter)
+map <Leader>H createUnhoverHint         " [Link Hints] trigger a unhover event (mouseout + mouseleave)
+map mf createMultiHint                  " [Link Hints] open multiple links
+map my multiYankUrl                     " [Link Hints] yank multiple links (open the list of links with P)
+map Y yankUrl                           " [Link Hints] copy URL from link to clipboard
+map M<*> addQuickMark                   " [Quick Marks] create quickmark
+map go<*> openQuickMark                 " [Quick Marks] open quickmark in the current tab
+map gt<*> openQuickMarkTabbed           " [Quick Marks] open quickmark in a new tab
+map gw<*> openQuickMarkWindowed         " [Quick Marks] open quickmark in a new window
+map gs :viewsource!                     " [Miscellaneous] go to the view-source:// page for the current Url
+map gu goUpUrl                          " [Miscellaneous] go up one path in the URL
+map gU goToRootUrl                      " [Miscellaneous] go to to the base URL
+map gf nextFrame                        " [Miscellaneous] cycle through iframes
+map gF rootFrame                        " [Miscellaneous] go to the root frame
+map gd :chrome://downloads<CR>          " [Miscellaneous] alias to :chrome://downloads<CR>
+map ge :chrome://extensions<CR>         " [Miscellaneous] alias to :chrome://extensions<CR>
+map <C-q> :chrome://restart<CR>         " [Miscellaneous] restart Google Chrome
+" | `I`                       | | :history                        |search through browser history
+" | `b`                       | | :bookmarks                      |search through bookmarks
+" | `<C-b>`                   | | createBookmark                  |create or toggle a bookmark for the current URL
+
+map r reloadTabUncached                 " [Miscellaneous] reload the current tab + local cache
+map R reloadTab                         " [Miscellaneous] reload the current tab
+map <M-R> reloadAllTabs                 " [Miscellaneous] reload all tabs
+map c cancelWebRequest                  " [Miscellaneous] stop the current tab from loading
+map C cancelAllWebRequests              " [Miscellaneous] stop all tabs from loading
+
+map . repeatCommand                     " [Miscellaneous] repeat the last command
+map : openCommandBar                    " [Miscellaneous] open command bar
+map ; openLinkSearchBar                 " [Miscellaneous] open link search bar (same as pressing `/?`)
+map <N><Esc> passKeys                   " [Miscellaneous] pass `<N>` keys through to the current page
+map mm muteTab                          " [Miscellaneous] mute/unmute a tab
+map z<Enter> toggleImageZoom            " [Miscellaneous] toggle image zoom (same as clicking the image on image-only pages)
+map y yankDocumentUrl                   " [Miscellaneous] copy the URL of the current page to the clipboard
+map yd yankRootUrl                      " [Miscellaneous] copy the URL of the current frame to the clipboard
+map yh yankHighlight                    " [Miscellaneous] copy the currently matched text from find mode (if any)
+map Y yankWindowUrls                    " [Miscellaneous] copy the URLs in the current window
+map p openPasteTab                      " [Miscellaneous] open the clipboard selection in a new tab
+map P openPaste                         " [Miscellaneous] open the clipboard selection
+
+map a :tabnew google<cr>                " [] Open google.
+
+" | `''`                      | | lastScrollPosition              |go to last scroll position
+"
+" | **Miscellaneous**         | |                                 |
+" | `i`                       | | insertMode                      |enter insert mode (escape to exit)
+" | `;<*>`                    | | setMark                         |create mark <*>
+" | `'<*>`                    | | goToMark                        |go to mark <*>
+"
+"
+" | **Tab Navigation**        | |                                 |
+" | `gt`, `K`, `R`            | | nextTab                         |navigate to the next tab
+" | `gT`, `J`, `E`            | | previousTab                     |navigate to the previous tab
+" | `g0`, `g$`                | | firstTab, lastTab               |go to the first/last tab
+" | `<C-S-h>`, `gh`           | | openLastLinkInTab               |open the last URL in the current tab's history in a new tab
+" | `<C-S-l>`, `gl`           | | openNextLinkInTab               |open the next URL from the current tab's history in a new tab
+" | `X`                       | | map u lastClosedTab                   |open the last closed tab
+" | `x`                       | | map d closeTab                        |close the current tab
+" | `gxT`                     | | map D<Left> closeTabLeft                    |close the tab to the left of the current tab
+" | `gxt`                     | | map D<Right> closeTabRight                   |close the tab to the right of the current tab
+" | `gx0`                     | | map D0 closeTabsToLeft                 |close all tabs to the left of the current tab
+" | `gx$`                     | | map D$ closeTabsToRight                |close all tabs to the right of the current tab
+" | `t`                       | | map t :tabnew                         |:tabnew
+" | `T`                       | | map T :tabnew @%                      |:tabnew <CURRENT URL>
+" | `O`                       | | map o :open                        |:open <CURRENT URL>
+" | `O`                       | | map O :open @%                        |:open <CURRENT URL>
+" | `<N>%`                    | | goToTab                         |switch to tab <N>
+" | `H`, `S`                  | | goBack                          |go back
+" | `L`, `D`                  | | goForward                       |go forward
+" | `B`                       | | :buffer                         |search for another active tab
+" | `<`                       | | map <S-Left> moveTabLeft                     |move current tab left
+" | `>`                       | | map <S-Right> moveTabRight                    |move current tab right
+" | `]]`                      | | map ]] nextMatchPattern                |click the "next" link on the page (see nextmatchpattern above)
+" | `[[`                      | | map ]] previousMatchPattern            |click the "back" link on the page (see previousmatchpattern above)
+" | `gp`                      | | map sp pinTab                          |pin/unpin the current tab (sp: Set Pinned)
+" | `<C-6>`                   | | lastUsedTab                     |toggle the focus between the last used tabs
+"
+"
+" | **Find Mode**             | |                                 |
+" map / openSearchBar                     |open search bar
+" map ? openSearchBarReverse              |open search bar (reverse search)
+" map n nextSearchResult                |next search result
+" map N previousSearchResult            |previous search result
+" map v toggleVisualMode                |enter visual/caret mode (highlight current search/selection)
+" map V toggleVisualLineMode            |enter visual line mode from caret mode/currently highlighted search
+" map <F2> clearSearchHighlight            |clear search mode highlighting
+"
+"
+" | **Text boxes**            | |                                 |
+" | unmapped                  | edit with Vim in a terminal (need the [cvim_server.py](https://github.com/1995eaton/chromium-vim/blob/master/cvim_server.py) script running for this to work and the VIM_COMMAND set inside that script) | editWithVim     |
+
+
+
+"| unmapped                  | edit text with external editor                  V                     | createEditHint                  |      // Link Hints
+"| unmapped                  | call a code block with the link as the first argument                 | createScriptHint(`<FUNCTION_NAME>`) | // Link Hints
+"| unmapped                  | opens images in a new tab                                             | fullImageHint                   |    // Link Hints
+
+
+"-----
+
+" map af createActiveTabbedHint
+" map $ lastTab
+" map 0 firstTab
+" map <Space> l
+" map <S-Space> h
+" map gS :viewsource&<CR>
+" map xx closeTab
+" map qq xx
+" map Q closeTab
+" map gs fullImageHint
+" map gq :restore<Space>
+" map a<Space> z<Enter>
+" map <C-e> z<Enter>
+" map <C-k> nextTab
+" map <C-j> previousTab
+" map cn :execute nzz<CR>
+" map cN :execute Nzz<CR>
+" map <C-d> :file ~/
+" map m* setMark
+" map <C-s> openLastHint
+" map <C-g> :set smoothscroll!<CR>
+" map <C-h> :nohl<CR>
+" map cc :set hud!<CR>
+" map aa :tabopen g<Space>
+" map ga :settings<CR>
+" map g0 scrollToLeft
+" map I yankHighlight
+" map g$ scrollToRight
+" imap <C-y> selectAll
+" imap <C-a> <C-i>
+" imap <C-l> forwardWord
+" imap <C-h> backwardWord
+" map <BS> <Nop>
+" map <Leader>s :source<CR>
+" map <Leader>n :set numerichints!<CR>
+" map ci :call getIP<CR>
+" map ? openLinkSearchBar
+"
+" fixChromiumWikiBug -> {{
+"   [].slice.call(document.querySelectorAll('*[accesskey]')).forEach(function(e) {
+"     e.removeAttribute('accesskey');
+"   });
+" }}
+" site '*://*/*' {
+"   call fixChromiumWikiBug
+" }
+"
+" getIP -> {{
+"   httpRequest({url: 'http://www.telize.com/geoip', json: true}, function(res) {
+"     Status.setMessage(res.ip + ' - ' + res.isp);
+"   });
+" }}
+"
+" site '*://*.netflix.com/watch*' {
+"   unmap <Space>
+"   unmap f
+" }
+"set nosmoothscroll
+" set nodimhintcharacters
+" set noautofocus
+" set cncpcompletion
+" set nohud
+" set typelinkhints
+" let scrollduration = 250
+" let homedirectory = '/home/jake'
+" let searchlimit = 25
+"
+" let completionengines = [
+"       \ 'google',  'wikipedia', 'imdb',
+"       \ 'amazon', 'wolframalpha', 'duckduckgo'
+"       \ ]
+" let qmark
+"       \ a = ['http://www.reddit.com/r/learnjavascript/new', 'http://www.reddit.com/r/learnpython/new/', 'http://www.reddit.com/r/learnprogramming/new']
+" imap <C-o> editWithVim
+" map <C-o> :duplicate<CR>
+" map af createTabbedHint
+" map xx closeTab
+" map $ lastTab
+"
+" "
+"
+" map 0 firstTab
+" map g0 scrollToLeft
+" map g$ scrollToRight
+" map gS :viewsource&<CR>
+" map qq closeTab
+" map gs fullImageHint
+" map <Space> l
+" map <S-Space> h
+" map <A-r> nextTab
+" map <A-e> previousTab
+" map gq :restore<Space>
+" map a<Space> z<Enter>
+" map ab :bookmarks&<Space>
+" map <C-k> nextTab
+" map <C-j> previousTab
+" map cn :execute nzz<CR>
+" map cN :execute Nzz<CR>
+" map <C-d> :file ~/
+" map <C-e> scrollUp
+" map <C-s> openLastHint
+" map <C-g> :set smoothscroll!<CR>
+" map <C-h> :nohl<CR>
+" map cc :set hud!<CR>
+" map aa :tabopen g<Space>
+" map T :tabopen<CR>
+" map , :set numerichints!<CR>
+" map ga :settings<CR>
+" unmap j k h l
+" let @@a = 3
+"
+" site '*://*/*' {
+"   call :script [].slice.call(document.querySelectorAll('*[accesskey]')).forEach(function(e){e.removeAttribute('accesskey')});
+"   call :script console.log(3);
+" }
+"
+" let blacklists = ["http://localhost/*","http://lo-th.github.io/*"]
+"
+" f(x) -> {{
+"   console.log(x);
+" }}
+"
+" command refresh open @%
+"
+" -> {{
+"   console.log();
+" }}
+"
+" " Comment 1
+" "
+" " Comment 2
+"
+" let array = [0, [0, 1, 123], 2]
+" let array_elem = array[1 ][ 2]
+"
+
+
+
+
+" | vimport                             | integer                            | set the port to be used with the `editWithVim` insert mode command                        | 8001                                                                        |
+" | numerichints                        | boolean                            | use numbers for link hints instead of a set of characters                                 | false                                                                       |
+" | blacklists                          | array of strings                   | disable cVim on the sites matching one of the patterns                                    | []                                                                          |
+" | completionengines                   | array of strings                   | use only the specified search engines                                                     | ["google", "duckduckgo", "wikipedia", "amazon"]                             |
+" | qmark <alphanumeric charcter> | string                             | add a persistent QuickMark (e.g. ```let qmark a = ["http://google.com", "http://reddit.com"]```) | none                                                                 |
+
+" let searchengine withbase = ["http://www.dogpile.com", "http://www.dogpile.com/search/web?q=%s"]
+" let qmark a = ["http://www.reddit.com", "http://www.google.com", "http://twitter.com"]
+" let blacklists = ["https://mail.google.com/*", "*://mail.google.com/*", "@https://mail.google.com/mail/*"]  "" blacklists prefixed by '@' act as a whitelist
+"
+" map <Leader>r reloadTabUncached
+" map <Leader>x :restore<Space>
+"
+" " This remaps the default 'j' mapping
+" map j scrollUp
+"
+" " You can use <Space>, which is interpreted as a
+" " literal " " character, to enter buffer completion mode
+" map gb :buffer<Space>
+"
+" " This unmaps the default 'k' mapping
+" unmap k
+"
+" " This unmaps the default 'h', 'j', 'k', and 'l' mappings
+" unmap h j k l
+"
+" " This remaps the default 'f' mapping to the current 'F' mapping
+" map f F
+"
+" " Toggle the current HUD display value
+" map <C-h> :set hud!<CR>
+"
+" " Switch between alphabetical hint characters and numeric hints
+" map <C-i> :set numerichints!<CR>
+"
+" map <C-u> rootFrame
+" map <M-h> previousTab
+" map <C-d> scrollPageDown
+" map <C-e> scrollPageUp
+" iunmap <C-y>
+" imap <C-m> deleteWord
+"
+" " Create a variable that can be used/referenced in the command bar
+" let @@reddit_prog = 'http://www.reddit.com/r/programming'
+" let @@top_all = 'top?sort=top&t=all'
+" let @@top_day = 'top?sort=top&t=day'
+"
+" " TA binding opens 'http://www.reddit.com/r/programming/top?sort=top&t=all' in a new tab
+" map TA :tabnew @@reddit_prog/@@top_all<CR>
+" map TD :tabnew @@reddit_prog/@@top_day<CR>
+"
+" " Use paste buffer in mappings
+" map T :tabnew wikipedia @"<CR>
+"
+" " Code blocks (see below for more info)
+" getIP() -> {{
+" httpRequest({url: 'http://api.ipify.org/?format=json', json: true},
+"             function(res) { Status.setMessage('IP: ' + res.ip); });
+" }}
+" " Displays your public IP address in the status bar
+" map ci :call getIP<CR>
+"
+" " Script hints
+" echo(link) -> {{
+"   alert(link.href);
+" }}
+" map <C-f> createScriptHint(echo)
+"
+" let configpath = '/path/to/your/.cvimrc'
+" set localconfig " Update settings via a local file (and the `:source` command) rather
+"                 " than the default options page in chrome
+" " As long as localconfig is set in the .cvimrc file. cVim will continue to read
+" " settings from there
+" ```
+"
+" ### Blacklists
+"  * The blacklists setting uses a custom inplementation of Chrome's @match pattern guidelines.
+"    See https://developer.chrome.com/extensions/match_patterns for a description of the syntax.
+"
+"
+" ### Site-specific Configuration
+"  * You can enable certain rc settings for sites using the blacklist match pattern as described above
+" ```vim
+" " this will enable the config block below on the domain 'reddit.com'
+" site '*://*.reddit.com/*' {
+"       unmap j
+"       unmap k
+"       set numerichints
+" }
+" ```
+"
+" ### Running commands when a page loads
+"  * In a similar fashion to the site-specific configuration described above, cVim can run commands when a page is loaded with the `call` keyword
+" ```vim
+" " In this case, when pages with a file ending in '.js' are loaded,
+" " cVim will pin the tab and then scroll down
+" site '*://*/*.js' {
+"       call :pintab
+"       call scrollDown
+" }
+" ```
+"
+" ### Mappings
+"  * Normal mappings are defined with the following structure: ```map <KEY> <MAPPING_NAME>```
+"  * Insert mappings use the same structure, but use the command "imap" instead of "map"
+"  * Control, meta, and alt can be used also:
+" ```vim
+" <C-u> " Ctrl + u
+" <M-u> " Meta + u
+" <A-u> " Alt  + u
+" ```
+"  * It is also possible to unmap default bindings with ```unmap <KEY>``` and insert bindings with ```iunmap <KEY>```
+"  * To unmap all default keybindings, use ```unmapAll```. To unmap all default insert bindings, use ```iunmapAll```
+"
+" ### Tabs
+"  * Commands that open links (`:tabnew` and `:open`) have three different properties
+"   * `!` => Open in a new tab
+"   * `$` => Open in a new window
+"   * `|` => Open in an incognito window
+"   * `&` => Open in a new tab (inactive/unfocused)
+"   * `*` => Pin the tab
+"   * `?` => Treat the query as a search
+"   * `=` => Treat the query as a URL
+"  * The use of these properties are best explained with examples:
+"
+" ```vim
+" :open! google<CR> " This is the same as :tabnew google<CR>
+"
+" :open google!<CR> " This is another way of writing the above
+"                   " (these flags can can be added to either
+"                   " the base command or the end of the final command)
+"
+" :open& google<CR> " This will open Google in a new inactive tab
+"
+" :open$ google<CR> " This will open Google in a new window
+"
+" :open&* google<CR> " The will open Google in a new inactive, pinned tab
+"
+" :tabnew google&*<CR> " Once again, this will do the same thing as the above command
+"
+" :open google&*<CR> " Again, same as above
+"
+" :open google!& " Here, the & flag will cancel out the ! flag,
+"                " opening Google in a new inactive tab
+"
+" " More examples
+" :bookmarks my_bookmark.com&  " inactive,new tab
+" :bookmarks&* my_bookmark.com " inactive,pinned,new tab
+" :bookmarks! my_bookmark.com  " new tab
+" :bookmarks$ my_bookmark.com  " new window
+" :bookmarks my_bookmark.com   " same tab
+" ```
+"
+" ### Code blocks
+"  * Code blocks allow you to interact with cVim's content scripts via the cVimrc.
+"  * Since code blocks use `eval(...)`, you should only use them if you know what you're doing.
+"
+" ```JavaScript
+" " To be used by the code block
+" set hintset_a
+"
+" " Create a code block named switchHintCharacters
+" switchHintCharacters -> {{
+"   // We are now in JavaScript mode
+"
+"   // Settings are contained in an object named settings
+"   settings.hintset_a = !settings.hintset_a;
+"   if (settings.hintset_a) {
+"     settings.hintcharacters = 'abc'; // equivalent to "let hintcharacters = 'abc'"
+"   } else {
+"     settings.hintcharacters = 'xyz';
+"   }
+"
+"   // Propagate the current settings to all tabs for the
+"   // rest of the session
+"   PORT('syncSettings', { settings: settings });
+"
+"   // Display cVim's status bar for 2 seconds.
+"   Status.setMessage('Hint Set: ' + (true ? 'a' : 'b'), 2);
+" }}
+"
+" " Run the JavaScript block
+" map <Tab> :call switchHintCharacters<CR>
+" ```
+"
+" ### Completion Engines
+"   * These are a list of completion engines that can be used in the command bar. They can be set
+"     by assigning their names to an array with the `completionengines` variable.
+"     * google, wikipedia, youtube, imdb, amazon, google-maps, wolframalpha, google-image, ebay,
+"       webster, wictionary, urbandictionary, duckduckgo, answers, google-trends, google-finance,
+"       yahoo, bing, themoviedb
+"   * Example usage:
+" ```vim
+" let completionengines = ['google', 'google-image', 'youtube'] " Show only these engines in the command bar
+" ```
+"
+
+"
+" # Command Mode
+"
+" | Command                                     | Description                                                                            |
+" | ------------------------------------------- | -------------------------------------------------------------------------------------- |
+" | :tabnew (autocomplete)                      | open a new tab with the typed/completed search                                         |
+" | :new (autocomplete)                         | open a new window with the typed/completed search                                      |
+" | :open (autocomplete)                        | open the typed/completed URL/google search                                             |
+" | :history (autocomplete)                     | search through browser history                                                         |
+" | :bookmarks (autocomplete)                   | search through bookmarks                                                               |
+" | :bookmarks /<folder> (autocomplete)   | browse bookmarks by folder/open all bookmarks from folder                              |
+" | :set (autocomplete)                         | temporarily change a cVim setting                                                      |
+" | :chrome:// (autocomplete)                   | open a chrome:// URL                                                                   |
+" | :tabhistory (autocomplete)                  | browse the different history states of the current tab                                 |
+" | :command `<NAME>` `<ACTION>`                | aliases :`<NAME>` to :`<ACTION>`                                                       |
+" | :quit                                       | close the current tab                                                                  |
+" | :qall                                       | close the current window                                                               |
+" | :restore (autocomplete)                     | restore a previously closed tab (newer versions of Chrome only)                        |
+" | :tabattach (autocomplete)                   | move the current tab to another open window                                            |
+" | :tabdetach                                  | move the current tab to a new window                                                   |
+" | :file (autocomplete)                        | open a local file                                                                      |
+" | :source (autocomplete)                      | load a cVimrc file into memory (this will overwrite the settings in the options page if the `localconfig` setting had been set previously |
+" | :duplicate                                  | duplicate the current tab                                                              |
+" | :settings                                   | open the settings page                                                                 |
+" | :nohlsearch                                 | clear the highlighted text from the last search                                        |
+" | :execute                                    | execute a sequence of keys (Useful for mappings. For example, "map j :execute 2j<CR>") |
+" | :buffer (autocomplete)                      | change to a different tab                                                              |
+" | :mksession                                  | create a new session from the current tabs in the active window                        |
+" | :delsession (autocomplete)                  | delete a saved session                                                                 |
+" | :session (autocomplete)                     | open the tabs from a saved session in a new window                                     |
+" | :script                                     | run JavaScript on the current page                                                     |
+" | :togglepin                                  | toggle the pin state of the current tab                                                |
+" | :pintab                                     | pin the current tab                                                                    |
+" | :unpintab                                   | unpin the current tab                                                                  |
+"
+" # Tips
+"
+"  * You can use `@%` in "open" commands to specify the current URL.
+"    For example, `:open @%` would essentially refresh the current page.
+"  * Prepend a number to the command to repeat that command N times
+"  * Use the up/down arrows in command/find mode to navigate through previously
+"    executed commands/searches -- you can also use this to search for previously
+"    executed commands starting with a certain combination of letters (for example,
+"    entering `ta` in the command bar and pressing the up arrow will search command
+"    history for all matches beginning with `ta`
+"
+" # Contributing
+"
+" Nice that you want to spend some time improving this extension.
+" Solving issues is always appreciated. If you're going to add a feature,
+" it would be best to [submit an issue](https://github.com/1995eaton/chromium-vim/issues).
+" You'll get feedback whether it will likely be merged.
+"
+" 1. Run `npm install` in the repository's root folder
+" 1. Run `make`
+" 1. Navigate to `chrome://extensions`
+" 1. Toggle into Developer Mode
+" 1. Click on "Load Unpacked Extension..."
+" 1. Select the cVim directory.

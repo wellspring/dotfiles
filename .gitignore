@@ -3,11 +3,13 @@
 # -- Big folders
 local
 config
-history
+history/*
 vim/plugged
 
 # -- Private
 gnupg
+config/spotifile/spotifile.conf
+config/spotify/Users/wellspring-user/prefs
 
 # -- Logs
 **/*.log
@@ -18,6 +20,12 @@ vim/view
 
 # -- Other
 fish/fishd.*
+config/Kingsoft/Office.conf
+config/deadbeef/config
+config/gtk-2.0/gtkfilechooser.ini
+config/qalculate/qalculate-gtk.cfg
+config/spacefm/session
+config/vlc/vlc-qt-interface.conf
 pentadactyl/info/default/cache
 pentadactyl/info/default/local-marks
 pentadactyl/info/default/register-ring

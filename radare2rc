@@ -1,373 +1,630 @@
 # radare2 config (disassembler/debugger)
-# r2 -AA -d -w -p <project> <bin> (or `ood+`)
+# --------------
+# ( GENERATED WITH: r2-config )
+
+##?e \x20[*] Starting radare2...
+##!title Horayyyy
+##!readlink -f `i~^file[1]` | sed 's/^/ [*] Opening binary /; s/$/ ...\n/' 2> /dev/null
+
+
+# -- Analysis
+
+#e anal.a2f = false                                        	# Use the new WIP analysis algorithm (core/p/a2f), anal.depth ignored atm (default: false, type: bool)
+e anal.afterjmp = true                                    	# Continue analysis after jmp/ujmp (default: true, type: bool)
+#e anal.arch = x86                                         	# Select the architecture to use (default: x86, type: str)
+#e anal.autoname = true                                    	# Automatically set a name for the functions, may result in some false positives (default: true, type: bool)
+#e anal.bb.align = 0x10                                    	# Possible space between basic blocks (default: 0x10, type: str)
+#e anal.bb.maxsize = 1024                                  	# Maximum basic block size (default: 1024, type: str)
+#e anal.bb.split = true                                    	# Use the experimental basic block split for JMPs (default: true, type: bool)
+#e anal.brokenrefs = false                                 	# Follow function references as well if function analysis was failed (default: false, type: bool)
+#e anal.calls = false                                      	# Make basic af analysis walk into calls (default: false, type: bool)
+#e anal.cjmpref = false                                    	# Create references for conditional jumps (default: false, type: bool)
+#e anal.cpu =                                              	# Specify the anal.cpu to use (default: x86, type: str)
+#e anal.datarefs = false                                   	# Follow data references for code coverage (default: false, type: bool)
+#e anal.depth = 16                                         	# Max depth at code analysis (default: 16, type: int)
+#e anal.eobjmp = false                                     	# jmp is end of block mode (option) (default: false, type: bool)
+e anal.esil = false                                        	# Use the new ESIL code analysis (default: false, type: bool) -- DOESNT SEEM TO WORK WITH ARM :/
+e anal.fcnprefix = func                                    	# Prefix new function names with this (default: fcn, type: str)
+#e anal.from = -1                                          	# Lower limit on the address range for analysis (default: -1, type: addr)
+#e anal.gp = 0                                             	# Set the value of the GP register (MIPS) (default: 0, type: int)
+#e anal.hasnext = false                                    	# Continue analysis after each function (default: false, type: bool)
+#e anal.hpskip = false                                     	# Skip `mov reg, reg` and `lea reg, [reg] at the beginning of functions (default: false, type: bool)
+#e anal.jmpabove = true                                    	# Jump above function pointer (default: true, type: bool)
+#e anal.jmpref = true                                      	# Create references for unconditional jumps (default: true, type: bool)
+#e anal.jmptbl = false                                     	# Analyze jump tables in switch statements (default: false, type: bool)
+#e anal.limits = false                                     	# Restrict analysis to address range [anal.from:anal.to] (default: false, type: bool)
+#e anal.maxreflines = 0                                    	# Maximum number of reflines to be analyzed and displayed in asm.lines with pd (default: 0, type: int)
+#e anal.noncode = false                                    	# Analyze data as code (default: false, type: bool)
+e anal.nopskip = false                                     	# Skip nops at the beginning of functions (default: true, type: bool)
+#e anal.prelude =                                          	# Specify an hexpair to find preludes in code (default: , type: str)
+#e anal.ptrdepth = 3                                       	# Maximum number of nested pointers to follow in analysis (default: 3, type: int)
+#e anal.pushret = false                                    	# Analyze push+ret as jmp (default: false, type: bool)
+#e anal.recont = false                                     	# End block after splitting a basic block instead of error (default: false, type: bool)
+e anal.refstr = true                                      	# Search string references in data references (default: false, type: bool)
+#e anal.searchstringrefs = true                             	# Search string references in data references (default: false, type: bool)
+#e anal.sleep = 0                                          	# Sleep N usecs every so often during analysis. Avoid 100% CPU usage (default: 0, type: int)
+#e anal.split = true                                       	# Split functions into basic blocks in analysis (default: true, type: bool)
+#e anal.strings = false                                    	# Identify and register strings during analysis (aar only) (default: false, type: bool)
+#e anal.timeout = 0                                        	# Stop analyzing after a couple of seconds (default: 0, type: int)
+#e anal.to = -1                                            	# Upper limit on the address range for analysis (default: -1, type: addr)
+#e anal.vars = true                                        	# Analyze local variables and arguments (default: true, type: bool)
+#e anal.vinfun = true                                      	# Search values in functions (aav) (false by default to only find on non-code) (default: true, type: bool)
+#e anal.vinfunrange = false                                	# Search values outside function ranges (default: false, type: bool -- requires anal.vinfun=false)
+e anal.armthumb = true                                      # aae computes arm/thumb changes (lot of false positives ahead)
+
+# -- Assembly
+
+#e asm.arch = x86                                          	# Set the arch to be used by asm (default: x86, type: str)
+#e asm.armimm = 0                                          	# Display # for immediates in ARM (default: 0, type: int)
+#e asm.asciidot = false                                    	# Enable a char filter for string comments that passes through chars in the range 0x20-0x7e and turns the rest into dots (except some control chars) (default: false, type: bool)
+#e asm.assembler =                                         	# Set the plugin name to use when assembling (default: , type: str)
+#e asm.bbline = false                                      	# Show empty line after every basic block (default: false, type: bool)
+#e asm.bits = 64                                           	# Word size in bits at assembler (default: 64, type: int)
+#e asm.bytes = true                                        	# Display the bytes of each instruction (default: true, type: bool)
+e asm.bytespace = true                                    	# Separate hexadecimal bytes with a whitespace (default: false, type: bool)
+#e asm.calls = true                                        	# Show callee function related info as comments in disasm (default: true, type: bool)
+#e asm.capitalize = false                                  	# Use camelcase at disassembly (default: false, type: bool)
+e asm.cmtcol = 110                                         	# Column to align comments (default: 71, type: int)
+#e asm.cmtflgrefs = true                                   	# Show comment flags associated to branch reference (default: true, type: bool)
+#e asm.cmtfold = false                                     	# Fold comments, toggle with Vz (default: false, type: bool)
+#e asm.cmtoff = nodup                                      	# Show offset comment in disasm (true, false, nodup) (default: nodup, type: str)
+e asm.cmtpatch = true                                     	# Show patch comments in disasm (default: false, type: bool)
+#e asm.cmtrefs = false                                     	# Show flag and comments from refs in disasm (default: false, type: bool)
+#e asm.cmtright = true                                     	# Show comments at right of disassembly if they fit in screen (default: true, type: bool)
+#e asm.comments = true                                     	# Show comments in disassembly view (default: true, type: bool)
+#e asm.cpu = x86                                           	# Set the kind of asm.arch cpu (default: x86, type: str)
+#e asm.cycles = false                                      	# Show CPU-cycles taken by instruction at disassembly (default: false, type: bool)
+#e asm.cyclespace = false                                  	# Indent instructions depending on CPU-cycles (default: false, type: bool)
+#e asm.decode = false                                      	# Use code analysis as a disassembler (default: false, type: bool)
+#e asm.decoff = false                                      	# Show segmented address in prompt (x86-16) (default: false, type: bool)
+#e asm.demangle = true                                     	# Show demangled symbols in disasm (default: true, type: bool)
+#e asm.describe = false                                    	# Show opcode description (default: false, type: bool)
+e asm.dwarf = true                                         	# Show dwarf comment at disassembly (default: false, type: bool)
+#e asm.dwarf.abspath = false                               	# Show absolute path in asm.dwarf (default: false, type: bool)
+#e asm.dwarf.file = true                                   	# Show filename of asm.dwarf in pd (default: true, type: bool)
+e asm.emu = true                                           	# Run ESIL emulation analysis on disasm (default: false, type: bool)
+#e asm.emuskip = ds                                        	# Skip metadata of given types in asm.emu (default: ds, type: str)
+e asm.emustr = false                                       	# Show only strings if any in the asm.emu output (default: false, type: bool)
+#e asm.emuwrite = false                                    	# Allow asm.emu to modify memory (WARNING) (default: false, type: bool)
+#e asm.esil = false                                        	# Show ESIL instead of mnemonic (default: false, type: bool)
+#e asm.family = false                                      	# Show family name in disasm (default: false, type: bool)
+#e asm.fcncalls = true                                     	# Show functions calls (default: true, type: bool)
+#e asm.fcnlines = true                                     	# Show function boundary lines (default: true, type: bool)
+#e asm.features =                                          	# Specify supported features by the target CPU (default: , type: str)
+#e asm.filter = true                                       	# Replace numeric values by flags (e.g. 0x4003e0 -> sym.imp.printf) (default: true, type: bool)
+e asm.flags = false                                       	# Show flags (default: true, type: bool)
+#e asm.flagsinbytes = false                                	# Display flags inside the bytes space (default: false, type: bool)
+e asm.flgoff = false                                      	# Show offset in flags (default: false, type: bool)
+#e asm.functions = true                                    	# Show functions in disassembly (default: true, type: bool)
+#e asm.hints = false                                       	# Show hints for magic numbers in disasm (default: false, type: bool)
+#e asm.indent = false                                      	# Indent disassembly based on reflines depth (default: false, type: bool)
+#e asm.indentspace = 2                                     	# How many spaces to indent the code (default: 2, type: int)
+#e asm.invhex = false                                      	# Show invalid instructions as hexadecimal numbers (default: false, type: bool)
+#e asm.jmphints = true                                     	# Show jump hints [numbers] in disasm (default: true, type: bool)
+#e asm.lbytes = true                                       	# Align disasm bytes to left (default: true, type: bool)
+#e asm.leahints = false                                    	# Show LEA hints [numbers] in disasm (default: false, type: bool)
+#e asm.lines = true                                        	# Show ASCII-art lines at disassembly (default: true, type: bool)
+#e asm.lines.call = false                                  	# Enable call lines (default: false, type: bool)
+e asm.lines.ret = true                                     	# Show separator lines after ret (default: false, type: bool)
+#e asm.linesout = true                                     	# Show out of block lines (default: true, type: bool)
+e asm.linesright = true                                   	# Show lines before opcode instead of offset (default: false, type: bool)
+e asm.lineswide = true                                     	# Put a space between lines (default: false, type: bool)
+e asm.lineswidth = 30                                      	# Number of columns for program flow arrows (default: 7, type: int)
+#e asm.marks = true                                        	# Show marks before the disassembly (default: true, type: bool)
+#e asm.maxrefs = 5                                         	# Maximum number of xrefs to be displayed as list (use columns above) (default: 5, type: int)
+#e asm.midcursor = false                                   	# Cursor in visual disasm mode breaks the instruction (default: false, type: bool)
+e asm.middle = true                                        	# Allow disassembling jumps in the middle of an instruction (default: false, type: bool)
+#e asm.midflags = 2                                        	# Realign disassembly if there is a flag in the middle of an instruction (default: 2, type: int)
+#e asm.minicols = false                                    	# Only show the instruction in the column disasm (default: false, type: bool)
+#e asm.minvalsub = 256                                     	# Minimum value to substitute in instructions (asm.varsub) (default: 256, type: int)
+e asm.nbytes = 7                                           	# Number of bytes for each opcode at disassembly (default: 6, type: int)
+#e asm.nodup = false                                       	# Do not show dupped instructions (collapse disasm) (default: false, type: bool)
+#e asm.noisy = true                                        	# Show comments considered noisy but possibly useful (default: true, type: bool)
+#e asm.offless = false                                     	# Remove all offsets and constants from disassembly (default: false, type: bool)
+#e asm.offset = true                                       	# Show offsets at disassembly (default: true, type: bool)
+#e asm.os = linux                                          	# Select operating system (kernel) (default: linux, type: str)
+#e asm.parser = x86.pseudo                                 	# Set the asm parser to use (default: x86.pseudo, type: str)
+#e asm.payloads = false                                    	# Show payload bytes in disasm (default: false, type: bool)
+#e asm.pcalign = 0                                         	# Only recognize as valid instructions aligned to this value (default: 0, type: int)
+#e asm.pseudo = false                                      	# Enable pseudo syntax (default: false, type: bool)
+#e asm.reloff = false                                      	# Show relative offsets instead of absolute address in disasm (default: false, type: bool)
+#e asm.reloff.flags = false                                	# Show relative offsets to flags (not only functions) (default: false, type: bool)
+#e asm.relsub = true                                       	# Substitute pc relative expressions in disasm (default: true, type: bool)
+#e asm.section = false                                     	# Show section name before offset (default: false, type: bool)
+#e asm.section.col = 20                                    	# Columns width to show asm.section (default: 20, type: int)
+#e asm.section.sub = false                                 	# Show offsets in disasm prefixed with section/map name (default: false, type: bool)
+#e asm.segoff = false                                      	# Show segmented address in prompt (x86-16) (default: false, type: bool)
+#e asm.size = false                                        	# Show size of opcodes in disassembly (pd) (default: false, type: bool)
+e asm.slow = true                                          	# Perform slow analysis operations in disasm (default: true, type: bool) -- DISPLAY LOTS OF NICE INFO IN COMMENT :)
+#e asm.stackptr = false                                    	# Show stack pointer at disassembly (default: false, type: bool)
+#e asm.strenc = guess                                      	# Assumed string encoding for disasm (default: guess, type: str)
+#e asm.symbol = false                                      	# Show symbol+delta instead of absolute offset (default: false, type: bool)
+#e asm.symbol.col = 40                                     	# Columns width to show asm.section (default: 40, type: int)
+#e asm.syntax = intel                                      	# Select assembly syntax (default: intel, type: str)
+#e asm.tabs = 0                                            	# Use tabs in disassembly (default: 0, type: int)
+#e asm.tabsoff = 0                                         	# tabulate spaces after the offset (default: 0, type: int)
+e asm.tabsonce = true                                     	# Only tabulate the opcode, not the arguments (default: false, type: bool)
+e asm.trace = false                                       	# Show execution traces for each opcode (default: false, type: bool)
+e asm.tracespace = false                                  	# Indent disassembly with trace.count information (default: false, type: bool)
+#e asm.ucase = false                                       	# Use uppercase syntax at disassembly (default: false, type: bool)
+#e asm.vars = true                                         	# Show local function variables in disassembly (default: true, type: bool)
+#e asm.varsub = true                                       	# Substitute variables in disassembly (default: true, type: bool)
+#e asm.varsub_only = true                                  	# Substitute the entire variable expression with the local variable name (e.g. [local10h] instead of [ebp+local10h]) (default: true, type: bool)
+#e asm.varsum = false                                      	# Show variables summary instead of full list in disasm (default: false, type: bool)
+#e asm.varxs = false                                       	# Show accesses of local variables (default: false, type: bool)
+#e asm.xrefs = true                                        	# Show xrefs in disassembly (default: true, type: bool)
+
+# -- Binary
+
+e bin.baddr = 0                                            	# Base address of the binary (default: -1, type: addr)
+#e bin.classes = true                                      	# Load classes from rbin on startup (default: true, type: bool)
+#e bin.dbginfo = true                                      	# Load debug information at startup if available (default: true, type: bool)
+#e bin.debase64 = false                                    	# Try to debase64 all strings (default: false, type: bool)
+#e bin.demangle = true                                     	# Import demangled symbols from RBin (default: true, type: bool)
+#e bin.demanglecmd = false                                 	# run xcrun swift-demangle and similar if available (SLOW) (default: false, type: bool)
+#e bin.filter = true                                       	# Filter symbol names to fix dupped names (default: true, type: bool)
+#e bin.force =                                             	# Force that rbin plugin (default: , type: str)
+#e bin.laddr = 0                                           	# Base address for loading library ('*.so') (default: 0, type: int)
+#e bin.lang =                                              	# Language for bin.demangle (default: , type: str)
+e bin.libs = true                                         	# /!\ MAKE THE DEBUGGER SEGFAULT IF ENABLED!! WTF:/ -- Try to load libraries after loading main binary (default: false, type: bool)
+#e bin.maxstr = 0                                          	# Maximum string length for r_bin (default: 0, type: int)
+#e bin.maxstrbuf = 10485760                                	# Maximum size of range to load strings from (default: 10485760, type: addr)
+#e bin.minstr = 0                                          	# Minimum string length for r_bin (default: 0, type: int)
+#e bin.prefix =                                            	# Prefix all symbols/sections/relocs with a specific string (default: , type: str)
+#e bin.rawstr = false                                      	# Load strings from raw binaries (default: false, type: bool)
+#e bin.relocs = true                                       	# Load relocs information at startup if available (default: true, type: bool)
+#e bin.strfilter =                                         	# Filter strings (default: , type: str)
+#e bin.strings = true                                      	# Load strings from rbin on startup (default: true, type: bool)
+#e bin.strpurge = false                                    	# Try to purge false positive strings (default: false, type: bool)
+#e bin.verbose = true                                      	# Show RBin warnings when loading binaries (default: true, type: bool)
+
+# -- Config
+
+#e cfg.bigendian = false                                   	# Use little (false) or big (true) endianness (default: false, type: bool)
+#e cfg.debug = false                                       	# Debugger mode (default: false, type: bool)
+e cfg.editor = vim                                         	# Select default editor program (default: /usr/bin/vim, type: str)
+e cfg.fortunes = false                                     	# If enabled show tips at start (default: true, type: bool)
+#e cfg.fortunes.clippy = false                             	# Use ?E instead of ?e (default: false, type: bool)
+#e cfg.fortunes.tts = false                                	# Speak out the fortune (default: false, type: bool)
+#e cfg.fortunes.type = tips,fun                            	# Type of fortunes to show (tips, fun, nsfw, creepy) (default: tips,fun, type: str)
+#e cfg.hashlimit = 10485760                                	# If the file is bigger than hashlimit, do not compute hashes (default: 10485760, type: addr)
+#e cfg.log = false                                         	# Log changes using the T api needed for realtime syncing (default: false, type: bool)
+e cfg.newtab = true                                        	# Show descriptions in command completion (default: false, type: bool)
+#e cfg.plugins = true                                      	# Load plugins at startup (default: true, type: bool)
+#e cfg.prefixdump = dump                                   	# Filename prefix for automated dumps (default: dump, type: str)
+e cfg.sandbox = false                                     	# Sandbox mode disables systems and open on upper directories (default: false, type: bool)
+#e cfg.user = pid12362                                     	# Set current username/pid (default: pid12362, type: str)
+#e cfg.wseek = false                                       	# Seek after write (default: false, type: bool)
+
+# -- Command
+
+e cmd.bp = dbt                                             	# Run when a breakpoint is hit (default: , type: str)
+#e cmd.cprompt =                                           	# Column visual prompt commands (default: , type: str)
+#e cmd.depth = 10                                          	# Maximum command depth (default: 10, type: int)
+#e cmd.esil.intr =                                         	# Command to run when an esil interrupt happens (default: , type: str)
+#e cmd.esil.ioer =                                         	# Command to run when esil fails to IO (invalid read/write) (default: , type: str)
+#e cmd.esil.mdev =                                         	# Command to run when memory device address is accessed (default: , type: str)
+#e cmd.esil.todo =                                         	# Command to run when the esil instruction contains TODO (default: , type: str)
+#e cmd.esil.trap =                                         	# Command to run when an esil trap happens (default: , type: str)
+#e cmd.fcn.delete =                                        	# Run when a function is deleted (default: , type: str)
+#e cmd.fcn.new =                                           	# Run when new function is analyzed (default: , type: str)
+#e cmd.fcn.rename =                                        	# Run when a function is renamed (default: , type: str)
+#e cmd.gprompt =                                           	# Graph visual prompt commands (default: , type: str)
+#e cmd.graph = ag $$ > a.dot;!xdot a.dot                   	# Command executed by 'agv' command to view graphs (default: ag $$ > a.dot;!xdot a.dot, type: str)
+#e cmd.hit =                                               	# Run when a search hit is found (default: , type: str)
+#e cmd.hitinfo = 1                                         	# Show info when a tracepoint/breakpoint is hit (default: 1, type: int)
+#e cmd.log =                                               	# Every time a new T log is added run this command (default: , type: str)
+#e cmd.open =                                              	# Run when file is opened (default: , type: str)
+#e cmd.prompt =                                            	# Prompt commands (default: , type: str)
+#e cmd.repeat = false                                      	# Empty command an alias for '..' (repeat last command) (default: false, type: bool)
+#e cmd.stack =                                             	# Command to display the stack in visual debug mode (default: , type: str)
+#e cmd.times =                                             	# Run when a command is repeated (number prefix) (default: , type: str)
+#e cmd.visual =                                            	# Replace current print mode (default: , type: str)
+#e cmd.vprompt =                                           	# Visual prompt commands (default: , type: str)
+e cmd.xterm = terminal                                     	# xterm command to spawn with V@ (default: xterm -bg black -fg gray -e, type: str)
+
+# -- Debugger
+
+#e dbg.aftersyscall = true                                 	# Stop execution before the syscall is executed (see dcs) (default: true, type: bool)
+#e dbg.args =                                              	# Set the args of the program to debug (default: , type: str)
+#e dbg.backend = native                                    	# Select the debugger backend (default: native, type: str)
+e dbg.bep = main                                          	# Break on entrypoint (default: loader, values: ["loader", "entry"/entry0, any address or symbol], type: str)
+#e dbg.bpinmaps = true                                     	# Force breakpoints to be inside a valid map (default: true, type: bool)
+#e dbg.bpsize = 1                                          	# Size of software breakpoints (default: 1, type: int)
+#e dbg.bpsysign = false                                    	# Ignore system breakpoints (default: false, type: bool)
+#e dbg.btalgo = fuzzy                                      	# Select backtrace algorithm (default: fuzzy, values: [fuzzy, anal, default], type: str)
+#e dbg.btdepth = 128                                       	# Depth of backtrace (default: 128, type: int)
+e dbg.clone = true                                        	# Stop execution if new thread is created (default: false, type: bool)
+e dbg.consbreak = true                                    	# SIGINT handle for attached processes (default: false, type: bool)
+#e dbg.exe.path =                                          	# Path to binary being debugged (default: , type: str)
+e dbg.execs = false                                       	# Stop execution if new thread is created (default: false, type: bool)
+#e dbg.exitkills = true                                    	# Kill process on exit (default: true, type: bool)
+#e dbg.follow = 64                                         	# Follow program counter when pc > core->offset + dbg.follow (default: 64, type: int)
+e dbg.follow.child = true                                 	# Continue tracing the child process on fork. By default the parent process is traced (default: false, type: bool)
+e dbg.forks = true                                         	# Stop execution if fork() is done (see dbg.threads) (default: false, type: bool)
+#e dbg.gdb.page_size = 4096                                	# Page size on gdb target (useful for QEMU) (default: 4096, type: addr)
+#e dbg.gdb.retries = 10                                    	# Number of retries before gdb packet read times out (default: 10, type: int)
+#e dbg.hwbp = 0                                            	# Set HW or SW breakpoints (default: 0, type: int)
+#e dbg.libs =                                              	# If set stop when loading matching libname (default: , type: str)
+#e dbg.malloc = glibc                                      	# Choose malloc structure parser (default: glibc, type: str)
+#e dbg.profile =                                           	# Path to RRunProfile file (default: , type: str)
+#e dbg.slow = false                                        	# Show stack and regs in visual mode in a slow but verbose mode (default: false, type: bool)
+#e dbg.status = false                                      	# Set cmd.prompt to '.dr*' or '.dr*;drd;sr PC;pi 1;s-' (default: false, type: bool)
+#e dbg.swstep = false                                      	# Force use of software steps (code analysis+breakpoint) (default: false, type: bool)
+e dbg.threads = true                                       	# Stop all threads when debugger breaks (see dbg.forks) (default: false, type: bool)
+e dbg.trace = true                                        	# Trace program execution (see asm.trace) (default: false, type: bool)
+e dbg.trace.inrange = false                               	# While tracing, avoid following calls outside specified range (default: false, type: bool)
+e dbg.trace.libs = true                                   	# Trace library code too (default: true, type: bool)
+#e dbg.trace.tag = 0                                       	# Trace tag (default: 0, type: int)
+#e dbg.unlibs =                                            	# If set stop when unloading matching libname (default: , type: str)
+
+# -- Diff
+
+#e diff.bare = false                                       	# Never show function names in diff output (default: false, type: bool)
+#e diff.from = 0                                           	# Set source diffing address for px (uses cc command) (default: 0, type: int)
+#e diff.levenstein = false                                 	# Use faster (and buggy) levenstein algorithm for buffer distance diffing (default: false, type: bool)
+#e diff.sort = addr                                        	# Specify function diff sorting column see (e diff.sort=?) (default: addr, type: str)
+#e diff.to = 0                                             	# Set destination diffing address for px (uses cc command) (default: 0, type: int)
+
+# -- Directory
+
+#e dir.dbgsnap = .                                         	# Path to session dump files (default: ., type: str)
+#e dir.magic = /usr/share/radare2/2.0.1/magic              	# Path to r_magic files (default: /usr/share/radare2/2.0.1/magic, type: str)
+#e dir.plugins = /usr/lib/radare2/2.0.1/                   	# Path to plugin files to be loaded at startup (default: /usr/lib/radare2/2.0.1/, type: str)
+#e dir.projects = ~/.config/radare2/projects               	# Default path for projects (default: ~/.config/radare2/projects, type: str)
+#e dir.source =                                            	# Path to find source files (default: , type: str)
+#e dir.types = /usr/include                                	# Default path to look for cparse type files (default: /usr/include, type: str)
+#e dir.zigns = ~/.config/radare2/zigns                     	# Default path for zignatures (see zo command) (default: ~/.config/radare2/zigns, type: str)
+
+# -- ESIL
+
+#e esil.exectrap = false                                   	# trap when executing code in non-executable memory (default: false, type: bool)
+#e esil.fillstack =                                        	# Initialize ESIL stack with (random, debrujn, sequence, zeros, ...) (default: , type: str)
+#e esil.gotolimit = 4096                                   	# Maximum number of gotos per ESIL expression (default: 4096, type: addr)
+#e esil.iotrap = true                                      	# invalid read or writes produce a trap exception (default: true, type: bool)
+#e esil.mdev.range =                                       	# Specify a range of memory to be handled by cmd.esil.mdev (default: , type: str)
+#e esil.nonull = false                                     	# Prevent memory read, memory write at null pointer (default: false, type: bool)
+#e esil.prestep = true                                     	# Step before esil evaluation in `de` commands (default: true, type: bool)
+#e esil.romem = false                                      	# Set memory as read-only for ESIL (default: false, type: bool)
+#e esil.stack.addr = 1048576                               	# Number of elements that can be pushed on the esilstack (default: 1048576, type: addr)
+#e esil.stack.depth = 32                                   	# Number of elements that can be pushed on the esilstack (default: 32, type: int)
+#e esil.stack.pattern = 0                                  	# Specify fill pattern to initialize the stack (0, w, d, i) (default: 0, type: str)
+#e esil.stack.size = 983040                                	# Number of elements that can be pushed on the esilstack (default: 983040, type: addr)
+#e esil.stats = false                                      	# Statistics from ESIL emulation stored in sdb (default: false, type: bool)
+#e esil.verbose = 0                                        	# Show ESIL verbose level (0, 1, 2) (default: 0, type: int)
+
+# -- File
+
+#e file.desc =                                             	# User defined file description (used by projects) (default: , type: str)
+#e file.info = true                                        	# RBin info loaded (default: true, type: bool)
+#e file.lastpath =                                         	# Path of current file (default: , type: str)
+#e file.loadalign = 1024                                   	# Alignment of load addresses (default: 1024, type: addr)
+#e file.location =                                         	# Is the file 'local', 'remote', or 'memory' (default: , type: str)
+#e file.md5 =                                              	# MD5 sum of current file (default: , type: str)
+#e file.nowarn = true                                      	# Suppress file loading warning messages (default: true, type: bool)
+#e file.offset =                                           	# Offset where the file will be mapped at (default: , type: str)
+#e file.openmany = 1                                       	# Maximum number of files opened at once (default: 1, type: int)
+#e file.path =                                             	# Path of current file (default: , type: str)
+#e file.sha1 =                                             	# SHA1 hash of current file (default: , type: str)
+#e file.type =                                             	# Type of current file (default: , type: str)
+
+# -- Filesystem
+
+#e fs.view = normal                                        	# Set visibility options for filesystems (default: normal, type: str)
+
+# -- Graph
+
+e graph.cmtright = true                                    	# Show comments at right (default: false, type: bool)
+#e graph.comments = true                                   	# Show disasm comments in graph (default: true, type: bool)
+#e graph.font = Courier                                    	# Font for dot graphs (default: Courier, type: str)
+#e graph.format = dot                                      	# Specify output format for graphs (dot, gml, gmlfcn) (default: dot, type: str)
+#e graph.from = -1                                         	#  (default: -1, type: addr)
+e graph.gv.current = true                                  	# Highlight the current node in graphviz graph. (default: false, type: bool)
+#e graph.gv.edge =                                         	# Graphviz edge style. (arrowhead="vee") (default: , type: str)
+#e graph.gv.graph =                                        	# Graphviz global style attributes. (bgcolor=white) (default: , type: str)
+#e graph.gv.node =                                         	# Graphviz node style. (color=gray, style=filled shape=box) (default: , type: str)
+#e graph.gv.spline =                                       	# Graphviz spline style. (splines="ortho") (default: , type: str)
+#e graph.invscroll = false                                 	# Invert scroll direction in ascii-art graph (default: false, type: bool)
+#e graph.layout = 0                                        	# Graph layout (0=vertical, 1=horizontal) (default: 0, type: int)
+#e graph.linemode = 1                                      	# Graph edges (0=diagonal, 1=square) (default: 1, type: int)
+#e graph.nodejmps = true                                   	# Enables shortcuts for every node. (default: true, type: bool)
+e graph.offset = true                                      	# Show offsets in graphs (default: false, type: bool)
+e graph.refs = true                                        	# Graph references in callgraphs (.agc*;aggi) (default: false, type: bool)
+#e graph.scroll = 5                                        	# Scroll speed in ascii-art graph (default: 5, type: int)
+#e graph.title =                                           	# Title of the graph (default: , type: str)
+#e graph.to = -1                                           	#  (default: -1, type: addr)
+#e graph.web = false                                       	# Display graph in web browser (VV) (default: false, type: bool)
+
+# -- Hexdump
+
+e hex.cols = 32                                           	# Number of columns in hexdump (default: 16, type: int)
+#e hex.comments = true                                     	# Show comments in 'px' hexdump (default: true, type: bool)
+#e hex.compact = false                                     	# Show smallest 16 byte col hexdump (60 columns) (default: false, type: bool)
+#e hex.depth = 5                                           	# Maximal level of recurrence while telescoping memory (default: 5, type: int)
+#e hex.flagsz = 0                                          	# If non zero, overrides the flag size in pxa (default: 0, type: int)
+#e hex.header = true                                       	# Show header in hexdumps (default: true, type: bool)
+#e hex.onechar = false                                     	# Number of columns in hexdump (default: false, type: bool)
+e hex.pairs = false                                       	# Show bytes paired in 'px' hexdump (default: true, type: bool)
+#e hex.pcols = 40                                          	# Number of pixel columns for prc (default: 40, type: int)
+#e hex.stride = 0                                          	# Line stride in hexdump (default is 0) (default: 0, type: int)
+
+# -- Web interface
+
+#e http.allow =                                            	# Only accept clients from the comma separated IP list (default: , type: str)
+e http.bind = 0.0.0.0                                     	# Server address (default: localhost, type: str)
+#e http.browser = xdg-open                                 	# Command to open HTTP URLs (default: xdg-open, type: str)
+#e http.cors = false                                       	# Enable CORS (default: false, type: bool)
+#e http.dietime = 0                                        	# Kill server after N seconds with no client (default: 0, type: int)
+#e http.dirlist = false                                    	# Enable directory listing (default: false, type: bool)
+#e http.homeroot = ~/.config/radare2/www                   	# http home root directory (default: ~/.config/radare2/www, type: str)
+#e http.log = true                                         	# Show HTTP requests processed (default: true, type: bool)
+#e http.logfile =                                          	# Specify a log file instead of stderr for http requests (default: , type: str)
+#e http.maxport = 9999                                     	# Last HTTP server port (default: 9999, type: str)
+#e http.maxsize = 0                                        	# Maximum file size for upload (default: 0, type: int)
+e http.port = 1337                                         	# HTTP server port (default: 9090, type: str)
+#e http.referer =                                          	# CSFR protection if set (default: , type: str)
+#e http.root = /usr/share/radare2/2.0.1/www                	# http root directory (default: /usr/share/radare2/2.0.1/www, type: str)
+#e http.sandbox = true                                     	# Sandbox the HTTP server (default: true, type: bool)
+#e http.timeout = 3                                        	# Disconnect clients after N seconds of inactivity (default: 3, type: int)
+#e http.ui = m                                             	# Default webui (enyo, m, p, t) (default: m, type: str)
+#e http.upget = false                                      	# /up/ answers GET requests, in addition to POST (default: false, type: bool)
+#e http.upload = false                                     	# Enable file uploads to /up/<filename> (default: false, type: bool)
+#e http.uproot = /tmp                                      	# Path where files are uploaded (default: /tmp, type: str)
+#e http.uri =                                              	# Address of HTTP proxy (default: , type: str)
+#e http.verbose = true                                     	# Output server logs to stdout (default: true, type: bool)
+
+# -- HUD
+
+#e hud.path =                                              	# Set a custom path for the HUD file (default: , type: str)
+
+# -- Input / Output
+
+#e io.0xff = 255                                           	# Use this value instead of 0xff to fill unallocated areas (default: 255, type: int)
+#e io.aslr = false                                         	# Disable ASLR for spawn and such (default: false, type: bool)
+#e io.autofd = true                                        	# Change fd when opening a new file (default: true, type: bool)
+#e io.buffer = false                                       	# Load and use buffer cache if enabled (default: false, type: bool)
+#e io.buffer.from = 0                                      	# Lower address of buffered cache (default: 0, type: int)
+#e io.buffer.to = 0                                        	# Higher address of buffered cache (default: 0, type: int)
+#e io.cache = false                                        	# Change both of io.cache.{read,write} (default: false, type: bool)
+#e io.cache.read = false                                   	# Enable read cache for vaddr (or paddr when io.va=0) (default: false, type: bool)
+#e io.cache.write = false                                  	# Enable write cache for vaddr (or paddr when io.va=0) (default: false, type: bool)
+#e io.exec = true                                          	# See !!r2 -h~-x (default: true, type: bool)
+#e io.ff = true                                            	# Fill invalid buffers with 0xff instead of returning error (default: true, type: bool)
+#e io.pcache = false                                       	# io.cache for p-level (default: false, type: bool)
+#e io.pcache.read = false                                  	# Enable read-cache (default: false, type: int)
+#e io.pcache.write = false                                 	# Enable write-cache (default: false, type: int)
+#e io.va = true                                            	# Use virtual address layout (default: true, type: bool)
+
+# -- Key shortcuts
+
+#e key.S =                                                 	# override step over action (default: , type: str)
+#e key.f1 =                                                	# Run this when F1 key is pressed in visual mode (default: , type: str)
+#e key.f2 =                                                	# Run this when F2 key is pressed in visual mode (default: , type: str)
+#e key.f3 =                                                	# Run this when F3 key is pressed in visual mode (default: , type: str)
+#e key.f4 =                                                	# Run this when F4 key is pressed in visual mode (default: , type: str)
+#e key.f5 =                                                	# Run this when F5 key is pressed in visual mode (default: , type: str)
+#e key.f6 =                                                	# Run this when F6 key is pressed in visual mode (default: , type: str)
+#e key.f7 =                                                	# Run this when F7 key is pressed in visual mode (default: , type: str)
+#e key.f8 =                                                	# Run this when F8 key is pressed in visual mode (default: , type: str)
+#e key.f9 =                                                	# Run this when F9 key is pressed in visual mode (default: , type: str)
+#e key.f10 =                                               	# Run this when F10 key is pressed in visual mode (default: , type: str)
+#e key.f11 =                                               	# Run this when F11 key is pressed in visual mode (default: , type: str)
+#e key.f12 =                                               	# Run this when F12 key is pressed in visual mode (default: , type: str)
+#e key.s =                                                 	# override step into action (default: , type: str)
+
+# -- Line
+
+#e lines.abs = false                                       	# Enable absolute line numbers (default: false, type: bool)
+#e lines.from = 0                                          	# Start address for line seek (default: 0, type: int)
+#e lines.to = $s                                           	# End address for line seek (default: $s, type: str)
+
+# -- Magic
+
+#e magic.depth = 100                                       	# Recursivity depth in magic description strings (default: 100, type: int)
+
+# -- PDB (windows debug files)
+
+#e pdb.autoload = 1                                        	# Automatically load the required pdb files for loaded DLLs (default: 0, type: int)
+#e pdb.extract = 1                                         	# Avoid extract of the pdb file, just download (default: 1, type: int)
+#e pdb.server = https://msdl.microsoft.com/download/symbols	# Base URL for Microsoft symbol server (default: https://msdl.microsoft.com/download/symbols, type: str)
+#e pdb.useragent = Microsoft-Symbol-Server/6.11.0001.402   	# User agent for Microsoft symbol server (default: Microsoft-Symbol-Server/6.11.0001.402, type: str)
+
+# -- Project
+
+#e prj.files = false                                       	# Save the target binary inside the project directory (default: false, type: bool)
+#e prj.git = false                                         	# Every project is a git repo and saving is committing (default: false, type: bool)
+#e prj.gpg = false                                         	# TODO: Encrypt project with GnuPGv2 (default: false, type: bool)
+#e prj.name =                                              	# Name of current project (default: , type: str)
+#e prj.zip = false                                         	# Use ZIP format for project files (default: false, type: bool)
+
+# -- Remote access protocol
+
+#e rap.loop = true                                         	# Run rap as a forever-listening daemon (default: true, type: bool)
+
+# -- ROP (Return-Oriented Programming exploit technique)
+
+#e rop.comments = false                                    	# Display comments in rop search output (default: false, type: bool)
+#e rop.conditional = false                                 	# Include conditional jump, calls and returns in ropsearch (default: false, type: bool)
+#e rop.db = true                                           	# Store rop search results in sdb (default: true, type: bool)
+#e rop.len = 5                                             	# Maximum ROP gadget length (default: 5, type: int)
+#e rop.nx = false                                          	# Include NX/XN/XD sections in ropsearch (default: false, type: bool)
+#e rop.subchains = false                                   	# Display every length gadget from rop.len=X to 2 in /Rl (default: false, type: bool)
+
+# Screen
+
+#e scr.atport = false                                      	# V@ starts a background http server and spawns an r2 -C (default: false, type: bool)
+#e scr.breaklines = false                                  	# Break lines in Visual instead of truncating them (default: false, type: bool)
+#e scr.breakword =                                         	# Emulate console break (^C) when a word is printed (useful for pD) (default: , type: str)
+e scr.color = true                                        	# Enable colors (default: true, type: bool)
+e scr.color.bytes = true                                  	# Colorize bytes that represent the opcodes of the instruction (default: true, type: bool)
+e scr.color.ops = true                                    	# Colorize numbers and registers in opcodes (default: true, type: bool)
+#e scr.columns = 0                                         	# Force console column count (width) (default: 0, type: int)
+#e scr.echo = false                                        	# Show rcons output in realtime to stderr and buffer (default: false, type: bool)
+#e scr.feedback = 1                                        	# Set visual feedback level (1=arrow on jump, 2=every key (useful for videos)) (default: 1, type: int)
+#e scr.fgets = false                                       	# Use fgets() instead of dietline for prompt input (default: false, type: bool)
+#e scr.fix.columns = 0                                     	# Workaround for Prompt iOS SSH client (default: 0, type: int)
+#e scr.fix.rows = 0                                        	# Workaround for Linux TTY (default: 0, type: int)
+#e scr.flush = false                                       	# Force flush to console in realtime (breaks scripting) (default: false, type: bool)
+#e scr.fps = false                                         	# Show FPS in Visual (default: false, type: bool)
+#e scr.highlight =                                         	# Highlight that word at RCons level (default: , type: str)
+#e scr.histsave = true                                     	# Always save history on exit (default: true, type: bool)
+#e scr.html = false                                        	# Disassembly uses HTML syntax (default: false, type: bool)
+#e scr.interactive = true                                  	# Start in interactive mode (default: true, type: bool)
+#e scr.linesleep = 0                                       	# Flush sleeping some ms in every line (default: 0, type: int)
+#e scr.nkey = flag                                         	# Select visual seek mode (affects n/N visual commands) (default: flag, type: str)
+#e scr.null = false                                        	# Show no output (default: false, type: bool)
+e scr.pager = less -iR                                     	# Select pager program (when output overflows the window) (default: , type: str)
+#e scr.pagesize = 1                                        	# Flush in pages when scr.linesleep is != 0 (default: 1, type: int)
+#e scr.pipecolor = false                                   	# Enable colors when using pipes (default: false, type: bool)
+e scr.prompt = true                                       	# Show user prompt (used by r2 -q) (default: true, type: bool)
+e scr.promptfile = true                                   	# Show user prompt file (used by r2 -q) (default: false, type: bool)
+e scr.promptflag = true                                   	# Show flag name in the prompt (default: false, type: bool)
+e scr.promptsect = true                                   	# Show section name in the prompt (default: false, type: bool)
+e scr.rainbow = true                                      	# Shows rainbow colors depending of address (default: false, type: bool)
+#e scr.randpal = false                                     	# Random color palete or just get the next one from 'eco' (default: false, type: bool)
+e scr.responsive = true                                   	# Auto-adjust Visual depending on screen (e.g. unset asm.bytes) (default: false, type: bool)
+e scr.rgbcolor = true                                     	# Use RGB colors (not available on Windows) (default: true, type: bool)
+#e scr.rows = 0                                            	# Force console row count (height) (duplicate?) (default: 0, type: str)
+#e scr.seek =                                              	# Seek to the specified address on startup (default: , type: str)
+#e scr.tee =                                               	# Pipe output to file of this name (default: , type: str)
+e scr.truecolor = false                                   	# 24 bit color (default: false, type: bool)
+#e scr.tts = false                                         	# Use tts if available by a command (see ic) (default: false, type: bool)
+e scr.utf8 = true                                          	# Show UTF-8 characters instead of ANSI (default: false, type: bool)
+e scr.utf8.curvy = true                                   	# Show curved UTF-8 corners (requires scr.utf8) (default: false, type: bool)
+#e scr.wheel = true                                        	# Mouse wheel in Visual; temporaryly disable/reenable by right click/Enter) (default: true, type: bool)
+#e scr.wheelnkey = false                                   	# Use sn/sp and scr.nkey on wheel instead of scroll (default: false, type: bool)
+#e scr.wheelspeed = 4                                      	# Mouse wheel speed (default: 4, type: int)
+#e scr.zoneflags = true                                    	# Show zoneflags in visual mode before the title (see fz?) (default: true, type: bool)
+
+# -- Search
+
+#e search.align = 0                                        	# Only catch aligned search hits (default: 0, type: int)
+#e search.chunk = 0                                        	# Chunk size for /+ (default size is asm.bits/8 (default: 0, type: int)
+#e search.contiguous = true                                	# Accept contiguous/adjacent search hits (default: true, type: bool)
+#e search.distance = 0                                     	# Search string distance (default: 0, type: int)
+#e search.esilcombo = 8                                    	# Stop search after N consecutive hits (default: 8, type: int)
+e search.flags = true                                     	# All search results are flagged, otherwise only printed (default: true, type: bool)
+e search.from = 0                                          	# Search start address (default: -1, type: addr)
+#e search.in = io.maps                                     	# Specify search boundaries (default: io.maps, type: str)
+#e search.kwidx = 0                                        	# Store last search index count (default: 0, type: int)
+#e search.maxhits = 0                                      	# Maximum number of hits (0: no limit) (default: 0, type: int)
+#e search.overlap = false                                  	# Look for overlapped search hits (default: false, type: bool)
+#e search.prefix = hit                                     	# Prefix name in search hits label (default: hit, type: str)
+#e search.show = true                                      	# Show search results (default: true, type: bool)
+#e search.to = -1                                          	# Search end address (default: -1, type: addr)
+
+# -- Stack
+
+#e stack.anotated = false                                  	# Show anotated hexdump in visual debug (default: false, type: bool)
+#e stack.bytes = true                                      	# Show bytes instead of words in stack (default: true, type: bool)
+#e stack.delta = 0                                         	# Delta for the stack dump (default: 0, type: int)
+#e stack.size = 64                                         	# Size in bytes of stack hexdump in visual debug (default: 64, type: int)
+
+# -- Time
+
+#e time.fmt = %Y-%m-%d %H:%M:%S %z                         	# Date format (%Y-%m-%d %H:%M:%S %z) (default: %Y-%m-%d %H:%M:%S %z, type: str)
+#e time.zone = 0                                           	# Time zone, in hours relative to GMT: +2, -1,.. (default: 0, type: int)
+
+# -- Zignature (radare2 function signature/hash system)
+
+#e zign.autoload = false                                   	# Autoload all zignatures located in ~/.config/radare2/zigns (default: false, type: bool)
+#e zign.bytes = true                                       	# Use bytes patterns for matching (default: true, type: bool)
+#e zign.graph = true                                       	# Use graph metrics for matching (default: true, type: bool)
+#e zign.maxsz = 500                                        	# Maximum zignature length (default: 500, type: int)
+#e zign.mincc = 10                                         	# Minimum cyclomatic complexity for matching (default: 10, type: int)
+#e zign.minsz = 16                                         	# Minimum zignature length for matching (default: 16, type: int)
+#e zign.offset = true                                      	# Use original offset for matching (default: true, type: bool)
+#e zign.prefix = sign                                      	# Default prefix for zignatures matches (default: sign, type: str)
+#e zign.refs = true                                        	# Use references for matching (default: true, type: bool)
+
+# -- Zoom
+
+#e zoom.byte = h                                           	# Zoom callback to calculate each byte (See pz? for help) (default: h, type: str)
+#e zoom.from = 0                                           	# Zoom start address (default: 0, type: int)
+#e zoom.maxsz = 512                                        	# Zoom max size of block (default: 512, type: int)
+#e zoom.to = 0                                             	# Zoom end address (default: 0, type: int)
+
+# -- Theme (see available colors with `ecs`)
+# (see: white, consonance, xvilka, tango, pink, ogray)
+
+ec prompt rgb:ff005f      # pink
+ec help rgb:4e4e4e
+ec args green
+
+ec cmp blue
+ec cjmp green          # green
+#ec jmp rgb:000 green   # black on green
+#ec jmp rgb:000 blue    # black on blue
+ec jmp green black
+ec call rgb:ff005f     # pink
+ec ret rgb:ff005f      # pink
+ec flow green
+ec flow2 blue
+
+ec graph.true green        # green
+ec graph.false rgb:ff005f  # red/pinkish
+ec graph.trufae blue       # blue
+
+ec push black
+ec pop black
+ec mov black
+ec bin black
+ec math black
+ec trap black yellow
+ec invalid black red
+ec nop rgb:1c1c1c   # dark grey (barely visible, as it does nothing)
+
+ec reg rgb:767676
+ec comment blue
+ec offset black
+ec num black
+ec btext black # instruction's byte
+ec other rgb:262626 # other bytes (darker grey as not as important, but lighter than nop)
+ec b0x7f rgb:262626
+ec b0xff rgb:262626
+ec b0x00 rgb:262626
+
+ec fname yellow # function name
+ec fline blue   # function delimiter line (left)
+ec flag yellow # (e.g. `eip`)
+ec creg rgb:ff005f # changed registers: pink
+ec highlight rgb:000 rgb:ff0 # black on yellow
+
+
+# ???
+ec input black red
+ec label cyan red
+ec crypto magenta red
+ec swi green red
+ec graph.box blue red
+ec graph.box2 green red
+ec graph.box3 red red
+ec graph.box4 blue red
+ec graph.current yellow red
+ec graph.traced red red
+ec ai.read red red
+ec ai.write red red
+ec ai.exec red red
+ec ai.seq red red
+ec ai.ascii red red
+ec gui.cflow red red
+ec gui.dataoffset red red
+ec gui.background red red
+ec gui.alt_background red red
+ec gui.border red red
+
 
 # -- Aliases
-$copy="pdf #!pipe xsel -b"         # Copy current function to clipboard
+$config="!grep --color=none '^[^#]' $HOME/.radare2rc"           # Show the user config
+##$configdiff="!r2-config | grep --color=none '^[^#]'"          # Show the user config (without theme/color infos, without aliases, and without default options)
+$ruby="#!pipe irb"                                              # Start an interractive IRB ruby console (see: `$r`)
+$copy="pdf #!pipe xsel -b"                                      # Copy current function to clipboard
+$pdf="pdf @e:asm.lines=1,asm.lineswidth=10,asm.lineswide=0,asm.nbytes=0,asm.fcncalls=0,asm.jmphints=0,asm.vars=0,asm.xrefs=0,asm.flags=0,scr.color=0"
+##$sym="is | align ' ' | sort -k8 | colorize-columns | less -r" # Pretty print symbols (sorted by name, and not address)
+##$str="iz | align ' ' | sort -k7 | colorize-columns | less -r" # Pretty print strings (sorted by text, and not address)
+##$disall="pd $SS @ $S"                                         # Disassemble everything
 
-# -- Style
-e asm.lineswidth = 20              # Number of columns for program flow arrows
-e asm.lineswide = true             # Put a space between lines
-e asm.lines = true                 # Show JUMPs lines at disassembly
-e asm.lines.call = false           # DO NOT show CALLs lines at disassembly
-e asm.lines.ret = true             # Show separator lines after ret
-e scr.utf8 = true                  # Show UTF-8 characters instead of ANSI (nice arrows, etc.)
-e scr.color = true                 # Enable colors
-e scr.truecolor = true             # Manage color palette (0: ansi 16, 1: 256, 2: 16M)
-e scr.pipecolor = false            # Enable colors when using pipes
-e scr.color.bytes = true           # Colorize bytes that represent the opcodes of the instruction
-e scr.color.ops = true             # Colorize numbers and registers in opcodes
-e scr.pager = less -R              # Select pager program (when output overflows the window)
-e cfg.fortunes = false             # DO NOT show tips/jokes at start
-e anal.nopskip = false             # DO NOT skip nops at the beginning of functions
-e graph.offset = true              # Show offsets in graphs
-e graph.comments = true            # Show disasm comments in graph
-e graph.cmtright = true            # Show comments at right
-e asm.cmtright = true              # Show comments/str/desc at right of disassembly if they fit in screen
-#eco ogray                         # theme (orange/gray/white)
-#eco consonance                    # theme (pink/cyan/grey/white)
-#eco xvilka                        # theme (red CALL, blue JUMP, green TEST/CMP, yellow OR/XOR/AND, white MOV)
-eco white                          # theme (green CALL/JUMP, grey/blue)
-#eco behelit                       # theme (green bg CALL, blue bg JUMP, pink comments/tests, orange OR)
-
-# -- Help
-e asm.describe = true              # Show opcode description
-e asm.pseudo = false               # [DISABLED] Shows pseudocode in disassembly. (e.g. `eax = str.ok`)
-e anal.jmptbl = false              # [DISABLED] Analyze jump tables in switch statements
-e asm.emu = false                  # [DISABLED] Run ESIL emulation analysis on disasm
-
-# -- Trust me.
-e asm.slow = false                 # Perform slow analysis operations in disasm
-e asm.middle = true                # Allow disassembling jumps in the middle of an instruction
-e dbg.forks = true                 # Stop execution if fork() is done (see dbg.threads)
-e dbg.threads = true               # Stop all threads when debugger breaks (see dbg.forks)
-e anal.searchstringrefs = true     # Search string references in data references
-e anal.afterjmp = false            # Continue analysis after jmp/ujmp
-e anal.hasnext = false             # Continue analysis after each function
-e anal.pushret = false             # Analyze push+ret as jmp
-e anal.noncode = false             # Analyze data as code
-e cfg.sandbox = false              # Sandbox mode disables systems and open on upper directories
-
-# -- Server
-e http.allow = 127.0.0.1           # Only accept clients from the comma separated IP list
-e http.bind = localhost            # Server address
-e http.port = 1337                 # Server port
-e http.ui = m                      # Default webui (enyo, m, p, t)
-e http.upload = false              # Enable file uploads to /up/<filename>
-
-# -- Other
-e bin.strings = true               # Load strings from rbin on startup
-e search.flags = false             # All search results are flagged, otherwise only printed
-e search.from = 0                  # Search start address
-e cfg.editor = vim                 # Select default editor program
-
-
-
-# DOCUMENTATION:  (e??)
-# =============
-#             asm.arch: Set the arch to be used by asm
-#        asm.assembler: Set the plugin name to use when assembling
-#           asm.bbline: Show empty line after every basic block
-#             asm.bits: Word size in bits at assembler
-#            asm.bytes: Display the bytes of each instruction
-#        asm.bytespace: Separate hexadecimal bytes with a whitespace
-#            asm.calls: Show callee function related info as comments in disasm
-#       asm.capitalize: Use camelcase at disassembly
-#           asm.cmtcol: Align comments at column 60
-#       asm.cmtflgrefs: Show comment flags associated to branch reference
-#          asm.cmtfold: Fold comments, toggle with Vz
-#         asm.cmtpatch: Show patch comments in disasm
-#          asm.cmtrefs: Show flag and comments from refs in disasm
-#         asm.comments: Show comments in disassembly view
-#           asm.cycles: Show CPU-cycles taken by instruction at disassembly
-#       asm.cyclespace: Indent instructions depending on CPU-cycles
-#           asm.decode: Use code analysis as a disassembler
-#           asm.decoff: Show segmented address in prompt (x86-16)
-#         asm.demangle: Show demangled symbols in disasm
-#            asm.dwarf: Show dwarf comment at disassembly
-#    asm.dwarf.abspath: Show absolute path in asm.dwarf
-#       asm.dwarf.file: Show filename of asm.dwarf in pd
-#          asm.emuskip: Skip metadata of given types in asm.emu (see e asm.emuskip=?)
-#           asm.emustr: Show only strings if any in the asm.emu output
-#         asm.emuwrite: Allow asm.emu to modify memory (WARNING)
-#             asm.esil: Show ESIL instead of mnemonic
-#           asm.family: Show family name in disasm
-#         asm.fcncalls: Show functions calls
-#         asm.fcnlines: Show function boundary lines
-#         asm.features: Specify supported features by the target CPU (=? for help)
-#           asm.filter: Replace numeric values by flags (e.g. 0x4003e0 -> sym.imp.printf)
-#            asm.flags: Show flags
-#     asm.flagsinbytes: Display flags inside the bytes space
-#           asm.flgoff: Show offset in flags
-#        asm.functions: Show functions in disassembly
-#            asm.hints: Show hints for magic numbers in disasm
-#           asm.indent: Indent disassembly based on reflines depth
-#      asm.indentspace: How many spaces to indent the code
-#           asm.invhex: Show invalid instructions as hexadecimal numbers
-#         asm.jmphints: Show jump hints [numbers] in disasm
-#           asm.lbytes: Align disasm bytes to left
-#         asm.leahints: Show LEA hints [numbers] in disasm
-#            asm.marks: Show marks before the disassembly
-#          asm.maxrefs: Maximum number of xrefs to be displayed as list (use columns above)
-#         asm.midflags: Realign disassembly if there is a flag in the middle of an instruction
-#         asm.minicols: Only show the instruction in the column disasm
-#           asm.nbytes: Number of bytes for each opcode at disassembly
-#            asm.nodup: Do not show dupped instructions (collapse disasm)
-#           asm.offset: Show offsets at disassembly
-#               asm.os: Select operating system (kernel) (linux, darwin, w32,..)
-#           asm.parser: Set the asm parser to use
-#          asm.pcalign: Only recognize as valid instructions aligned to this value
-#           asm.pseudo: Enable pseudo syntax
-#           asm.reloff: Show relative offsets instead of absolute address in disasm
-#     asm.reloff.flags: Show relative offsets to flags (not only functions)
-#           asm.relsub: Substitute pc relative expressions in disasm
-#          asm.section: Show section name before offset
-#      asm.section.col: Columns width to show asm.section
-#           asm.segoff: Show segmented address in prompt (x86-16)
-#             asm.size: Show size of opcodes in disassembly (pd)
-#            asm.spacy: Spacy disasm after calls and before flags
-#         asm.stackptr: Show stack pointer at disassembly
-#           asm.symbol: Show symbol+delta instead of absolute offset
-#       asm.symbol.col: Columns width to show asm.section
-#           asm.syntax: Select assembly syntax
-#             asm.tabs: Use tabs in disassembly
-#          asm.tabsoff: tabulate spaces after the offset
-#         asm.tabsonce: Only tabulate the opcode, not the arguments
-#            asm.trace: Show execution traces for each opcode
-#       asm.tracespace: Indent disassembly with trace.count information
-#            asm.ucase: Use uppercase syntax at disassembly
-#             asm.vars: Show local function variables in disassembly
-#           asm.varsub: Substitute variables in disassembly
-#            asm.varxs: Show accesses of local variables
-#            asm.xrefs: Show xrefs in disassembly
-#            bin.baddr: Base address of the binary
-#          bin.classes: Load classes from rbin on startup
-#          bin.dbginfo: Load debug information on startup if available
-#         bin.debase64: Try to debase64 all strings
-#         bin.demangle: Import demangled symbols from RBin
-#      bin.demanglecmd: run xcrun swift-demangle and similar if available (SLOW)
-#           bin.filter: Filter symbol names to fix dupped names
-#            bin.force: Force that rbin plugin
-#            bin.laddr: Base address for loading library ('*.so')
-#             bin.lang: Language for bin.demangle
-#             bin.libs: Try to load libraries after loading main binary
-#           bin.maxstr: Maximum string length for r_bin
-#        bin.maxstrbuf: Maximum size of range to load strings from
-#       bin.mergeflags: Merge symbols with the same name into the same flag
-#           bin.minstr: Minimum string length for r_bin
-#           bin.prefix: Prefix all symbols/sections/relocs with a specific string
-#           bin.rawstr: Load strings from raw binaries
-#        bin.strfilter: Filter strings (?:help, a:scii, e:mail, p:ath, u:rl, 8:utf8)
-#         bin.strpurge: Try to purge false positive strings
-#          bin.verbose: Show RBin warnings when loading binaries
-#        cfg.bigendian: Use little (false) or big (true) endianness
-#            cfg.debug: Debugger mode
-#  cfg.fortunes.clippy: Use ?E instead of ?e
-#     cfg.fortunes.tts: Speak out the fortune
-#    cfg.fortunes.type: Type of fortunes to show (tips, fun, nsfw, creepy)
-#        cfg.hashlimit: If the file is bigger than hashlimit, do not compute hashes
-#          cfg.plugins: Load plugins at startup
-#       cfg.prefixdump: Filename prefix for automated dumps
-#             cfg.user: Set current username/pid
-#            cfg.wseek: Seek after write
-#               cmd.bp: Run when a breakpoint is hit
-#          cmd.cprompt: Column visual prompt commands
-#            cmd.depth: Maximum command depth
-#        cmd.esil.intr: Command to run when an esil interrupt happens
-#        cmd.esil.trap: Command to run when an esil trap happens
-#       cmd.fcn.delete: Run when a function is deleted
-#          cmd.fcn.new: Run when new function is analyzed
-#       cmd.fcn.rename: Run when a function is renamed
-#          cmd.gprompt: Graph visual prompt commands
-#            cmd.graph: Command executed by 'agv' command to view graphs
-#              cmd.hit: Run when a search hit is found
-#          cmd.hitinfo: Show info when a tracepoint/breakpoint is hit
-#             cmd.open: Run when file is opened
-#           cmd.prompt: Prompt commands
-#           cmd.repeat: Empty command an alias for '..' (repeat last command)
-#            cmd.times: Run when a command is repeated (number prefix)
-#           cmd.visual: Replace current print mode
-#          cmd.vprompt: Visual prompt commands
-#            cmd.xterm: xterm command to spawn with V@
-#     dbg.aftersyscall: Stop execution before the syscall is executed (see dcs)
-#             dbg.args: Set the args of the program to debug
-#          dbg.backend: Select the debugger backend
-#              dbg.bep: break on entrypoint (loader, entry, constructor, main)
-#         dbg.bpinmaps: Force breakpoints to be inside a valid map
-#           dbg.bpsize: Size of software breakpoints
-#           dbg.btalgo: Select backtrace algorithm
-#          dbg.btdepth: Depth of backtrace
-#            dbg.clone: Stop execution if new thread is created
-#        dbg.consbreak: SIGINT handle for attached processes
-#            dbg.execs: Stop execution if new thread is created
-#        dbg.exitkills: Kill process on exit
-#           dbg.follow: Follow program counter when pc > core->offset + dbg.follow
-#     dbg.follow.child: Continue tracing the child process on fork. By default the parent process is traced
-#             dbg.hwbp: Set HW or SW breakpoints
-#             dbg.libs: If set stop when loading matching libname
-#          dbg.profile: Path to RRunProfile file
-#             dbg.slow: Show stack and regs in visual mode in a slow but verbose mode
-#           dbg.status: Set cmd.prompt to '.dr*' or '.dr*;drd;sr PC;pi 1;s-'
-#           dbg.swstep: Force use of software steps (code analysis+breakpoint)
-#            dbg.trace: Trace program execution (see asm.trace)
-#    dbg.trace.inrange: While tracing, avoid following calls outside specified range
-#        dbg.trace.tag: Trace tag
-#           dbg.unlibs: If set stop when unloading matching libname
-#            diff.bare: Never show function names in diff output
-#            diff.from: Set source diffing address for px (uses cc command)
-#      diff.levenstein: Use faster (and buggy) levenstein algorithm for buffer distance diffing
-#            diff.sort: Specify function diff sorting column see (e diff.sort=?)
-#              diff.to: Set destination diffing address for px (uses cc command)
-#            dir.magic: Path to r_magic files
-#          dir.plugins: Path to plugin files to be loaded at startup
-#         dir.projects: Default path for projects
-#           dir.source: Path to find source files
-#            dir.types: Default path to look for cparse type files
-#        esil.exectrap: trap when executing code in non-executable memory
-#       esil.fillstack: Initialize ESIL stack with (random, debrujn, sequence, zeros, ...)
-#       esil.gotolimit: Maximum number of gotos per ESIL expression
-#          esil.iotrap: invalid read or writes produce a trap exception
-#          esil.nonull: Prevent memory read, memory write at null pointer
-#         esil.prestep: Step before esil evaluation in `de` commands
-#           esil.romem: Set memory as read-only for ESIL
-#       esil.stacksize: Number of elements that can be pushed on the esilstack
-#           esil.stats: Statistics from ESIL emulation stored in sdb
-#         esil.verbose: Show ESIL verbose level (0, 1, 2)
-#            file.desc: User defined file description (used by projects)
-#       file.loadalign: Alignment of load addresses
-#      file.loadmethod: What to do when load addresses overlap: fail, overwrite, or append (next available)
-#        file.location: Is the file 'local', 'remote', or 'memory'
-#             file.md5: MD5 sum of current file
-#          file.nowarn: Suppress file loading warning messages
-#        file.openmany: Maximum number of files opened at once
-#            file.path: Path of current file
-#            file.sha1: SHA1 hash of current file
-#            file.type: Type of current file
-#              fs.view: Set visibility options for filesystems
-#           graph.font: Font for dot graphs
-#         graph.format: Specify output format for graphs (dot, gml, gmlfcn)
-#     graph.gv.current: Highlight the current node in graphviz graph.
-#        graph.gv.edge: Graphviz edge style. (arrowhead="vee")
-#       graph.gv.graph: Graphviz global style attributes. (bgcolor=white)
-#        graph.gv.node: Graphviz node style. (color=gray, style=filled shape=box)
-#      graph.invscroll: Invert scroll direction in ascii-art graph
-#         graph.layout: Graph layout (0=vertical, 1=horizontal)
-#       graph.linemode: Graph edges (0=diagonal, 1=square)
-#       graph.nodejmps: Enables shortcuts for every node.
-#           graph.refs: Graph references in callgraphs (.agc*;aggi)
-#         graph.scroll: Scroll speed in ascii-art graph
-#          graph.title: Title of the graph
-#            graph.web: Display graph in web browser (VV)
-#             hex.cols: Number of columns in hexdump
-#         hex.comments: Show comments in 'px' hexdump
-#            hex.depth: Maximal level of recurrence while telescoping memory
-#           hex.flagsz: If non zero, overrides the flag size in pxa
-#          hex.onechar: Number of columns in hexdump
-#            hex.pairs: Show bytes paired in 'px' hexdump
-#           hex.stride: Line stride in hexdump (default is 0)
-#             hud.path: Set a custom path for the HUD file
-#              io.0xff: Use this value instead of 0xff to fill unallocated areas
-#              io.aslr: Disable ASLR for spawn and such
-#            io.autofd: Change fd when opening a new file
-#            io.buffer: Load and use buffer cache if enabled
-#       io.buffer.from: Lower address of buffered cache
-#         io.buffer.to: Higher address of buffered cache
-#             io.cache: Enable cache for io changes
-#           io.enforce: Honor IO section permissions for 1=read , 2=write, 0=none
-#                io.ff: Fill invalid buffers with 0xff instead of returning error
-#              io.pava: Use EXPERIMENTAL paddr -> vaddr address mode
-#               io.raw: Ignore maps/sections and use raw io
-#          io.sectonly: Only read from sections (if any)
-#                io.va: Use virtual address layout
-#               io.vio: Enable the new vio (reading only) (WIP)
-#                key.S: override step over action
-#               key.f1: Run this when F1 key is pressed in visual mode
-#              key.f10: Run this when F10 key is pressed in visual mode
-#              key.f11: Run this when F11 key is pressed in visual mode
-#              key.f12: Run this when F12 key is pressed in visual mode
-#               key.f2: Run this when F2 key is pressed in visual mode
-#               key.f3: Run this when F3 key is pressed in visual mode
-#               key.f4: Run this when F4 key is pressed in visual mode
-#               key.f5: Run this when F5 key is pressed in visual mode
-#               key.f6: Run this when F6 key is pressed in visual mode
-#               key.f7: Run this when F7 key is pressed in visual mode
-#               key.f8: Run this when F8 key is pressed in visual mode
-#               key.f9: Run this when F9 key is pressed in visual mode
-#                key.s: override step into action
-#            lines.abs: Enable absolute line numbers
-#           lines.from: Start address for line seek
-#          magic.depth: Recursivity depth in magic description strings
-#          pdb.extract: Avoid extract of the pdb file, just download
-#           pdb.server: Base URL for Microsoft symbol server
-#        pdb.useragent: User agent for Microsoft symbol server
-#            prj.files: Save the target binary inside the project directory
-#              prj.git: Every project is a git repo and saving is commiting
-#              prj.gpg: TODO: Encrypt project with GnuPGv2
-#             prj.name: Name of current project
-#              prj.zip: Use ZIP format for project files
-#             rap.loop: Run rap as a forever-listening daemon
-#         rop.comments: Display comments in rop search output
-#      rop.conditional: Include conditional jump, calls and returns in ropsearch
-#               rop.db: Store rop search results in sdb
-#              rop.len: Maximum ROP gadget length
-#               rop.nx: Include NX/XN/XD sections in ropsearch
-#        rop.subchains: Display every length gadget from rop.len=X to 2 in /Rl
-#           scr.atport: V@ starts a background http server and spawns an r2 -C
-#        scr.breakword: Emulate console break (^C) when a word is printed (useful for pD)
-#          scr.columns: Force console column count (width)
-#             scr.echo: Show rcons output in realtime to stderr and buffer
-#         scr.feedback: Set visual feedback level (1=arrow on jump, 2=every key (useful for videos))
-#            scr.fgets: Use fgets() instead of dietline for prompt input
-#      scr.fix.columns: Workaround for Prompt iOS SSH client
-#         scr.fix.rows: Workaround for Linux TTY
-#            scr.flush: Force flush to console in realtime (breaks scripting)
-#              scr.fps: Show FPS in Visual
-#        scr.highlight: Highlight that word at RCons level
-#         scr.histsave: Always save history on exit
-#             scr.html: Disassembly uses HTML syntax
-#      scr.interactive: Start in interactive mode
-#        scr.linesleep: Flush sleeping some ms in every line
-#             scr.nkey: Select the seek mode in visual
-#             scr.null: Show no output
-#         scr.pagesize: Flush in pages when scr.linesleep is != 0
-#           scr.prompt: Show user prompt (used by r2 -q)
-#       scr.promptfile: Show user prompt file (used by r2 -q)
-#       scr.promptflag: Show flag name in the prompt
-#       scr.promptsect: Show section name in the prompt
-#          scr.randpal: Random color palete or just get the next one from 'eco'
-#       scr.responsive: Auto-adjust Visual depending on screen (e.g. unset asm.bytes)
-#         scr.rgbcolor: Use RGB colors (not available on Windows)
-#             scr.rows: Force console row count (height) (duplicate?)
-#             scr.seek: Seek to the specified address on startup
-#              scr.tee: Pipe output to file of this name
-#              scr.tts: Use tts if available by a command (see ic)
-#            scr.wheel: Mouse wheel in Visual; temporaryly disable/reenable by right click/Enter)
-#        scr.wheelnkey: Use sn/sp and scr.nkey on wheel instead of scroll
-#       scr.wheelspeed: Mouse wheel speed
-#        scr.zoneflags: Show zoneflags in visual mode before the title (see fz?)
-#         search.align: Only catch aligned search hits
-#         search.chunk: Chunk size for /+ (default size is asm.bits/8
-#    search.contiguous: Accept contiguous/adjacent search hits
-#         search.count: Start index number at search hits
-#      search.distance: Search string distance
-#     search.esilcombo: Stop search after N consecutive hits
-#            search.in: Specify search boundaries (raw, block, file, section, range)
-#         search.kwidx: Store last search index count
-#       search.maxhits: Maximum number of hits (0: no limit)
-#       search.overlap: Look for overlapped search hits
-#        search.prefix: Prefix name in search hits label
-#          search.show: Show search results
-#            search.to: Search end address
-#       stack.anotated: Show anotated hexdump in visual debug
-#          stack.bytes: Show bytes instead of words in stack
-#          stack.delta: Delta for the stack dump
-#           stack.size: Size in bytes of stack hexdump in visual debug
-#             time.fmt: Date format (%Y-%m-%d %H:%M:%S %z)
-#            time.zone: Time zone, in hours relative to GMT: +2, -1,..
-#             zign.max: Maximum zignature length to filter in 'zg'
-#             zign.min: Minimum zignature length to filter in 'zg'
-#          zign.prefix: Default prefix for signatures matches
-#-----
-
+#---
 # Analyze:
 # =======
 # af                    analyze functions
@@ -378,6 +635,7 @@ e cfg.editor = vim                 # Select default editor program
 # aae                   Emulate code to identify new pointer references
 # aas                   Use binary header information to find public functions
 # aat                   Assume functions are consecutive
+# ?t aaaa               analyze ALL + time/benchmark the cmd
 #
 # Navigate:
 # ========
@@ -410,7 +668,13 @@ e cfg.editor = vim                 # Select default editor program
 # V                     disassemble (whole listing, scrollable)
 # pd 1@str.<s>          display the XREFS OF A STRING, 'k' to access 'ar' (anal refs) database.
 #
-# Debug: (run with `r2 -d <file>`)
+# Unpack:
+# ======
+# dm.                   show in which memory map we currently are (debugger only)
+# dmda                  dump all memory maps to the disk into *.dmp files (or dmdw for only the writables)
+#                       NOTE: no way to imprec on windows, use https://github.com/OALabs/PyIATRebuild/blob/master/pyiatrebuild.py
+#
+# Debug: (run with `r2 -d <file|pid>`)
 # =====
 # dc             : Continue process execution
 # dcu <addr>     : Continue until symbol/addr (sort of breakpoint+continue, e.g. `dcu main`)
@@ -433,6 +697,22 @@ e cfg.editor = vim                 # Select default editor program
 # wx <bytes>     : Write hex bytes (e.g. `wx 90`)
 # wox 0x42       : Xor the current byte with 42
 #
+# RUBY:
+# ====
+# #!pipe irb     : Open an interractive IRB ruby console (the irbrc sets `$r`, which enables to do JSON($r.cmd('...')) -- also possible to script with `R2Pipe.new("app.bin")`)
+# ij             : File info (in JSON)
+# iej            : Entrypoint (in JSON)
+# iEj            : List all exported synbols (in JSON)
+# iij            : List all imported symbols (in JSON)
+# aflj           : List all functions (in JSON)
+# abj 807f2000   : Disassemble `80 7f 20 00` (in JSON)
+# "pa ret"       : Assemble `ret` (STR)
+# pij 5          : Disassemble 5 instructions (in JSON)
+# pdfj @ ADDR    : Disassemble the function (in JSON)
+# p8j SIZE @ ADDR: Output N bytes addr (in JSON)
+# psz @ ADDR     : Output the string at addr (STR)
+# ?*~+json       : LIST ALL JSON FUNCTIONS
+#
 # Other Examples:
 # ==============
 # [0x00011111]> pdf @ 0x11111 | sed 's/^[^0]*//; s/ ; .*//' | awk -F'[^a-zA-Z0-9]+' '$3=="xor" && $4!=$5'
@@ -440,4 +720,4 @@ e cfg.editor = vim                 # Select default editor program
 # SEE ALSO:
 # - http://www.academia.edu/26856063/Radare2-explorations
 # - https://github.com/radare/radare2/blob/master/doc/intro.md
-
+# - https://www.morphick.com/resources/news/writing-malware-config-parser-using-radare2-and-ruby

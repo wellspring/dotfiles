@@ -1,0 +1,11 @@
+#--tmux
+#--fg
+#--progress --bar
+#--delay 7
+#--joblog parallel.logs/runtask.log
+#--resume
+#--trc {}
+--rpl '{0#} $f="%0".int(1+log(total_jobs()-1)/log(10))."d";$_=sprintf($f,$job->seq()-1)'
+--rpl '{@} $_=$job->slot%@Global::sshlogin'
+--sshlogin 2/paradise
+--sshlogin 2/:

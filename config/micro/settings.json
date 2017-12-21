@@ -6,11 +6,15 @@
     "colorscheme": "default",
     "cursorline": true,
     "eofnewline": true,
+    "fastdirty": true,
+    "fileformat": "unix",
+    "ftoptions": true,
     "ignorecase": false,
     "indentchar": " ",
     "infobar": true,
     "keepautoindent": false,
     "linter": true,
+    "mouse": true,
     "pluginchannels": [
         "https://raw.githubusercontent.com/micro-editor/plugin-channel/master/channel.json"
     ],
@@ -26,7 +30,9 @@
     "splitRight": true,
     "statusline": true,
     "syntax": true,
+    "tabmovement": false,
     "tabsize": 4,
     "tabstospaces": true,
+    "termtitle": false,
     "useprimary": true
 }

@@ -3,8 +3,8 @@
 #                              ~~~~~~~~~~~                              #
 #   Author         : William Hubault <contact A T williamhubault.com>   #
 #   Description    : configuration for zsh (shell)                      #
-#   Last modified  : 11/04/2017                                         #
-#   Version        : 2.0.0                                              #
+#   Last modified  : 2017-12-21                                         #
+#   Version        : 3.0.0                                              #
 # ********************************************************************* #
 
 ####
@@ -69,12 +69,27 @@ export TERMINAL="/usr/bin/urxvtc"
 export SVN_EDITOR="$EDITOR"
 export VISUAL="$EDITOR"
 
+export LESS="-ifFXRMS"                             # (Note: -X should always be there with -F, otherwise it quits without displaying anything)
+export LESSOPEN="|lesspipe %s"                     # Use the custom command `lesspipe` to filter the input depending on the type of file
+#export LESS_TERMCAP_DEBUG=1                       # -- used for knowing how to set the termcaps
+export LESS_TERMCAP_md=$'\E[00;38;5;118m'          # <title> (green)
+export LESS_TERMCAP_me=$'\E[00m'                   # </title>
+export LESS_TERMCAP_us=$'\E[00;38;5;198m'          # <value> (pink, italic)
+export LESS_TERMCAP_ue=$'\E[00m'                   # </value>
+export LESS_TERMCAP_so=$'\E[03;48;5;232;38;5;245m' # status line (darkgrey, italic)
+export LESS_TERMCAP_se=$'\E[00m'                   # status line end
+export GROFF_NO_SGR=1
+
+export GREP_COLORS="fn=38;5;242:se=38;5;248:ln=38;5;245:bn=32:mt=48;5;226;38;5;232:sl=37:se=31"
+export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512M"
 export VMWARE_USE_SHIPPED_GTK="yes"
 export RAILS_ENV=development
+export TZ="Europe/Stockholm"
 export LC_COLLATE="C"
 
 export COLUMNS
-export ROWS
+export LINES
+export ROWS=$LINES
 
 ####
 # Load ZSH addins
@@ -93,18 +108,22 @@ autoload -U age
 setopt INTERACTIVECOMMENTS
 # Export all variables by default.
 setopt ALL_EXPORT
-# Add some globbing features.
-setopt EXTENDEDGLOB
 # Something like foo/$arr result as foo/b foo/a foo/r.
 setopt RCEXPANDPARAM
 # Show tab choices just after the first TAB.
 unsetopt LIST_AMBIGUOUS
 # Perform a path search even on command names with slashes in them. (dangerous)
 unsetopt PATH_DIRS
+# Add some globbing features.
+setopt EXTENDEDGLOB
+# Allow **.c and ***.c instead of **/*.c and ***/*.c (** = recursive, *** = recursive + follow symlink)
+setopt GLOB_STAR_SHORT
 # Remove useless jockers, instead of giving an error.
 setopt NULLGLOB
 # When a number is found, do sort numerically.
 setopt NUMERIC_GLOB_SORT
+# Case insensitive globbing
+setopt NOCASE_GLOB
 # Do not show a question when "rm *".
 #setopt RM_STAR_SILENT
 # Do not treat \ in echo if -e is not specified. (like in bash)
@@ -325,40 +344,41 @@ if [ `hash grc 2>/dev/null` ]; then
     alias traceroute='cl /usr/sbin/traceroute'
 fi
 
-alias build="./configure --prefix=/usr && make && su -c 'make install'"
+alias build='./configure --prefix=/usr && make && su -c "make install"'
 alias nomake='/usr/bin/make -s'
 alias vcm='vi **/CMakeLists.txt'
 alias mk='make -j5'
 alias mi='make install'
-alias cm="cmake -H. -Bbuild && (cd build && make -j5)"
+alias cm='cmake -H. -Bbuild && (cd build && make -j5)'
 alias menuconfig='nomake menuconfig'
 
-alias ls='ls -vFG --color=auto' sl='ls'
-alias ll='ls -l' mm='ll'
+alias ls='LC_COLLATE=$LANG ls -vFX --color=auto --hyperlink=auto --group-directories-first' sl='ls' # list files (fancy output)
+ll() { ls --color=always -lhZ --author -ip "$@" | less; }                                           # detailed list with '| less'
+alias mm='ll' lh='ll' lll='ll'
+alias lb='ll --block-size=1' llb='lb'                                                               # detailed list (in bytes)
+alias lba='LC_COLLATE=C lb -A'                                                                      # detailed list+hidden (bytes)
+alias la='LC_COLLATE=C ll -A'                                                                       # detailed list+hidden
+alias l='ls -d'
+alias .ls='ls -d .*' l.='.ls'
+alias dirs='ls -d *(-/)'
+alias .dirs='ls -d .*(-/)'
+alias .files='ls -d .*(-.)'
+alias files='ls -d *(-.)'
 alias l1='ls -1'
-alias l='ls -dF'
-alias la='ls -la'
-alias lh='ls -lh'
-alias lx='ls -lXB'
-alias l.='ls -d .[^.]*'
 alias lse='ls -d *(/^F)'
-alias lll='ls -la | less'
 alias lsx='ls -l *(*[1,10])'
-alias lsd='ls -d [^.]*(-/DN)'
-alias lsbig="ls -flh *(.OL[1,10])"
-alias lsnew="ls -rl *(D.om[1,10])"
-alias lsold="ls -rtlh *(D.om[1,10])"
-alias lssmall="ls -Srl *(.oL[1,10])"
+alias lsbig='ls -flh *(.OL[1,10])'
+alias lsnew='ls -rl *(D.om[1,10])'
+alias lsold='ls -rtlh *(D.om[1,10])'
+alias lssmall='ls -Srl *(.oL[1,10])'
 
 alias cd..='cd ..'
 alias '..'='cd ..'
 
 [ -f "/usr/bin/acp" ] && alias cp='nocorrect acp -g ' || alias cp='nocorrect cp'
 [ -f "/usr/bin/amv" ] && alias mv='nocorrect amv -g ' || alias mv='nocorrect mv'
-nocorrect rmcd() { cd .. && rmdir -v "$OLDPWD"; }
-nocorrect mcd(){ mkdir -vp "$1" && cd "$1"; }
 alias mkdir='nocorrect mkdir -p'
-alias mkcd='mcd'
+alias mcd='mkcd'
 alias md='mkdir'
 alias rd='rmdir'
 
@@ -430,12 +450,21 @@ alias please='sudo $(fc -ln -1)'
 #systemctl start ...
 
 alias cx="chmod +x"
+alias c-x="chmod -x"
 
+####
+# Functions that need to be sourced!
+########
+load() { for conf; do [ -e "$conf" ] && source "$conf"; done }
+undef() { for x; do unfunction "$x" 2>/dev/null; unalias "$x" 2>/dev/null; done }
+disable-vcs-prompt() { zstyle ':vcs_info:*' disable-patterns "($(current-git-dir)|/*)" }
+nocorrect code() { [ $# -gt 0 ] && cd "$(code-dir "$*")" || cd ~/code }
+nocorrect rmcd() { cd .. && rmdir -v "$OLDPWD"; }
+nocorrect mkcd() { mkdir -vp "$1" && cd "$1"; }
 
 ####
 # Small functions
 ########
-load() { for conf; do [ -e "$conf" ] && source "$conf"; done }
 calc() { echo "$*" | bc }
 sdate() { date +%d-%m-%Y }
 .grep() { grep "$*" -R . }
@@ -451,7 +480,7 @@ hgrep() { grep $1 ~/.zsh_history | sed s"/[^;]*;//" }
 remindme() { sleep $1 && zenity --info --text "$2" & }
 wikien() { ${=BROWSER} http://en.wikipedia.org/wiki/"${(C)*}" }
 wikifr() { ${=BROWSER} http://fr.wikipedia.org/wiki/"${(C)*}" }
-disassemble() { gcc -pipe -S -o - -O -g $* | as -aldh -o /dev/null }
+#disassemble() { gcc -pipe -S -o - -O -g $* | as -aldh -o /dev/null }
 google() { ${=BROWSER} "http://www.google.com/search?&num=100&q=$*" }
 gethrefs() { perl -ne 'while ( m/href="([^"]*)"/gc ) { print $1, "\n"; }' $* }
 backup() { tar jcvf "$HOME/Backups/`basename $1`-`date +%Y%m%d%H%M`.tar.bz2" $1 }
@@ -648,12 +677,13 @@ zstyle ':vcs_info:*' unstagedstr        $'%F{1}\uE0A0 ✱'
 zstyle ':vcs_info:*' stagedstr          $'%F{3}\uE0A0 ✚'
 
 # -- Set hooks (for VCS, title, and printing a newline before the command output)
-preexec(){echo; title "Terminal » $1"; _CMDSTARTTIME=$EPOCHSECONDS } # after prompt / before exec cmd
-precmd(){vcs_info; title "ZSH"; (( ${EPOCHSECONDS:-0} - ${_CMDSTARTTIME:-0} > $REPORTTIME )) && notify-window } # before prompt / after exec cmd
+preexec(){echo; title "Terminal  [${PWD/${HOME}/~}]  » ${TMUX:+tmux » }$1"; _CMDSTARTTIME=$EPOCHSECONDS } # after prompt / before exec cmd
+precmd(){vcs_info; title "Terminal  [${PWD/${HOME}/~}]"; (( ${EPOCHSECONDS:-0} - ${_CMDSTARTTIME:-0} > $REPORTTIME )) && notify-window } # before prompt / after exec cmd
 
 #---------------------------------------------------------------------------------------------------
 # .start
 # ======
+[ -e ~/.dir_colors ] && eval `dircolors ~/.dir_colors`
 load /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 load /usr/share/autojump/autojump.zsh
 load /usr/share/doc/pkgfile/command-not-found.zsh
@@ -662,6 +692,5 @@ load ~/.fzf.zsh
 load ~/.zshrc.local
 load ~/.zshext
 motd
-
 
 # vim: ft=zsh fileencoding=utf8

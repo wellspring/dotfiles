@@ -1,11 +1,22 @@
- for id in (grep -Po '/[0-9]+' /tmp/plop | tr -d /)
-   echo Finding branch for issue "#$id ("(redmine-issue-name $id)") ..."
-   git branch -r | grep --color=none $id"[-_]" | sed 's/^\s*//' | indent
- end
+
+ESC ESC -> sudo the command
+ESC ESC -> menu to choose which server to ssh to (c.f. ~/.ssh/config)
+
+Make `start` / `stop` / `restart` check the current dir if ran with no arg (e.g. useful to start a ruby-on-rails or whatever server).
 
 
- for v2:
- ======
- - add links to file added to the repository (maybe a git hook? :)
- - add a .history/ folder with links to history stuff (.{bash,fish,gdb,pry,scala,zsh}_history)
- - make functions/aliases as lazy loaded in zsh AND bash! (using that file/function trick: http://unix.stackexchange.com/a/33898)
+---
+sudo ln -s /usr/share/dotfiles/shortcuts /usr/share/applications/_user
+
+Listing available one-letter aliases...
+---------------------------------------
+for letter in {a..z}; if command -v $letter &>/dev/null; then echo -e "\e[31m *** Command '$letter' exists. ($(command -v $letter))\e[0m"; else; echo -e "\e[32m --- Command '$letter' available.\e[0m"; fi
+
+Listing available one-letter git aliases...
+-------------------------------------------
+for letter in g{a..z}; if command -v $letter &>/dev/null; then echo -e "\e[31m *** Command '$letter' exists. ($(command -v $letter))\e[0m"; else; echo -e "\e[32m --- Command '$letter' available.\e[0m"; fi
+
+Listing stuff from fish
+-----------------------
+for file in ~/.fish/functions/*; [ ! -e ~/.bin/$(basename $file .fish) ] && echo " >> \`$file\` has no equivalent."
+
