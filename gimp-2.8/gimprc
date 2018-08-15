@@ -1,0 +1,70 @@
+# GIMP gimprc
+#
+# This is your personal gimprc file.  Any variable defined in this file takes
+# precedence over the value defined in the system-wide gimprc:
+# /etc/gimp/2.0/gimprc
+# Most values can be set within GIMP by changing some options in the
+# Preferences dialog.
+
+(last-opened-size 15)
+(snap-distance 4)
+(initial-zoom-to-fit yes)
+(color-profile-policy keep)
+(interpolation-type lanczos)
+(default-threshold 15)
+(restore-session yes)
+(save-device-status no)
+(save-tool-options yes)
+(confirm-on-close no)
+
+(theme "PsIcons")
+(default-brush "Circle (11)")
+(default-palette "Default")
+(default-gradient "FG to BG (RGB)")
+(default-pattern "Pine")
+(default-font "Roboto")
+
+(image-title-format "  GIMP » Editing image '%F'%D* (%t) (%wpx x %hpx) (%W%u x %H%U) (%n/%L) -- mem:%m -- %z%%")
+(image-status-format "%n @ %B %F (%wx%h, %t)")
+(web-browser "surf %s")
+(undo-levels 5)
+(undo-size 64M)
+(undo-preview-size small)
+(save-document-history yes)
+(menu-mnemonics yes)
+(perfect-mouse yes)
+(layer-previews yes)
+(trust-dirty-flag yes)
+(resize-windows-on-zoom no)
+(resize-windows-on-resize no)
+(toolbox-color-area yes)
+(toolbox-foo-area yes)
+(show-help-button no)
+(use-help no)
+
+(default-view
+    (show-menubar yes)
+    (show-statusbar yes)
+    (show-rulers yes)
+    (show-scrollbars yes)
+    (show-selection yes)
+    (show-layer-boundary yes)
+    (show-guides yes)
+    (show-grid no)
+    (show-sample-points yes)
+    (padding-mode custom)
+    (padding-color (color-rgb 0.360784 0.357955 0.357955)))
+(default-fullscreen-view
+    (show-menubar yes)
+    (show-statusbar yes)
+    (show-rulers yes)
+    (show-scrollbars yes)
+    (show-selection yes)
+    (show-layer-boundary yes)
+    (show-guides yes)
+    (show-grid no)
+    (show-sample-points yes)
+    (padding-mode custom)
+    (padding-color (color-rgb 0.427451 0.427451 0.427451)))
+
+# end of gimprc

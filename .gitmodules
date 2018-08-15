@@ -2,21 +2,21 @@
 
 # -- Required
 [submodule "templates"]
-	url = https://github.com/wellspring/templates.git
-	path = templates
+  url = https://github.com/wellspring/templates.git
+  path = templates
   fetchRecurseSubmodules = true
 [submodule "bin"]
-	url = https://github.com/wellspring/bin.git
-	path = bin
+  url = https://github.com/wellspring/bin.git
+  path = bin
   fetchRecurseSubmodules = true
 
 # -- Optional
 [submodule "tmux/powerline"]
-	url = https://github.com/erikw/tmux-powerline.git
-	path = tmux/powerline
+  url = https://github.com/erikw/tmux-powerline.git
+  path = tmux/powerline
   shallow = true
 [submodule "emacs.d"]
-	url = https://github.com/bodil/ohai-emacs.git
-	path = emacs.d
+  url = https://github.com/bodil/ohai-emacs.git
+  path = emacs.d
   shallow = true
 

@@ -83,6 +83,9 @@
     insteadOf = "mygithub:"
     insteadOf = "wellspring:"
 [url "git@github.com:wellspring/"]
+    pushInsteadOf = "https://www.github.com/wellspring/"
+    pushInsteadOf = "http://www.github.com/wellspring/"
+    pushInsteadOf = "git://www.github.com/wellspring/"
     pushInsteadOf = "https://github.com/wellspring/"
     pushInsteadOf = "http://github.com/wellspring/"
     pushInsteadOf = "git://github.com/wellspring/"
@@ -98,21 +101,29 @@
     pushInsteadOf = "g:"
     pushInsteadOf = "gh:"
     pushInsteadOf = "github:"
+    pushInsteadOf = "https://www.github.com/"
+    pushInsteadOf = "http://www.github.com/"
+    pushInsteadOf = "git://www.github.com/"
+    pushInsteadOf = "ssh://www.github.com/"
     pushInsteadOf = "https://github.com/"
     pushInsteadOf = "http://github.com/"
     pushInsteadOf = "git://github.com/"
-    pushInsteadOf = "ssh://github.com"
+    pushInsteadOf = "ssh://github.com/"
 
+[url "https://bitbucket.org/"]
+    insteadOf = "bb:"
+    insteadOf = "bitbucket:"
 [url "git@bitbucket.org:"]
     pushInsteadOf = "bb:"
     pushInsteadOf = "bitbucket:"
+    pushInsteadOf = "https://www.bitbucket.org/"
+    pushInsteadOf = "http://www.bitbucket.org/"
+    pushInsteadOf = "git://www.bitbucket.org/"
+    pushInsteadOf = "ssh://www.bitbucket.org/"
     pushInsteadOf = "https://bitbucket.org/"
     pushInsteadOf = "http://bitbucket.org/"
     pushInsteadOf = "git://bitbucket.org/"
     pushInsteadOf = "ssh://bitbucket.org/"
-[url "https://bitbucket.org/"]
-    insteadOf = "bb:"
-    insteadOf = "bitbucket:"
 
 [url "git@gist.github.com:"]
     insteadOf = "gist:"
