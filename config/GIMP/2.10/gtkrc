@@ -1,0 +1,24 @@
+# pixmap_path "<dir 1>:<dir 2>:<dir 3>:..."
+#
+# include "rc-file"
+#
+# style <name> [= <name>]
+# {
+#   <option>
+# }
+#
+# widget <widget_set>       style <style_name>
+# class  <widget_class_set> style <style_name>
+#
+# You can add your own GIMP-specific GTK styles here.
+# Use `GTK_MODULES=gtkparasite gimp` to inspect widgets.
+
+# -- GIMP Style
+gtk-font-name = "Lato Regular 12"
+gtk-icon-sizes = "gtk-small-toolbar=16,16:gtk-large-toolbar=16,16"
+#style "gimp-default-style" { ... }
+
+# -- Adjust the size of previews in plug-in dialogs
+style "gimp-large-preview" { GimpPreview::size = 256 }
+class "GimpPreview" style "gimp-large-preview"
+

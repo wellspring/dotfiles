@@ -1,0 +1,66 @@
+These are extra Gradient Files for the GIMP...
+
+If you don't know what GIMP is, go to
+http://www.gimp.org to learn more
+about this great program. 
+
+To Use these Gradients you have to copy the
+.ggr Gradient Files to your local GIMP Gradient 
+directory. 
+
+~/your user directory/gimp_version/gradients
+
+Alternatively you can place them anywhere you 
+want and point to those folders in program 
+options.
+
+Ready Gradients can be used with Blend Tool (L)
+to fill the selected area with the gradient of 
+choice.Gimp has a powerfull Blend Tool with lots
+of options. 
+
+Another use for gradients is to use them while 
+painting. Pencil, Paintbrush and Airbrush tools
+have options to use color from grandient instead
+of foreground color. 
+
+If you use a pressure sensitive tablet pen there 
+is a choice to use a color from gradient under 
+pressure sensitivity dialog. 
+
+Any B&W image can be remapped to a gradient under 
+Color menu. 
+
+You can import a new palette from any gradient. 
+
+Those gradients who start with Atmospheric
+attempt to make Common Atmospheric Effects 
+done in 3D programs in GIMP at ease of
+drawing a Gradient from bottom of image to top
+with Blend Tool. 
+
+There are many Basic Gradient possibilities 
+that done for a quick visual reference and 
+easy of use. Their names start with Basic.
+These are playings with pure form of primary 
+and secondary colors along  with white and 
+black. 
+
+There are also a few modifications of original
+Gimp Gradients like neons in new colors, and a 
+few unclassified new gradients that neither fit
+in atmospheric nor basic.
+
+Copyright notice: 
+2007
+
+I, the author of this work, hereby publish it under the following license:
+Permission is granted to copy, distribute and/or modify this 
+package under the terms of the GNU Free License, 
+Version 1.2 or any later version published by the 
+Free Software Foundation a copy of which can be found at
+www.GNU.org
+
+Happy Gimping,
+Nevit Dilmen
+http://start.at/nevit

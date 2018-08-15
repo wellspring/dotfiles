@@ -1,0 +1,20 @@
+# GIMP tool preset file
+
+(stock-id "gimp-tool-paintbrush")
+(name "Texturer -PkGam")
+(tool-options "GimpPaintOptions"
+    (tool "gimp-paintbrush-tool")
+    (brush "Fine Texture -PkGam")
+    (dynamics "Texturer -PkGam")
+    (gradient "FG to BG (RGB)")
+    (palette "All Color")
+    (brush-size 256.000000))
+(use-fg-bg no)
+(use-brush yes)
+(use-dynamics yes)
+(use-gradient no)
+(use-pattern no)
+(use-palette no)
+(use-font no)
+
+# end of GIMP tool preset file
