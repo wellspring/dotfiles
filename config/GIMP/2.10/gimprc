@@ -5,6 +5,7 @@
 # /etc/gimp/2.0/gimprc
 # Most values can be set within GIMP by changing some options in the
 # Preferences dialog.
+(import-raw-plug-in "${gimp_plug_in_dir}/plug-ins/file-raw-placeholder")
 
 (last-opened-size 15)
 (snap-distance 4)
@@ -27,6 +28,7 @@
 (image-title-format "  GIMP » Editing image '%F'%D* (%t) (%wpx x %hpx) (%W%u x %H%U) (%n/%L) -- mem:%m -- %z%%")
 (image-status-format "%n @ %B %F (%wx%h, %t)")
 (web-browser "surf %s")
+(use-opencl yes)
 (undo-levels 5)
 (undo-size 64M)
 (undo-preview-size small)
@@ -39,6 +41,7 @@
 (resize-windows-on-resize no)
 (toolbox-color-area yes)
 (toolbox-foo-area yes)
+(toolbox-wilber no)
 (show-help-button no)
 (use-help no)
 
